@@ -14,12 +14,12 @@ class CreateBranchesTable extends Migration
     public function up()
     {
         Schema::create('branches', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name', 100);
             $table->string('phone_number', 11);
             $table->string('address', 200);
 
-            $table->unsignedbigInteger('city_id');
+            $table->unsignedInteger('city_id');
             $table->foreign('city_id')
                 ->references('id')
                 ->on('cities')

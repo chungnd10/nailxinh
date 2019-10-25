@@ -14,10 +14,10 @@ class CreateTypeOfServicesTable extends Migration
     public function up()
     {
         Schema::create('type_of_services', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name', 100);
             $table->string('slug', 200);
-            $table->string('image', 300);
+            $table->string('image', 300)->default('type_of_services_default.png');
             $table->string('description', 300);
             $table->timestamps();
         });

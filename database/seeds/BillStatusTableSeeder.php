@@ -11,6 +11,14 @@ class BillStatusTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $status = [
+            [
+                'name' => 'Chưa thanh toán'
+            ],
+            [
+                'name' => 'Đã thanh toán'
+            ]
+        ];
+        DB::table('bill_statuses')->insert($status);
     }
 }

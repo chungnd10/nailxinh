@@ -11,6 +11,17 @@ class GendersTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $genders = [
+            [
+                'name' => 'Nam'
+            ],
+            [
+                'name' => 'Nữ'
+            ],
+            [
+                'name' => 'Khác'
+            ]
+        ];
+        DB::table('genders')->insert($genders);
     }
 }

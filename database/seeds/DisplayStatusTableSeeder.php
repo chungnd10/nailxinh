@@ -14,7 +14,7 @@ class DisplayStatusTableSeeder extends Seeder
     {
         $status = [
             [
-                'name ' => 'Ẩn'
+                'name' => 'Ẩn'
             ],
             [
                 'name'  => 'Hiện'
