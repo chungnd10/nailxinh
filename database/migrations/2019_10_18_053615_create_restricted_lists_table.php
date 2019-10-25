@@ -14,7 +14,7 @@ class CreateRestrictedListsTable extends Migration
     public function up()
     {
         Schema::create('restricted_lists', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('phone_number', 11);
             $table->timestamps();
         });

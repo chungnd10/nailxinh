@@ -14,7 +14,7 @@ class CreateFamousCustomersTable extends Migration
     public function up()
     {
         Schema::create('famous_customers', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('full_name', 100);
             $table->string('image', 200);
             $table->string('description', 300);

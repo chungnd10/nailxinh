@@ -14,31 +14,31 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('full_name');
             $table->string('phone_number', 11);
             $table->dateTime('time');
             $table->string('note', 200);
 
-            $table->unsignedBigInteger('branch_id');
+            $table->unsignedInteger('branch_id');
             $table->foreign('branch_id')
                 ->references('id')
                 ->on('branches')
                 ->onDelete('CASCADE');
 
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('CASCADE');
 
-            $table->unsignedBigInteger('service_id');
+            $table->unsignedInteger('service_id');
             $table->foreign('service_id')
                 ->references('id')
                 ->on('services')
                 ->onDelete('CASCADE');
 
-            $table->unsignedBigInteger('order_status_id');
+            $table->unsignedInteger('order_status_id');
             $table->foreign('order_status_id')
                 ->references('id')
                 ->on('order_statuses')

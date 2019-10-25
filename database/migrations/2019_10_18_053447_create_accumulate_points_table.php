@@ -14,8 +14,8 @@ class CreateAccumulatePointsTable extends Migration
     public function up()
     {
         Schema::create('accumulate_points', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('phone_number', 11);
+            $table->increments('id');
+            $table->string('phone_number', 11)->unique();
             $table->double('total_money', 10, 2);
             $table->timestamps();
         });

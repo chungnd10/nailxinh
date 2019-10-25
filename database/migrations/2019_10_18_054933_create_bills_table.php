@@ -14,12 +14,12 @@ class CreateBillsTable extends Migration
     public function up()
     {
         Schema::create('bills', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->double('total_price', 10, 2);
             $table->double('discount', 10, 2);
             $table->string('note', 200);
 
-            $table->unsignedBigInteger('order_id');
+            $table->unsignedInteger('order_id');
             $table->foreign('order_id')
                 ->references('id')
                 ->on('orders')
