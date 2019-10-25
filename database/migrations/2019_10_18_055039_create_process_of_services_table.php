@@ -14,12 +14,12 @@ class CreateProcessOfServicesTable extends Migration
     public function up()
     {
         Schema::create('process_of_services', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name', 100);
             $table->tinyInteger('step');
             $table->string('content', 200);
 
-            $table->unsignedBigInteger('type_of_services_id');
+            $table->unsignedInteger('type_of_services_id');
             $table->foreign('type_of_services_id')
                 ->references('id')
                 ->on('type_of_services')

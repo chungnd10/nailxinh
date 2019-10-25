@@ -14,9 +14,9 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('full_name');
-            $table->string('avatar', 300);
+            $table->string('avatar', 300)->default('avatar-default.png');
             $table->string('phone_number', 11);
             $table->date('birthday');
             $table->string('address');
@@ -25,19 +25,19 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->unsignedBigInteger('branch_id');
+            $table->unsignedInteger('branch_id');
             $table->foreign('branch_id')
                 ->references('id')
                 ->on('branches')
                 ->onDelete('CASCADE');
 
-            $table->unsignedBigInteger('gender_id');
+            $table->unsignedInteger('gender_id');
             $table->foreign('gender_id')
                 ->references('id')
                 ->on('genders')
                 ->onDelete('CASCADE');
 
-            $table->unsignedBigInteger('operation_status_id');
+            $table->unsignedInteger('operation_status_id');
             $table->foreign('operation_status_id')
                 ->references('id')
                 ->on('operation_statuses')
