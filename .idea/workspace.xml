@@ -2,32 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a5e3e7b-2434-431f-8be7-663bcbc326a9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config/contants.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_053212_create_slides_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_053212_create_slides_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_053313_create_discounts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_053313_create_discounts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_053447_create_accumulate_points_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_053447_create_accumulate_points_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_053615_create_restricted_lists_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_053615_create_restricted_lists_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_053806_create_famous_customers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_053806_create_famous_customers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054028_create_feed_backs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054028_create_feed_backs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054549_create_cities_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054549_create_cities_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054550_create_branches_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054550_create_branches_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054551_create_genders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054551_create_genders_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054552_create_operation_statuses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054552_create_operation_statuses_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054554_create_permissions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054554_create_permissions_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054555_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054555_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054659_create_order_statuses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054659_create_order_statuses_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054659_create_type_of_services_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054659_create_type_of_services_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054660_create_services_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054660_create_services_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054932_create_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054932_create_orders_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_054933_create_bills_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_054933_create_bills_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_18_055039_create_process_of_services_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_18_055039_create_process_of_services_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/BillStatusTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/BillStatusTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DisplayStatusTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DisplayStatusTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/GendersTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/GendersTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/OperationStatusTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/OperationStatusTableSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/OrdersStatusTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/OrdersStatusTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/vendor/beyondcode/laravel-dump-server/" />
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
@@ -125,10 +100,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/contants.php">
+        <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="128">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
@@ -140,7 +115,30 @@
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
-      <list>
+      <list
+        <option value="$PROJECT_DIR$/app/Feedback.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054028_create_feedbacks_table.php" />
+        <option value="$PROJECT_DIR$/app/WebSetting.php" />
+        <option value="$PROJECT_DIR$/app/FamousCustomer.php" />
+        <option value="$PROJECT_DIR$/app/RestrictedList.php" />
+        <option value="$PROJECT_DIR$/app/Discount.php" />
+        <option value="$PROJECT_DIR$/app/Slides.php" />
+        <option value="$PROJECT_DIR$/app/Introduction.php" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_055106_create_type_of_services_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_055054_create_services_table.php" />
+        <option value="$PROJECT_DIR$/app/TypeOfService.php" />
+        <option value="$PROJECT_DIR$/app/ProcessOfService.php" />
+        <option value="$PROJECT_DIR$/app/Service.php" />
+        <option value="$PROJECT_DIR$/app/OrderStatus.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054659_create_order_statuses_table.php" />
+        <option value="$PROJECT_DIR$/app/OperationStatus.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054858_create_operation_statuses_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054529_create_genders_table.php" />
+        <option value="$PROJECT_DIR$/app/Gender.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054549_create_cities_table.php" />
+        <option value="$PROJECT_DIR$/app/City.php" />
         <option value="$PROJECT_DIR$/app/BillStatus.php" />
         <option value="$PROJECT_DIR$/app/Bill.php" />
         <option value="$PROJECT_DIR$/app/Branch.php" />
@@ -159,39 +157,7 @@
         <option value="$PROJECT_DIR$/database/seeds/CitiesTableSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/BillStatusTableSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/DisplayStatusTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/GendersTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/OperationStatusTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/OrdersStatusTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054554_create_permissions_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054551_create_genders_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054552_create_operation_statuses_table.php" />
-        <option value="$PROJECT_DIR$/database/seeds/BranchesTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/UsersTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/TypeOfServicesTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/SlidesTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054659_create_type_of_services_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_055039_create_process_of_services_table.php" />
-        <option value="$PROJECT_DIR$/database/seeds/ProcessOfServicesTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054660_create_services_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_24_154855_create_user_services_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054555_create_users_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054932_create_orders_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_053212_create_slides_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_053313_create_discounts_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_053447_create_accumulate_points_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_053615_create_restricted_lists_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_053806_create_famous_customers_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054028_create_feed_backs_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054549_create_cities_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054659_create_order_statuses_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054933_create_bills_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_10_18_054550_create_branches_table.php" />
-        <option value="$PROJECT_DIR$/database/seeds/ServicesTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/PermissionsTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/RolesTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/RolesPermissionsTableSeeder.php" />
-        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
-        <option value="$PROJECT_DIR$/config/contants.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
       </list>
     </option>
   </component>
@@ -281,10 +247,10 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="40" />
-    <option name="y" value="102" />
-    <option name="width" value="1129" />
-    <option name="height" value="645" />
+    <option name="x" value="78" />
+    <option name="y" value="107" />
+    <option name="width" value="1199" />
+    <option name="height" value="680" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -301,12 +267,7 @@
             <path>
               <item name="nailxinh" type="b2602c69:ProjectViewProjectNode" />
               <item name="nailxinh" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nailxinh" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nailxinh" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -358,13 +319,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29542000" />
+    <option name="totallyTimeSpent" value="16895000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="40" y="102" width="1129" height="645" extended-state="0" />
+    <frame x="-35" y="223" width="1199" height="680" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.299908" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28176317" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -379,7 +340,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32935154" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5004558" side_tool="true" weight="0.32935154" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4995442" weight="0.35262206" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4995442" weight="0.32838285" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -803,6 +764,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
