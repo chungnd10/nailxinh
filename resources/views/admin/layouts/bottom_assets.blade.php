@@ -9,7 +9,13 @@
 <script src="admin_assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="admin_assets/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- bootstrap datepicker -->
+<script src="admin_assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- AdminLTE App -->
 <script src="admin_assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="admin_assets/dist/js/demo.js"></script>
+{{--toastr--}}
+<script src="admin_assets/plugins/toastr/toastr.min.js"></script>
+{{--common js--}}
+<script src="admin_assets/js/common.js"></script>
