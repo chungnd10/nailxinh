@@ -17,7 +17,12 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="admin_assets/dist/css/skins/_all-skins.min.css">
-
+{{--toastr --}}
+<link rel="stylesheet" href="admin_assets/plugins/toastr/toastr.min.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="admin_assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <!-- Google Font -->
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+{{--common css--}}
+<link rel="stylesheet" href="admin_assets/css/common.css">
