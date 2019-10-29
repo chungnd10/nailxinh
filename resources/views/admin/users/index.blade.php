@@ -44,11 +44,13 @@
                                         <a href="{{ route('users.show', $item->id) }}" class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="{{ route('users.destroy', $item->id) }}"
-                                           class="btn btn-xs btn-danger"
-                                           onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
+                                        @if($item->role_id != 1)
+                                            <a href="{{ route('users.destroy', $item->id) }}"
+                                               class="btn btn-xs btn-danger"
+                                               onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

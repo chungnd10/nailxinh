@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#datepicker').datepicker({
         autoclose: true,
         dateFormat: 'yyyy-mm-dd'
-    })
+    });
 
     //data table
     $('#example1').DataTable({

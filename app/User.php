@@ -35,7 +35,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -50,12 +51,28 @@ class User extends Authenticatable
     protected $table = 'users';
 
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function operationStatus()
     {
         return $this->belongsTo(OperationStatus::class);
+    }
+
+    public function hasPermission(Permission $permission)
+    {
+        return !!optional(optional($this->role)->permissions)->contains($permission);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role->id == 1;
     }
 }
