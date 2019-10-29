@@ -251,4 +251,9 @@ class UserController extends Controller
         //điều hướng
         return redirect()->route('profile', $id)->with($notify);
     }
+
+    public function test()
+    {
+
+    }
 }
