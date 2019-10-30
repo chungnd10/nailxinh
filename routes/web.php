@@ -22,7 +22,7 @@ Route::get('logout', 'Auth\AuthController@logout')->name('logout');
 
 
 Route::prefix('admin')->group(function () {
-    Route::get('index', 'Dashboard\DashboardController@index')->name('admin.index');
+    Route::get('', 'Dashboard\DashboardController@index')->name('admin.index');
 
     //profile
     Route::get('profile/{id}', 'User\UserController@profile')
