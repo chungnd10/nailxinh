@@ -78,9 +78,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Nhập lại mật khẩu</label><span class="text-danger">*</span>
-                                <input type="password" class="form-control" name="cf-password" id="cfPassword">
-                                @if($errors->first('cf-password'))
-                                    <span class="text-danger">{{ $errors->first('cf-password') }}</span>
+                                <input type="password" class="form-control" name="cf_password">
+                                @if($errors->first('cf_password'))
+                                    <span class="text-danger">{{ $errors->first('cf_password') }}</span>
                                 @endif
                             </div>
                             <!-- /.form-group -->
@@ -220,7 +220,7 @@
                         minlength: 6,
                         maxlength: 40,
                     },
-                    cfPassword: {
+                    cf_password: {
                         required: true,
                         equalTo:password
                     },
@@ -258,7 +258,7 @@
                         minlength: "Yêu cầu từ 6-40 ký tự",
                         maxlength: "Yêu cầu từ 6-40 ký tự",
                     },
-                    cfPassword: {
+                    cf_password: {
                         required: "Mục này không được để trống",
                         equalTo: "Nhập lại mật khẩu không đúng"
                     },

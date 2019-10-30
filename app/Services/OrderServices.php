@@ -17,7 +17,7 @@ class OrderServices
     public function countOrderWithMonths(){
         $order = array();
         for ($i=  1; $i <13; $i++){
-            $order[] = Order::whereMonth('time', $i)->count();
+            $order[] = Order::whereMonth('time', $i)->whereYear('time', date('Y'))->count();
         }
         $order = implode(',', $order);
         return rtrim($order, ',');
@@ -27,7 +27,7 @@ class OrderServices
     public function countOrderWithMonthsCompleted(){
         $order = array();
         for ($i=  1; $i <13; $i++){
-            $order[] = Order::whereMonth('time', $i)->where('order_status_id',4)->count();
+            $order[] = Order::whereMonth('time', $i)->whereYear('time', date('Y'))->where('order_status_id',4)->count();
         }
         $order = implode(',', $order);
         return rtrim($order, ',');

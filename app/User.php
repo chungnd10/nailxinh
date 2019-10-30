@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use League\Flysystem\Config;
 
 class User extends Authenticatable
 {
@@ -73,6 +74,13 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role->id == 1;
+        $role_admin = Config::get('contants.role_admin');
+        return $this->role->id == $role_admin;
+    }
+
+    public function isManager()
+    {
+        $role_manager = Config::get('contants.role_admin');
+        return $this->role->id == $role_manager;
     }
 }

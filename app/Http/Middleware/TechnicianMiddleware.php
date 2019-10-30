@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Config;
 use Illuminate\Support\Facades\Auth;
 
 class TechnicianMiddleware
@@ -16,9 +17,10 @@ class TechnicianMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $role_technician = Config::get('contants.role_technician');
         if (Auth::check())
         {
-            if (Auth::user()->role_id == 3 )
+            if (Auth::user()->role_id == $role_technician )
             {
                 return $next($request);
             }

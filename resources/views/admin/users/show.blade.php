@@ -59,7 +59,10 @@
                                         <input type="text"
                                                class="form-control"
                                                value="{{ old('birthday', $user->birthday)}}"
-                                               name="birthday">
+                                               name="birthday"
+                                               id="birthday"
+                                               data-date-format='yyyy-mm-dd'
+                                                >
                                         @if($errors->first('birthday'))
                                             <span class="text-danger">{{ $errors->first('birthday') }}</span>
                                         @endif
@@ -211,7 +214,7 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-sm-5">
-                                            <input type="password" name="password2" class="form-control"
+                                            <input type="password" name="cf_password" class="form-control"
                                                    placeholder="Nhập lại mật khẩu mới">
                                             @if($errors->first('cf-password'))
                                                 <span class="text-danger">{{ $errors->first('cf-password') }}</span>
@@ -251,7 +254,13 @@
                 } else {
                     getBase64(file, '#proImg');
                 }
-            }
+            };
+
+            //Date picker
+            $('#birthday').datepicker({
+                autoclose: true,
+                dateFormat: 'yyyy-mm-dd'
+            });
 
             //validate update user
             $("#updateUser").validate({
@@ -312,7 +321,7 @@
                         minlength: 6,
                         maxlength: 40,
                     },
-                    password2: {
+                    cf_password: {
                         equalTo:password
                     },
                 },
@@ -322,7 +331,7 @@
                         minlength: "Yêu cầu từ 6-40 ký tự",
                         maxlength: "Yêu cầu từ 6-40 ký tự",
                     },
-                    password2: {
+                    cf_password: {
                         equalTo: "Nhập lại mật khẩu không đúng"
                     }
                 }

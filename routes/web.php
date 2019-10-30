@@ -30,6 +30,8 @@ Route::prefix('admin')->group(function () {
     Route::post('profile/{id}', 'User\UserController@updateProfile')->name('profile');
     Route::post('update-image-profile/{id}', 'User\UserController@updateImageProfile')
         ->name('update-image-profile');
+
+    Route::post('changePassword/{id}', 'User\UserController@changePassword')->name('changePassword');
     //user
     Route::prefix('users')->group(function () {
         Route::get('', 'User\UserController@index')
