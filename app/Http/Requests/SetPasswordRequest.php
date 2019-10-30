@@ -25,7 +25,7 @@ class SetPasswordRequest extends FormRequest
     {
         return [
             'password' => 'required|min:6|max:40',
-            'cf-password' => 'required|same:password'
+            'cf_password' => 'required|same:password'
         ];
     }
 
@@ -35,8 +35,8 @@ class SetPasswordRequest extends FormRequest
             'password.required' => 'Mục này không được để trống',
             'password.min' => 'Yêu cầu từ 6-40 ký tự',
             'password.max' => 'Yêu cầu từ 6-40 ký tự',
-            'cf-password.required' => 'Mục này không được để trống',
-            'cf-password.same' => 'Nhập lại mật khẩu không đúng',
+            'cf_password.required' => 'Mục này không được để trống',
+            'cf_password.same' => 'Nhập lại mật khẩu không đúng',
         ];
     }
 }

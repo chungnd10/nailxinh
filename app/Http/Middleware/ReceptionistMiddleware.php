@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Config;
 use Illuminate\Support\Facades\Auth;
 
 class ReceptionistMiddleware
@@ -16,9 +17,10 @@ class ReceptionistMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $role_receptionist = Config::get('contants.role_receptionist');
         if (Auth::check())
         {
-            if (Auth::user()->role_id == 5 )
+            if (Auth::user()->role_id == $role_receptionist )
             {
                 return $next($request);
             }

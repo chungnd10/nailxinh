@@ -16,9 +16,11 @@ class ManagerBranchMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $role_manager = Config::get('contants.role_admin');
+
         if (Auth::check())
         {
-            if (Auth::user()->role_id == 2 )
+            if (Auth::user()->role_id == $role_manager )
             {
                 return $next($request);
             }
