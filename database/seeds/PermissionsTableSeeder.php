@@ -75,7 +75,7 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'title' => 'Sửa trang giới thiệu',
-                'name'  => 'edit-introduction-page'
+                'name'  => 'edit-introductions-page'
             ],
             [
                 'title' => 'Xem danh sách hạn chế',

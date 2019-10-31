@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <img class="profile-user-img img-responsive"
+                                <img class="profile-user-img img-responsive img-slide"
                                      src="upload/images/slides/{{ $slide->images }}"
                                      id="proImg"
                                      alt="Slide picture">
@@ -29,18 +29,6 @@
                                        id="images">
                                 @if($errors->first('images'))
                                     <span class="text-danger">{{ $errors->first('images') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label>URL</label><span class="text-danger">*</span>
-                                <input type="text"
-                                       class="form-control"
-                                       name="url"
-                                       placeholder="Nhập url"
-                                       value="{{ old('url', $slide->url) }}"
-                                >
-                                @if($errors->first('url'))
-                                    <span class="text-danger">{{ $errors->first('url') }}</span>
                                 @endif
                             </div>
                             <div class="form-group">
@@ -84,6 +72,18 @@
                                 >{{ old('description', $slide->description) }}</textarea>
                                 @if($errors->first('description'))
                                     <span class="text-danger">{{ $errors->first('description') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label>URL</label><span class="text-danger">*</span>
+                                <input type="text"
+                                       class="form-control"
+                                       name="url"
+                                       placeholder="Nhập url"
+                                       value="{{ old('url', $slide->url) }}"
+                                >
+                                @if($errors->first('url'))
+                                    <span class="text-danger">{{ $errors->first('url') }}</span>
                                 @endif
                             </div>
                         </div>

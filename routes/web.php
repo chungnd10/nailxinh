@@ -21,7 +21,7 @@ Route::post('login', 'Auth\AuthController@checkLogin')->name('login');
 Route::get('logout', 'Auth\AuthController@logout')->name('logout');
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('', 'Dashboard\DashboardController@index')->name('admin.index');
 
     //profile
@@ -321,14 +321,14 @@ Route::prefix('admin')->group(function () {
             ->name('slides.destroy');
     });
 
-    //introduction
-    Route::prefix('introduction')->group(function () {
-        Route::get('', 'Introduction\IntroductionController@index')
-            ->middleware('can:view-introduction-page')
-            ->name('introduction.index');
+    //introductions
+    Route::prefix('introductions')->group(function () {
+        Route::get('{id}', 'Introduction\IntroductionController@index')
+            ->middleware('can:edit-introduction-page')
+            ->name('introductions.index');
 
         Route::post('update/{id}', 'Introduction\IntroductionController@update')
             ->middleware('can:edit-introduction-page')
-            ->name('introduction.update');
+            ->name('introductions.update');
     });
 });

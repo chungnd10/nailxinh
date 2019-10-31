@@ -214,7 +214,7 @@
                         <li><a href="{{ route('slides.index') }}"><i class="fa fa-angle-right"></i>Slide</a></li>
                     @endcan
                     @can('edit-introduction-page')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Trang giới thiệu</a></li>
+                        <li><a href="{{ route('introductions.index', 1) }}"><i class="fa fa-angle-right"></i>Trang giới thiệu</a></li>
                     @endcan
                 </ul>
             </li>

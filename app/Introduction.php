@@ -12,4 +12,9 @@ class Introduction extends Model
      * @var string
      */
     protected $table = 'introductions';
+
+    protected $fillable = [
+      'title',
+      'content'
+    ];
 }
