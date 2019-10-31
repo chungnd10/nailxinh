@@ -302,9 +302,23 @@ Route::prefix('admin')->group(function () {
             ->middleware('can:view-slide')
             ->name('slides.index');
 
+        Route::get('create', 'Slides\SlidesController@create')
+            ->middleware('can:add-slide')
+            ->name('slides.create');
+        Route::post('create', 'Slides\SlidesController@store')
+            ->middleware('can:add-slide')
+            ->name('slides.store');
+
+        Route::get('update/{id}', 'Slides\SlidesController@show')
+            ->middleware('can:edit-slide')
+            ->name('slides.show');
         Route::post('update/{id}', 'Slides\SlidesController@update')
             ->middleware('can:edit-slide')
             ->name('slides.update');
+
+        Route::get('destroy/{id}', 'Slides\SlidesController@destroy')
+            ->middleware('can:remove-slide')
+            ->name('slides.destroy');
     });
 
     //introduction

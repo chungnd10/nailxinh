@@ -123,7 +123,8 @@ class UserController extends Controller
         //nếu có nhập ảnh ảnh
         if ($request->hasFile('avatar')) {
             // xoá ảnh cũ
-            if (file_exists('upload/images/users/'.$user->avatar && $user->avatar != 'avatar-default.png')) {
+            if (file_exists('upload/images/users/'.$user->avatar) && $user->avatar != 'avatar-default.png')
+            {
                 unlink('upload/images/users/'.$user->avatar);
             }
             //lưu ảnh mới
@@ -149,7 +150,8 @@ class UserController extends Controller
         //tìm kiếm đối tượng
         $user = User::find($id);
         // xoá ảnh cũ
-        if (file_exists('upload/images/users/'.$user->avatar && $user->avatar != 'avatar-default.png')) {
+        if (file_exists('upload/images/users/'.$user->avatar) && $user->avatar != 'avatar-default.png')
+        {
             unlink('upload/images/users/'.$user->avatar);
         }
         // thực thi xóa
@@ -270,8 +272,9 @@ class UserController extends Controller
         //nếu có nhập ảnh ảnh
         if ($request->hasFile('avatar')) {
             // xoá ảnh cũ
-            if (file_exists('upload/images/users/' . $user->avatar && $user->avatar != 'avatar-default.png')) {
-                unlink('upload/images/users/' . $user->avatar);
+            if (file_exists('upload/images/users/'.$user->avatar) && $user->avatar != 'avatar-default.png')
+            {
+                unlink('upload/images/users/'.$user->avatar);
             }
             //lưu ảnh mới
             $file = $request->file('avatar');
