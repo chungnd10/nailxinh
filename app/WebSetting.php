@@ -12,4 +12,12 @@ class WebSetting extends Model
      * @var string
      */
     protected $table = 'web_settings';
+
+    protected $fillable = [
+        'phone_number',
+        'email',
+        'open_time',
+        'close_time',
+        'facebook'
+    ];
 }

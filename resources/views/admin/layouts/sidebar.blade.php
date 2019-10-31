@@ -208,7 +208,7 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('edit-web-settings')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Thông tin website</a></li>
+                        <li><a href="{{ route('web-settings.index', 1) }}"><i class="fa fa-angle-right"></i>Thông tin website</a></li>
                     @endcan
                     @can('edit-slide')
                         <li><a href=""><i class="fa fa-angle-right"></i>Slide</a></li>

@@ -227,94 +227,94 @@ Route::prefix('admin')->group(function () {
             ->name('discount.index');
 
         Route::get('create', 'Discount\DiscountController@create')
-            ->middleware('add-discount')
+            ->middleware('can:add-discount')
             ->name('discount.create');
         Route::post('create', 'Discount\DiscountController@store')
-            ->middleware('add-discount')
+            ->middleware('can:add-discount')
             ->name('discount.store');
 
         Route::get('update/{id}', 'Discount\DiscountController@show')
-            ->middleware('edit-discount')
+            ->middleware('can:edit-discount')
             ->name('discount.show');
         Route::post('update/{id}', 'Discount\DiscountController@update')
-            ->middleware('edit-discount')
+            ->middleware('can:edit-discount')
             ->name('discount.update');
 
         Route::get('destroy/{id}', 'Discount\DiscountController@destroy')
-            ->middleware('remove-discount')
+            ->middleware('can:remove-discount')
             ->name('discount.destroy');
     });
 
     //restricted lists
     Route::prefix('restricted-lists')->group(function () {
         Route::get('', 'RestrictedLists\RestrictedListsController@index')
-            ->middleware('view-restricted-lists')
+            ->middleware('can:view-restricted-lists')
             ->name('restricted-lists.index');
 
         Route::get('destroy/{id}', 'RestrictedLists\RestrictedListsController@destroy')
-            ->middleware('remove-restricted-lists')
+            ->middleware('can:remove-restricted-lists')
             ->name('restricted-lists.destroy');
     });
 
     //feedback
     Route::prefix('feedback')->group(function () {
         Route::get('', 'Feedback\FeedbackController@index')
-            ->middleware('view-feedback')
+            ->middleware('can:view-feedback')
             ->name('feedback.index');
 
         Route::get('update/{id}', 'Feedback\FeedbackController@show')
-            ->middleware('edit-feedback')
+            ->middleware('can:edit-feedback')
             ->name('feedback.show');
         Route::post('update/{id}', 'Feedback\FeedbackController@update')
-            ->middleware('edit-feedback')
+            ->middleware('can:edit-feedback')
             ->name('feedback.update');
 
         Route::get('destroy/{id}', 'Feedback\FeedbackController@destroy')
-            ->middleware('remove-feedback')
+            ->middleware('can:remove-feedback')
             ->name('feedback.destroy');
     });
 
     // roles
     Route::prefix('roles')->group(function () {
         Route::get('', 'Roles\RolesController@index')
-            ->middleware('view-roles')
+            ->middleware('can:view-roles')
             ->name('roles.index');
 
         Route::post('update/{id}', 'Roles\RolesController@update')
-            ->middleware('edit-roles')
+            ->middleware('can:edit-roles')
             ->name('roles.update');
     });
 
     // web_settings
     Route::prefix('web-settings')->group(function () {
-        Route::get('', 'WebSettings\WebSettingsController@index')
-            ->middleware('view-web-settings')
+        Route::get('{id}', 'WebSettings\WebSettingsController@index')
+            ->middleware('can:view-web-settings')
             ->name('web-settings.index');
 
         Route::post('update/{id}', 'WebSettings\WebSettingsController@update')
-            ->middleware('edit-web-settings')
+            ->middleware('can:edit-web-settings')
             ->name('web-settings.update');
     });
 
     //slides
     Route::prefix('slides')->group(function () {
         Route::get('', 'Slides\SlidesController@index')
-            ->middleware('view-slide')
+            ->middleware('can:view-slide')
             ->name('slides.index');
 
         Route::post('update/{id}', 'Slides\SlidesController@update')
-            ->middleware('edit-slide')
+            ->middleware('can:edit-slide')
             ->name('slides.update');
     });
 
     //introduction
     Route::prefix('introduction')->group(function () {
         Route::get('', 'Introduction\IntroductionController@index')
-            ->middleware('view-introduction-page')
+            ->middleware('can:view-introduction-page')
             ->name('introduction.index');
 
         Route::post('update/{id}', 'Introduction\IntroductionController@update')
-            ->middleware('edit-introduction-page')
+            ->middleware('can:edit-introduction-page')
             ->name('introduction.update');
     });
 });
