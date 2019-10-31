@@ -190,10 +190,7 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-feedback')
-                    <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
-                    @endcan
-                    @can('add-feedback')
-                    <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                    <li><a href="{{ route('feedbacks.index') }}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                 </ul>
             </li>

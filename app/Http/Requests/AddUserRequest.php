@@ -37,7 +37,6 @@ class AddUserRequest extends FormRequest
             'branch_id' => 'required',
             'role_id' => 'required',
             'gender_id' => 'required',
-            'operation_status_id' => 'required'
         ];
 
         //trường hợp thêm người dùng
@@ -76,7 +75,6 @@ class AddUserRequest extends FormRequest
             'branch_id.required' => 'Mục này không được để trống',
             'role_id.required' => 'Mục này không được để trống',
             'gender_id.required' => 'Mục này không được để trống',
-            'operation_status_id.required' => 'Mục này không được để trống'
         ];
     }
 }

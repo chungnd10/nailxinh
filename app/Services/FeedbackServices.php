@@ -12,4 +12,11 @@ class FeedbackServices
         $feedback = Feedback::count();
         return $feedback;
     }
+
+    // lấy tất cả feedback
+    public function all($paginate)
+    {
+        $feedbacks = Feedback::paginate($paginate);
+        return $feedbacks;
+    }
 }

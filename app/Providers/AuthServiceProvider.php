@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::before(function ($user){
 
-            $role_admin = Config::get('contants.role_admin');
+            $role_admin = config('contants.role_admin');
             if ($user->role_id == $role_admin )
             {
                 return true;

@@ -17,7 +17,7 @@ class ReceptionistMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $role_receptionist = Config::get('contants.role_receptionist');
+        $role_receptionist = config('contants.role_receptionist');
         if (Auth::check())
         {
             if (Auth::user()->role_id == $role_receptionist )

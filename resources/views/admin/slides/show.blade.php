@@ -31,23 +31,6 @@
                                     <span class="text-danger">{{ $errors->first('images') }}</span>
                                 @endif
                             </div>
-                            <div class="form-group">
-                                <label>Trạng thái hiển thị</label><span class="text-danger">*</span><br>
-                                @foreach($display_status as $item)
-                                    <input type="radio"
-                                           name="display_status_id"
-                                           value="{{ $item->id }}"
-                                           @if($item->id == old('display_status_id', $slide->display_status_id ))
-                                                checked
-                                           @endif
-                                    >&nbsp;&nbsp;
-                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                @endforeach
-                                @if($errors->first('display_status_id'))
-                                    <span class="text-danger">{{ $errors->first('display_status_id') }}</span>
-                                @endif
-                            </div>
-
                         </div>
                         <!-- /.col -->
                         <div class="col-md-6">

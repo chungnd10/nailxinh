@@ -17,7 +17,7 @@ class RoleServices
     //lấy tất cả role trừ admin
     public function allNotAdmin()
     {
-        $role_admin = Config::get('contants.role_admin');
+        $role_admin = config('contants.role_admin');
         $role = Role::where('id', '<>', $role_admin)->get();
         return $role;
     }
