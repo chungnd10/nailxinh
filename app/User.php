@@ -74,13 +74,13 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        $role_admin = Config::get('contants.role_admin');
+        $role_admin = config('contants.role_admin');
         return $this->role->id == $role_admin;
     }
 
     public function isManager()
     {
-        $role_manager = Config::get('contants.role_admin');
+        $role_manager = config('contants.role_manager');
         return $this->role->id == $role_manager;
     }
 }

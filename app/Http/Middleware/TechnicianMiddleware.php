@@ -17,7 +17,7 @@ class TechnicianMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $role_technician = Config::get('contants.role_technician');
+        $role_technician = config('contants.role_technician');
         if (Auth::check())
         {
             if (Auth::user()->role_id == $role_technician )

@@ -16,7 +16,7 @@ class ManagerBranchMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $role_manager = Config::get('contants.role_admin');
+        $role_manager = config('contants.role_admin');
 
         if (Auth::check())
         {

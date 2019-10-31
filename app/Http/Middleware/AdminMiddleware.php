@@ -17,7 +17,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $role_admin = Config::get('contants.role_admin');
+        $role_admin = config('contants.role_admin');
 
         if (Auth::check())
         {

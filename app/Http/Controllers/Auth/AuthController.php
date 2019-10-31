@@ -26,9 +26,15 @@ class AuthController extends Controller
             ]
         );
 
-        if (Auth::attempt(['email'=>$request->email, 'password' => $request->password])) {
+        if (Auth::attempt(
+            [
+                'email' => $request->email,
+                'password' => $request->password
+
+            ])
+        ) {
             return redirect()->route('admin.index');
-        }else{
+        } else {
             return back()->with('danger', 'Tài khoản hoặc mật khẩu không đúng');
         }
     }

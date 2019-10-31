@@ -35,11 +35,22 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->full_name }}</td>
                                     <td>
-                                        <img width="50" style="border-radius: 50%" src="upload/images/users/{{ $item->avatar }}" alt="avatar">
+                                        <img width="50" style="border-radius: 50%"
+                                             src="upload/images/users/{{ $item->avatar }}" alt="avatar">
                                     </td>
                                     <td>{{ $item->phone_number }}</td>
                                     <td>{{ $item->role->name }}</td>
-                                    <td>{{ $item->operationStatus->name }}</td>
+                                    <td>
+                                        <label class="switch">
+                                            <input type="checkbox"
+                                                   name="operation_status_id"
+                                                   class="operation_status_id"
+                                                   data-id="{{ $item->id }}"
+                                                    {{ $item->operation_status_id == config('contants.operation_status_active') ? 'checked' : ''}}
+                                            >
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </td>
                                     <td>
                                         <a href="{{ route('users.show', $item->id) }}" class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
@@ -66,4 +77,26 @@
         </div>
         <!-- /.row -->
     </section>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        // change status
+        $('.operation_status_id').change(function () {
+            var operation_status_id = $(this).prop('checked') === true ?
+                "{{ config('contants.operation_status_active') }}" :
+                "{{ config('contants.operation_status_inactive') }}";
+            var id = $(this).data('id');
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "{{ route('users.change-status') }}",
+                data: {'operation_status_id': operation_status_id, 'id': id},
+                success: function (data) {
+                    console.log(data.success)
+                }
+            });
+        })
+        //end change status
+    </script>
 @endsection

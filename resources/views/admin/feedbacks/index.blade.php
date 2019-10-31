@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             Danh sách
-            <small>slides</small>
+            <small>phản hồi</small>
         </h1>
     </section>
     {{--Main content--}}
@@ -17,26 +17,28 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th width="40" >ID</th>
+                                <th>ID</th>
                                 <th width="100">Ảnh</th>
-                                <th>Tiêu đề</th>
-                                <th width=100>Trạng thái</th>
-                                <th width="120">URL</th>
-                                <th width="50">
-                                    <a href="{{ route('slides.create') }}" class="btn btn-xs btn-success">
-                                        <i class="fa fa-plus"></i> Thêm</a>
-                                </th>
+                                <th width="150">Họ tên</th>
+                                <th>Nội dung</th>
+                                <th width="120">Trạng thái</th>
+                                <th width="90">Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($slides as $item)
+                            @foreach($feedbacks as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>
-                                        <img width="80"
-                                             src="upload/images/slides/{{ $item->images }}">
+                                        <img width="80" style="border-radius: 50%"
+                                             src="upload/images/feedbacks/{{ $item->image }}">
                                     </td>
-                                    <td>{{ $item->title }}</td>
+                                    <td>{{ $item->full_name }}</td>
+                                    <td>
+                                        <span class="more">
+                                            {{ $item->content }}
+                                        </span>
+                                    </td>
                                     <td>
                                         <label class="switch">
                                             <input type="checkbox"
@@ -48,22 +50,18 @@
                                             <span class="slider round"></span>
                                         </label>
                                     </td>
-                                    <td>{{ $item->url }}</td>
                                     <td>
-                                        <a href="{{ route('slides.show', $item->id) }}" class="btn btn-xs btn-warning">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a href="{{ route('slides.destroy', $item->id) }}"
+                                        <a href="{{ route('feedbacks.destroy', $item->id) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                            <i class="fa fa-trash"></i>
+                                            <i class="fa fa-trash"></i> Xóa
                                         </a>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $slides->links() !!}
+                        {!! $feedbacks->links() !!}
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -77,6 +75,39 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
+
+            // hide content
+            var showChar = 100;  // Số ký tự muốn hiển thị
+            var ellipsestext = "...";
+            var moretext = "Xem thêm >";
+            var lesstext = "Ẩn bớt >";
+
+            $('.more').each(function () {
+                var content = $(this).html();
+                if (content.length > showChar) {
+                    var c = content.substr(0, showChar);
+                    var h = content.substr(showChar, content.length - showChar);
+                    var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span>' +
+                        '<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;' +
+                        '<a href="" class="morelink">' + moretext + '</a></span>';
+                    $(this).html(html);
+                }
+            });
+
+            $(".morelink").click(function () {
+                if ($(this).hasClass("less")) {
+                    $(this).removeClass("less");
+                    $(this).html(moretext);
+                } else {
+                    $(this).addClass("less");
+                    $(this).html(lesstext);
+                }
+                $(this).parent().prev().toggle();
+                $(this).prev().toggle();
+                return false;
+            });
+            // end hide content
+
             // change status
             $('.display_status_id').change(function () {
                 var display_status_id = $(this).prop('checked') === true ? "{{ config('contants.display_status_display') }}" : "{{ config('contants.display_status_hide') }}";
@@ -85,7 +116,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: "{{ route('slides.change-status') }}",
+                    url: "{{ route('feedbacks.update') }}",
                     data: {'display_status_id': display_status_id, 'id': id},
                     success: function (data) {
                         console.log(data.success)

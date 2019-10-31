@@ -17,7 +17,7 @@ class CashierMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $role_cashier = Config::get('contants.role_cashier');
+        $role_cashier = config('contants.role_cashier');
         if (Auth::check())
         {
             if (Auth::user()->role_id == $role_cashier )

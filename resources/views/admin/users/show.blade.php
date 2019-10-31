@@ -62,7 +62,7 @@
                                                name="birthday"
                                                id="birthday"
                                                data-date-format='yyyy-mm-dd'
-                                                >
+                                        >
                                         @if($errors->first('birthday'))
                                             <span class="text-danger">{{ $errors->first('birthday') }}</span>
                                         @endif
@@ -100,7 +100,7 @@
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Chi nhánh</label><span class="text-danger">*</span>
-                                        <select name="branch_id"  class="form-control">
+                                        <select name="branch_id" class="form-control">
                                             @foreach($branchs as $item)
                                                 <option value="{{ $item->id }}"
                                                         @if($user->branch_id == $item->id)
@@ -149,19 +149,15 @@
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Trạng thái hoạt dộng</label><span class="text-danger">*</span><br>
-                                        @foreach($operation_status as $item)
-                                            <input type="radio"
+                                        <label class="switch">
+                                            <input type="checkbox"
                                                    name="operation_status_id"
-                                                   value="{{ $item->id }}"
-                                                   @if($user->operation_status_id == $item->id)
-                                                   checked
-                                                    @endif
-                                            >&nbsp;&nbsp;
-                                            @if($errors->first('operation_status_id'))
-                                                <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
-                                            @endif
-                                            {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        @endforeach
+                                                   class="operation_status_id"
+                                                   data-id="{{ $user->id }}"
+                                                   {{ $user->operation_status_id == config('contants.operation_status_active') ? 'checked' : ''}}
+                                            >
+                                            <span class="slider round"></span>
+                                        </label>
                                     </div>
                                     <!-- /.form-group -->
                                 </div>
@@ -285,7 +281,6 @@
                     branch_id: "required",
                     role_id: "required",
                     gender_id: "required",
-                    operation_status_id: "required",
                 },
 
                 messages: {
@@ -309,7 +304,6 @@
                     branch_id: "Mục này không được để trống",
                     role_id: "Mục này không được để trống",
                     gender_id: "Mục này không được để trống",
-                    operation_status_id: "Mục này không được để trống",
                 }
             });
 
@@ -322,7 +316,7 @@
                         maxlength: 40,
                     },
                     cf_password: {
-                        equalTo:password
+                        equalTo: password
                     },
                 },
                 messages: {
@@ -336,6 +330,24 @@
                     }
                 }
             });
+            //end validate
+
+            // change status
+            $('.operation_status_id').change(function () {
+                var operation_status_id = $(this).prop('checked') === true ? "{{ config('contants.operation_status_active') }}" : "{{ config('contants.operation_status_inactive') }}";
+                var id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "{{ route('users.change-status') }}",
+                    data: {'operation_status_id': operation_status_id, 'id': id},
+                    success: function (data) {
+                        console.log(data.success)
+                    }
+                });
+            })
+            //end change status
 
         });
     </script>

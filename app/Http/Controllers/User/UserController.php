@@ -45,11 +45,11 @@ class UserController extends Controller
         //nếu là admin thì lấy all
         if (Auth::user()->isAdmin()) {
             //lấy dữ liệu
-            $users = $this->user_services->all(10);
+            $users = $this->user_services->allAndNotAdmin(100);
         }
         if (Auth::user()->isManager()) {
             // chủ tiệm thì lấy nhân viên của tiệm
-            $users = $this->user_services->getUserWithBranch(Auth::user()->branch_id, 10);
+            $users = $this->user_services->getUserWithBranch(Auth::user()->branch_id, 100);
         }
         // điều hướng
         return view('admin.users.index', compact('users'));
@@ -305,5 +305,15 @@ class UserController extends Controller
         );
         //điều hướng
         return redirect()->route('profile', $id)->with($notify);
+    }
+
+    // thay đổi trạng thái
+    public function changeStatus(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->operation_status_id = $request->operation_status_id;
+        $user->save();
+
+        return response()->json(['success' => 'Status change successfully.']);
     }
 }

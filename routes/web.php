@@ -57,6 +57,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->name('users.destroy');
         Route::post('set-password/{id}', 'User\UserController@setPassword')
             ->name('set.password');
+
+        Route::get('change-status', 'User\UserController@changeStatus')
+            ->middleware('can:edit-users')
+            ->name('users.change-status');
     });
 
     //type of services
@@ -257,21 +261,18 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     });
 
     //feedback
-    Route::prefix('feedback')->group(function () {
+    Route::prefix('feedbacks')->group(function () {
         Route::get('', 'Feedback\FeedbackController@index')
             ->middleware('can:view-feedback')
-            ->name('feedback.index');
+            ->name('feedbacks.index');
 
-        Route::get('update/{id}', 'Feedback\FeedbackController@show')
+        Route::get('update/', 'Feedback\FeedbackController@changeStatus')
             ->middleware('can:edit-feedback')
-            ->name('feedback.show');
-        Route::post('update/{id}', 'Feedback\FeedbackController@update')
-            ->middleware('can:edit-feedback')
-            ->name('feedback.update');
+            ->name('feedbacks.update');
 
         Route::get('destroy/{id}', 'Feedback\FeedbackController@destroy')
             ->middleware('can:remove-feedback')
-            ->name('feedback.destroy');
+            ->name('feedbacks.destroy');
     });
 
     // roles
@@ -319,6 +320,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('destroy/{id}', 'Slides\SlidesController@destroy')
             ->middleware('can:remove-slide')
             ->name('slides.destroy');
+
+        Route::get('change-status', 'Slides\SlidesController@changeStatus')
+            ->middleware('can:edit-slide')
+            ->name('slides.change-status');
     });
 
     //introductions
