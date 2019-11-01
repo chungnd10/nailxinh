@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <img class="profile-user-img img-responsive"
+                                <img class="profile-user-img img-responsive img-web_settings"
                                      src="upload/images/web_settings/{{ $item->logo }}"
                                      id="proImg"
                                      alt="User profile picture">

@@ -12,9 +12,7 @@
 */
 
 
-Route::get('/', function () {
-    return view('admin.index');
-});
+Route::get('/', 'Dashboard\DashboardController@index');
 
 Route::get('login', 'Auth\AuthController@login')->name('login');
 Route::post('login', 'Auth\AuthController@checkLogin')->name('login');

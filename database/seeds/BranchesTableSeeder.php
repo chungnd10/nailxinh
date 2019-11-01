@@ -18,6 +18,18 @@ class BranchesTableSeeder extends Seeder
                 'phone_number'  => '0987654321',
                 'address'   => '199 Quang Trung, Quận Hà Đông',
                 'city_id' => 24
+            ],
+            [
+                'name' => '199 Thanh Xuân',
+                'phone_number'  => '0987654322',
+                'address'   => '199 Thanh Xuân, Quận Thanh Xuân',
+                'city_id' => 24
+            ],
+            [
+                'name' => '216 Cầu Giấy',
+                'phone_number'  => '0987654323',
+                'address'   => '216 Cầu Giấy, Quận Cầu Giấy',
+                'city_id' => 24
             ]
         ];
 
