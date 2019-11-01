@@ -14,7 +14,7 @@
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="slides_table">
                             <thead>
                             <tr>
                                 <th width="40" >ID</th>
@@ -38,6 +38,7 @@
                                     </td>
                                     <td>{{ $item->title }}</td>
                                     <td>
+                                        <span class="hidden">{{ $item->display_status_id }}</span>
                                         <label class="switch">
                                             <input type="checkbox"
                                                    name="display_status_id"
@@ -77,6 +78,28 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
+
+            //datatable
+            $('#slides_table').DataTable({
+                "language": {
+                    "emptyTable": "Không có bản ghi nào",
+                    "infoEmpty": "Không có bản ghi nào",
+                    "zeroRecords": "Không có bản ghi nào"
+                },
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true,
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": [ 1,4,5]
+                    }
+                ]
+            });
+
             // change status
             $('.display_status_id').change(function () {
                 var display_status_id = $(this).prop('checked') === true ? "{{ config('contants.display_status_display') }}" : "{{ config('contants.display_status_hide') }}";

@@ -20,10 +20,10 @@
                     </a>
                     <ul class="treeview-menu">
                         @can('view-branchs')
-                            <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                            <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                         @endcan
                         @can('add-branchs')
-                            <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                            <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                         @endcan
                     </ul>
                 </li>
@@ -38,10 +38,10 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-type-of-services')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                     @can('add-type-of-services')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                     @endcan
                 </ul>
             </li>
@@ -56,10 +56,10 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-services')
-                    <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                    <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                     @can('add-services')
-                    <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                    <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                     @endcan
                 </ul>
             </li>
@@ -74,10 +74,10 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-process-of-services')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                     @can('add-process-of-services')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                     @endcan
                 </ul>
             </li>
@@ -92,10 +92,10 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-bills')
-                    <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                    <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                     @can('add-bills')
-                    <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                    <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                     @endcan
                 </ul>
             </li>
@@ -110,10 +110,10 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-orders')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                     @can('add-orders')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                     @endcan
                 </ul>
             </li>
@@ -128,10 +128,10 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-accumulate-points')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Tích điểm</a></li>
+                        <li><a href="{{ route('accumulate-points.index') }}"><i class="fa fa-angle-right"></i>Tích điểm</a></li>
                     @endcan
                     @can('view-discount')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Chiết khấu</a></li>
+                        <li><a href="{{ route('membership_type.index') }}"><i class="fa fa-angle-right"></i>Chiết khấu</a></li>
                     @endcan
                 </ul>
             </li>
@@ -146,10 +146,7 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-restricted-lists')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
-                    @endcan
-                    @can('add-restricted-lists')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                        <li><a href="{{ route('restricted-lists.index') }}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                 </ul>
             </li>

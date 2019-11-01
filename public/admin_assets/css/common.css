@@ -54,8 +54,8 @@
     left: 3px;
     bottom: 4px;
     background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: .3s;
+    transition: .3s;
 }
 
 input:checked + .slider {
@@ -91,3 +91,11 @@ input:checked + .slider:before {
     display: block;
 }
 /* end toggle text*/
+
+div.dataTables_wrapper div.dataTables_filter input{
+    width: 220px !important;
+}
+
+.dataTables_empty{
+    color: #dd4b39;
+}

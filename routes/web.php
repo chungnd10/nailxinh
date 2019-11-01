@@ -224,29 +224,29 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->name('accumulate-points.destroy');
     });
 
-    //discount
-    Route::prefix('discount')->group(function () {
-        Route::get('', 'Discount\DiscountController@index')
-            ->middleware('view-discount')
-            ->name('discount.index');
+    //membership_type
+    Route::prefix('membership_type')->group(function () {
+        Route::get('', 'MembershipType\MembershipTypeController@index')
+            ->middleware('can:view-membership-type')
+            ->name('membership_type.index');
 
-        Route::get('create', 'Discount\DiscountController@create')
-            ->middleware('can:add-discount')
-            ->name('discount.create');
-        Route::post('create', 'Discount\DiscountController@store')
-            ->middleware('can:add-discount')
-            ->name('discount.store');
+        Route::get('create', 'MembershipType\MembershipTypeController@create')
+            ->middleware('can:add-membership-type')
+            ->name('membership_type.create');
+        Route::post('create', 'MembershipType\MembershipTypeController@store')
+            ->middleware('can:add-membership-type')
+            ->name('membership_type.store');
 
-        Route::get('update/{id}', 'Discount\DiscountController@show')
-            ->middleware('can:edit-discount')
-            ->name('discount.show');
-        Route::post('update/{id}', 'Discount\DiscountController@update')
-            ->middleware('can:edit-discount')
-            ->name('discount.update');
+        Route::get('update/{id}', 'MembershipType\MembershipTypeController@show')
+            ->middleware('can:edit-membership-type')
+            ->name('membership_type.show');
+        Route::post('update/{id}', 'MembershipType\MembershipTypeController@update')
+            ->middleware('can:edit-membership-type')
+            ->name('membership_type.update');
 
-        Route::get('destroy/{id}', 'Discount\DiscountController@destroy')
-            ->middleware('can:remove-discount')
-            ->name('discount.destroy');
+        Route::get('destroy/{id}', 'MembershipType\MembershipTypeController@destroy')
+            ->middleware('can:remove-membership-type')
+            ->name('membership_type.destroy');
     });
 
     //restricted lists
