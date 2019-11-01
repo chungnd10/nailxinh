@@ -67,6 +67,9 @@ class User extends Authenticatable
         return $this->belongsTo(OperationStatus::class);
     }
 
+    public function services(){
+        return $this->belongsToMany(Service::class,'user_services');
+    }
     public function hasPermission(Permission $permission)
     {
         return !!optional(optional($this->role)->permissions)->contains($permission);

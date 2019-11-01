@@ -11,8 +11,11 @@
     <section class="content">
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Thông tin cơ bản</a></li>
-                <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đặt lại mật khẩu</a></li>
+                <li class="active" id="li_tab_1"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Thông tin cơ
+                        bản</a></li>
+                <li class="" id="li_tab_2"><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đặt lại mật khẩu</a>
+                </li>
+                <li class="" id="li_tab_3"><a href="#tab_3" data-toggle="tab" aria-expanded="false">Kỹ năng</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
@@ -154,7 +157,7 @@
                                                    name="operation_status_id"
                                                    class="operation_status_id"
                                                    data-id="{{ $user->id }}"
-                                                   {{ $user->operation_status_id == config('contants.operation_status_active') ? 'checked' : ''}}
+                                                    {{ $user->operation_status_id == config('contants.operation_status_active') ? 'checked' : ''}}
                                             >
                                             <span class="slider round"></span>
                                         </label>
@@ -233,6 +236,53 @@
                             </form>
                         </div>
                     </div>
+                </div>
+                <div class="tab-pane" id="tab_3">
+                    <form action="{{route('set.services',$user->id )}}"
+                          method="post"
+                          class="form-horizontal"
+                    >
+                        @csrf
+                        <div class="box-body">
+                            @foreach($type_services as $type_service)
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>
+                                            {{ $type_service->name }}
+                                        </label>
+                                        @foreach($type_service->showServices($type_service->id) as $service)
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"
+                                                           @foreach($services_of_user as $services_of_users)
+                                                                @if($services_of_users->service_id == $service->id)
+                                                                    checked
+                                                                @endif
+                                                           @endforeach
+                                                           name="services_id[]"
+                                                           value="{{ $service->id }}"
+                                                    >
+                                                    {{ $service->name }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <a href="{{ route('users.index') }}" class="btn btn-default">
+                                <i class="fa fa-arrow-circle-o-left"></i>
+                                Trở về
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-save"></i>
+                                Lưu
+                            </button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
                 </div>
             </div>
             <!-- /.tab-content -->
@@ -349,6 +399,30 @@
             })
             //end change status
 
+            //active table
+            if (window.location.hash === '#tab_2') {
+                $('#li_tab_1').removeClass('active');//remove active class
+                $('#tab_1').removeClass('active');
+                $('#li_tab_2').addClass('active');
+                $('#tab_2').addClass('active');
+                $('#li_tab_3').removeClass('active');
+                $('#tab_3').removeClass('active');
+            }
+            //active table
+            if (window.location.hash === '#tab_3') {
+                $('#li_tab_1').removeClass('active');//remove active class
+                $('#tab_1').removeClass('active');
+                $('#li_tab_2').removeClass('active');
+                $('#tab_2').removeClass('active');
+                $('#li_tab_3').addClass('active');
+                $('#tab_3').addClass('active');
+            }
+
+            //Flat red color scheme for iCheck
+            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            })
         });
     </script>
 @endsection

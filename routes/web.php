@@ -53,8 +53,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('destroy/{id}', 'User\UserController@destroy')
             ->middleware('can:remove-users')
             ->name('users.destroy');
+
         Route::post('set-password/{id}', 'User\UserController@setPassword')
+            ->middleware('can:edit-users')
             ->name('set.password');
+
+        Route::post('set-services/{id}', 'User\UserController@setServices')
+            ->middleware('can:edit-users')
+            ->name('set.services');
 
         Route::get('change-status', 'User\UserController@changeStatus')
             ->middleware('can:edit-users')

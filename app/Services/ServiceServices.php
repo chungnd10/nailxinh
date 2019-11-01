@@ -12,4 +12,12 @@ class ServiceServices
         $service = Service::count();
         return $service;
     }
+
+    // lấy tất cả dịch vụ
+    public function all()
+    {
+        $service = Service::all();
+        return $service;
+    }
+
 }

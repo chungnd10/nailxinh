@@ -12,4 +12,11 @@ class TypeServiceServices
         $type = TypeOfService::count();
         return $type;
     }
+
+    // lấy tất cả loại dịch vụ
+    public function all()
+    {
+        $type = TypeOfService::all();
+        return $type;
+    }
 }
