@@ -16,19 +16,19 @@ class TypeOfServicesTableSeeder extends Seeder
                 'name' => 'Nail',
                 'slug' => 'nail',
                 'image' => 'type_of_services_default.png',
-                'description' => 'Là dịch vụ được yêu thích nhất tại Nail Xinh, với những mẫu nail...'
+                'description' => 'Là dịch vụ được yêu thích nhất tại Nail Xinh, với những mẫu nail'
             ],
             [
                 'name' => 'Mi',
                 'slug' => 'mi',
                 'image' => 'type_of_services_default.png',
-                'description' => 'Là dịch vụ được yêu thích nhất tại Nail Xinh, với những mẫu nail...'
+                'description' => 'Ở Nail Xinh hiện có 2 dịch vụ chính về mi đó là nối mi và uốn mi'
             ],
             [
                 'name' => 'Lông mày',
                 'slug' => 'long-may',
                 'image' => 'type_of_services_default.png',
-                'description' => 'Là dịch vụ được yêu thích nhất tại Nail Xinh, với những mẫu nail...'
+                'description' => 'Nail Xinh đang có các dịch vụ về lông mày như: phun thêu, điêu khắc, waxing'
             ]
         ];
 

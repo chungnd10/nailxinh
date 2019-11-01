@@ -26,15 +26,15 @@ class WebSettingsController extends Controller
         //nếu có nhập ảnh ảnh
         if ($request->hasFile('avatar')) {
             // xoá ảnh cũ
-            if (file_exists('upload/images/web_settings/'.$item->avatar) && $item->avatar != 'logo-default.png')
+            if (file_exists('upload/images/web_settings/'.$item->logo) && $item->logo != 'logo-default.png')
             {
-                unlink('upload/images/web_settings/'.$item->avatar);
+                unlink('upload/images/web_settings/'.$item->logo);
             }
             //lưu ảnh mới
             $file = $request->file('avatar');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/web_settings', $name);
-            $item->avatar = $name;
+            $item->logo = $name;
         }
         //lưu
         $item->fill($request->all())->save();

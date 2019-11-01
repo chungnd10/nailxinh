@@ -13,22 +13,19 @@ class SlidesTableSeeder extends Seeder
     {
         $slides = [
             [
-                'title' => 'Tiêu đề',
+                'title' => 'Banner 1',
                 'images' => 'slide-default.png',
-                'display_status_id' => 1
-
+                'display_status_id' => 2
             ],
             [
-                'title' =>'Tiêu đề',
+                'title' => 'Baner 2',
                 'images' => 'slide-default.png',
-                'display_status_id' => 1
-
+                'display_status_id' => 2
             ],
             [
-                'title' => 'Tiêu đề',
+                'title' => 'Banner 3',
                 'images' => 'slide-default.png',
-                'display_status_id' => 1
-
+                'display_status_id' => 2
             ]
         ];
 
