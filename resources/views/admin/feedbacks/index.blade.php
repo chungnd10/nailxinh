@@ -14,15 +14,15 @@
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="feedbacks_table">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th width="100">Ảnh</th>
                                 <th width="150">Họ tên</th>
                                 <th>Nội dung</th>
-                                <th width="120">Trạng thái</th>
-                                <th width="90">Hành động</th>
+                                <th width="70">Trạng thái</th>
+                                <th width="80">Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -40,12 +40,13 @@
                                         </span>
                                     </td>
                                     <td>
+                                        <span class="hidden">{{ $item->display_status_id }}</span>
                                         <label class="switch">
                                             <input type="checkbox"
                                                    name="display_status_id"
                                                    class="display_status_id"
                                                    data-id="{{ $item->id }}"
-                                                   {{ $item->display_status_id == config('contants.display_status_display') ? 'checked' : ''}}
+                                                    {{ $item->display_status_id == config('contants.display_status_display') ? 'checked' : ''}}
                                             >
                                             <span class="slider round"></span>
                                         </label>
@@ -75,6 +76,27 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
+
+            //data table
+            $('#feedbacks_table').DataTable({
+                "language": {
+                    "emptyTable": "Không có bản ghi nào",
+                    "infoEmpty": "Không có bản ghi nào",
+                    "zeroRecords": "Không có bản ghi nào"
+                },
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true,
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": [ 1,3,5]
+                    }
+                ]
+            });
 
             // hide content
             var showChar = 100;  // Số ký tự muốn hiển thị
@@ -124,6 +146,7 @@
                 });
             })
             //end change status
-        });
+        })
+        ;
     </script>
 @endsection

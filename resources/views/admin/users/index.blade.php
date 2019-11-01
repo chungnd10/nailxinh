@@ -14,7 +14,7 @@
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="users_table">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -67,7 +67,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $users->links() !!}
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -80,6 +79,28 @@
 @endsection
 @section('script')
     <script type="text/javascript">
+
+        //data table
+            $('#users_table').DataTable({
+                "language": {
+                    "emptyTable": "Không có bản ghi nào",
+                    "infoEmpty": "Không có bản ghi nào",
+                    "zeroRecords": "Không có bản ghi nào"
+                },
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true,
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": [ 2,6]
+                    }
+                ]
+            });
+
         // change status
         $('.operation_status_id').change(function () {
             var operation_status_id = $(this).prop('checked') === true ?

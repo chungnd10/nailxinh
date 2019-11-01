@@ -19,7 +19,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="admin_assets/dist/js/demo.js"></script>
 {{--toastr--}}
-<script src="admin_assets/plugins/toastr/toastr.min.js"></script>
+<script src="admin_assets/plugins/toastr/toastr.js"></script>
 <!-- ChartJS -->
 <script src="admin_assets/bower_components/chart.js/Chart.min.js"></script>
 <script src="admin_assets/bower_components/chart.js/Chart.bundle.min.js"></script>

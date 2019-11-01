@@ -153,22 +153,7 @@
                                     <label class="col-sm-2 control-label">Trạng thái<span
                                                 class="text-danger">*</span></label>
                                     <div class="col-sm-4">
-                                        @if(Auth::check())
-                                            @if(Auth::user()->isAdmin())
-                                                @foreach($operation_status as $item)
-                                                    <input type="radio"
-                                                           name="operation_status_id"
-                                                           value="{{ $item->id }}"
-                                                           @if($user->operation_status_id == $item->id)
-                                                           checked
-                                                            @endif
-                                                    >&nbsp;&nbsp;
-                                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                @endforeach
-                                            @else
-                                                <p>{{ $user->operationStatus->name }}</p>
-                                            @endif
-                                        @endif
+                                        <p>{{ $user->operationStatus->name }}</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
