@@ -15,7 +15,9 @@
                         bản</a></li>
                 <li class="" id="li_tab_2"><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đặt lại mật khẩu</a>
                 </li>
-                <li class="" id="li_tab_3"><a href="#tab_3" data-toggle="tab" aria-expanded="false">Kỹ năng</a></li>
+                @if($user->role_id == config('role_technician'))
+                    <li class="" id="li_tab_3"><a href="#tab_3" data-toggle="tab" aria-expanded="false">Kỹ năng</a></li>
+                @endif
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
@@ -237,7 +239,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="tab_3">
+                @if($user->role_id == config('role_technician'))
+                    <div class="tab-pane" id="tab_3">
                     <form action="{{route('set.services',$user->id )}}"
                           method="post"
                           class="form-horizontal"
@@ -284,6 +287,7 @@
                         <!-- /.box-footer -->
                     </form>
                 </div>
+                @endif
             </div>
             <!-- /.tab-content -->
         </div>
@@ -408,21 +412,19 @@
                 $('#li_tab_3').removeClass('active');
                 $('#tab_3').removeClass('active');
             }
-            //active table
-            if (window.location.hash === '#tab_3') {
-                $('#li_tab_1').removeClass('active');//remove active class
-                $('#tab_1').removeClass('active');
-                $('#li_tab_2').removeClass('active');
-                $('#tab_2').removeClass('active');
-                $('#li_tab_3').addClass('active');
-                $('#tab_3').addClass('active');
-            }
 
-            //Flat red color scheme for iCheck
-            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-                checkboxClass: 'icheckbox_flat-green',
-                radioClass: 'iradio_flat-green'
-            })
+            @if($user->role_id == config('role_technician'))
+                //active table
+                if (window.location.hash === '#tab_3') {
+                    $('#li_tab_1').removeClass('active');//remove active class
+                    $('#tab_1').removeClass('active');
+                    $('#li_tab_2').removeClass('active');
+                    $('#tab_2').removeClass('active');
+                    $('#li_tab_3').addClass('active');
+                    $('#tab_3').addClass('active');
+                }
+            @endif
+
         });
     </script>
 @endsection
