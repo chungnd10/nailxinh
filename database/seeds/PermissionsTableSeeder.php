@@ -38,20 +38,20 @@ class PermissionsTableSeeder extends Seeder
                 'name'  => 'remove-slide'
             ],
             [
-                'title' => 'Xem mức chiết khấu',
-                'name'  => 'view-discount'
+                'title' => 'Xem loại thành viên',
+                'name'  => 'view-membership-type'
             ],
             [
-                'title' => 'Thêm mức chiết khấu',
-                'name'  => 'add-discount'
+                'title' => 'Thêm loại thành viên',
+                'name'  => 'add-membership-type'
             ],
             [
-                'title' => 'Sửa mức chiết khấu',
-                'name'  => 'edit-discount'
+                'title' => 'Sửa loại thành viên',
+                'name'  => 'edit-membership-type'
             ],
             [
-                'title' => 'Xóa mức chiết khấu',
-                'name'  => 'remove-discount'
+                'title' => 'Xóa loại thành viên',
+                'name'  => 'remove-membership-type'
             ],
             [
                 'title' => 'Xem thông tin website',
@@ -75,7 +75,7 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'title' => 'Sửa trang giới thiệu',
-                'name'  => 'edit-introduction-page'
+                'name'  => 'edit-introductions-page'
             ],
             [
                 'title' => 'Xem danh sách hạn chế',

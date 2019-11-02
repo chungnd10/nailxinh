@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\TypeServiceServices;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
@@ -12,4 +13,8 @@ class Service extends Model
      * @var string
      */
     protected $table = 'services';
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }

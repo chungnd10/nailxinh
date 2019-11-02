@@ -12,4 +12,9 @@ class AccumulatePoints extends Model
      * @var string
      */
     protected $table = 'accumulate_points';
+
+    public function membership_type()
+    {
+        return $this->belongsTo(MembershipType::class);
+    }
 }

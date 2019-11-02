@@ -12,4 +12,16 @@ class Slides extends Model
      * @var string
      */
     protected $table = 'slides';
+
+    protected $fillable = [
+      'title',
+      'description',
+      'url',
+      'display_status_id'
+    ];
+
+    public function displayStatus()
+    {
+        return $this->belongsTo(DisplayStatus::class);
+    }
 }

@@ -17,6 +17,12 @@ class CreateAccumulatePointsTable extends Migration
             $table->increments('id');
             $table->string('phone_number', 11)->unique();
             $table->double('total_money', 10, 2);
+
+            $table->unsignedInteger('membership_type_id')->default(1);
+            $table->foreign('membership_type_id')
+                ->references('id')
+                ->on('membership_type')
+                ->onDelete('CASCADE');
             $table->timestamps();
         });
     }
