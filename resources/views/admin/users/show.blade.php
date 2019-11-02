@@ -11,8 +11,11 @@
     <section class="content">
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Thông tin cơ bản</a></li>
-                <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đặt lại mật khẩu</a></li>
+                <li class="active" id="li_tab_1"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Thông tin cơ
+                        bản</a></li>
+                <li class="" id="li_tab_2"><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đặt lại mật khẩu</a>
+                </li>
+                <li class="" id="li_tab_3"><a href="#tab_3" data-toggle="tab" aria-expanded="false">Kỹ năng</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
@@ -59,7 +62,10 @@
                                         <input type="text"
                                                class="form-control"
                                                value="{{ old('birthday', $user->birthday)}}"
-                                               name="birthday">
+                                               name="birthday"
+                                               id="birthday"
+                                               data-date-format='yyyy-mm-dd'
+                                        >
                                         @if($errors->first('birthday'))
                                             <span class="text-danger">{{ $errors->first('birthday') }}</span>
                                         @endif
@@ -97,7 +103,7 @@
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Chi nhánh</label><span class="text-danger">*</span>
-                                        <select name="branch_id"  class="form-control">
+                                        <select name="branch_id" class="form-control">
                                             @foreach($branchs as $item)
                                                 <option value="{{ $item->id }}"
                                                         @if($user->branch_id == $item->id)
@@ -146,19 +152,15 @@
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Trạng thái hoạt dộng</label><span class="text-danger">*</span><br>
-                                        @foreach($operation_status as $item)
-                                            <input type="radio"
+                                        <label class="switch">
+                                            <input type="checkbox"
                                                    name="operation_status_id"
-                                                   value="{{ $item->id }}"
-                                                   @if($user->operation_status_id == $item->id)
-                                                   checked
-                                                    @endif
-                                            >&nbsp;&nbsp;
-                                            @if($errors->first('operation_status_id'))
-                                                <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
-                                            @endif
-                                            {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        @endforeach
+                                                   class="operation_status_id"
+                                                   data-id="{{ $user->id }}"
+                                                    {{ $user->operation_status_id == config('contants.operation_status_active') ? 'checked' : ''}}
+                                            >
+                                            <span class="slider round"></span>
+                                        </label>
                                     </div>
                                     <!-- /.form-group -->
                                 </div>
@@ -211,7 +213,7 @@
                                             <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-sm-5">
-                                            <input type="password" name="password2" class="form-control"
+                                            <input type="password" name="cf_password" class="form-control"
                                                    placeholder="Nhập lại mật khẩu mới">
                                             @if($errors->first('cf-password'))
                                                 <span class="text-danger">{{ $errors->first('cf-password') }}</span>
@@ -235,6 +237,53 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="tab_3">
+                    <form action="{{route('set.services',$user->id )}}"
+                          method="post"
+                          class="form-horizontal"
+                    >
+                        @csrf
+                        <div class="box-body">
+                            @foreach($type_services as $type_service)
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>
+                                            {{ $type_service->name }}
+                                        </label>
+                                        @foreach($type_service->showServices($type_service->id) as $service)
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"
+                                                           @foreach($services_of_user as $services_of_users)
+                                                                @if($services_of_users->service_id == $service->id)
+                                                                    checked
+                                                                @endif
+                                                           @endforeach
+                                                           name="services_id[]"
+                                                           value="{{ $service->id }}"
+                                                    >
+                                                    {{ $service->name }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <a href="{{ route('users.index') }}" class="btn btn-default">
+                                <i class="fa fa-arrow-circle-o-left"></i>
+                                Trở về
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-save"></i>
+                                Lưu
+                            </button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
             </div>
             <!-- /.tab-content -->
         </div>
@@ -251,7 +300,13 @@
                 } else {
                     getBase64(file, '#proImg');
                 }
-            }
+            };
+
+            //Date picker
+            $('#birthday').datepicker({
+                autoclose: true,
+                dateFormat: 'yyyy-mm-dd'
+            });
 
             //validate update user
             $("#updateUser").validate({
@@ -276,7 +331,6 @@
                     branch_id: "required",
                     role_id: "required",
                     gender_id: "required",
-                    operation_status_id: "required",
                 },
 
                 messages: {
@@ -300,7 +354,6 @@
                     branch_id: "Mục này không được để trống",
                     role_id: "Mục này không được để trống",
                     gender_id: "Mục này không được để trống",
-                    operation_status_id: "Mục này không được để trống",
                 }
             });
 
@@ -312,8 +365,8 @@
                         minlength: 6,
                         maxlength: 40,
                     },
-                    password2: {
-                        equalTo:password
+                    cf_password: {
+                        equalTo: password
                     },
                 },
                 messages: {
@@ -322,12 +375,54 @@
                         minlength: "Yêu cầu từ 6-40 ký tự",
                         maxlength: "Yêu cầu từ 6-40 ký tự",
                     },
-                    password2: {
+                    cf_password: {
                         equalTo: "Nhập lại mật khẩu không đúng"
                     }
                 }
             });
+            //end validate
 
+            // change status
+            $('.operation_status_id').change(function () {
+                var operation_status_id = $(this).prop('checked') === true ? "{{ config('contants.operation_status_active') }}" : "{{ config('contants.operation_status_inactive') }}";
+                var id = $(this).data('id');
+
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: "{{ route('users.change-status') }}",
+                    data: {'operation_status_id': operation_status_id, 'id': id},
+                    success: function (data) {
+                        console.log(data.success)
+                    }
+                });
+            })
+            //end change status
+
+            //active table
+            if (window.location.hash === '#tab_2') {
+                $('#li_tab_1').removeClass('active');//remove active class
+                $('#tab_1').removeClass('active');
+                $('#li_tab_2').addClass('active');
+                $('#tab_2').addClass('active');
+                $('#li_tab_3').removeClass('active');
+                $('#tab_3').removeClass('active');
+            }
+            //active table
+            if (window.location.hash === '#tab_3') {
+                $('#li_tab_1').removeClass('active');//remove active class
+                $('#tab_1').removeClass('active');
+                $('#li_tab_2').removeClass('active');
+                $('#tab_2').removeClass('active');
+                $('#li_tab_3').addClass('active');
+                $('#tab_3').addClass('active');
+            }
+
+            //Flat red color scheme for iCheck
+            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            })
         });
     </script>
 @endsection

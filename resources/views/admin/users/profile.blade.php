@@ -48,9 +48,9 @@
             <div class="col-md-9">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Thông tin</a>
+                        <li class="active" id="li_tab_1"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Thông tin</a>
                         </li>
-                        <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đổi mật khẩu</a>
+                        <li class="" id="li_tab_2"><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đổi mật khẩu</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -63,7 +63,8 @@
                             >
                                 @csrf
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Họ tên<span class="text-danger">*</span></label>
+                                    <label class="col-sm-2 control-label">Họ tên<span
+                                                class="text-danger">*</span></label>
                                     <div class="col-sm-4">
                                         <input type="text"
                                                class="form-control"
@@ -73,25 +74,29 @@
                                             <span class="text-danger">{{ $errors->first('full_name') }}</span>
                                         @endif
                                     </div>
-                                    <label class="col-sm-2 control-label">Email <span class="text-danger">*</span></label>
+                                    <label class="col-sm-2 control-label">Email <span
+                                                class="text-danger">*</span></label>
                                     <div class="col-sm-4">
                                         <p>{{ $user->email }}</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Ngày sinh<span class="text-danger">*</span></label>
+                                    <label class="col-sm-2 control-label">Ngày sinh<span
+                                                class="text-danger">*</span></label>
                                     <div class="col-sm-4">
                                         <input type="text"
                                                class="form-control"
                                                value="{{ old('birthday', $user->birthday)}}"
                                                name="birthday"
-                                               id="datepicker2">
+                                               data-date-format='yyyy-mm-dd'
+                                               id="birthday">
                                         @if($errors->first('birthday'))
                                             <span class="text-danger">{{ $errors->first('birthday') }}</span>
                                         @endif
                                     </div>
 
-                                    <label class="col-sm-2 control-label">Chi nhánh<span class="text-danger">*</span></label>
+                                    <label class="col-sm-2 control-label">Chi nhánh<span
+                                                class="text-danger">*</span></label>
                                     <div class="col-sm-4">
                                         @if(Auth::check())
                                             @if(Auth::user()->isAdmin())
@@ -122,17 +127,17 @@
                                             <span class="text-danger">{{ $errors->first('phone_number') }}</span>
                                         @endif
                                     </div>
-                                    <label class="col-sm-2 control-label">Quyền<span class="text-danger">*</span></label>
+                                    <label class="col-sm-2 control-label">Quyền<span
+                                                class="text-danger">*</span></label>
                                     <div class="col-sm-4">
                                         @if(Auth::check())
-                                            @if(Auth::user()->isAdmin())
-                                                <p>{{ $user->role->name }}</p>
-                                            @endif
+                                            <p>{{ $user->role->name }}</p>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Giới tính<span class="text-danger">*</span></label>
+                                    <label class="col-sm-2 control-label">Giới tính<span
+                                                class="text-danger">*</span></label>
                                     <div class="col-sm-4">
                                         @foreach($genders as $item)
                                             <input type="radio"
@@ -145,28 +150,15 @@
                                             {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         @endforeach
                                     </div>
-                                    <label class="col-sm-2 control-label">Trạng thái<span class="text-danger">*</span></label>
+                                    <label class="col-sm-2 control-label">Trạng thái<span
+                                                class="text-danger">*</span></label>
                                     <div class="col-sm-4">
-                                        @if(Auth::check())
-                                            @if(Auth::user()->isAdmin())
-                                                @foreach($operation_status as $item)
-                                                    <input type="radio"
-                                                           name="operation_status_id"
-                                                           value="{{ $item->id }}"
-                                                           @if($user->operation_status_id == $item->id)
-                                                           checked
-                                                            @endif
-                                                    >&nbsp;&nbsp;
-                                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                @endforeach
-                                            @else
-                                                <p>{{ $user->operationStatus->name }}</p>
-                                            @endif
-                                        @endif
+                                        <p>{{ $user->operationStatus->name }}</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Địa chỉ<span class="text-danger">*</span></label>
+                                    <label class="col-sm-2 control-label">Địa chỉ<span
+                                                class="text-danger">*</span></label>
                                     <div class="col-sm-10">
                                         <input type="text"
                                                class="form-control"
@@ -201,8 +193,10 @@
                             <div class="row">
                                 <div class="col-md-12 ">
                                     <form class="form-horizontal"
-                                          action="{{route('set.password',$user->id )}}"
-                                          method="post">
+                                          action="{{route('changePassword',$user->id )}}"
+                                          method="post"
+                                          id="changePassword"
+                                    >
                                         @csrf
                                         <div class="box-body">
                                             <div class="form-group">
@@ -210,8 +204,18 @@
                                                     Mật khẩu cũ
                                                     <span class="text-danger">*</span></label>
                                                 <div class="col-sm-5">
-                                                    <input type="password" name="old-password" class="form-control"
+                                                    <input type="password" name="old_password" class="form-control"
                                                            placeholder="Mật khẩu cũ">
+                                                    @if($errors->first('old_password'))
+                                                        <span class="text-danger">
+                                                            {{ $errors->first('old_password') }}
+                                                        </span>
+                                                    @endif
+                                                    @if(session()->has('old_password'))
+                                                        <span class="text-danger">
+                                                            {{ session('old_password') }}
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -220,8 +224,12 @@
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-sm-5">
-                                                    <input type="password" name="password" class="form-control"
+                                                    <input type="password" name="password" id="password"
+                                                           class="form-control"
                                                            placeholder="Mật khẩu mới">
+                                                    @if($errors->first('password'))
+                                                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -229,8 +237,11 @@
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-sm-5">
-                                                    <input type="password" name="cf-password" class="form-control"
+                                                    <input type="password" name="cf_password" class="form-control"
                                                            placeholder="Nhập lại mật khẩu mới">
+                                                    @if($errors->first('cf_password'))
+                                                        <span class="text-danger">{{ $errors->first('cf_password') }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -275,7 +286,7 @@
             };
 
             //Date picker
-            $('#datepicker2').datepicker({
+            $('#birthday').datepicker({
                 autoclose: true,
                 dateFormat: 'yyyy-mm-dd'
             });
@@ -298,7 +309,6 @@
             });
 
             //validate update infomation
-            //validate update user
             $("#updateInfoProfile").validate({
                 rules: {
                     full_name: {
@@ -334,6 +344,43 @@
                     },
                 }
             });
+
+            //validate
+            $("#changePassword").validate({
+                rules: {
+                    old_password: {
+                        required: true,
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 40,
+                    },
+                    cf_password: {
+                        equalTo:password
+                    },
+                },
+                messages: {
+                    old_password: {
+                        required: "Mục này không được để trống",
+                    },
+                    password: {
+                        required: "Mục này không được để trống",
+                        minlength: "Yêu cầu từ 6-40 ký tự",
+                        maxlength: "Yêu cầu từ 6-40 ký tự",
+                    },
+                    cf_password: {
+                        equalTo: "Nhập lại mật khẩu không đúng"
+                    }
+                }
+            });
+
+            if (window.location.hash == '#tab_2') {
+                $('#li_tab_1').removeClass('active');//remove active class
+                $('#tab_1').removeClass('active');
+                $('#li_tab_2').addClass('active');
+                $('#tab_2').addClass('active');
+            }
         });
     </script>
 @endsection

@@ -14,9 +14,11 @@ class CreateIntroductionsTable extends Migration
     public function up()
     {
         Schema::create('introductions', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('title',200);
             $table->text('content');
             $table->string('image',300);
+            $table->timestamps();
         });
     }
 

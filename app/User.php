@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Config;
 
 class User extends Authenticatable
 {
@@ -66,6 +67,9 @@ class User extends Authenticatable
         return $this->belongsTo(OperationStatus::class);
     }
 
+    public function services(){
+        return $this->belongsToMany(Service::class,'user_services');
+    }
     public function hasPermission(Permission $permission)
     {
         return !!optional(optional($this->role)->permissions)->contains($permission);
@@ -73,6 +77,13 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role->id == 1;
+        $role_admin = config('contants.role_admin');
+        return $this->role->id == $role_admin;
+    }
+
+    public function isManager()
+    {
+        $role_manager = config('contants.role_manager');
+        return $this->role->id == $role_manager;
     }
 }

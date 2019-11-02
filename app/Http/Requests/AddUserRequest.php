@@ -37,7 +37,6 @@ class AddUserRequest extends FormRequest
             'branch_id' => 'required',
             'role_id' => 'required',
             'gender_id' => 'required',
-            'operation_status_id' => 'required'
         ];
 
         //trường hợp thêm người dùng
@@ -46,7 +45,7 @@ class AddUserRequest extends FormRequest
             $validate['avatar']  = 'required|mimes:png,jpg,jpeg';
             $validate['email']  = 'required|unique:users,email';
             $validate['password']  = 'required|min:6|max:40';
-            $validate['cf-password']  = 'required|same:password';
+            $validate['cf_password']  = 'required|same:password';
         }
 
         return $validate;
@@ -69,14 +68,13 @@ class AddUserRequest extends FormRequest
             'password.required' => 'Mục này không được để trống',
             'password.min' => 'Yêu cầu từ 6-40 ký tự',
             'password.max' => 'Yêu cầu từ 6-40 ký tự',
-            'cf-password.required' => 'Mục này không được để trống',
-            'cf-password.same' => 'Nhập lại mật khẩu không đúng',
+            'cf_password.required' => 'Mục này không được để trống',
+            'cf_password.same' => 'Nhập lại mật khẩu không đúng',
             'email.required' => 'Mục này không được để trống',
             'email.unique' => 'Email đã được sử dụng',
             'branch_id.required' => 'Mục này không được để trống',
             'role_id.required' => 'Mục này không được để trống',
             'gender_id.required' => 'Mục này không được để trống',
-            'operation_status_id.required' => 'Mục này không được để trống'
         ];
     }
 }

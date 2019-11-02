@@ -19,6 +19,8 @@
 <link rel="stylesheet" href="admin_assets/dist/css/skins/_all-skins.min.css">
 {{--toastr --}}
 <link rel="stylesheet" href="admin_assets/plugins/toastr/toastr.min.css">
+<!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="admin_assets/plugins/iCheck/all.css">
   <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="admin_assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <!-- Google Font -->

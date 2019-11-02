@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiscountsTable extends Migration
+class CreateMembershipTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateDiscountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('discounts', function (Blueprint $table) {
+        Schema::create('membership_type', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 200);
-            $table->string('description', 300);
-            $table->Integer('money_level');
+            $table->string('description', 300)->nullable();
+            $table->integer('money_level');
             $table->tinyInteger('discount_level');
             $table->timestamps();
         });
@@ -30,6 +30,6 @@ class CreateDiscountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discounts');
+        Schema::dropIfExists('membership_type');
     }
 }

@@ -64,23 +64,23 @@
                 </li>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="upload/images/users/{{ Auth::user()->avatar }}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">{{ Auth::user()->full_name }}</span>
+                        <img src="upload/images/users/{{ Auth::check() ? Auth::user()->avatar : '' }}" class="user-image" alt="User Image">
+                        <span class="hidden-xs">{{ Auth::check() ? Auth::user()->full_name : '' }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="upload/images/users/{{ Auth::user()->avatar }}" class="img-circle" alt="User Image">
+                            <img src="upload/images/users/{{ Auth::check() ? Auth::user()->avatar : '' }}" class="img-circle" alt="User Image">
 
                             <p>
-                                {{ Auth::user()->full_name }}
-                                <small>{{ Auth::user()->role->name }}</small>
+                                {{ Auth::check() ? Auth::user()->full_name : ''}}
+                                <small>{{ Auth::check() ? Auth::user()->role->name : ''}}</small>
                             </p>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ route('profile', Auth::user()->id) }}" class="btn btn-default btn-flat">Thông tin</a>
+                                <a href="{{ route('profile', Auth::check() ? Auth::user()->id :'' ) }}" class="btn btn-default btn-flat">Thông tin</a>
                             </div>
                             <div class="pull-right">
                                 <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Đăng xuất</a>

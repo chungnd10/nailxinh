@@ -5,13 +5,6 @@ $(document).ready(function () {
         dateFormat: 'yyyy-mm-dd'
     });
 
-    //data table
-    $('#example1').DataTable({
-        "ordering": false,
-        "paging": false,
-        "searching": false,
-        "showNEntries": false
-    });
 });
 
 function getBase64(file, selector) {

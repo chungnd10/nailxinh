@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Config;
 use App\Permission;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -27,8 +28,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+
         Gate::before(function ($user){
-            if ($user->role_id == 1)
+
+            $role_admin = config('contants.role_admin');
+            if ($user->role_id == $role_admin )
             {
                 return true;
             }

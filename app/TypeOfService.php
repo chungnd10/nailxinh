@@ -12,6 +12,7 @@ class TypeOfService extends Model
      * @var string
      */
     protected $table = 'type_of_services';
+    
     protected $fillable = [
     	'name',
     	'slug',
@@ -24,4 +25,9 @@ class TypeOfService extends Model
     	return $this->hasMany('App\ProcessOfService','type_of_services_id');
     }
 
+
+    public function showServices($id)
+    {
+        return Service::where('type_of_services_id', $id)->get();
+    }
 }

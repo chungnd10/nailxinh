@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\TypeServiceServices;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
@@ -12,6 +13,7 @@ class Service extends Model
      * @var string
      */
     protected $table = 'services';
+<<<<<<< HEAD
     protected $fillable =[
     	'name',
     	'description',
@@ -22,5 +24,10 @@ class Service extends Model
     ];
     public function typeservice(){
     	return $this->belongsTo('App\TypeOfService', 'type_of_services_id', 'id');
+=======
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+>>>>>>> 7cd21e51db3045e154517057ccb59ff96567b129
     }
 }
