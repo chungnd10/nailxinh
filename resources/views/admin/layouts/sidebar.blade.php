@@ -20,10 +20,10 @@
                     </a>
                     <ul class="treeview-menu">
                         @can('view-branchs')
-                            <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                            <li><a href="{{route('branch.index')}}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                         @endcan
                         @can('add-branchs')
-                            <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                            <li><a href="{{route('branch.create')}}"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                         @endcan
                     </ul>
                 </li>
@@ -38,10 +38,12 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-type-of-services')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                        <li><a href="{{route('type-services.index')}}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                     @can('add-type-of-services')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                        <li>
+                            <a href="{{route('type-services.create')}}"><i class="fa fa-angle-right"></i>Thêm mới</a>
+                        </li>
                     @endcan
                 </ul>
             </li>
@@ -56,10 +58,10 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-services')
-                    <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                    <li><a href="{{route('services.index')}}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                     @can('add-services')
-                    <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                    <li><a href="{{route('services.create')}}"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                     @endcan
                 </ul>
             </li>
@@ -74,10 +76,10 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-process-of-services')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                        <li><a href="{{route('process-type-services.index')}}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                     @can('add-process-of-services')
-                        <li><a href=""><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                        <li><a href="{{route('process-type-services.create')}}"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                     @endcan
                 </ul>
             </li>
