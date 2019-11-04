@@ -6,12 +6,11 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="keywords" content="Hantus, Responsive, SPA Template, Bootstrap 4,">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="client_assets/img/favicon.png" type="image/x-icon" />
     <title>NAILXINH - Spa and Beauty</title>
-
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="client_assets/css/style.css">
+    <link rel="stylesheet" href="client_assets/css/responsive.css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -67,7 +66,7 @@
                 <div class="row">
                     <div class="col-lg-2 col-6">
                         <div class="logo main">
-                            <a href="index-2.html"><img class="responsive" src="assets/img/logo.png" alt="Startkit"></a>
+                            <a href="index-2.html"><img class="responsive" src="client_assets/img/logo.png" alt="Startkit"></a>
                         </div>
                     </div>
                     <div class="col-lg-10 col-md-10 d-none d-lg-block text-right">
@@ -209,7 +208,7 @@
                 <div class="header-slider">
                     <div class="header-single-slider">
                         <figure>
-                            <img src="assets/img/sliders/slider01.jpg" alt="">
+                            <img src="client_assets/img/sliders/slider01.jpg" alt="">
                             <figcaption>
                                 <div class="content">
                                     <div class="container inner-content text-left">
@@ -225,7 +224,7 @@
                     </div>
                     <div class="header-single-slider">
                         <figure>
-                            <img src="assets/img/sliders/slider02.jpg" alt="">
+                            <img src="client_assets/img/sliders/slider02.jpg" alt="">
                             <figcaption>
                                 <div class="content">
                                     <div class="container inner-content text-center">
@@ -241,7 +240,7 @@
                     </div>
                     <div class="header-single-slider">
                         <figure>
-                            <img src="assets/img/sliders/slider03.jpg" alt="">
+                            <img src="client_assets/img/sliders/slider03.jpg" alt="">
                             <figcaption>
                                 <div class="content">
                                     <div class="container inner-content text-right">
@@ -270,17 +269,17 @@
         <div class="container contact-wrapper text-center text-xl-left">
             <div class="row">
                 <div class="col-xl-4 col-md-6 col-sm-6 single-contact">
-                    <img src="assets/img/icons/icon01.png" alt="">
+                    <img src="client_assets/img/icons/icon01.png" alt="">
                     <h4>Mở cửa</h4>
                     <p>Thứ 2 - Thứ 7: 7h30 - 20h30</p>
                 </div>
                 <div class="col-xl-4 col-md-6 col-sm-6 single-contact">
-                    <img src="assets/img/icons/icon02.png" alt="">
+                    <img src="client_assets/img/icons/icon02.png" alt="">
                     <h4>Địa chỉ</h4>
                     <p>20 Quang Trung, Hoàn Kiếm, Hà Nội</p>
                 </div>
                 <div class="col-xl-4 offset-xl-0 col-md-6 col-sm-6 offset-sm-3 single-contact">
-                    <img src="assets/img/icons/icon03.png" alt="">
+                    <img src="client_assets/img/icons/icon03.png" alt="">
                     <h4>Số điện thoại</h4>
                     <p>0965 695 055</p>
                 </div>
@@ -309,7 +308,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-lg-0">                    
                     <div class="service-box text-center">                        
                         <figure>
-                            <img src="assets/img/service/service01.png" alt="">
+                            <img src="client_assets/img/service/service01.png" alt="">
                             <figcaption>
                                 <div class="inner-text">
                                     <a href="#" class="boxed-btn">Đặt Lịch</a>
@@ -324,7 +323,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-lg-0">                    
                     <div class="service-box text-center">                        
                         <figure>
-                            <img src="assets/img/service/service02.png" alt="">
+                            <img src="client_assets/img/service/service02.png" alt="">
                             <figcaption>
                                 <div class="inner-text">
                                     <a href="#" class="boxed-btn">Đặt Lịch</a>
@@ -339,7 +338,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-sm-0">                    
                     <div class="service-box text-center">                        
                         <figure>
-                            <img src="assets/img/service/service03.png" alt="">
+                            <img src="client_assets/img/service/service03.png" alt="">
                             <figcaption>
                                 <div class="inner-text">
                                     <a href="#" class="boxed-btn">Đặt Lịch</a>
@@ -354,7 +353,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">                    
                     <div class="service-box text-center">                        
                         <figure>
-                            <img src="assets/img/service/service04.png" alt="">
+                            <img src="client_assets/img/service/service04.png" alt="">
                             <figcaption>
                                 <div class="inner-text">
                                     <a href="#" class="boxed-btn">Đặt Lịch</a>
@@ -412,12 +411,12 @@
                         <div id="hair" class="tab-pane">
                             <ul>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio01.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio01.png" alt="">
                                     <a href="#"><h4>Sơn móng tay <span class="price">$24.95</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio02.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio02.png" alt="">
                                     <a href="#"><h4>Sơn móng tay<span class="price">$24.95</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
@@ -426,17 +425,17 @@
                         <div id="nail" class="tab-pane">
                             <ul>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio01.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio01.png" alt="">
                                     <a href="#"><h4>Sơn móng tay<span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio05.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio05.png" alt="">
                                     <a href="#"><h4>Massage Relax<span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio04.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio04.png" alt="">
                                     <a href="#"><h4>Massage Water<span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
@@ -445,42 +444,42 @@
                         <div id="massage" class="tab-pane fade-in active">
                             <ul>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio01.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio01.png" alt="">
                                     <a href="#"><h4>Massage <span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio05.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio05.png" alt="">
                                      <a href="#"><h4>Sơn móng tay <span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio02.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio02.png" alt="">
                                      <a href="#"><h4>Sơn móng tay & Steam <span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio06.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio06.png" alt="">
                                      <a href="#"><h4>Sơn móng tay <span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio03.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio03.png" alt="">
                                      <a href="#"><h4>Sơn móng tay <span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio07.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio07.png" alt="">
                                      <a href="#"><h4>Sơn móng tay <span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio04.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio04.png" alt="">
                                      <a href="#"><h4>Sơn móng tay<span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio08.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio08.png" alt="">
                                      <a href="#"><h4>Sơn móng tay<span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
@@ -489,12 +488,12 @@
                         <div id="nail" class="tab-pane">
                             <ul>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio07.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio07.png" alt="">
                                      <a href="#"><h4>Sơn móng tay<span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio01.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio01.png" alt="">
                                      <a href="#"><h4>Sơn móng tay<span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
@@ -503,12 +502,12 @@
                         <div id="waxing" class="tab-pane">
                             <ul>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio08.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio08.png" alt="">
                                      <a href="#"><h4>Sơn móng tay<span class="price">150.000VNĐ</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio04.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio04.png" alt="">
                                      <a href="#"><h4>Sơn móng tay<span class="price">$24.95</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
@@ -517,12 +516,12 @@
                         <div id="facial" class="tab-pane">
                             <ul>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio02.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio02.png" alt="">
                                      <a href="#"><h4>Sơn móng tay<span class="price">$24.95</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
                                 <li>
-                                    <img src="assets/img/portfolio/portfolio03.png" alt="">
+                                    <img src="client_assets/img/portfolio/portfolio03.png" alt="">
                                      <a href="#"><h4>Sơn móng tay<span class="price">$24.95</span></h4></a>
                                     <p>Bạn có thể tham khảo những...</p>
                                 </li>
@@ -556,7 +555,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-lg-0">                    
                     <div class="feature-box text-center">                        
                         <div class="feature-icon">
-                            <img src="assets/img/feature-icon/feature-icon05.png" alt="">
+                            <img src="client_assets/img/feature-icon/feature-icon05.png" alt="">
                         </div>
                         <h4>Bước 1:</h4>
                         <p>Đặt lịch online trên website</p>
@@ -565,7 +564,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-lg-0">                    
                     <div class="feature-box text-center">                        
                         <div class="feature-icon">
-                            <img src="assets/img/feature-icon/feature-icon06.png" alt="">
+                            <img src="client_assets/img/feature-icon/feature-icon06.png" alt="">
                         </div>
                         <h4>Bước 2:</h4>
                         <p>Nhân viên gọi điện xác nhận</p>
@@ -574,7 +573,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-sm-0">                    
                     <div class="feature-box text-center">                        
                         <div class="feature-icon">
-                            <img src="assets/img/feature-icon/feature-icon03.png" alt="">
+                            <img src="client_assets/img/feature-icon/feature-icon03.png" alt="">
                         </div>
                         <h4>Bước 3:</h4>
                         <p>Đến tiệm để làm dịch vụ</p>
@@ -583,7 +582,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">                    
                     <div class="feature-box text-center">                        
                         <div class="feature-icon">
-                            <img src="assets/img/feature-icon/feature-icon07.png" alt="">
+                            <img src="client_assets/img/feature-icon/feature-icon07.png" alt="">
                         </div>
                         <h4>Bước 4:</h4>
                         <p>Hoàn thành dịch vụ</p>
@@ -617,7 +616,7 @@
                     <div class="beauticians-slider">
                         <div class="single-beauticians">
                             <div class="img-wrapper">
-                                <img src="assets/img/beauticians/beauticians01.jpg" alt="">
+                                <img src="client_assets/img/beauticians/beauticians01.jpg" alt="">
                                 <div class="beautician-footer-text">
                                     <h5>Phương Anh</h5>
                                     <p>Chuyên viên: Lông mày</p>
@@ -627,7 +626,7 @@
                         </div>
                         <div class="single-beauticians">
                             <div class="img-wrapper">
-                                <img src="assets/img/beauticians/beauticians02.jpg" alt="">
+                                <img src="client_assets/img/beauticians/beauticians02.jpg" alt="">
                                 <div class="beautician-footer-text">
                                     <h5>Phương Anh</h5>
                                     <p>Chuyên viên: Lông mày</p>
@@ -637,7 +636,7 @@
                         </div>
                         <div class="single-beauticians">
                             <div class="img-wrapper">
-                                <img src="assets/img/beauticians/beauticians03.jpg" alt="">
+                                <img src="client_assets/img/beauticians/beauticians03.jpg" alt="">
                                 <div class="beautician-footer-text">
                                     <h5>Phương Anh</h5>
                                     <p>Chuyên viên: Lông mày</p>
@@ -647,7 +646,7 @@
                         </div>
                         <div class="single-beauticians">
                             <div class="img-wrapper">
-                                <img src="assets/img/beauticians/beauticians04.jpg" alt="">
+                                <img src="client_assets/img/beauticians/beauticians04.jpg" alt="">
                                 <div class="beautician-footer-text">
                                     <h5>Phương Anh</h5>
                                     <p>Chuyên viên: Lông mày</p>
@@ -682,7 +681,7 @@
                             <h5>Ngọc Trinh</h5>
                             <p class="title">Người mẫu</p>
                             <div class="testimonial-img">
-                                <img src="/assets/img/testimonial/testimonial01.png" alt="">
+                                <img src="/client_assets/img/testimonial/testimonial01.png" alt="">
                             </div>
                         </div>
                         <div class="single-testimonial">
@@ -691,7 +690,7 @@
                             <h5>Ngọc Trinh</h5>
                             <p class="title">Người mẫu</p>
                             <div class="testimonial-img">
-                                <img src="/assets/img/testimonial/testimonial02.png" alt="">
+                                <img src="/client_assets/img/testimonial/testimonial02.png" alt="">
                             </div>
                         </div>
                         <div class="single-testimonial">
@@ -700,7 +699,7 @@
                             <h5>Ngọc Trinh</h5>
                             <p class="title">Người mẫu</p>
                             <div class="testimonial-img">
-                                <img src="/assets/img/testimonial/testimonial03.png" alt="">
+                                <img src="/client_assets/img/testimonial/testimonial03.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -719,22 +718,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 single-box mb-5 mb-lg-0">
-                    <img src="assets/img/counter/counter-icon01.png" alt="">
+                    <img src="client_assets/img/counter/counter-icon01.png" alt="">
                     <h3><span class="counter">15</span></h3>
                     <p>Cơ sở</p>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 single-box mb-5 mb-lg-0">
-                    <img src="assets/img/counter/counter-icon02.png" alt="">
+                    <img src="client_assets/img/counter/counter-icon02.png" alt="">
                     <h3><span class="counter">400</span></h3>
                     <p>Nhân viên</p>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 single-box mb-5 mb-sm-0">
-                    <img src="assets/img/counter/counter-icon03.png" alt="">
+                    <img src="client_assets/img/counter/counter-icon03.png" alt="">
                     <h3><span class="counter">8</span></h3>
                     <p>Dịch vụ</p>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 single-box">
-                    <img src="assets/img/counter/counter-icon05.png" alt="">
+                    <img src="client_assets/img/counter/counter-icon05.png" alt="">
                     <h3><span class="counter">1256</span></h3>
                     <p>Khách hàng</p>
                 </div>
@@ -776,7 +775,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-4">
                     <aside class="widget widget_about">
-                        <div class="footer-logo"><img src="assets/img/logo.png" alt=""></div>
+                        <div class="footer-logo"><img src="client_assets/img/logo.png" alt=""></div>
                         <p>NAILXINH là một trong số những 
                             tiệm nail cao cấp ở Hà Nội đầu tư
                             hệ thống trang thiết bị</p>
@@ -789,7 +788,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-md-0 mb-4">
                     <aside class="widget widget_recent widget_links">
-                        <h4 class="widget-title"><img src="assets/img/section-icon.png" alt="">Chi nhánh</h4>
+                        <h4 class="widget-title"><img src="client_assets/img/section-icon.png" alt="">Chi nhánh</h4>
                         <ul>
                             <li class="latest-news">
                                 <a href="#">
@@ -811,7 +810,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-4">
                     <aside class="widget widget_links">
-                        <h4 class="widget-title"><img src="assets/img/section-icon.png" alt="">Menu</h4>
+                        <h4 class="widget-title"><img src="client_assets/img/section-icon.png" alt="">Menu</h4>
                         <ul>
                             <li><a href="#">Trang chủ</a></li>
                             <li><a href="#">Giới thiệu</a></li>
@@ -830,42 +829,42 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <aside class="widget widdget-instagram">
-                        <h4 class="widget-title"><img src="assets/img/section-icon.png" alt="">Theo dõi chúng tôi</h4>
+                        <h4 class="widget-title"><img src="client_assets/img/section-icon.png" alt="">Theo dõi chúng tôi</h4>
                         <ul class="instagram-photos">                                
                             <li>
-                                <img src="assets/img/instagram/instagram01.jpg" alt="">
+                                <img src="client_assets/img/instagram/instagram01.jpg" alt="">
                                 <div class="instagram-overlay">
                                     <a href="#">+</a>
                                 </div>
                             </li>                                
                             <li>
-                                <img src="assets/img/instagram/instagram02.jpg" alt="">
+                                <img src="client_assets/img/instagram/instagram02.jpg" alt="">
                                 <div class="instagram-overlay">
                                     <a href="#">+</a>
                                 </div>
                                 
                             </li>                                
                             <li>
-                                <img src="assets/img/instagram/instagram03.jpg" alt="">
+                                <img src="client_assets/img/instagram/instagram03.jpg" alt="">
                                 <div class="instagram-overlay">
                                     <a href="#">+</a>
                                 </div>
                             </li>                               
                             <li>
-                                <img src="assets/img/instagram/instagram04.jpg" alt="">
+                                <img src="client_assets/img/instagram/instagram04.jpg" alt="">
                                 <div class="instagram-overlay">
                                     <a href="#">+</a>
                                 </div>
                             </li>                                
                             <li>
-                                <img src="assets/img/instagram/instagram05.jpg" alt="">
+                                <img src="client_assets/img/instagram/instagram05.jpg" alt="">
                                 <div class="instagram-overlay">
                                     <a href="#">+</a>
                                 </div>
                                 
                             </li>                                
                             <li>
-                                <img src="assets/img/instagram/instagram06.jpg" alt="">
+                                <img src="client_assets/img/instagram/instagram06.jpg" alt="">
                                 <div class="instagram-overlay">
                                     <a href="#">+</a>
                                 </div>
@@ -883,19 +882,19 @@
 
     
     <!-- Scripts -->
-    <script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.sticky.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/jquery.shuffle.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/jquery.meanmenu.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="client_assets/js/jquery-3.2.1.min.js"></script>
+    <script src="client_assets/js/popper.min.js"></script>
+    <script src="client_assets/js/bootstrap.min.js"></script>
+    <script src="client_assets/js/jquery.sticky.js"></script>
+    <script src="client_assets/js/owl.carousel.min.js"></script>
+    <script src="client_assets/js/jquery.shuffle.min.js"></script>
+    <script src="client_assets/js/jquery.counterup.min.js"></script>
+    <script src="client_assets/js/wow.min.js"></script>
+    <script src="client_assets/js/jquery.meanmenu.min.js"></script>
+    <script src="client_assets/js/jquery.magnific-popup.min.js"></script>
     
     <!-- Custom Script -->
-    <script src="assets/js/custom.js"></script>
+    <script src="client_assets/js/custom.js"></script>
     
 </body>
 
