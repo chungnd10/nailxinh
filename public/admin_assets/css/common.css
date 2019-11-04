@@ -12,11 +12,12 @@
     font-weight: normal;
 }
 
- {
-    width: 300px;
+{
+    width: 300px
+;
 }
 
-.img-slide, .img-web_settings, .img-introduction{
+.img-slide, .img-web_settings, .img-introduction {
     width: 300px;
 }
 
@@ -88,15 +89,18 @@ input:checked + .slider:before {
 .morecontent span {
     display: none;
 }
+
 .morelink {
     display: block;
 }
+
 /* end toggle text*/
 
-div.dataTables_wrapper div.dataTables_filter input{
+div.dataTables_wrapper div.dataTables_filter input {
     width: 220px !important;
 }
 
-.dataTables_empty{
+.dataTables_empty {
     color: #dd4b39;
 }
+

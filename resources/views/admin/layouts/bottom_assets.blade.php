@@ -23,7 +23,8 @@
 <!-- ChartJS -->
 <script src="admin_assets/bower_components/chart.js/Chart.min.js"></script>
 <script src="admin_assets/bower_components/chart.js/Chart.bundle.min.js"></script>
-
+{{--cropper js--}}
+<script src="admin_assets/plugins/cropperjs/cropper.min.js"></script>
 <!-- iCheck 1.0.1 -->
 <script src="admin_assets/plugins/iCheck/icheck.min.js"></script>
 {{--common js--}}

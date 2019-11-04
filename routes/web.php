@@ -73,6 +73,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('change-status', 'User\UserController@changeStatus')
             ->middleware('can:edit-users')
             ->name('users.change-status');
+
+        Route::post('change-image-profile/{id}', 'User\UserController@changeImageProfile')
+            ->name('users.change-image-profile');
     });
 
     //type of services
