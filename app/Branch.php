@@ -12,12 +12,14 @@ class Branch extends Model
      * @var string
      */
     protected $table = 'branches';
+
     protected $fillable = [
         'name',
         'city_id',
         'phone_number',
         'address'
     ]; 
+    
     public function city(){
     	return $this->belongsTo(City::class);
     }

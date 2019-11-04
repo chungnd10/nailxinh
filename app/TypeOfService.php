@@ -12,19 +12,22 @@ class TypeOfService extends Model
      * @var string
      */
     protected $table = 'type_of_services';
-    
+
     protected $fillable = [
     	'name',
     	'slug',
     	'description'
     ];
-    public function services(){
+
+    public function services()
+    {
     	return $this->hasMany(Service::class);
     }
-    public function processofservices(){
-    	return $this->hasMany('App\ProcessOfService','type_of_services_id');
-    }
 
+    public function processOfServices()
+    {
+    	return $this->hasMany(ProcessOfService::class,'type_of_services_id');
+    }
 
     public function showServices($id)
     {

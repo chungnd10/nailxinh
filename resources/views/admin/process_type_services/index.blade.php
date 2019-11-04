@@ -33,7 +33,7 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->typeservice->name }}</td>
+                                    <td>{{ $item->typeService->name }}</td>
                                    	<td>{{ $item->step }}</td>
                                     <td>{{$item->content}}</td>
                                     <td>

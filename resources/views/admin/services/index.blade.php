@@ -38,7 +38,7 @@
                                     <td>
                                         <img width="50" src="upload/images/service/{{ $item->image }}" alt="image">
                                     </td>
-                                    <td>{{ $item->typeservice->name }}</td>
+                                    <td>{{ $item->typeService->name }}</td>
                                    	<td>{{ $item->price}}</td>
                                    	<td>{{ $item->completion_time}}</td>
                                     <td>{{$item->description}}</td>

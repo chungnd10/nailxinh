@@ -7,19 +7,23 @@ use App\Http\Controllers\Controller;
 use App\Service;
 use App\TypeOfService;
 use App\Http\Requests\AddServiceRequest;
+
 class ServicesController extends Controller
 {
-    public function index(){
+    public function index()
+    {
     	$services = Service::paginate(10);
     	return view('admin.services.index', compact('services'));
     }
 
-    public function create(){
+    public function create()
+    {
         $type_of_services = TypeOfService::all();
     	return view('admin.services.create', compact('type_of_services'));
     }
 
-    public function store(AddServiceRequest $request){
+    public function store(AddServiceRequest $request)
+    {
         // khai báo đối tượng
         $service = new Service();
 
@@ -33,7 +37,7 @@ class ServicesController extends Controller
 
         //lưu
         $service->fill($request->all())->save();
-//dd($request->all());
+        
         // xuất thông báo
         $notification = array(
             'message' => 'Thêm dịch vụ thành công !',
@@ -44,13 +48,15 @@ class ServicesController extends Controller
         return redirect()->route('services.index')->with($notification);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $service = Service::find($id);
         $type_of_services = TypeOfService::all();
         return view('admin.services.show', compact('service','type_of_services'));
     }
 
-    public function update(AddServiceRequest $request, $id){
+    public function update(AddServiceRequest $request, $id)
+    {
          // khai báo đối tượng
        $service = Service::find($id);
 
@@ -88,7 +94,6 @@ class ServicesController extends Controller
         //tìm kiếm đối tượng
         $service = Service::find($id);
 
-        
         // thực thi xóa
         $service->delete();
 

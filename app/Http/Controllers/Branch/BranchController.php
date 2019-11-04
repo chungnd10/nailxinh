@@ -6,28 +6,33 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\City;
 use App\Branch;
+
 class BranchController extends Controller
 {
-    public function index(){
+
+    public function index()
+    {
     	$branchs = Branch::paginate(10);
     	return view('admin.branchs.index', compact('branchs'));
     }
-    public function create(){
+
+    public function create()
+    {
     	$cities = City::all();
     	return view('admin.branchs.create', compact('cities'));
 
     }
-    public function store(Request $request){
+
+    public function store(Request $request)
+    {
     	$branch = new Branch();
     	//lưu
         $branch->fill($request->all())->save();
-//dd($request->all());
         // xuất thông báo
         $notification = array(
             'message' => 'Thêm chi nhánh thành công !',
             'alert-type' => 'success'
         );
-
         //điều hướng
         return redirect()->route('branch.index')->with($notification);
     }
@@ -44,17 +49,14 @@ class BranchController extends Controller
     public function update(Request $request, $id)
     {
         // khai báo đối tượng
-       $branch = Branch::find($id);
-
+        $branch = Branch::find($id);
         //lưu
         $branch->fill($request->all())->save();
-
         // xuất thông báo
         $notify = array(
             'message' => 'Cập nhật chi nhánh thành công !',
             'alert-type' => 'success'
         );
-
         //điều hướng
         return redirect()->route('branch.index')->with($notify);
     }
@@ -63,16 +65,13 @@ class BranchController extends Controller
     {
         //tìm kiếm đối tượng
         $branch = Branch::find($id);
-
         // thực thi xóa
         $branch->delete();
-
         //xuất thông báo
         $notify = array(
             'alert-type' => 'success',
             'message' => 'Xoá chi nhánh thành công !'
         );
-
         // điều hướng
         return redirect()->route('branch.index')->with($notify);
     }

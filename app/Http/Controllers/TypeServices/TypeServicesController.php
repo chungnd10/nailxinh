@@ -6,21 +6,25 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddTypeServiceRequest;
 use App\TypeOfService;
+
 class TypeServicesController extends Controller
 {
-    public function index(){
+    public function index()
+    {
     	//lấy dữ liệu
         $typeservices = TypeOfService::paginate(10);
 
         // điều hướng
-        return view('admin.typeservices.index', compact('typeservices'));
+        return view('admin.type_services.index', compact('typeservices'));
     }
 
-    public function create(){
-    	return view('admin.typeservices.create');
+    public function create()
+    {
+    	return view('admin.type_services.create');
     }
 
-    public function store(AddTypeServiceRequest $request){
+    public function store(AddTypeServiceRequest $request)
+    {
     	// khai báo đối tượng
         $type_of_service = new TypeOfService();
 
@@ -34,7 +38,7 @@ class TypeServicesController extends Controller
 
         //lưu
         $type_of_service->fill($request->all())->save();
-//dd($request->all());
+
         // xuất thông báo
         $notification = array(
             'message' => 'Thêm loại dịch vụ thành công !',
@@ -51,7 +55,7 @@ class TypeServicesController extends Controller
         $type_of_service = TypeOfService::find($id);
 
         // điều hướng
-        return view('admin.typeservices.show', compact('type_of_service'));
+        return view('admin.type_services.show', compact('type_of_service'));
     }
 
     public function update(AddTypeServiceRequest $request, $id)

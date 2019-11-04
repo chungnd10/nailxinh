@@ -38,19 +38,12 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-type-of-services')
-<<<<<<< HEAD
                         <li><a href="{{route('type-services.index')}}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                     @can('add-type-of-services')
                         <li>
                             <a href="{{route('type-services.create')}}"><i class="fa fa-angle-right"></i>Thêm mới</a>
                         </li>
-=======
-                        <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
-                    @endcan
-                    @can('add-type-of-services')
-                        <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
->>>>>>> 7cd21e51db3045e154517057ccb59ff96567b129
                     @endcan
                 </ul>
             </li>
@@ -65,17 +58,10 @@
                 </a>
                 <ul class="treeview-menu">
                     @can('view-services')
-<<<<<<< HEAD
                     <li><a href="{{route('services.index')}}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                     @endcan
                     @can('add-services')
                     <li><a href="{{route('services.create')}}"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
-=======
-                    <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
-                    @endcan
-                    @can('add-services')
-                    <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
->>>>>>> 7cd21e51db3045e154517057ccb59ff96567b129
                     @endcan
                 </ul>
             </li>

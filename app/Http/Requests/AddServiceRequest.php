@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+
 class AddServiceRequest extends FormRequest
 {
     /**
@@ -23,7 +24,7 @@ class AddServiceRequest extends FormRequest
      */
     public function rules()
     {
-        //trường hợp sửa người dùng
+        
         $validate = [
             'name' => 'required|min:5|max:40',
             'slug' => [
@@ -33,14 +34,13 @@ class AddServiceRequest extends FormRequest
             ]
         ];
 
-        //trường hợp thêm người dùng
         if (!$this->id){
-
             $validate['image']  = 'required|mimes:png,jpg,jpeg';
         }
 
         return $validate;
     }
+    
     public function messages()
     {
         return [

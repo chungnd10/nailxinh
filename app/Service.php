@@ -13,7 +13,7 @@ class Service extends Model
      * @var string
      */
     protected $table = 'services';
-<<<<<<< HEAD
+
     protected $fillable =[
     	'name',
     	'description',
@@ -22,12 +22,12 @@ class Service extends Model
     	'type_of_services_id',
         'slug'
     ];
-    public function typeservice(){
-    	return $this->belongsTo('App\TypeOfService', 'type_of_services_id', 'id');
-=======
+    
+    public function typeService(){
+    	return $this->belongsTo(TypeOfService::class,'type_of_services_id');
+    }
 
     public function users(){
         return $this->belongsToMany(User::class);
->>>>>>> 7cd21e51db3045e154517057ccb59ff96567b129
     }
 }

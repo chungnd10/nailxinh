@@ -12,6 +12,7 @@ class ProcessOfService extends Model
      * @var string
      */
     protected $table = 'process_of_services';
+
     protected $fillable = [
     	'name',
     	'step',
@@ -19,7 +20,7 @@ class ProcessOfService extends Model
     	'type_of_services_id'
     ];
 
-    public function typeservice(){
-    	return $this->belongsTo('App\TypeOfService', 'type_of_services_id', 'id');
+    public function typeService(){
+    	return $this->belongsTo(TypeOfService::class, 'type_of_services_id');
     }
 }
