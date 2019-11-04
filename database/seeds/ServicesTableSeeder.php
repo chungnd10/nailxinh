@@ -14,6 +14,7 @@ class ServicesTableSeeder extends Seeder
         $services = [
             [
                 'name' => 'Chăm sóc móng (Nail care)',
+                'slug'=> 'cham-soc-mong',
                 'description' => 'Hơn 300 màu sơn Hàn Quốc đa dạng và chất lượng. Hàng trăm mẫu đá, hạt, charm trang 
                 trí hot nhất hiện nay.',
                 'price' => 150000,
@@ -22,6 +23,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Chà gót chân',
+                'slug' => 'cha-got-chan',
                 'description' => '70 - 80k',
                 'price' => 80000,
                 'completion_time' => '30 phút',
@@ -29,6 +31,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Nối mi (Eyelashes extension)',
+                'slug' => 'noi-mi',
                 'description' => 'tùy độ dày cộng thêm 10k - 50k',
                 'price' => 200000,
                 'completion_time' => '1 giờ',
@@ -36,6 +39,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Uốn mi (Eyelashes curling)',
+                'slug' => 'uon-mi',
                 'description' => 'Uốn mi Collagen 3D',
                 'price' => 200000,
                 'completion_time' => '40 phút',
@@ -43,6 +47,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Combo uốn mi + wax mày',
+                'slug' => 'combo-uon-mi',
                 'description' => '',
                 'price' => 350000,
                 'completion_time' => '1 giờ',
@@ -50,6 +55,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Dặm lại mi (Eyelashes retouch)',
+                'slug' => 'dam-lai-mi',
                 'description' => '',
                 'price' => 150000,
                 'completion_time' => '30 phút',
@@ -57,6 +63,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Nhuộm mi',
+                'slug' => 'nhuom-mi',
                 'description' => 'Nhuộm mi cùng uốn mi phụ thu thêm: 150.000',
                 'price' => 200000,
                 'completion_time' => '30 phút',
@@ -64,6 +71,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Tháo mi (remove eyelashes)',
+                'slug' => 'thao-mi',
                 'description' => '',
                 'price' => 50000,
                 'completion_time' => '30 phút',
@@ -71,6 +79,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Wax lông mày',
+                'slug' => 'wax-long-may',
                 'description' => '',
                 'price' => 200000,
                 'completion_time' => '30 phút',
@@ -78,6 +87,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Điêu khắc lông mày (Microblading eyebrows)',
+                'slug' => 'dieu-khac-long-may',
                 'description' => '',
                 'price' => 2000000,
                 'completion_time' => '1 giờ 30 phút',
@@ -85,6 +95,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Phun lông mày (Eyebrow spray)',
+                'slug' => 'phun-long-may',
                 'description' => '',
                 'price' => 2150000,
                 'completion_time' => '1 giờ',
@@ -92,6 +103,7 @@ class ServicesTableSeeder extends Seeder
             ],
             [
                 'name' => 'Phun mí - Eyeliner spray',
+                'slug' => 'phun-mi',
                 'description' => '',
                 'price' => 150000,
                 'completion_time' => '1 giờ',

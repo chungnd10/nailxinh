@@ -14,6 +14,19 @@ class Service extends Model
      */
     protected $table = 'services';
 
+    protected $fillable =[
+    	'name',
+    	'description',
+    	'price',
+    	'completion_time',
+    	'type_of_services_id',
+        'slug'
+    ];
+    
+    public function typeService(){
+    	return $this->belongsTo(TypeOfService::class,'type_of_services_id');
+    }
+
     public function users(){
         return $this->belongsToMany(User::class);
     }

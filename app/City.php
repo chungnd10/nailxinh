@@ -12,4 +12,8 @@ class City extends Model
      * @var string
      */
     protected $table = 'cities';
+    
+    public function branchs(){
+    	return $this->hasMany(Branch::class);
+    }
 }
