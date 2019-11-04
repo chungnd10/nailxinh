@@ -1,1 +1,7 @@
-<h3>services</h3>
+@extends('client.layouts.index')
+@section('content')
+    {{-- example--}}
+@endsection
+@section('script')
+    {{-- example--}}
+@endsection
