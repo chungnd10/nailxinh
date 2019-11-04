@@ -1,5 +1,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <base href="{{url('')}}">
 <title>Nail Xinh</title>
 <!-- Tell the browser to be responsive to screen width -->
@@ -20,9 +21,11 @@
 {{--toastr --}}
 <link rel="stylesheet" href="admin_assets/plugins/toastr/toastr.min.css">
 <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="admin_assets/plugins/iCheck/all.css">
-  <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="admin_assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="admin_assets/plugins/iCheck/all.css">
+{{--cropper js--}}
+<link rel="stylesheet" href="admin_assets/plugins/cropperjs/cropper.min.css">
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="admin_assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <!-- Google Font -->
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">

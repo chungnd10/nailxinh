@@ -31,20 +31,6 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <img class="profile-user-img img-responsive img-circle"
-                                             src="upload/images/users/{{$user->avatar}}"
-                                             alt="User profile picture"
-                                             id="proImg"
-                                        >
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Ảnh đại diện</label><span class="text-danger">*</span>
-                                        <input type="file" class="form-control" name="avatar">
-                                        @if($errors->first('avatar'))
-                                            <span class="text-danger">{{ $errors->first('avatar') }}</span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group">
                                         <label>Họ tên</label><span class="text-danger">*</span>
                                         <input type="text"
                                                class="form-control"
@@ -57,7 +43,6 @@
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                         @endif
                                     </div>
-
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Ngày sinh</label><span class="text-danger">*</span>
@@ -81,6 +66,40 @@
                                                name="address">
                                         @if($errors->first('address'))
                                             <span class="text-danger">{{ $errors->first('address') }}</span>
+                                        @endif
+                                    </div>
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Giới tính</label><span class="text-danger">*</span><br>
+                                        @foreach($genders as $item)
+                                            <input type="radio"
+                                                   name="gender_id"
+                                                   value="{{ $item->id }}"
+                                                   @if($user->gender_id == $item->id)
+                                                   checked
+                                                    @endif
+                                            >&nbsp;&nbsp;
+                                            @if($errors->first('gender_id'))
+                                                <span class="text-danger">{{ $errors->first('gender_id') }}</span>
+                                            @endif
+                                            {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        @endforeach
+                                    </div>
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Trạng thái hoạt động</label><span class="text-danger">*</span><br>
+                                        @foreach($operation_status as $item)
+                                            <input type="radio"
+                                                   name="operation_status_id"
+                                                   value="{{ $item->id }}"
+                                                   @if($item->id == old('operation_status_id', $user->operation_status_id))
+                                                   checked
+                                                    @endif
+                                            >&nbsp;&nbsp;
+                                            {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        @endforeach
+                                        @if($errors->first('operation_status_id'))
+                                            <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
                                         @endif
                                     </div>
                                     <!-- /.form-group -->
@@ -133,36 +152,6 @@
                                         @if($errors->first('role_id'))
                                             <span class="text-danger">{{ $errors->first('role_id') }}</span>
                                         @endif
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                        <label>Giới tính</label><span class="text-danger">*</span><br>
-                                        @foreach($genders as $item)
-                                            <input type="radio"
-                                                   name="gender_id"
-                                                   value="{{ $item->id }}"
-                                                   @if($user->gender_id == $item->id)
-                                                   checked
-                                                    @endif
-                                            >&nbsp;&nbsp;
-                                            @if($errors->first('gender_id'))
-                                                <span class="text-danger">{{ $errors->first('gender_id') }}</span>
-                                            @endif
-                                            {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        @endforeach
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                        <label>Trạng thái hoạt dộng</label><span class="text-danger">*</span><br>
-                                        <label class="switch">
-                                            <input type="checkbox"
-                                                   name="operation_status_id"
-                                                   class="operation_status_id"
-                                                   data-id="{{ $user->id }}"
-                                                    {{ $user->operation_status_id == config('contants.operation_status_active') ? 'checked' : ''}}
-                                            >
-                                            <span class="slider round"></span>
-                                        </label>
                                     </div>
                                     <!-- /.form-group -->
                                 </div>
@@ -241,52 +230,52 @@
                 </div>
                 @if($user->role_id == config('role_technician'))
                     <div class="tab-pane" id="tab_3">
-                    <form action="{{route('set.services',$user->id )}}"
-                          method="post"
-                          class="form-horizontal"
-                    >
-                        @csrf
-                        <div class="box-body">
-                            @foreach($type_services as $type_service)
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>
-                                            {{ $type_service->name }}
-                                        </label>
-                                        @foreach($type_service->showServices($type_service->id) as $service)
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"
-                                                           @foreach($services_of_user as $services_of_users)
-                                                                @if($services_of_users->service_id == $service->id)
-                                                                    checked
-                                                                @endif
-                                                           @endforeach
-                                                           name="services_id[]"
-                                                           value="{{ $service->id }}"
-                                                    >
-                                                    {{ $service->name }}
-                                                </label>
-                                            </div>
-                                        @endforeach
+                        <form action="{{route('set.services',$user->id )}}"
+                              method="post"
+                              class="form-horizontal"
+                        >
+                            @csrf
+                            <div class="box-body">
+                                @foreach($type_services as $type_service)
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>
+                                                {{ $type_service->name }}
+                                            </label>
+                                            @foreach($type_service->showServices($type_service->id) as $service)
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox"
+                                                               @foreach($services_of_user as $services_of_users)
+                                                               @if($services_of_users->service_id == $service->id)
+                                                               checked
+                                                               @endif
+                                                               @endforeach
+                                                               name="services_id[]"
+                                                               value="{{ $service->id }}"
+                                                        >
+                                                        {{ $service->name }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <a href="{{ route('users.index') }}" class="btn btn-default">
-                                <i class="fa fa-arrow-circle-o-left"></i>
-                                Trở về
-                            </a>
-                            <button type="submit" class="btn btn-success">
-                                <i class="fa fa-save"></i>
-                                Lưu
-                            </button>
-                        </div>
-                        <!-- /.box-footer -->
-                    </form>
-                </div>
+                                @endforeach
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <a href="{{ route('users.index') }}" class="btn btn-default">
+                                    <i class="fa fa-arrow-circle-o-left"></i>
+                                    Trở về
+                                </a>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-save"></i>
+                                    Lưu
+                                </button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </form>
+                    </div>
                 @endif
             </div>
             <!-- /.tab-content -->
@@ -296,15 +285,6 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            var inputImage = document.querySelector(`[name="avatar"]`);
-            inputImage.onchange = function () {
-                var file = this.files[0];
-                if (file == undefined) {
-                    document.querySelector('#proImg').src = 'upload/images/users/{{ $user->avatar }}';
-                } else {
-                    getBase64(file, '#proImg');
-                }
-            };
 
             //Date picker
             $('#birthday').datepicker({
@@ -315,9 +295,6 @@
             //validate update user
             $("#updateUser").validate({
                 rules: {
-                    avatar: {
-                        extension: "jpg|jpeg|png"
-                    },
                     full_name: {
                         required: true,
                         minlength: 5,
@@ -338,9 +315,6 @@
                 },
 
                 messages: {
-                    avatar: {
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
-                    },
                     full_name: {
                         required: "Mục này không được để trống",
                         minlength: "Yêu cầu từ 5-40 ký tự",
@@ -386,23 +360,6 @@
             });
             //end validate
 
-            // change status
-            $('.operation_status_id').change(function () {
-                var operation_status_id = $(this).prop('checked') === true ? "{{ config('contants.operation_status_active') }}" : "{{ config('contants.operation_status_inactive') }}";
-                var id = $(this).data('id');
-
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: "{{ route('users.change-status') }}",
-                    data: {'operation_status_id': operation_status_id, 'id': id},
-                    success: function (data) {
-                        console.log(data.success)
-                    }
-                });
-            })
-            //end change status
-
             //active table
             if (window.location.hash === '#tab_2') {
                 $('#li_tab_1').removeClass('active');//remove active class
@@ -414,15 +371,15 @@
             }
 
             @if($user->role_id == config('role_technician'))
-                //active table
-                if (window.location.hash === '#tab_3') {
-                    $('#li_tab_1').removeClass('active');//remove active class
-                    $('#tab_1').removeClass('active');
-                    $('#li_tab_2').removeClass('active');
-                    $('#tab_2').removeClass('active');
-                    $('#li_tab_3').addClass('active');
-                    $('#tab_3').addClass('active');
-                }
+            //active table
+            if (window.location.hash === '#tab_3') {
+                $('#li_tab_1').removeClass('active');//remove active class
+                $('#tab_1').removeClass('active');
+                $('#li_tab_2').removeClass('active');
+                $('#tab_2').removeClass('active');
+                $('#li_tab_3').addClass('active');
+                $('#tab_3').addClass('active');
+            }
             @endif
 
         });

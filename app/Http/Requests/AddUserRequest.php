@@ -41,8 +41,6 @@ class AddUserRequest extends FormRequest
 
         //trường hợp thêm người dùng
         if (!$this->id){
-
-            $validate['avatar']  = 'required|mimes:png,jpg,jpeg';
             $validate['email']  = 'required|unique:users,email';
             $validate['password']  = 'required|min:6|max:40';
             $validate['cf_password']  = 'required|same:password';
@@ -57,8 +55,6 @@ class AddUserRequest extends FormRequest
             'full_name.required' => 'Mục này không được để trống',
             'full_name.min' => 'Yêu cầu từ 5-40 ký tự',
             'full_name.max' => 'Yêu cầu từ 5-40 ký tự',
-            'avatar.required' => 'Mục này không được để trống',
-            'avatar.mimes' => 'Chỉ chấp nhận ảnh JPG, JPEG, PNG',
             'phone_number.required' => 'Mục này không được để trống',
             'phone_number.regex' => 'Số điện thoại sai định dạng',
             'phone_number.unique' => 'Số điện thoại đã được sử dụng',

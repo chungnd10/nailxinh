@@ -200,6 +200,10 @@ class PermissionsTableSeeder extends Seeder
             [
                 'title' => 'Phân quyền chức năng',
                 'name'  => 'set-role'
+            ],
+            [
+                'title' => 'Thay đổi ảnh đại diện',
+                'name'  => 'change-image-profile'
             ]
         ];
 
