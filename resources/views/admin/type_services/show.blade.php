@@ -16,16 +16,9 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Tên loại dịch vụ</label><span class="text-danger">*</span>
-							<input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name',$type_of_service->name) }}" name="name"  id="name">
-							 @if($errors->first('name'))
-                                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                             @endif
-						</div>
-						<div class="form-group">
 							<label>Ảnh đại diện</label><span class="text-danger">*</span>
 							<img style="width: 130px;" class="img-responsive"
-							src="upload/images/type-service/{{$type_of_service->image}}"
+							src="upload/images/type_services/{{$type_of_service->image}}"
 							id="proImg"
 							alt="">
 							<input type="file" class="form-control" name="image" id="image">
@@ -38,17 +31,22 @@
 					<!-- /.col -->
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Đường dẫn</label><span class="text-danger">*</span>
-							<input type="text" class="form-control{{ $errors->has('slug') ? ' is-invalid' : '' }}" value="{{ old('slug',$type_of_service->slug) }}" name="slug" id="slug">
-							@if($errors->first('slug'))
-                                    <span class="text-danger">{{ $errors->first('slug') }}</span>
+							<label>Tên loại dịch vụ</label><span class="text-danger">*</span>
+							<input type="text"
+								   class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+								   value="{{ old('name', $type_of_service->name) }}"
+								   name="name"
+								   id="name">
+							 @if($errors->first('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
                              @endif
 						</div>
 						<!-- /.form-group -->
 						<div class="form-group">
 							<label>Mô tả</label><span class="text-danger">*</span>
-							<textarea name="description" id="" class="form-control" rows="7">{{old('description',$type_of_service->description)}}</textarea>
-							
+							<textarea name="description"
+									  id="" class="form-control"
+									  rows="7">{{old('description', $type_of_service->description)}}</textarea>
 						</div>
 						<!-- /.form-group -->
 					</div>
@@ -78,44 +76,41 @@
 		inputImage.onchange = function () {
 			var file = this.files[0];
 			if (file == undefined) {
-				document.querySelector('#proImg').src = 'upload/images/type-service/{{$type_of_service->image}}';
+				document.querySelector('#proImg').src = 'upload/images/type_services/{{$type_of_service->image}}';
 			} else {
 				getBase64(file, '#proImg');
 			}
 		}
 
-            //validate
-            $("#addTypeService").validate({
-            	rules: {
-            		image: {
-            			extension: "jpg|jpeg|png"
-            		},
-            		name: {
-            			required: true,
-            			minlength: 5,
-            			maxlength: 40
-            		},
-            		slug: {
-            			required: true
-            		}
-            		
-            	},
-
-            	messages: {
-            		image: {
-            			extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
-            		},
-            		name: {
-            			required: "Mục này không được để trống",
-            			minlength: "Yêu cầu từ 5-40 ký tự",
-            			maxlength: "Yêu cầu từ 5-40 ký tự",
-            			alpha: "Mục này không được để trống"
-            		},
-            		slug: {
-            			required: "Mục này không được để trống"
-            		}
-            	}
-            });
+            // //validate
+            // $("#addTypeService").validate({
+            // 	rules: {
+            // 		image: {
+            // 			extension: "jpg|jpeg|png"
+            // 		},
+            // 		name: {
+            // 			required: true,
+            // 			maxlength: 40
+            // 		},
+            // 		description: {
+            // 			required: true
+            // 		}
+			//
+            // 	},
+			//
+            // 	messages: {
+            // 		image: {
+            // 			extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+            // 		},
+            // 		name: {
+            // 			required: "Mục này không được để trống",
+            // 			maxlength: "Yêu cầu tối đa 40 ký tự",
+            // 		},
+            // 		description: {
+            // 			required: "Mục này không được để trống"
+            // 		}
+            // 	}
+            // });
 
 
         });

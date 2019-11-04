@@ -23,4 +23,13 @@ class Branch extends Model
     public function city(){
     	return $this->belongsTo(City::class);
     }
+
+    //đếm user theo chi nhánh
+    public function countUserWithBranch($branch_id)
+    {
+
+        $user = User::where('branch_id',$branch_id)
+                ->count();
+        return $user;
+    }
 }

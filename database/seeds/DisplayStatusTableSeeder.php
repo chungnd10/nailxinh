@@ -17,7 +17,7 @@ class DisplayStatusTableSeeder extends Seeder
                 'name' => 'Ẩn'
             ],
             [
-                'name'  => 'Hiện'
+                'name'  => 'Hiển thị'
             ]
         ];
         DB::table('display_statuses')->insert($status);

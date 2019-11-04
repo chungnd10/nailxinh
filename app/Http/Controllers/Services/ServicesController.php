@@ -2,24 +2,33 @@
 
 namespace App\Http\Controllers\Services;
 
+use App\Services\ServiceServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service;
 use App\TypeOfService;
 use App\Http\Requests\AddServiceRequest;
+use Illuminate\Support\Str;
 
 class ServicesController extends Controller
 {
+    protected $service_services;
+
+    public function __construct(ServiceServices $service_services)
+    {
+        $this->service_services = $service_services;
+    }
+
     public function index()
     {
-    	$services = Service::paginate(10);
-    	return view('admin.services.index', compact('services'));
+        $services = $this->service_services->all();
+        return view('admin.services.index', compact('services'));
     }
 
     public function create()
     {
         $type_of_services = TypeOfService::all();
-    	return view('admin.services.create', compact('type_of_services'));
+        return view('admin.services.create', compact('type_of_services'));
     }
 
     public function store(AddServiceRequest $request)
@@ -35,9 +44,10 @@ class ServicesController extends Controller
             $service->image = $name;
         }
 
+        $service->slug = Str::slug($request->name);
         //lưu
         $service->fill($request->all())->save();
-        
+
         // xuất thông báo
         $notification = array(
             'message' => 'Thêm dịch vụ thành công !',
@@ -52,21 +62,21 @@ class ServicesController extends Controller
     {
         $service = Service::find($id);
         $type_of_services = TypeOfService::all();
-        return view('admin.services.show', compact('service','type_of_services'));
+        return view('admin.services.show', compact('service', 'type_of_services'));
     }
 
     public function update(AddServiceRequest $request, $id)
     {
-         // khai báo đối tượng
-       $service = Service::find($id);
+        // khai báo đối tượng
+        $service = Service::find($id);
 
         //nếu có nhập ảnh ảnh
         if ($request->hasFile('image')) {
 
             // xoá ảnh cũ
-            if (file_exists('upload/images/service/'.$service->image && $service->image != 'no-image-found.jpg'))
-            {
-                unlink('upload/images/service/'.$service->image);
+            if (file_exists('upload/images/service/' . $service->image)
+                && $service->image != 'services-default.png') {
+                unlink('upload/images/service/' . $service->image);
             }
 
             //lưu ảnh mới
@@ -76,7 +86,7 @@ class ServicesController extends Controller
             $service->image = $name;
 
         }
-
+        $service->slug = Str::slug($request->name);
         //lưu
         $service->fill($request->all())->save();
 
@@ -90,10 +100,15 @@ class ServicesController extends Controller
         return redirect()->route('services.index')->with($notify);
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         //tìm kiếm đối tượng
         $service = Service::find($id);
-
+        // xoá ảnh cũ
+        if (file_exists('upload/images/service/'.$service->image)
+            && $service->image != 'services-default.png') {
+            unlink('upload/images/service/'.$service->image);
+        }
         // thực thi xóa
         $service->delete();
 

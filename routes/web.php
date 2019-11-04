@@ -338,7 +338,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
         Route::get('change-status', 'Slides\SlidesController@changeStatus')
             ->middleware('can:edit-slide')
-            ->name('slides.change-status');
+        ->name('slides.change-status');
     });
 
     //introductions

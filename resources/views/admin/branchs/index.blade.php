@@ -14,13 +14,14 @@
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="branchs_table">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Tên chi nhánh</th>
                                 <th>Số điện thoại</th>
                                 <th>Địa chỉ</th>
+                                <th>Nhân sự</th>
                                 <th>Thành phố</th>
                                 <th width="50">
                                     <a href="{{ route('branch.create') }}" class="btn btn-xs btn-success">
@@ -35,6 +36,7 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->phone_number }}</td>
                                     <td>{{ $item->address}}</td>
+                                    <td>{{ $item->countUserWithBranch($item->id) }}</td>
                                     <td>{{ $item->city->name}}</td>
                                     <td>
                                         <a href="{{ route('branch.show', $item->id) }}" class="btn btn-xs btn-warning">
@@ -52,7 +54,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $branchs->links() !!}
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -62,4 +63,30 @@
         </div>
         <!-- /.row -->
     </section>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //datatable
+            $('#branchs_table').DataTable({
+                "language": {
+                    "emptyTable": "Không có bản ghi nào",
+                    "infoEmpty": "Không có bản ghi nào",
+                    "zeroRecords": "Không có bản ghi nào"
+                },
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true,
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": [3, 5, 6]
+                    }
+                ]
+            });
+        });
+    </script>
 @endsection

@@ -26,7 +26,7 @@ class WebSettingRequest extends FormRequest
         return [
             'phone_number' => [
                 'required',
-                'regex:/(09|02|03|07|08|05)+([0-9]{8})$/',
+                'regex:/(09|03|07|08|05)+([0-9]{8})$/',
             ],
             'email' => [
               'required',

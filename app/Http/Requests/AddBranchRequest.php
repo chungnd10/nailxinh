@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateProfileRequest extends FormRequest
+class AddBranchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,30 +24,40 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'full_name' => 'required|min:5|max:40',
+        //trường hợp sửa
+        $validate = [
+            'name' => [
+                'required',
+                Rule::unique('branches')->ignore($this->id),
+            ],
             'phone_number' => [
                 'required',
-                Rule::unique('users')->ignore($this->id),
+                Rule::unique('branches')->ignore($this->id),
                 'regex:/(09|03|07|08|05)+([0-9]{8})$/',
             ],
-            'birthday' => 'required',
-            'address' => 'required|min:5',
+            'city_id' => 'required',
+            'address' => [
+                'required',
+                'min:5',
+                Rule::unique('branches')->ignore($this->id),
+            ]
         ];
+
+        return $validate;
     }
 
     public function messages()
     {
         return [
-            'full_name.required' => 'Mục này không được để trống',
-            'full_name.min' => 'Yêu cầu từ 5-40 ký tự',
-            'full_name.max' => 'Yêu cầu từ 5-40 ký tự',
+            'name.required' => 'Mục này không được để trống',
+            'name.unique' => 'Tên đã được sử dụng',
             'phone_number.required' => 'Mục này không được để trống',
-            'phone_number.regex' => 'Số điện thoại sai định dạng',
             'phone_number.unique' => 'Số điện thoại đã được sử dụng',
-            'birthday.required' => 'Mục này không được để trống',
+            'phone_number.regex' => 'Số điện thoại sai định dạng',
+            'city_id.required' => 'Mục này không được để trống',
             'address.required' => 'Mục này không được để trống',
             'address.min' => 'Yêu cầu tối thiểu 5 ký tự',
+            'address.unique' => 'Địa chỉ đã được sử dụng'
         ];
     }
 }

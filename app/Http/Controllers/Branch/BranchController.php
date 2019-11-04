@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Branch;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AddBranchRequest;
+use App\Services\BranchServices;
+use App\Services\UserServices;
 use App\Http\Controllers\Controller;
 use App\City;
 use App\Branch;
@@ -10,9 +12,18 @@ use App\Branch;
 class BranchController extends Controller
 {
 
+    protected $user_sercices;
+    protected $branch_services;
+
+    public function __construct(UserServices $user_sercices, BranchServices $branch_services)
+    {
+        $this->user_sercices = $user_sercices;
+        $this->branch_services = $branch_services;
+    }
+
     public function index()
     {
-    	$branchs = Branch::paginate(10);
+    	$branchs = $this->branch_services->all();
     	return view('admin.branchs.index', compact('branchs'));
     }
 
@@ -23,7 +34,7 @@ class BranchController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(AddBranchRequest $request)
     {
     	$branch = new Branch();
     	//lưu
@@ -46,7 +57,7 @@ class BranchController extends Controller
         return view('admin.branchs.show', compact('branch','cities'));
     }
 
-    public function update(Request $request, $id)
+    public function update(AddBranchRequest $request, $id)
     {
         // khai báo đối tượng
         $branch = Branch::find($id);
