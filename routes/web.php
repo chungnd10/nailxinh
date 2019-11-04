@@ -12,8 +12,16 @@
 */
 
 
-Route::get('/', 'Dashboard\DashboardController@index');
+//client
+Route::get('/', 'Client\ClientController@index')->name('index');
+Route::get('/introduction', 'Client\ClientController@introduction')->name('introduction');
+Route::get('/contact', 'Client\ClientController@contact')->name('contact');
+Route::get('/services', 'Client\ClientController@services')->name('services');
+Route::get('/booking', 'Client\ClientController@booking')->name('booking');
+Route::get('/gallery', 'Client\ClientController@gallery')->name('gallery');
+// end client
 
+//login | logout
 Route::get('login', 'Auth\AuthController@login')->name('login');
 Route::post('login', 'Auth\AuthController@checkLogin')->name('login');
 Route::get('logout', 'Auth\AuthController@logout')->name('logout');
@@ -65,6 +73,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('change-status', 'User\UserController@changeStatus')
             ->middleware('can:edit-users')
             ->name('users.change-status');
+
+        Route::post('change-image-profile/{id}', 'User\UserController@changeImageProfile')
+            ->name('users.change-image-profile');
     });
 
     //type of services

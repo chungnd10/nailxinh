@@ -33,7 +33,11 @@ class AuthController extends Controller
 
             ])
         ) {
-            return redirect()->route('admin.index');
+            $notify = array(
+                'message' => 'Xin chào '.Auth::user()->full_name,
+                'alert-type' => 'success'
+            );
+            return redirect()->route('admin.index')->with($notify);
         } else {
             return back()->with('danger', 'Tài khoản hoặc mật khẩu không đúng');
         }

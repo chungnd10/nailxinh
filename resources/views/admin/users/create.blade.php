@@ -10,24 +10,13 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data" id="addUser">
+            <form action="{{ route('users.store') }}"
+                  method="POST"
+                  id="addUser">
                 @csrf
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <img class="profile-user-img img-responsive img-circle"
-                                     src="upload/images/users/avatar-default.png"
-                                     id="proImg"
-                                     alt="User profile picture">
-                            </div>
-                            <div class="form-group">
-                                <label>Ảnh đại diện</label><span class="text-danger">*</span>
-                                <input type="file" class="form-control" name="avatar" id="avatar">
-                                @if($errors->first('avatar'))
-                                    <span class="text-danger">{{ $errors->first('avatar') }}</span>
-                                @endif
-                            </div>
                             <div class="form-group">
                                 <label>Họ tên</label><span class="text-danger">*</span>
                                 <input type="text" class="form-control" value="{{ old('full_name')}}"
@@ -63,6 +52,40 @@
                                        name="address" placeholder="VD: 216 Cầu Giấy, Hà Nội" id="address">
                                 @if($errors->first('address'))
                                     <span class="text-danger">{{ $errors->first('address') }}</span>
+                                @endif
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Giới tính</label><span class="text-danger">*</span><br>
+                                @foreach($genders as $item)
+                                    <input type="radio"
+                                           name="gender_id"
+                                           value="{{ $item->id }}"
+                                           @if($item->id == old('gender_id'))
+                                           checked
+                                            @endif
+                                    >&nbsp;&nbsp;
+                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @endforeach
+                                @if($errors->first('gender_id'))
+                                    <span class="text-danger">{{ $errors->first('gender_id') }}</span>
+                                @endif
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Trạng thái hoạt động</label><span class="text-danger">*</span><br>
+                                @foreach($operation_status as $item)
+                                    <input type="radio"
+                                           name="operation_status_id"
+                                           value="{{ $item->id }}"
+                                           @if($item->id == old('operation_status_id'))
+                                           checked
+                                            @endif
+                                    >&nbsp;&nbsp;
+                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @endforeach
+                                @if($errors->first('operation_status_id'))
+                                    <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
                                 @endif
                             </div>
                             <!-- /.form-group -->
@@ -127,40 +150,6 @@
                                 @endif
                             </div>
                             <!-- /.form-group -->
-                            <div class="form-group">
-                                <label>Giới tính</label><span class="text-danger">*</span><br>
-                                @foreach($genders as $item)
-                                    <input type="radio"
-                                           name="gender_id"
-                                           value="{{ $item->id }}"
-                                           @if($item->id == old('gender_id'))
-                                           checked
-                                            @endif
-                                    >&nbsp;&nbsp;
-                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                @endforeach
-                                @if($errors->first('gender_id'))
-                                    <span class="text-danger">{{ $errors->first('gender_id') }}</span>
-                                @endif
-                            </div>
-                            <!-- /.form-group -->
-                            <div class="form-group">
-                                <label>Trạng thái hoạt động</label><span class="text-danger">*</span><br>
-                                @foreach($operation_status as $item)
-                                    <input type="radio"
-                                           name="operation_status_id"
-                                           value="{{ $item->id }}"
-                                           @if($item->id == old('operation_status_id'))
-                                           checked
-                                            @endif
-                                    >&nbsp;&nbsp;
-                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                @endforeach
-                                @if($errors->first('operation_status_id'))
-                                    <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
-                                @endif
-                            </div>
-                            <!-- /.form-group -->
                         </div>
                         <!-- /.col -->
                     </div>
@@ -184,23 +173,10 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            var inputImage = document.querySelector(`[name="avatar"]`);
-            inputImage.onchange = function () {
-                var file = this.files[0];
-                if (file == undefined) {
-                    document.querySelector('#proImg').src = 'upload/images/users/avatar-default.png';
-                } else {
-                    getBase64(file, '#proImg');
-                }
-            }
 
             //validate
             $("#addUser").validate({
                 rules: {
-                    avatar: {
-                        required: true,
-                        extension: "jpg|jpeg|png"
-                    },
                     full_name: {
                         required: true,
                         minlength: 5,
@@ -222,7 +198,7 @@
                     },
                     cf_password: {
                         required: true,
-                        equalTo:password
+                        equalTo: password
                     },
                     email: {
                         required: true,
@@ -235,10 +211,6 @@
                 },
 
                 messages: {
-                    avatar: {
-                        required: "Mục này không được để trống",
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
-                    },
                     full_name: {
                         required: "Mục này không được để trống",
                         minlength: "Yêu cầu từ 5-40 ký tự",

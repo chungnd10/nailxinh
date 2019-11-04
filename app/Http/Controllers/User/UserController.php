@@ -13,6 +13,8 @@ use App\Services\TypeServiceServices;
 use App\Services\UserServices;
 use App\Services\UserServiceServices;
 use App\User;
+use Intervention\Image\File;
+use Intervention\Image\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -88,13 +90,6 @@ class UserController extends Controller
     {
         // khai báo đối tượng
         $user = new User();
-        //nếu có nhập ảnh ảnh
-        if ($request->hasFile('avatar')) {
-            $file = $request->file('avatar');
-            $name = time() . $file->getClientOriginalName();
-            $file->storeAs('images/users', $name);
-            $user->avatar = $name;
-        }
         //lưu
         $user->fill($request->all())->save();
         // xuất thông báo
@@ -117,7 +112,7 @@ class UserController extends Controller
         $genders = $this->gender_services->all();
         $roles = $this->role_services->allNotAdmin();
         $operation_status = $this->operation_status_services->all();
-        $type_services = $this-> type_services->all();
+        $type_services = $this->type_services->all();
         $services_of_user = $this->user_services_services->getServiceWithId($id);
         // điều hướng
         return view('admin.users.show', compact('user',
@@ -136,18 +131,6 @@ class UserController extends Controller
     {
         // khai báo đối tượng
         $user = User::find($id);
-        //nếu có nhập ảnh ảnh
-        if ($request->hasFile('avatar')) {
-            // xoá ảnh cũ
-            if (file_exists('upload/images/users/' . $user->avatar) && $user->avatar != 'avatar-default.png') {
-                unlink('upload/images/users/' . $user->avatar);
-            }
-            //lưu ảnh mới
-            $file = $request->file('avatar');
-            $name = time() . $file->getClientOriginalName();
-            $file->storeAs('images/users', $name);
-            $user->avatar = $name;
-        }
         //lưu
         $user->fill($request->all())->save();
         // xuất thông báo
@@ -234,7 +217,7 @@ class UserController extends Controller
             'alert-type' => 'success'
         );
         // điều hướng
-        return redirect()->route('users.show', $id.'#tab_3')->with($notify);
+        return redirect()->route('users.show', $id . '#tab_3')->with($notify);
 
     }
 
@@ -370,5 +353,40 @@ class UserController extends Controller
         $user->save();
 
         return response()->json(['success' => 'Status change successfully.']);
+    }
+
+    public function changeImageProfile(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        $data = json_decode($request->get('image'), true);
+        $file = $request->file('image');
+
+        if (!empty($file)) {
+
+            $filename = time() . '.png';
+            $folderPath = "upload/images/users/";
+            $path = "$folderPath/$filename";
+
+            Image::make($file)->crop(
+                intval($data['height']),
+                intval($data['width']),
+                intval($data['x']),
+                intval($data['y'])
+            )->save($path);
+
+            $user->update([
+                "image" => $path
+            ]);
+
+            return [
+                'state' => 200,
+                'message' => 'success',
+                'result' => "/$path"
+            ];
+        }
+
+        return response()->json(['status' => true]);
+
     }
 }
