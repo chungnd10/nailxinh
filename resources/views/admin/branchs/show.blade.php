@@ -63,7 +63,7 @@
 			</div>
 			<!-- /.box-body -->
 			<div class="box-footer ">
-				<a href="{{ route('users.index') }}" class="btn btn-default">
+				<a href="{{ route('branch.index') }}" class="btn btn-default">
 					<i class="fa fa-arrow-circle-o-left"></i>
 					Trở về
 				</a>
@@ -108,7 +108,6 @@
             		},
             		phone_number: {
             			required: "Mục này không được để trống",
-            			phoneNumberVietNam: "Nhập đúng định dạng số điện thoại",
             		},
             		address: {
             			required: "Mục này không được để trống",

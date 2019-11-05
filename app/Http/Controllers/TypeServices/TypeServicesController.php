@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\TypeServices;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddTypeServiceRequest;
 use App\TypeOfService;
+use Illuminate\Support\Str;
 
 class TypeServicesController extends Controller
 {
     public function index()
     {
     	//lấy dữ liệu
-        $typeservices = TypeOfService::paginate(10);
-
+        $type_services = TypeOfService::all();
         // điều hướng
-        return view('admin.type_services.index', compact('typeservices'));
+        return view('admin.type_services.index', compact('type_services'));
     }
 
     public function create()
@@ -32,10 +31,11 @@ class TypeServicesController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $name = time() . $file->getClientOriginalName();
-            $file->storeAs('images/type-service', $name);
+            $file->storeAs('images/type_services', $name);
             $type_of_service->image = $name;
         }
 
+        $type_of_service->slug = Str::slug($request->name);
         //lưu
         $type_of_service->fill($request->all())->save();
 
@@ -67,15 +67,16 @@ class TypeServicesController extends Controller
         if ($request->hasFile('image')) {
 
             // xoá ảnh cũ
-            if (file_exists('upload/images/type-service/'.$type_of_service->image && $type_of_service->image != 'no-image-found.jpg'))
+            if (file_exists('upload/images/type_services/'.$type_of_service->image)
+                && $type_of_service->image != 'type_of_services_default.png')
             {
-                unlink('upload/images/type-service/'.$type_of_service->image);
+                unlink('upload/images/type_services/'.$type_of_service->image);
             }
 
             //lưu ảnh mới
             $file = $request->file('image');
             $name = time() . $file->getClientOriginalName();
-            $file->storeAs('images/type-service', $name);
+            $file->storeAs('images/type_services', $name);
             $type_of_service->image = $name;
 
         }
@@ -99,8 +100,9 @@ class TypeServicesController extends Controller
         $type_of_service = TypeOfService::find($id);
 
         // xoá ảnh cũ
-        if (file_exists('upload/images/type-service/'.$type_of_service->image  && $type_of_service->image != 'no-image-found.jpg')) {
-            unlink('upload/images/type-service/'.$type_of_service->image);
+        if (file_exists('upload/images/type_services/'.$type_of_service->image)
+            && $type_of_service->image != 'type_of_services_default.png') {
+            unlink('upload/images/type_services/'.$type_of_service->image);
         }
         // thực thi xóa
         $type_of_service->delete();

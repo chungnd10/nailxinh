@@ -24,16 +24,19 @@ class AddServiceRequest extends FormRequest
      */
     public function rules()
     {
-        
+        // trường hợp sửa
         $validate = [
-            'name' => 'required|min:5|max:40',
-            'slug' => [
-                'required',
-                Rule::unique('services')->ignore($this->id),
-                'regex:/^[a-z0-9-]*$/'
-            ]
+            'name' => [
+               'required',
+               'max:80',
+               Rule::unique('type_of_services')->ignore($this->id),
+            ],
+            'price' => 'required|numeric|between:1,1000000000',
+            'completion_time' => 'required',
+            'type_of_services_id' => 'required'
         ];
 
+        // trưởng hợp thêm
         if (!$this->id){
             $validate['image']  = 'required|mimes:png,jpg,jpeg';
         }
@@ -45,13 +48,13 @@ class AddServiceRequest extends FormRequest
     {
         return [
             'name.required' => 'Mục này không được để trống',
-            'name.min' => 'Yêu cầu từ 5-40 ký tự',
-            'name.max' => 'Yêu cầu từ 5-40 ký tự',
+            'name.max' => 'Không được vượt quá 80 ký tự',
             'image.required' => 'Mục này không được để trống',
             'image.mimes' => 'Chỉ chấp nhận ảnh JPG, JPEG, PNG',
-            'slug.required' => 'Mục này không được để trống',
-            'slug.regex' => 'Đường dẫn chỉ chứa các chứ, số và dấu -',
-            'slug.unique' => 'Đường dẫn này đã tồn tại'
+            'price.required' => 'Mục này không được để trống',
+            'price.between' => 'Yêu cầu giá trị từ 1-1.000.000.000',
+            'completion_time.required' => 'Mục này không được để trống',
+            'type_of_services_id.required' => 'Mục này không được để trống',
         ];
     }
 }

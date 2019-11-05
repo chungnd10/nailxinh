@@ -27,15 +27,15 @@ class AddSlideRequest extends FormRequest
         $validate = [
             'images' => 'nullable|mimes:jpg,jpeg,png,gif',
             'url' => 'nullable|url',
-            'display_status_id' => 'required',
-            'title' => 'nullable|min:10|max:25',
-            'description' => 'nullable|min:10|max:130',
+            'title' => 'nullable|max:120',
+            'description' => 'nullable|max:200',
         ];
 
         //trường hợp thêm slide
         if (!$this->id)
         {
             $validate['images'] = 'required|mimes:jpg,jpeg,png,gif';
+            $validate['display_status_id'] = 'required';
         }
         return $validate;
     }
@@ -47,10 +47,8 @@ class AddSlideRequest extends FormRequest
             'images.mimes' => 'Chỉ chấp nhận JPG, JPEG, PNG, GIF',
             'url.url' => 'Url sai định dạng',
             'display_status_id' => 'Mục này không được để trống',
-            'title.min' => 'Yêu cầu từ 10-25 ký tự',
-            'title.max' => 'Yêu cầu từ 10-25 ký tự',
-            'description.min' => 'Yêu cầu từ 10-130 ký tự',
-            'description.max' => 'Yêu cầu từ 10-130 ký tự',
+            'title.max' => 'Không được vượt quá 120 ký tự',
+            'description.max' => 'Không được vượt quá 200 ký tự',
         ];
     }
 }

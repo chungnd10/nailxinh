@@ -14,15 +14,15 @@
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="services_table">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Tên dịch vụ</th>
                                 <th>Ảnh</th>
                                 <th>Loại dịch vụ</th>
-                                <th>Giá</th>
-                                <th>Thời gian thực hiện</th>
+                                <th>Giá(VND)</th>
+                                <th>Thời gian</th>
                                 <th>Mô tả</th>
                                 <th width="50">
                                     <a href="{{ route('services.create') }}" class="btn btn-xs btn-success">
@@ -38,9 +38,9 @@
                                     <td>
                                         <img width="50" src="upload/images/service/{{ $item->image }}" alt="image">
                                     </td>
-                                    <td>{{ $item->typeService->name }}</td>
-                                   	<td>{{ $item->price}}</td>
-                                   	<td>{{ $item->completion_time}}</td>
+                                    <td width="100">{{ $item->typeService->name }}</td>
+                                   	<td>{{ number_format($item->price,2,",",".")}}</td>
+                                   	<td width="80">{{ $item->completion_time}}</td>
                                     <td>{{$item->description}}</td>
                                     <td>
                                         <a href="{{ route('services.show', $item->id) }}" class="btn btn-xs btn-warning">
@@ -58,7 +58,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $services->links() !!}
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -68,4 +67,49 @@
         </div>
         <!-- /.row -->
     </section>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //datatable
+            $('#services_table').DataTable({
+                "language": {
+                    "emptyTable": "Không có bản ghi nào",
+                    "zeroRecords": "Không tìm thấy bản ghi nào",
+                    "decimal": "",
+                    "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
+                    "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
+                    "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Hiển thị _MENU_ mục",
+                    "loadingRecords": "Loading...",
+                    "processing": "Processing...",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "Đầu",
+                        "last": "Cuối",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                },
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'autoWidth': true,
+                "responsive": true,
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": [2, 6, 7]
+                    }
+                ]
+            });
+        });
+    </script>
 @endsection

@@ -14,13 +14,14 @@
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="branchs_table">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Tên chi nhánh</th>
                                 <th>Số điện thoại</th>
                                 <th>Địa chỉ</th>
+                                <th>Nhân sự</th>
                                 <th>Thành phố</th>
                                 <th width="50">
                                     <a href="{{ route('branch.create') }}" class="btn btn-xs btn-success">
@@ -35,6 +36,7 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->phone_number }}</td>
                                     <td>{{ $item->address}}</td>
+                                    <td>{{ $item->countUserWithBranch($item->id) }}</td>
                                     <td>{{ $item->city->name}}</td>
                                     <td>
                                         <a href="{{ route('branch.show', $item->id) }}" class="btn btn-xs btn-warning">
@@ -52,7 +54,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $branchs->links() !!}
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -62,4 +63,49 @@
         </div>
         <!-- /.row -->
     </section>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //datatable
+            $('#branchs_table').DataTable({
+                "language": {
+                    "emptyTable": "Không có bản ghi nào",
+                    "zeroRecords": "Không tìm thấy bản ghi nào",
+                    "decimal": "",
+                    "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
+                    "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
+                    "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Hiển thị _MENU_ mục",
+                    "loadingRecords": "Loading...",
+                    "processing": "Processing...",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "Đầu",
+                        "last": "Cuối",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                },
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'autoWidth': true,
+                "responsive": true,
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": [3, 5, 6]
+                    }
+                ]
+            });
+        });
+    </script>
 @endsection

@@ -10,17 +10,20 @@
 {{--Main content--}}
 <section class="content">
 	<div class="box box-default">
-		<form action="{{ route('type-services.store') }}" method="POST" enctype="multipart/form-data" id="addTypeService">
+		<form action="{{ route('type-services.store') }}"
+			  method="POST"
+			  enctype="multipart/form-data"
+			  id="addTypeService">
 			@csrf
 			<div class="box-body">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Tên loại dịch vụ</label><span class="text-danger">*</span>
-							<input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" name="name"  id="name">
-							 @if($errors->first('name'))
-                                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                             @endif
+							<img class="profile-user-img img-responsive img-circle"
+                             	src="upload/images/type_services/type_of_services_default.png"
+                             	alt="User profile picture"
+                             	id="proImg"
+                        	>
 						</div>
 						<div class="form-group">
 							<label>Ảnh loại dịch vụ</label><span class="text-danger">*</span>
@@ -38,10 +41,10 @@
 					<!-- /.col -->
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Đường dẫn</label><span class="text-danger">*</span>
-							<input type="text" class="form-control{{ $errors->has('slug') ? ' is-invalid' : '' }}" value="{{ old('slug') }}" name="slug" id="slug">
-							@if($errors->first('slug'))
-                                    <span class="text-danger">{{ $errors->first('slug') }}</span>
+							<label>Tên loại dịch vụ</label><span class="text-danger">*</span>
+							<input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" name="name"  id="name">
+							 @if($errors->first('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
                              @endif
 						</div>
 						<!-- /.form-group -->
@@ -78,7 +81,7 @@
 		inputImage.onchange = function () {
 			var file = this.files[0];
 			if (file == undefined) {
-				document.querySelector('#proImg').src = 'upload/images/type-service/no-image-found.jpg';
+				document.querySelector('#proImg').src = 'upload/images/type_services/type_of_services_default.png';
 			} else {
 				getBase64(file, '#proImg');
 			}
@@ -93,10 +96,9 @@
             		},
             		name: {
             			required: true,
-            			minlength: 5,
             			maxlength: 40
             		},
-            		slug: {
+            		description: {
             			required: true
             		}
             		
@@ -109,17 +111,13 @@
             		},
             		name: {
             			required: "Mục này không được để trống",
-            			minlength: "Yêu cầu từ 5-40 ký tự",
-            			maxlength: "Yêu cầu từ 5-40 ký tự",
-            			alpha: "Mục này không được để trống"
+            			maxlength: "Yêu cầu tối đa 40 ký tự",
             		},
-            		slug: {
+            		description: {
             			required: "Mục này không được để trống"
             		}
             	}
             });
-
-
         });
     </script>
     @endsection

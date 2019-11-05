@@ -19,4 +19,5 @@ class BranchServices
         $branch = Branch::count();
         return $branch;
     }
+
 }

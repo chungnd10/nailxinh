@@ -126,6 +126,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('destroy/{id}', 'ProcessTypeServices\ProcessTypeServicesController@destroy')
             ->middleware('can:remove-process-of-services')
             ->name('process-type-services.destroy');
+
+        Route::post('get-procces-with-type-services',
+            'ProcessTypeServices\ProcessTypeServicesController@getProcessWithTypeServices')
+            ->middleware('can:add-process-of-services')
+            ->name('get-procces-with-type-services');
     });
 
     //services
@@ -338,7 +343,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
         Route::get('change-status', 'Slides\SlidesController@changeStatus')
             ->middleware('can:edit-slide')
-            ->name('slides.change-status');
+        ->name('slides.change-status');
     });
 
     //introductions

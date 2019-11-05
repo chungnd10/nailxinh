@@ -20,7 +20,6 @@ class Service extends Model
     	'price',
     	'completion_time',
     	'type_of_services_id',
-        'slug'
     ];
     
     public function typeService(){

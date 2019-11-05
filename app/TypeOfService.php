@@ -15,7 +15,6 @@ class TypeOfService extends Model
 
     protected $fillable = [
     	'name',
-    	'slug',
     	'description'
     ];
 
@@ -32,5 +31,13 @@ class TypeOfService extends Model
     public function showServices($id)
     {
         return Service::where('type_of_services_id', $id)->get();
+    }
+
+    //đếm số dịch vụ
+    public function countServicesWithType($type_of_services_id)
+    {
+        $services = Service::where('type_of_services_id',$type_of_services_id)
+                ->count();
+        return $services;
     }
 }

@@ -46,7 +46,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>Mô tả</label><span class="text-danger">*</span>
+                                <label>Mô tả</label>
                                 <textarea name="description"
                                           cols="30"
                                           rows="6"
@@ -58,7 +58,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>URL</label><span class="text-danger">*</span>
+                                <label>URL</label>
                                 <input type="text"
                                        class="form-control"
                                        name="url"
@@ -115,12 +115,11 @@
                         required: true,
                     },
                     title: {
-                        minlength: 10,
-                        maxlength: 25
+                        required: true,
+                        maxlength: 120
                     },
                     description: {
-                        minlength: 10,
-                        maxlength: 130
+                        maxlength: 200
                     }
                 },
 
@@ -136,17 +135,14 @@
                         required: "Mục này không được để trống",
                     },
                     title: {
-                        minlength: "Yêu cầu từ 10-25 ký tự",
-                        maxlength: "Yêu cầu từ 10-25 ký tự",
+                        required: "Mục này không được để trống",
+                        maxlength: 'Không được vượt quá 120 ký tự',
                     },
                     description: {
-                        minlength: "Yêu cầu từ 10-130 ký tự",
-                        maxlength: "Yêu cầu từ 10-130 ký tự",
+                        maxlength: 'Không được vượt quá 200 ký tự',
                     }
                 }
             });
-
-
         });
     </script>
 @endsection

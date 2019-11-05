@@ -17,14 +17,20 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Tên chi nhánh</label><span class="text-danger">*</span>
-							<input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ old('name') }}" name="name"  id="name">
+							<input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+								   value="{{ old('name') }}"
+								   name="name"
+								   id="name">
 							@if($errors->first('name'))
 							<span class="text-danger">{{ $errors->first('name') }}</span>
 							@endif
 						</div>
 						<div class="form-group">
 							<label>Số điện thoại</label><span class="text-danger">*</span>
-							<input type="text" class="form-control" name="phone_number" id="phone_number">
+							<input type="text" class="form-control"
+								   name="phone_number"
+								   value="{{ old('phone_number') }}"
+								   id="phone_number">
 							@if($errors->first('phone_number'))
 							<span class="text-danger">{{ $errors->first('phone_number') }}</span>
 							@endif
@@ -37,9 +43,13 @@
 							<label>Thành phố</label><span class="text-danger">*</span>
 							<select name="city_id" id="city_id" class="form-control">
 								<option value="">Chọn thành phố</option>
-								@foreach($cities as $item)
-								<option value="{{ $item->id }}">{{ $item->name }}</option>
-								@endforeach
+									@foreach($cities as $item)
+									<option value="{{ $item->id }}"
+											@if(old('city_id') == $item->id)
+												selected
+											@endif
+									>{{ $item->name }}</option>
+									@endforeach
 							</select>
 							@if($errors->first('city_id'))
 							<span class="text-danger">{{ $errors->first('city_id') }}</span>
@@ -61,7 +71,7 @@
 			</div>
 			<!-- /.box-body -->
 			<div class="box-footer ">
-				<a href="{{ route('users.index') }}" class="btn btn-default">
+				<a href="{{ route('branch.index') }}" class="btn btn-default">
 					<i class="fa fa-arrow-circle-o-left"></i>
 					Trở về
 				</a>
@@ -106,7 +116,6 @@
             		},
             		phone_number: {
             			required: "Mục này không được để trống",
-            			phoneNumberVietNam: "Nhập đúng định dạng số điện thoại",
             		},
             		address: {
             			required: "Mục này không được để trống",

@@ -14,14 +14,14 @@
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="type_services_table">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Tên loại dịch vụ</th>
-                                <th>Đường dẫn</th>
                                 <th>Ảnh</th>
-                                <th>Mô tả</th>
+                                <th>Đường dẫn</th>
+                                <th>Số dịch vụ</th>
                                 <th width="50">
                                     <a href="{{ route('type-services.create') }}" class="btn btn-xs btn-success">
                                         <i class="fa fa-plus"></i> Thêm</a>
@@ -29,17 +29,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($typeservices as $item)
+                            @foreach($type_services as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->slug }}</td>
                                     <td>
-                                        <img width="50" src="upload/images/type-service/{{ $item->image }}" alt="image">
+                                        <img width="50" src="upload/images/type_services/{{ $item->image }}" alt="image">
                                     </td>
-                                    <td>{{$item->description}}</td>
+                                    <td>{{ $item->slug }}</td>
+                                    <td>{{ $item->countServicesWithType($item->id) }}</td>
                                     <td>
-                                        <a href="{{ route('type-services.show', $item->id) }}" class="btn btn-xs btn-warning">
+                                        <a href="{{ route('type-services.show', $item->id) }}"
+                                           class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                         @if($item->role_id != 1)
@@ -54,7 +55,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $typeservices->links() !!}
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -64,4 +64,49 @@
         </div>
         <!-- /.row -->
     </section>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //datatable
+            $('#type_services_table').DataTable({
+                "language": {
+                    "emptyTable": "Không có bản ghi nào",
+                    "zeroRecords": "Không tìm thấy bản ghi nào",
+                    "decimal": "",
+                    "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
+                    "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
+                    "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Hiển thị _MENU_ mục",
+                    "loadingRecords": "Loading...",
+                    "processing": "Processing...",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "Đầu",
+                        "last": "Cuối",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                },
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'autoWidth': true,
+                "responsive": true,
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": [2, 3, 4, 5]
+                    }
+                ]
+            });
+        });
+    </script>
 @endsection
