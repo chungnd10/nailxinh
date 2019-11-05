@@ -14,9 +14,9 @@ class FeedbackServices
     }
 
     // lấy tất cả feedback
-    public function all($paginate)
+    public function all()
     {
-        $feedbacks = Feedback::paginate($paginate);
+        $feedbacks = Feedback::all();
         return $feedbacks;
     }
 }

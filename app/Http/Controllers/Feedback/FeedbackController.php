@@ -18,7 +18,7 @@ class FeedbackController extends Controller
 
     public function index()
     {
-        $feedbacks = $this->feedback_services->all(100);
+        $feedbacks = $this->feedback_services->all();
         return view('admin.feedbacks.index', compact('feedbacks'));
     }
 

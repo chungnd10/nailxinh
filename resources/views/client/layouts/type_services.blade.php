@@ -12,66 +12,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-lg-0">
+            @foreach($type_services as $type_service)
+                <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-lg-0">
                 <div class="service-box text-center">
                     <figure>
-                        <img src="client_assets/img/service/service01.png" alt="">
+                        <img class="fix-border-radius" src="upload/images/type_services/{{ $type_service->image }}" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <a href="#" class="boxed-btn">Đặt Lịch</a>
+                                <a href="javascript:;" class="boxed-btn">Chi tiết</a>
                             </div>
                         </figcaption>
                     </figure>
-                    <h4>Lông Mày</h4>
-                    <p>NAIL XINH đang có các dịch vụ về lông
-                        mày như: phun thêu, điêu khắc,…</p>
+                    <h4>{{ $type_service->name }}</h4>
+                    <p>{{ $type_service->description }}</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-lg-0">
-                <div class="service-box text-center">
-                    <figure>
-                        <img src="client_assets/img/service/service02.png" alt="">
-                        <figcaption>
-                            <div class="inner-text">
-                                <a href="#" class="boxed-btn">Đặt Lịch</a>
-                            </div>
-                        </figcaption>
-                    </figure>
-                    <h4>Nail</h4>
-                    <p>Là dịch vụ được yêu thích nhất tại NAIL
-                        XINH, với những mẫu nail…</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-sm-0">
-                <div class="service-box text-center">
-                    <figure>
-                        <img src="client_assets/img/service/service03.png" alt="">
-                        <figcaption>
-                            <div class="inner-text">
-                                <a href="#" class="boxed-btn">Đặt Lịch</a>
-                            </div>
-                        </figcaption>
-                    </figure>
-                    <h4>Chăm sóc da</h4>
-                    <p>NAIL XINH đang có các dịch vụ chăm sóc da
-                        như: massage, tẩy da chết,…</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="service-box text-center">
-                    <figure>
-                        <img src="client_assets/img/service/service04.png" alt="">
-                        <figcaption>
-                            <div class="inner-text">
-                                <a href="#" class="boxed-btn">Đặt Lịch</a>
-                            </div>
-                        </figcaption>
-                    </figure>
-                    <h4>Mi</h4>
-                    <p>NAIL XINH đang có các dịch vụ về mi như:
-                        nối mi và uốn mi...</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

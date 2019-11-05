@@ -3,3 +3,4 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="client_assets/css/style.css">
 <link rel="stylesheet" href="client_assets/css/responsive.css">
+<link rel="stylesheet" href="client_assets/css/custom.css">

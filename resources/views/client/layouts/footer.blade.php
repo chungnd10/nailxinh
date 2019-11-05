@@ -38,31 +38,54 @@
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-4">
                 <aside class="widget widget_links">
-                    <h4 class="widget-title"><img src="client_assets/img/section-icon.png" alt="">Menu</h4>
+                    <h4 class="widget-title">
+                        <img src="client_assets/img/section-icon.png" alt="">Menu
+                    </h4>
                     <div class="d-flex">
                         <ul>
-                            <li><a href="#">Trang chủ</a></li>
-                            <li><a href="#">Giới thiệu</a></li>
-                            <li><a href="#">Dịch vụ</a></li>
-                            <li><a href="#">Thư viện ảnh</a></li>
-                            <li><a href="#">Liên hệ</a></li>
-                            <li><a href="#">Đặt lịch</a></li>
+                            <li>
+                                <a href="{{ route('index') }}">TRANG CHỦ</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('introduction') }}">GIỚI THIỆU</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('services') }}">DỊCH VỤ</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('gallery') }}">THƯ VIỆN ẢNH</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('contact') }}">LIÊN HỆ</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('booking') }}">ĐẶT LỊCH</a>
+                            </li>
                         </ul>
                         <ul>
-                            <li><a href="#">Nail</a></li>
-                            <li><a href="#">Da</a></li>
-                            <li><a href="#">Lông mày</a></li>
-                            <li><a href="#">Mi</a></li>
+                            @foreach($type_services as $type_service)
+                                <li>
+                                    <a href="{{ route('type_services', $type_service->id) }}">{{ $type_service->name }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </aside>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <aside class="widget widdget-instagram">
-                    <h4 class="widget-title"><img src="client_assets/img/section-icon.png" alt="">Theo dõi chúng tôi
+                    <h4 class="widget-title">
+                        <img src="client_assets/img/section-icon.png" alt="">Theo dõi chúng tôi
                     </h4>
                     <div class="facebook-widget">
-                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FNail-Xinh-111390913633637%2F&tabs&width=255&height=196&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=399404564065453" width="255" height="196" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                        <iframe src="{{ $info->facebook }}"
+                                width="255" height="196"
+                                style="border:none;overflow:hidden"
+                                allowTransparency="true"
+                                allow="encrypted-media">
+
+                        </iframe>
                     </div>
                 </aside>
             </div>

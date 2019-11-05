@@ -210,49 +210,10 @@
                     </ul>
                 </li>
             @endcan
-            @can('view-slide')
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-image"></i> <span>Slides</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        @can('view-slide')
-                            <li><a href="{{ route('slides.index') }}"><i class="fa fa-angle-right"></i>Danh sách</a>
-                            </li>
-                        @endcan
-                        @can('view-slide')
-                            <li><a href="{{ route('slides.create') }}"><i class="fa fa-angle-right"></i>Thêm mới</a>
-                            </li>
-                        @endcan
-                    </ul>
-                </li>
-            @endcan
-            @can('edit-introduction-page')
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-desktop"></i> <span>Trang giới thiệu</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        @can('edit-introductions-page')
-                            <li>
-                                <a href="{{ route('introductions.index', 1) }}">
-                                    <i class="fa fa-angle-right"></i>Chỉnh sửa
-                                </a>
-                            </li>
-                        @endcan
-                    </ul>
-                </li>
-            @endcan
             @can('view-web-settings')
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-cog"></i> <span>Thông tin website</span>
+                        <i class="fa fa-cog"></i> <span>Thông tin</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -262,6 +223,20 @@
                             <li>
                                 <a href="{{ route('web-settings.index', 1) }}">
                                     <i class="fa fa-angle-right"></i>Cấu hình website
+                                </a>
+                            </li>
+                        @endcan
+                        @can('view-slide')
+                            <li>
+                                <a href="{{ route('slides.index') }}">
+                                    <i class="fa fa-angle-right"></i>Slides
+                                </a>
+                            </li>
+                        @endcan
+                        @can('edit-introductions-page')
+                            <li>
+                                <a href="{{ route('introductions.index', 1) }}">
+                                    <i class="fa fa-angle-right"></i>Trang giới thiệu
                                 </a>
                             </li>
                         @endcan
