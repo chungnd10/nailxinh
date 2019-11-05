@@ -81,54 +81,45 @@
             $('#feedbacks_table').DataTable({
                 "language": {
                     "emptyTable": "Không có bản ghi nào",
-                    "infoEmpty": "Không có bản ghi nào",
-                    "zeroRecords": "Không có bản ghi nào"
+                    "zeroRecords": "Không tìm thấy bản ghi nào",
+                    "decimal": "",
+                    "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
+                    "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
+                    "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Hiển thị _MENU_ mục",
+                    "loadingRecords": "Loading...",
+                    "processing": "Processing...",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "Đầu",
+                        "last": "Cuối",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
                 },
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'info': true,
                 'autoWidth': true,
+                "responsive": true,
                 "columnDefs": [
                     {
                         "orderable": false,
-                        "targets": [ 1,3,5]
+                        "targets": [1, 3, 5]
                     }
                 ]
             });
 
             // hide content
-            var showChar = 100;  // Số ký tự muốn hiển thị
-            var ellipsestext = "...";
-            var moretext = "Xem thêm >";
-            var lesstext = "Ẩn bớt >";
-
-            $('.more').each(function () {
-                var content = $(this).html();
-                if (content.length > showChar) {
-                    var c = content.substr(0, showChar);
-                    var h = content.substr(showChar, content.length - showChar);
-                    var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span>' +
-                        '<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;' +
-                        '<a href="" class="morelink">' + moretext + '</a></span>';
-                    $(this).html(html);
-                }
-            });
-
-            $(".morelink").click(function () {
-                if ($(this).hasClass("less")) {
-                    $(this).removeClass("less");
-                    $(this).html(moretext);
-                } else {
-                    $(this).addClass("less");
-                    $(this).html(lesstext);
-                }
-                $(this).parent().prev().toggle();
-                $(this).prev().toggle();
-                return false;
-            });
-            // end hide content
+            moreText(100);
+            //end hide content
 
             // change status
             $('.display_status_id').change(function () {
