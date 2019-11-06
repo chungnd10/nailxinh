@@ -16,7 +16,10 @@
 Route::get('/', 'Client\ClientController@index')->name('index');
 Route::get('/introduction', 'Client\ClientController@introduction')->name('introduction');
 Route::get('/contact', 'Client\ClientController@contact')->name('contact');
+
 Route::get('/services', 'Client\ClientController@services')->name('services');
+Route::get('/type_services/{id}', 'Client\ClientController@typeServices')->name('type_services');
+
 Route::get('/booking', 'Client\ClientController@booking')->name('booking');
 Route::get('/gallery', 'Client\ClientController@gallery')->name('gallery');
 // end client

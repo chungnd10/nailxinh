@@ -62,7 +62,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $feedbacks->links() !!}
                     </div>
                     <!-- /.box-body -->
                 </div>

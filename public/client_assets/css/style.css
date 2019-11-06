@@ -1739,7 +1739,7 @@ header {
 
 #counter {
     background: url(../img/bg/counter-bg.jpg) no-repeat center / 100% 100%;
-    padding: 75px 0;
+    padding: 5px 0;
 }
 
 #counter .single-box img {

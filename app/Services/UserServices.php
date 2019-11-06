@@ -39,4 +39,16 @@ class UserServices
                 ->get();
         return $user;
     }
+
+    //lấy tất cả kỹ thuật viên có trạng thái là hiển thị
+    public function getTechnician()
+    {
+        $status = config('contants.display_status_display');
+        $role_technician = config('contants.role_technician');
+        $users = User::where('role_id', $role_technician)
+            ->where('display_status_id', $status)
+            ->orderby('id', 'desc')
+            ->get();
+        return $users;
+    }
 }

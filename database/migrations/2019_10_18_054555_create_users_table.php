@@ -49,6 +49,12 @@ class CreateUsersTable extends Migration
                 ->on('roles')
                 ->onDelete('CASCADE');
 
+            $table->unsignedInteger('display_status_id')->default(config('contants.display_status_hide'));
+            $table->foreign('display_status_id')
+                ->references('id')
+                ->on('display_statuses')
+                ->onDelete('CASCADE');
+
             $table->timestamps();
         });
     }

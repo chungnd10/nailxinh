@@ -13,18 +13,21 @@ class SlidesTableSeeder extends Seeder
     {
         $slides = [
             [
-                'title' => 'Banner 1',
-                'images' => 'slide-default.png',
+                'title' => 'DỊCH VỤ LÀM MÓNG',
+                'images' => '1572969313slider01.jpg',
+                'description' => 'Là dịch vụ được yêu thích nhất tại NAIL ROOM, với những mẫu nail hot trend, luôn đi đầu xu hướng',
                 'display_status_id' => 2
             ],
             [
-                'title' => 'Baner 2',
-                'images' => 'slide-default.png',
+                'title' => 'DỊCH VỤ NỐI MI',
+                'images' => '1572969394slider02.jpg',
+                'description' => 'Ở Nail Xinh hiện có 2 dịch vụ chính về mi đó là nối mi và uốn mi',
                 'display_status_id' => 2
             ],
             [
-                'title' => 'Banner 3',
-                'images' => 'slide-default.png',
+                'title' => 'ĐIÊU KHẮC LÔNG MÀY',
+                'images' => '1572969453slider03.jpg',
+                'description' => 'Nail Xinh đang có các dịch vụ về lông mày như: phun thêu, điêu khắc, waxing',
                 'display_status_id' => 2
             ]
         ];

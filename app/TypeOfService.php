@@ -40,4 +40,13 @@ class TypeOfService extends Model
                 ->count();
         return $services;
     }
+
+    //lấy dịch vụ thuộc loại dịch vụ
+    public function getServices($type_services_id)
+    {
+        $services = Service::where('type_of_services_id', $type_services_id)
+            ->orderby('id', 'desc')
+            ->get();
+        return $services;
+    }
 }

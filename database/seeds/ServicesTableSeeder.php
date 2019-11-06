@@ -13,7 +13,7 @@ class ServicesTableSeeder extends Seeder
     {
         $services = [
             [
-                'name' => 'Chăm sóc móng (Nail care)',
+                'name' => 'Chăm sóc móng',
                 'slug'=> 'cham-soc-mong',
                 'description' => 'Hơn 300 màu sơn Hàn Quốc đa dạng và chất lượng. Hàng trăm mẫu đá, hạt, charm trang 
                 trí hot nhất hiện nay.',
@@ -30,7 +30,7 @@ class ServicesTableSeeder extends Seeder
                 'type_of_services_id' => 1
             ],
             [
-                'name' => 'Nối mi (Eyelashes extension)',
+                'name' => 'Nối mi',
                 'slug' => 'noi-mi',
                 'description' => 'tùy độ dày cộng thêm 10k - 50k',
                 'price' => 200000,
@@ -38,7 +38,7 @@ class ServicesTableSeeder extends Seeder
                 'type_of_services_id' => 2
             ],
             [
-                'name' => 'Uốn mi (Eyelashes curling)',
+                'name' => 'Uốn mi',
                 'slug' => 'uon-mi',
                 'description' => 'Uốn mi Collagen 3D',
                 'price' => 200000,
@@ -54,7 +54,7 @@ class ServicesTableSeeder extends Seeder
                 'type_of_services_id' => 2
             ],
             [
-                'name' => 'Dặm lại mi (Eyelashes retouch)',
+                'name' => 'Dặm lại mi ',
                 'slug' => 'dam-lai-mi',
                 'description' => '',
                 'price' => 150000,
@@ -70,7 +70,7 @@ class ServicesTableSeeder extends Seeder
                 'type_of_services_id' => 2
             ],
             [
-                'name' => 'Tháo mi (remove eyelashes)',
+                'name' => 'Tháo mi',
                 'slug' => 'thao-mi',
                 'description' => '',
                 'price' => 50000,
@@ -86,7 +86,7 @@ class ServicesTableSeeder extends Seeder
                 'type_of_services_id' => 3
             ],
             [
-                'name' => 'Điêu khắc lông mày (Microblading eyebrows)',
+                'name' => 'Điêu khắc lông mày ',
                 'slug' => 'dieu-khac-long-may',
                 'description' => '',
                 'price' => 2000000,
@@ -94,7 +94,7 @@ class ServicesTableSeeder extends Seeder
                 'type_of_services_id' => 3
             ],
             [
-                'name' => 'Phun lông mày (Eyebrow spray)',
+                'name' => 'Phun lông mày ',
                 'slug' => 'phun-long-may',
                 'description' => '',
                 'price' => 2150000,
