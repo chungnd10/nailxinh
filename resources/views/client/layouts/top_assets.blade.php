@@ -3,3 +3,6 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="client_assets/css/style.css">
 <link rel="stylesheet" href="client_assets/css/responsive.css">
+<link rel="stylesheet" href="client_assets/css/select2.css">
+<link rel="stylesheet" href="client_assets/css/bootstrap-datepicker.css">
+
