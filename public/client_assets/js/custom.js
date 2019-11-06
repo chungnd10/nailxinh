@@ -3,6 +3,19 @@
 
     jQuery(document).ready(function($) {
 
+
+
+         // Time frame
+
+         $(".time-frame").on('click', function(){
+            $('.time-frame').removeClass('active');
+            $(this).addClass('active');
+        });
+        $(".btn-adress-booking").on('click', function(){
+            $('.btn-adress-booking').removeClass('active');
+            $(this).addClass('active');
+        });
+
         // Header Slide
         $(".header-slider").owlCarousel({
             items: 1,
