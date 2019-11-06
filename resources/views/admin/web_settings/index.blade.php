@@ -56,6 +56,18 @@
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
+                            <div class="form-group">
+                                <label>Địa chỉ</label><span class="text-danger">*</span>
+                                <input type="text"
+                                       class="form-control"
+                                       value="{{ old('address', $item->address) }}"
+                                       name="address"
+                                       placeholder="VD: example@gmail.com"
+                                       id="address">
+                                @if($errors->first('address'))
+                                    <span class="text-danger">{{ $errors->first('address') }}</span>
+                                @endif
+                            </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-md-6">
@@ -91,6 +103,16 @@
                                           class="form-control">{{ $item->facebook }}</textarea>
                                 @if($errors->first('facebook'))
                                     <span class="text-danger">{{ $errors->first('facebook') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label>Giới thiệu ngắn</label>
+                                <textarea name="introduction"
+                                          cols="30"
+                                          rows="7"
+                                          class="form-control">{{ $item->introduction }}</textarea>
+                                @if($errors->first('introduction'))
+                                    <span class="text-danger">{{ $errors->first('introduction') }}</span>
                                 @endif
                             </div>
                         </div>

@@ -61,14 +61,17 @@ class ClientController extends Controller
 
     public function index()
     {
+        $display_status_id = config('contants.display_status_display');
+
         $info = $this->websetting_services->all();
         $type_services = $this->type_services->all();
         $branch = $this->branch_services->count();
         $user = $this->user_services->count();
         $service = $this->service_services->count();
         $orders = $this->order_services->count();
-        $feedbacks = $this->feedback_services->all();
+        $feedbacks = $this->feedback_services->allWithDisplayStatus($display_status_id);
         $slides = $this->slide_services->allDisplay();
+        $technicians = $this->user_services->getTechnician();
 
         return view('client.index', compact('info',
                 'type_services',
@@ -77,7 +80,8 @@ class ClientController extends Controller
                 'service',
                 'orders',
                 'feedbacks',
-                'slides'
+                'slides',
+                'technicians'
             )
         );
     }

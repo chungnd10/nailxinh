@@ -22,7 +22,7 @@
                                 <th width="60">Ảnh</th>
                                 <th>Số điện thoại</th>
                                 <th>Quyền</th>
-                                <th>Trạng thái</th>
+                                <th>Chi nhánh</th>
                                 <th width="50">
                                     <a href="{{ route('users.create') }}" class="btn btn-xs btn-success">
                                         <i class="fa fa-plus"></i> Thêm</a>
@@ -40,28 +40,16 @@
                                     </td>
                                     <td>{{ $item->phone_number }}</td>
                                     <td>{{ $item->role->name }}</td>
-                                    <td>
-                                        <label class="switch">
-                                            <input type="checkbox"
-                                                   name="operation_status_id"
-                                                   class="operation_status_id"
-                                                   data-id="{{ $item->id }}"
-                                                    {{ $item->operation_status_id == config('contants.operation_status_active') ? 'checked' : ''}}
-                                            >
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </td>
+                                    <td>{{ $item->branch->name.", ".$item->branch->address  }}</td>
                                     <td>
                                         <a href="{{ route('users.show', $item->id) }}" class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        @if($item->role_id != 1)
-                                            <a href="{{ route('users.destroy', $item->id) }}"
-                                               class="btn btn-xs btn-danger"
-                                               onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('users.destroy', $item->id) }}"
+                                           class="btn btn-xs btn-danger"
+                                           onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -81,62 +69,44 @@
     <script type="text/javascript">
 
         //data table
-            $('#users_table').DataTable({
-                "language": {
-                    "emptyTable": "Không có bản ghi nào",
-                    "zeroRecords": "Không tìm thấy bản ghi nào",
-                    "decimal": "",
-                    "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
-                    "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
-                    "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Hiển thị _MENU_ mục",
-                    "loadingRecords": "Loading...",
-                    "processing": "Processing...",
-                    "search": "Tìm kiếm:",
-                    "paginate": {
-                        "first": "Đầu",
-                        "last": "Cuối",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "aria": {
-                        "sortAscending": ": activate to sort column ascending",
-                        "sortDescending": ": activate to sort column descending"
-                    },
+        $('#users_table').DataTable({
+            "language": {
+                "emptyTable": "Không có bản ghi nào",
+                "zeroRecords": "Không tìm thấy bản ghi nào",
+                "decimal": "",
+                "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
+                "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
+                "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Hiển thị _MENU_ mục",
+                "loadingRecords": "Loading...",
+                "processing": "Processing...",
+                "search": "Tìm kiếm:",
+                "paginate": {
+                    "first": "Đầu",
+                    "last": "Cuối",
+                    "next": "Sau",
+                    "previous": "Trước"
                 },
-                'paging': true,
-                'lengthChange': true,
-                'searching': true,
-                'ordering': true,
-                'autoWidth': true,
-                "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [ 2,6]
-                    }
-                ]
-            });
-
-        // change status
-        $('.operation_status_id').change(function () {
-            var operation_status_id = $(this).prop('checked') === true ?
-                "{{ config('contants.operation_status_active') }}" :
-                "{{ config('contants.operation_status_inactive') }}";
-            var id = $(this).data('id');
-
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "{{ route('users.change-status') }}",
-                data: {'operation_status_id': operation_status_id, 'id': id},
-                success: function (data) {
-                    console.log(data.success)
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+            },
+            'paging': true,
+            'lengthChange': true,
+            'searching': true,
+            'ordering': true,
+            'autoWidth': true,
+            "responsive": true,
+            "columnDefs": [
+                {
+                    "orderable": false,
+                    "targets": [2, 6]
                 }
-            });
-        })
-        //end change status
+            ]
+        });
+
     </script>
 @endsection

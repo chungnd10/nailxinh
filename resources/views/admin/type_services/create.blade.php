@@ -19,7 +19,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<img class="profile-user-img img-responsive img-circle"
+							<img style="width: 130px;" class="profile-user-img img-responsive img-circle"
                              	src="upload/images/type_services/type_of_services_default.png"
                              	alt="User profile picture"
                              	id="proImg"
@@ -27,10 +27,6 @@
 						</div>
 						<div class="form-group">
 							<label>Ảnh loại dịch vụ</label><span class="text-danger">*</span>
-							<img style="width: 130px;" class="img-responsive"
-							src="{{old('image')}}"
-							id="proImg"
-							alt="">
 							<input type="file" class="form-control" name="image" id="image">
 							@if($errors->first('image'))
                                     <span class="text-danger">{{ $errors->first('image') }}</span>

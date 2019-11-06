@@ -13,7 +13,7 @@
                                     <div class="container inner-content text-left">
                                         <h3>Chào mừng bạn đến với Nail Xinh</h3>
                                         <h1>{{ $slide->title }}</h1>
-                                        <p>{{ $slide->description }}</p>
+                                        <p>{{ limit($slide->description, 100, '...') }}</p>
                                         <a href="#" class="boxed-btn">Xem thêm</a>
                                     </div>
                                 </div>
@@ -35,12 +35,12 @@
             <div class="col-xl-4 col-md-6 col-sm-6 single-contact">
                 <img src="client_assets/img/icons/icon01.png" alt="">
                 <h4>Mở cửa</h4>
-                <p>Thứ 2 - Thứ 7: {{ $info->open_time." - ".$info->close_time}}</p>
+                <p>{{ $info->open_time." - ".$info->close_time}}</p>
             </div>
             <div class="col-xl-4 col-md-6 col-sm-6 single-contact">
                 <img src="client_assets/img/icons/icon02.png" alt="">
                 <h4>Địa chỉ</h4>
-                <p>20 Quang Trung, Hoàn Kiếm, Hà Nội</p>
+                <p>{{ $info->address }}</p>
             </div>
             <div class="col-xl-4 offset-xl-0 col-md-6 col-sm-6 offset-sm-3 single-contact">
                 <img src="client_assets/img/icons/icon03.png" alt="">

@@ -24,7 +24,7 @@
                         </figcaption>
                     </figure>
                     <h4>{{ $type_service->name }}</h4>
-                    <p>{{ $type_service->description }}</p>
+                    <p>{{ limit( $type_service->description, 60, '...') }}</p>
                 </div>
             </div>
             @endforeach

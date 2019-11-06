@@ -4,13 +4,11 @@
             <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-4">
                 <aside class="widget widget_about">
                     <div class="footer-logo"><img src="client_assets/img/logo.png" alt=""></div>
-                    <p>NAILXINH là một trong số những
-                        tiệm nail cao cấp ở Hà Nội đầu tư
-                        hệ thống trang thiết bị</p>
+                    <p>{{ $info->introduction }}</p>
                     <ul class="widget-info">
-                        <li><i class="fas fa-map-marker"></i>20 Quang Trung, Hoàn Kiếm, HN</li>
-                        <li><i class="fas fa-phone"></i>0965 695 055</li>
-                        <li><i class="fas fa-envelope"></i>nailxinh@gmail.com</li>
+                        <li><i class="fas fa-map-marker"></i>{{ $info->address }}</li>
+                        <li><i class="fas fa-phone"></i>{{ $info->phone_number }}</li>
+                        <li><i class="fas fa-envelope"></i>{{ $info->email }}</li>
                     </ul>
                 </aside>
             </div>

@@ -15,10 +15,12 @@
                 <div class="portfolio-tabs">
                     <ul class="nav nav-tabs" role="tablist">
                         @foreach($type_services as $type_service)
-                            <li class="nav-item">
-                                <a class="nav-link {{ $loop->first ? 'active' : '' }}" data-toggle="tab"
-                                   href="#{{ $type_service->slug }}">{{ $type_service->name }}</a>
-                            </li>
+                            @if($type_service->getServices($type_service->id)->isNotEmpty())
+                                <li class="nav-item">
+                                    <a class="nav-link {{ $loop->first ? 'active' : '' }}" data-toggle="tab"
+                                       href="#{{ $type_service->slug }}">{{ $type_service->name }}</a>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
@@ -28,16 +30,19 @@
                              class="tab-pane {{ $loop->first ? 'fade-in active' : '' }}"
                         >
                             @foreach($type_service->getServices($type_service->id) as $service)
-                                <ul>
-                                    <li>
-                                        <img width="80" class="fix-border-radius" src="upload/images/service/{{ $service->image }}" alt="services">
-                                        <a href="#"><h4>{{ $service->name }}
-                                                <span class="price">{{ number_format($service->price) }} VNĐ</span>
-                                            </h4>
-                                        </a>
-                                        <p>{{ $service->description }}</p>
-                                    </li>
-                                </ul>
+                                @if($service)
+                                    <ul>
+                                        <li>
+                                            <img width="80" class="fix-border-radius"
+                                                 src="upload/images/service/{{ $service->image }}" alt="services">
+                                            <a href="#"><h4>{{ limit($service->name, 19, '...') }}
+                                                    <span class="price">{{ number_format($service->price) }} VNĐ</span>
+                                                </h4>
+                                            </a>
+                                            <p>{{ limit($service->description, 70, '...') }}</p>
+                                        </li>
+                                    </ul>
+                                @endif
                             @endforeach
                         </div>
                     @endforeach

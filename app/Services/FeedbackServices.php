@@ -19,4 +19,13 @@ class FeedbackServices
         $feedbacks = Feedback::all();
         return $feedbacks;
     }
+
+     // lấy tất cả feedback theo trạng thái hiển thị
+    public function allWithDisplayStatus($display_status_id)
+    {
+        $feedbacks = Feedback::where('display_status_id', $display_status_id)
+            ->orderby('id', 'desc')
+            ->get();
+        return $feedbacks;
+    }
 }

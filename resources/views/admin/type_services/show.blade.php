@@ -17,16 +17,17 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Ảnh đại diện</label><span class="text-danger">*</span>
-							<img style="width: 130px;" class="img-responsive"
+							<img style="width: 130px;" class="img-responsive img-circle profile-user-img"
 							src="upload/images/type_services/{{$type_of_service->image}}"
 							id="proImg"
 							alt="">
+						</div>
+						<div class="form-group">
 							<input type="file" class="form-control" name="image" id="image">
 							@if($errors->first('image'))
                                     <span class="text-danger">{{ $errors->first('image') }}</span>
                              @endif
 						</div>
-						
 					</div>
 					<!-- /.col -->
 					<div class="col-md-6">

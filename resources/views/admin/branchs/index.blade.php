@@ -102,7 +102,7 @@
                 "columnDefs": [
                     {
                         "orderable": false,
-                        "targets": [3, 5, 6]
+                        "targets": [3, 6]
                     }
                 ]
             });

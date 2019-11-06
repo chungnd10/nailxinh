@@ -18,6 +18,8 @@ class WebSetting extends Model
         'email',
         'open_time',
         'close_time',
-        'facebook'
+        'facebook',
+        'address',
+        'introduction'
     ];
 }

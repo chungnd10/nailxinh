@@ -15,7 +15,7 @@
                         bản</a></li>
                 <li class="" id="li_tab_2"><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đặt lại mật khẩu</a>
                 </li>
-                @if($user->role_id == config('role_technician'))
+                @if($user->role_id == config('contants.role_technician'))
                     <li class="" id="li_tab_3"><a href="#tab_3" data-toggle="tab" aria-expanded="false">Kỹ năng</a></li>
                 @endif
             </ul>
@@ -84,6 +84,8 @@
                                             @endif
                                             {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         @endforeach
+                                        <br>
+                                        <label id="gender_id-error" class="error" for="gender_id"></label>
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
@@ -130,7 +132,7 @@
                                                         @if($user->branch_id == $item->id)
                                                         selected
                                                         @endif
-                                                >{{ $item->name }}</option>
+                                                >{{ $item->name.", ".$item->address }}</option>
                                             @endforeach
                                         </select>
                                         @if($errors->first('branch_id'))
@@ -152,12 +154,9 @@
                                         @if($errors->first('role_id'))
                                             <span class="text-danger">{{ $errors->first('role_id') }}</span>
                                         @endif
-                                    </div>
-                                    <!-- /.form-group -->
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
@@ -228,7 +227,7 @@
                         </div>
                     </div>
                 </div>
-                @if($user->role_id == config('role_technician'))
+                @if($user->role_id == config('contants.role_technician'))
                     <div class="tab-pane" id="tab_3">
                         <form action="{{route('set.services',$user->id )}}"
                               method="post"
@@ -332,7 +331,9 @@
                     branch_id: "Mục này không được để trống",
                     role_id: "Mục này không được để trống",
                     gender_id: "Mục này không được để trống",
-                }
+                },
+                errorElement : 'label',
+                errorLabelContainer: '#gender_id-error'
             });
 
             //validate
@@ -370,7 +371,7 @@
                 $('#tab_3').removeClass('active');
             }
 
-            @if($user->role_id == config('role_technician'))
+            @if($user->role_id == config('contants.role_technician'))
             //active table
             if (window.location.hash === '#tab_3') {
                 $('#li_tab_1').removeClass('active');//remove active class

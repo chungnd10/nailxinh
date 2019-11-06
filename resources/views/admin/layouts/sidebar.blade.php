@@ -222,7 +222,7 @@
                         @can('edit-web-settings')
                             <li>
                                 <a href="{{ route('web-settings.index', 1) }}">
-                                    <i class="fa fa-angle-right"></i>Cấu hình website
+                                    <i class="fa fa-angle-right"></i>Thông tin
                                 </a>
                             </li>
                         @endcan

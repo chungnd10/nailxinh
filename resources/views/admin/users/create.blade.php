@@ -94,14 +94,23 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Mật khẩu</label><span class="text-danger">*</span>
-                                <input type="password" class="form-control" name="password" id="password">
+                                <input type="password"
+                                       class="form-control"
+                                       name="password"
+                                       id="password"
+                                       placeholder="Nhập mật khẩu"
+                                >
                                 @if($errors->first('password'))
                                     <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif
                             </div>
                             <div class="form-group">
                                 <label>Nhập lại mật khẩu</label><span class="text-danger">*</span>
-                                <input type="password" class="form-control" name="cf_password">
+                                <input type="password"
+                                       class="form-control"
+                                       name="cf_password"
+                                       placeholder="Nhập lại mật khẩu"
+                                >
                                 @if($errors->first('cf_password'))
                                     <span class="text-danger">{{ $errors->first('cf_password') }}</span>
                                 @endif
@@ -125,7 +134,7 @@
                                                 @if($item->id == old('branch_id'))
                                                 selected
                                                 @endif
-                                        >{{ $item->name }}</option>
+                                        >{{ $item->name.", ".$item->address }}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->first('branch_id'))
