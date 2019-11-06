@@ -425,25 +425,6 @@
             }
             ;
             // end remove active class
-
-            // cropper js
-            // $("#image").cropper({
-            //     modal: true,
-            //     checkCrossOrigin: true,
-            //     autoCrop: true,
-            //     autoCropArea: 1,
-            //     responsive: true,
-            //     background: false,
-            //     cropBoxResizable: false,
-            //     cropBoxMovable: false,
-            //     zoomOnTouch: true,
-            //     viewMode: 2,
-            //     dragMode: 'move',
-            //     aspectRatio: 300 / 300,
-            //     minContainerWidth: 320,
-            //     minContainerHeight: 180
-            // });
-            // end cropper js
         });
     </script>
 

@@ -236,19 +236,33 @@
                             @csrf
                             <div class="box-body">
                                 @foreach($type_services as $type_service)
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>
-                                                {{ $type_service->name }}
-                                            </label>
+                                    <div class="col-md-3">
+                                        <div class="list-group">
+                                            <div class="list-group-item active">
+                                               <input type="checkbox"
+                                                   name="type_services_id[]"
+                                                   value="{{ $type_service->id }}"
+                                                      @foreach($type_services_of_user as $item)
+                                                          @if($item->type_of_service_id == $type_service->id)
+                                                             checked
+                                                          @endif
+                                                      @endforeach
+                                               >
+                                                <label>{{ $type_service->name }}</label>
+                                            </div>
+                                            @if($type_service->showServices($type_service->id)->isEmpty())
+                                                <div class="list-group-item">
+                                                    <span class="text-danger">Không có dịch vụ nào</span>
+                                                </div>
+                                            @endif
                                             @foreach($type_service->showServices($type_service->id) as $service)
-                                                <div class="checkbox">
+                                                <div class="checkbox list-group-item">
                                                     <label>
                                                         <input type="checkbox"
                                                                @foreach($services_of_user as $services_of_users)
-                                                               @if($services_of_users->service_id == $service->id)
-                                                               checked
-                                                               @endif
+                                                                   @if($services_of_users->service_id == $service->id)
+                                                                   checked
+                                                                   @endif
                                                                @endforeach
                                                                name="services_id[]"
                                                                value="{{ $service->id }}"
@@ -258,6 +272,9 @@
                                                 </div>
                                             @endforeach
                                         </div>
+
+
+
                                     </div>
                                 @endforeach
                             </div>

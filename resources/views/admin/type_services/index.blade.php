@@ -34,7 +34,7 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>
-                                        <img width="50" src="upload/images/type_services/{{ $item->image }}" alt="image">
+                                        <img width="50" style="border-radius: 50%" src="upload/images/type_services/{{ $item->image }}" alt="image">
                                     </td>
                                     <td>{{ $item->slug }}</td>
                                     <td>{{ $item->countServicesWithType($item->id) }}</td>

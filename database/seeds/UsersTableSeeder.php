@@ -25,7 +25,8 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id,
                 'gender_id' => config('contants.gender_male'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_hide')
+                'display_status_id' => config('contants.display_status_hide'),
+                'avatar' => 'avatar-default.png'
             ],
     		[
 	            'full_name' => 'Ngô Thu Phương',
@@ -38,7 +39,8 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_hide')
+                'display_status_id' => config('contants.display_status_hide'),
+                'avatar' => 'avatar-default.png'
             ],
     		[
 	            'full_name' => 'Nguyễn Đức Chung',
@@ -51,7 +53,8 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id,
                 'gender_id' => config('contants.gender_male'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display')
+                'display_status_id' => config('contants.display_status_display'),
+                'avatar' => '1573049781beauticians03.jpg'
             ],
     		[
 	            'full_name' => 'Đào Uyên',
@@ -64,7 +67,8 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display')
+                'display_status_id' => config('contants.display_status_display'),
+                'avatar' => '1573049602beauticians01.jpg'
             ],
     		[
 	            'full_name' => 'Nguyễn Nhật Hảo',
@@ -77,7 +81,8 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display')
+                'display_status_id' => config('contants.display_status_display'),
+                'avatar' => '1573049757beauticians02.jpg'
             ],
             [
 	            'full_name' => 'Nguyễn Thị Bích Ngọc',
@@ -90,7 +95,8 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display')
+                'display_status_id' => config('contants.display_status_display'),
+                'avatar' => '1573049886beauticians04.jpg'
             ],
     		[
 	            'full_name' => 'Nguyễn Phương Anh',
@@ -103,7 +109,8 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_hide')
+                'display_status_id' => config('contants.display_status_hide'),
+                'avatar' => 'avatar-default.png'
             ],
     		[
 	            'full_name' => 'Bùi Thị Ánh',
@@ -116,7 +123,8 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_hide')
+                'display_status_id' => config('contants.display_status_hide'),
+                'avatar' => 'avatar-default.png'
             ]
 
     	];

@@ -70,6 +70,12 @@ class User extends Authenticatable
     public function services(){
         return $this->belongsToMany(Service::class,'user_services');
     }
+
+    public function type_services()
+    {
+        return $this->belongsToMany(TypeOfService::class, 'user_type_services');
+    }
+
     public function hasPermission(Permission $permission)
     {
         return !!optional(optional($this->role)->permissions)->contains($permission);
@@ -85,5 +91,15 @@ class User extends Authenticatable
     {
         $role_manager = config('contants.role_manager');
         return $this->role->id == $role_manager;
+    }
+
+    public function getNameTechnician($id)
+    {
+        $user_type_services = UserTypeServices::where('user_id', $id)->get();
+
+        $list_id = $user_type_services->pluck('type_of_service_id');
+        $name = TypeOfService::whereIn('id', $list_id)->get();
+
+        return $name;
     }
 }

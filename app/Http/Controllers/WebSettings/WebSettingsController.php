@@ -44,6 +44,6 @@ class WebSettingsController extends Controller
             'alert-type' => 'success'
         );
         // điều hướng
-        return redirect()->route('web-settings.index', $id)->with($notify);
+        return redirect()->route('admin.index')->with($notify);
     }
 }
