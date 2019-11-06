@@ -19,7 +19,13 @@
                                 <img src="upload/images/users/{{ $technician->avatar }}" alt="">
                                 <div class="beautician-footer-text">
                                     <h5>{{ get_last_words(1, $technician->full_name) }}</h5>
-                                    <p>Kỹ thuật viên: Lông mày</p>
+                                    <p>Kỹ thuật viên:
+                                        @foreach($technician->getNameTechnician($technician->id) as $item)
+                                            @if($item->name != "")
+                                                    {{ $item->name}}@if($loop->remaining){{ ", " }}@endif
+                                            @endif
+                                        @endforeach
+                                    </p>
                                 </div>
                             </div>
                         </div>

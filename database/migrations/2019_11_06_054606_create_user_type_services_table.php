@@ -22,8 +22,8 @@ class CreateUserTypeServicesTable extends Migration
                 ->on('users')
                 ->onDelete('CASCADE');
 
-            $table->unsignedInteger('type_services_id');
-            $table->foreign('type_services_id')
+            $table->unsignedInteger('type_of_service_id');
+            $table->foreign('type_of_service_id')
                 ->references('id')
                 ->on('type_of_services')
                 ->onDelete('CASCADE');

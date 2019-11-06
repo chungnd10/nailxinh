@@ -80,10 +80,13 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ route('profile', Auth::check() ? Auth::user()->id :'' ) }}" class="btn btn-default btn-flat">Thông tin</a>
+                                <a href="{{ route('profile', Auth::check() ? Auth::user()->id :'' ) }}"
+                                   class="btn btn-default btn-flat">Thông tin</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Đăng xuất</a>
+                                <a href="{{ route('logout') }}"
+                                   onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')"
+                                   class="btn btn-default btn-flat">Đăng xuất</a>
                             </div>
                         </li>
                     </ul>

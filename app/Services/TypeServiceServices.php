@@ -19,4 +19,6 @@ class TypeServiceServices
         $type = TypeOfService::all();
         return $type;
     }
+
+    //
 }

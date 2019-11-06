@@ -12,8 +12,8 @@ use App\Services\ServiceServices;
 use App\Services\TypeServiceServices;
 use App\Services\UserServices;
 use App\Services\UserServiceServices;
+use App\Services\UserTypeServiceServices;
 use App\User;
-use Intervention\Image\File;
 use Intervention\Image\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +31,7 @@ class UserController extends Controller
     protected $service_services;
     protected $type_services;
     protected $user_services_services;
+    protected $user_type_service_services;
 
     public function __construct(
         UserServices $user_services,
@@ -40,7 +41,8 @@ class UserController extends Controller
         OperationStatusServices $operation_status_services,
         ServiceServices $service_services,
         TypeServiceServices $type_services,
-        UserServiceServices $user_services_services
+        UserServiceServices $user_services_services,
+        UserTypeServiceServices $user_type_service_services
     ) {
         $this->user_services = $user_services;
         $this->branch_services = $branch_services;
@@ -50,6 +52,7 @@ class UserController extends Controller
         $this->service_services = $service_services;
         $this->type_services = $type_services;
         $this->user_services_services = $user_services_services;
+        $this->user_type_service_services = $user_type_service_services;
     }
 
     // danh sách user
@@ -114,6 +117,9 @@ class UserController extends Controller
         $operation_status = $this->operation_status_services->all();
         $type_services = $this->type_services->all();
         $services_of_user = $this->user_services_services->getServiceWithId($id);
+        $type_services_of_user = $this->user_type_service_services->getTypeServicesOfUser($id);
+
+//        dd($type_services_of_user);
         // điều hướng
         return view('admin.users.show', compact('user',
                 'branchs',
@@ -121,7 +127,8 @@ class UserController extends Controller
                 'roles',
                 'operation_status',
                 'type_services',
-                'services_of_user'
+                'services_of_user',
+                'type_services_of_user'
             )
         );
     }
@@ -209,7 +216,9 @@ class UserController extends Controller
         $user = User::find($id);
         // lấy dữ liệu
         $services_id = $request->input('services_id');
+        $type_services_id = $request->input('type_services_id');
         //lưu
+        $user->type_services()->sync($type_services_id);
         $user->services()->sync($services_id);
         //xuất thông báo
         $notify = array(
@@ -311,8 +320,9 @@ class UserController extends Controller
         //nếu có nhập ảnh ảnh
         if ($request->hasFile('avatar')) {
             // xoá ảnh cũ
-            if (file_exists('upload/images/users/' . $user->avatar) && $user->avatar != 'avatar-default.png') {
-                unlink('upload/images/users/' . $user->avatar);
+            if (file_exists('upload/images/users/'.$user->avatar)
+                && $user->avatar != 'avatar-default.png') {
+                unlink('upload/images/users/'.$user->avatar);
             }
             //lưu ảnh mới
             $file = $request->file('avatar');
