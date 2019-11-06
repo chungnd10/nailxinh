@@ -13,6 +13,9 @@
 <script src="client_assets/js/wow.min.js"></script>
 <script src="client_assets/js/jquery.meanmenu.min.js"></script>
 <script src="client_assets/js/jquery.magnific-popup.min.js"></script>
+<script src="client_assets/js/select2.js"></script>
+<script src="client_assets/js/bootstrap-datepicker.js"></script>
 
 <!-- Custom Script -->
 <script src="client_assets/js/custom.js"></script>
+<script src="client_assets/js/service-select.js"></script>
