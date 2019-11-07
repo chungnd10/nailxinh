@@ -33,20 +33,23 @@
                                 <span class="text-danger">(*) Bắt buộc nhập dữ liệu</span>
                            </div>
                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" value="" placeholder="Số điện thoại">
+                                <input type="text" class="form-control form-border" value="" placeholder="Số điện thoại">
                             </div>
                             <div class="form-group col-md-4">
-                                <select class="form-control">
+                                <select class="form-control form-border">
                                     <option value="">Mrs/Miss</option>
                                     <option value="">Mrs</option>
                                     <option value="">Miss</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-8">
-                                <input type="text" class="form-control" value="" placeholder="Họ và tên">
+                                <input type="text" class="form-control form-border" value="" placeholder="Họ và tên">
                             </div>
                             <div class="adress col-md-12">
-                                <div class="mb-3">Địa điểm</div>
+                                <div class="mb-3">
+                                    Địa điểm
+                                    <span class="text-danger">*</span>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <button type="button" class="btn btn-adress-booking">
@@ -93,7 +96,8 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mb-4">
-                                <select class="services form-control">
+                                <div class="mb-2">Dịch vụ <span class="text-danger">*</span></div>
+                                <select class="services form-control form-border">
                                     <optgroup label="NAIL">
                                         <option>Nail đính đá</option>
                                         <option>Nail poslish</option>
@@ -109,19 +113,20 @@
                                 </select>
                             </div>
                             <div class="col-md-12 mb-4">
-                                <select class="staff form-control">
-                                        <option>testimonial01</option>
-                                        <option>testimonial02</option>
-                                        <option>testimonial03</option>
-                                        <option>testimonial03</option>
+                                <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
+                                <select class="staff form-control form-border">
+                                    <option>testimonial01</option>
+                                    <option>testimonial02</option>
+                                    <option>testimonial03</option>
+                                    <option>testimonial03</option>
                                 </select>
                             </div>
                             <div class="col-md-12 mb-4">
-                                <div class="mb-2">Chọn ngày</div>
-                                <input class="datepicker form-control" placeholder="mm/dd/yyyy" data-date-format="mm/dd/yyyy">
+                                <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div>
+                                <input class="datepicker form-control form-border" placeholder="mm/dd/yyyy" data-date-format="mm/dd/yyyy">
                             </div>
                             <div class="col-md-12">
-                                <div class="mb-3">Chọn giờ</div>
+                                <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
                                 <div id="timeFrame" class="row">
                                     <div class="col-md-2 col-6">
                                         <button type="button" time-frame="09:00" class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
@@ -149,37 +154,37 @@
                                         </button>
                                     </div>
                                     <div class="col-md-2 col-6">
-                                        <button type="button" time-frame="14:00" class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                        <button type="button" time-frame="14:00" class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">14:00</div>
                                         </button>
                                     </div>
                                     <div class="col-md-2 col-6">
-                                        <button type="button" time-frame="15:00" class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                        <button type="button" time-frame="15:00" class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">15:00</div>
                                         </button>
                                     </div>
                                     <div class="col-md-2 col-6">
-                                        <button type="button" time-frame="16:00" class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                        <button type="button" time-frame="16:00" class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">16:00</div>
                                         </button>
                                     </div>
                                     <div class="col-md-2 col-6">
-                                        <button type="button" time-frame="17:00" class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                        <button type="button" time-frame="17:00" class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">17:00</div>
                                         </button>
                                     </div>
                                     <div class="col-md-2 col-6">
-                                        <button type="button" time-frame="18:00" class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                        <button type="button" time-frame="18:00" class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">18:00</div>
                                         </button>
                                     </div>
                                     <div class="col-md-2 col-6">
-                                        <button type="button" time-frame="19:00" class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                        <button type="button" time-frame="19:00" class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">19:00</div>
                                         </button>
                                     </div>
                                     <div class="col-md-2 col-6">
-                                        <button type="button" time-frame="20:00" class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                        <button type="button" time-frame="20:00" class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">20:00</div>
                                         </button>
                                     </div>
@@ -187,7 +192,7 @@
                             </div>
                             <div class="col-md-12 mb-4">
                                 <label for="ghichu">Ghi chú</label>
-                                <textarea class="form-control" id="ghichu" rows="3"></textarea>
+                                <textarea class="form-control form-border" id="ghichu" rows="3"></textarea>
                             </div>
                             <div class="col-md-6 offset-md-3 mt-5 mb-5">
                                 <button class="btn btn-block btn-pink">

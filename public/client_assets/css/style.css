@@ -3552,14 +3552,26 @@ canvas {
 
 /* booking page */
 
-button.btn.btn-adress-booking {
+button.btn.btn-adress-booking,
+.time-frame {
     width: 100%;
     padding: 10px;
-    font-size: 14px;
+    font-size: 14px;    
+    background: #fff;
+    border: 1px solid #ec5598;
+    cursor: pointer;
+}
+.text-pink{
+    color:#ec5598;
+}
+.form-border,
+.select2-container--default .select2-selection--single {
+    border: 1px solid #ec5598 !important;
 }
 span.select2.select2-container.select2-container--default {
     width: 100% !important;
 }
+
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 38px !important;
 }
@@ -3567,13 +3579,9 @@ span.select2.select2-container.select2-container--default {
 .select2-container .select2-selection--single {
     height: 38px !important;
 }
-.time-frame{
-    cursor: pointer;
-}
 .time-frame.active,
 .btn-adress-booking.active{
-    background-color: #ec5598;
-    color:#ffff;
+    background-color: #ec5598 !important;
     transition: ease-out .4s;
 }
 
@@ -3583,4 +3591,12 @@ span.select2.select2-container.select2-container--default {
     padding: 15px 0;
     font-size: 24px;
     cursor: pointer;
+}
+
+.disable-click {
+    border-color: #b9b9b9;
+}
+
+.disable-click .time {
+    color: #b9b9b9;
 }
