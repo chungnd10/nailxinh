@@ -96,7 +96,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>Đường dẫn trang facebook</label>
+                                <label>Đường dẫn trang facebook</label><span class="text-danger">*</span>
                                 <textarea name="facebook"
                                           cols="30"
                                           rows="7"
@@ -106,7 +106,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>Giới thiệu ngắn</label>
+                                <label>Giới thiệu ngắn</label><span class="text-danger">*</span>
                                 <textarea name="introduction"
                                           cols="30"
                                           rows="7"

@@ -20,5 +20,8 @@ class TypeServiceServices
         return $type;
     }
 
-    //
+    public function find($id){
+        $type = TypeOfService::find($id);
+        return $type;
+    }
 }

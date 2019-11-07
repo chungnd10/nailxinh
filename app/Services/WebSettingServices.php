@@ -8,7 +8,13 @@ class WebSettingServices
 {
     public function all()
     {
-        $info = WebSetting::find(1);
+        $info = WebSetting::find(config('contants.web_settings'));
+        return $info;
+    }
+
+    public function find($id)
+    {
+        $info = WebSetting::find($id);
         return $info;
     }
 }

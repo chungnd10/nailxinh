@@ -108,7 +108,7 @@ class UserController extends Controller
     public function show($id)
     {
         // tìm kiếm đối tượng
-        $user = User::find($id);
+        $user = $this->user_services->find($id);
 
         //lấy dữ liệu
         $branchs = $this->branch_services->all();
@@ -137,7 +137,7 @@ class UserController extends Controller
     public function update(AddUserRequest $request, $id)
     {
         // khai báo đối tượng
-        $user = User::find($id);
+        $user = $this->user_services->find($id);
         //lưu
         $user->fill($request->all())->save();
         // xuất thông báo
@@ -153,7 +153,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         //tìm kiếm đối tượng
-        $user = User::find($id);
+        $user = $this->user_services->find($id);
         // xoá ảnh cũ
         if (file_exists('upload/images/users/' . $user->avatar) && $user->avatar != 'avatar-default.png') {
             unlink('upload/images/users/' . $user->avatar);
@@ -173,7 +173,7 @@ class UserController extends Controller
     public function setPassword(Request $request, $id)
     {
         // tìm kiếm đối tượng
-        $user = User::find($id);
+        $user = $this->user_services->find($id);
 
         //validate
         $validator = Validator::make($request->all(),
@@ -213,7 +213,7 @@ class UserController extends Controller
     public function setServices(Request $request, $id)
     {
         //tìm kiếm đối tượng
-        $user = User::find($id);
+        $user = $this->user_services->find($id);
         // lấy dữ liệu
         $services_id = $request->input('services_id');
         $type_services_id = $request->input('type_services_id');
@@ -234,7 +234,7 @@ class UserController extends Controller
     public function changePassword(Request $request, $id)
     {
         // tìm kiếm đối tượng
-        $user = User::find($id);
+        $user = $this->user_services->find($id);
         //validate
         $validator = Validator::make($request->all(),
             [
@@ -279,7 +279,7 @@ class UserController extends Controller
     public function profile($id)
     {
         //tìm kiếm đối tượng
-        $user = User::find($id);
+        $user = $this->user_services->find($id);
         // trả về trang 404 nếu không tìm thấy
         if ($user) {
             if (Auth::user()->id != $user->id) {
@@ -306,7 +306,7 @@ class UserController extends Controller
     public function updateImageProfile(Request $request, $id)
     {
         //tìm đối tượng
-        $user = User::find($id);
+        $user = $this->user_services->find($id);
         //validate
         $request->validate(
             [
@@ -343,7 +343,7 @@ class UserController extends Controller
     public function updateProfile(UpdateProfileRequest $request, $id)
     {
         //tìm đối tượng
-        $user = User::find($id);
+        $user = $this->user_services->find($id);
         //lưu
         $user->fill($request->all())->save();
         // xuất thông báo
@@ -358,7 +358,7 @@ class UserController extends Controller
     // thay đổi trạng thái
     public function changeStatus(Request $request)
     {
-        $user = User::find($request->id);
+        $user = $this->user_services->find($request->id);
         $user->operation_status_id = $request->operation_status_id;
         $user->save();
 
@@ -367,7 +367,7 @@ class UserController extends Controller
 
     public function changeImageProfile(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = $this->user_services->find($id);
 
         $data = json_decode($request->get('image'), true);
         $file = $request->file('image');

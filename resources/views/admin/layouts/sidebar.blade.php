@@ -142,12 +142,18 @@
                     </a>
                     <ul class="treeview-menu">
                         @can('view-accumulate-points')
-                            <li><a href="{{ route('accumulate-points.index') }}"><i class="fa fa-angle-right"></i>Tích
-                                    điểm</a></li>
+                            <li>
+                                <a href="{{ route('accumulate-points.index') }}">
+                                    <i class="fa fa-angle-right"></i>Tích điểm
+                                </a>
+                            </li>
                         @endcan
                         @can('view-discount')
-                            <li><a href="{{ route('membership_type.index') }}"><i class="fa fa-angle-right"></i>Chiết
-                                    khấu</a></li>
+                            <li>
+                                <a href="{{ route('membership_type.index') }}">
+                                    <i class="fa fa-angle-right"></i>Loại thành viên
+                                </a>
+                            </li>
                         @endcan
                     </ul>
                 </li>
@@ -204,7 +210,17 @@
                     </a>
                     <ul class="treeview-menu">
                         @can('view-feedback')
-                            <li><a href="{{ route('feedbacks.index') }}"><i class="fa fa-angle-right"></i>Danh sách</a>
+                            <li>
+                                <a href="{{ route('feedbacks.index') }}">
+                                    <i class="fa fa-angle-right"></i>Danh sách
+                                </a>
+                            </li>
+                        @endcan
+                        @can('add-feedback')
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-angle-right"></i>Thêm mới
+                                </a>
                             </li>
                         @endcan
                     </ul>

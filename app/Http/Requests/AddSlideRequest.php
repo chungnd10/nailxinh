@@ -29,6 +29,7 @@ class AddSlideRequest extends FormRequest
             'url' => 'nullable|url',
             'title' => 'nullable|max:120',
             'description' => 'nullable|max:200',
+            'location_display ' => 'required'
         ];
 
         //trường hợp thêm slide
@@ -49,6 +50,7 @@ class AddSlideRequest extends FormRequest
             'display_status_id' => 'Mục này không được để trống',
             'title.max' => 'Không được vượt quá 120 ký tự',
             'description.max' => 'Không được vượt quá 200 ký tự',
+            'location_display.required' => 'Mục này không được để trống',
         ];
     }
 }

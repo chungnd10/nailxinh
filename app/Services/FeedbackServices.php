@@ -28,4 +28,10 @@ class FeedbackServices
             ->get();
         return $feedbacks;
     }
+
+    public function find($id)
+    {
+        $feedback = Feedback::find($id);
+        return $feedback;
+    }
 }

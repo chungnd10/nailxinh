@@ -4,15 +4,25 @@ namespace App\Http\Controllers\TypeServices;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddTypeServiceRequest;
+use App\Services\TypeServiceServices;
 use App\TypeOfService;
 use Illuminate\Support\Str;
 
 class TypeServicesController extends Controller
 {
+    protected $type_services;
+
+    public function __construct(
+        TypeServiceServices $type_services
+    )
+    {
+        $this->type_services = $type_services;
+    }
+
     public function index()
     {
     	//lấy dữ liệu
-        $type_services = TypeOfService::all();
+        $type_services = $this->type_services->all();
         // điều hướng
         return view('admin.type_services.index', compact('type_services'));
     }
@@ -52,7 +62,7 @@ class TypeServicesController extends Controller
     public function show($id)
     {
         // tìm kiếm đối tượng
-        $type_of_service = TypeOfService::find($id);
+        $type_of_service = $this->type_services->find($id);
 
         // điều hướng
         return view('admin.type_services.show', compact('type_of_service'));
@@ -61,7 +71,7 @@ class TypeServicesController extends Controller
     public function update(AddTypeServiceRequest $request, $id)
     {
         // khai báo đối tượng
-       $type_of_service = TypeOfService::find($id);
+       $type_of_service = $this->type_services->find($id);
 
         //nếu có nhập ảnh ảnh
         if ($request->hasFile('image')) {
@@ -97,7 +107,7 @@ class TypeServicesController extends Controller
     public function destroy($id)
     {
         //tìm kiếm đối tượng
-        $type_of_service = TypeOfService::find($id);
+        $type_of_service = $this->type_services->find($id);
 
         // xoá ảnh cũ
         if (file_exists('upload/images/type_services/'.$type_of_service->image)

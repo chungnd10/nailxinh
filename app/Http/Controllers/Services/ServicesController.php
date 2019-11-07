@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Services;
 
 use App\Services\ServiceServices;
+use App\Services\TypeServiceServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service;
@@ -13,10 +14,15 @@ use Illuminate\Support\Str;
 class ServicesController extends Controller
 {
     protected $service_services;
+    protected $type_services;
 
-    public function __construct(ServiceServices $service_services)
+    public function __construct(
+        ServiceServices $service_services,
+        TypeServiceServices $type_services
+    )
     {
         $this->service_services = $service_services;
+        $this->type_services = $type_services;
     }
 
     public function index()
@@ -27,7 +33,7 @@ class ServicesController extends Controller
 
     public function create()
     {
-        $type_of_services = TypeOfService::all();
+        $type_of_services = $this->type_services->all();
         return view('admin.services.create', compact('type_of_services'));
     }
 
@@ -60,15 +66,15 @@ class ServicesController extends Controller
 
     public function show($id)
     {
-        $service = Service::find($id);
-        $type_of_services = TypeOfService::all();
+        $service = $this->service_services->find($id);
+        $type_of_services = $this->type_services->all();
         return view('admin.services.show', compact('service', 'type_of_services'));
     }
 
     public function update(AddServiceRequest $request, $id)
     {
         // khai báo đối tượng
-        $service = Service::find($id);
+        $service = $this->service_services->find($id);
 
         //nếu có nhập ảnh ảnh
         if ($request->hasFile('image')) {
@@ -103,7 +109,7 @@ class ServicesController extends Controller
     public function destroy($id)
     {
         //tìm kiếm đối tượng
-        $service = Service::find($id);
+        $service = $this->service_services->find($id);
         // xoá ảnh cũ
         if (file_exists('upload/images/service/'.$service->image)
             && $service->image != 'services-default.png') {

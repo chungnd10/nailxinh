@@ -6,6 +6,12 @@
             Danh sách
             <small>loại dịch vụ</small>
         </h1>
+        <ol class="breadcrumb">
+            <a href="{{ route('type-services.create') }}"
+               class="btn btn-sm btn-success">
+               <i class="fa fa-plus"></i> Thêm
+            </a>
+        </ol>
     </section>
     {{--Main content--}}
     <section class="content">
@@ -17,21 +23,20 @@
                         <table class="table table-bordered table-hover" id="type_services_table">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>STT</th>
                                 <th>Tên loại dịch vụ</th>
                                 <th>Ảnh</th>
                                 <th>Đường dẫn</th>
                                 <th>Số dịch vụ</th>
-                                <th width="50">
-                                    <a href="{{ route('type-services.create') }}" class="btn btn-xs btn-success">
-                                        <i class="fa fa-plus"></i> Thêm</a>
+                                <th width="70">
+                                    Hành động
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($type_services as $item)
+                            @foreach($type_services as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>
                                         <img width="50" style="border-radius: 50%" src="upload/images/type_services/{{ $item->image }}" alt="image">

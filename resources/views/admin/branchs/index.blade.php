@@ -6,6 +6,12 @@
             Danh sách
             <small>chi nhánh</small>
         </h1>
+        <ol class="breadcrumb">
+            <a href="{{ route('branch.create') }}"
+               class="btn btn-sm btn-success">
+                <i class="fa fa-plus"></i> Thêm
+            </a>
+        </ol>
     </section>
     {{--Main content--}}
     <section class="content">
@@ -17,22 +23,21 @@
                         <table class="table table-bordered table-hover" id="branchs_table">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>STT</th>
                                 <th>Tên chi nhánh</th>
                                 <th>Số điện thoại</th>
                                 <th>Địa chỉ</th>
                                 <th>Nhân sự</th>
                                 <th>Thành phố</th>
-                                <th width="50">
-                                    <a href="{{ route('branch.create') }}" class="btn btn-xs btn-success">
-                                        <i class="fa fa-plus"></i> Thêm</a>
+                                <th width="70">
+                                    Hành động
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($branchs as $item)
+                            @foreach($branchs as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->phone_number }}</td>
                                     <td>{{ $item->address}}</td>
@@ -42,13 +47,11 @@
                                         <a href="{{ route('branch.show', $item->id) }}" class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        @if($item->role_id != 1)
-                                            <a href="{{ route('branch.destroy', $item->id) }}"
-                                               class="btn btn-xs btn-danger"
-                                               onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('branch.destroy', $item->id) }}"
+                                           class="btn btn-xs btn-danger"
+                                           onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

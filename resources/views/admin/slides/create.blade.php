@@ -32,14 +32,25 @@
                                 @endif
                             </div>
                             <div class="form-group">
+                                <label>URL</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="url"
+                                       placeholder="Nhập url"
+                                >
+                                @if($errors->first('url'))
+                                    <span class="text-danger">{{ $errors->first('url') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
                                 <label>Trạng thái hiển thị</label><span class="text-danger">*</span><br>
                                 @foreach($display_status as $item)
                                     <input type="radio"
                                            name="display_status_id"
                                            value="{{ $item->id }}"
                                            @if($item->id == old('display_status_id'))
-                                           checked
-                                            @endif
+                                                checked
+                                           @endif
                                     >&nbsp;&nbsp;
                                     {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 @endforeach
@@ -47,7 +58,6 @@
                                     <span class="text-danger">{{ $errors->first('display_status_id') }}</span>
                                 @endif
                             </div>
-
                         </div>
                         <!-- /.col -->
                         <div class="col-md-6">
@@ -63,6 +73,24 @@
                                 @endif
                             </div>
                             <div class="form-group">
+                                <label for="">Vị trí hiển thị tiêu đề</label><span class="text-danger">*</span><br>
+                                <input type="radio"
+                                       name="location_display"
+                                           @if( old('location_display') == config('contants.location_display_left') )
+                                           checked
+                                           @endif
+                                       value="{{ config('contants.location_display_left') }}"> Bên trái <br>
+                                <input type="radio"
+                                       name="location_display"
+                                           @if( old('location_display') == config('contants.location_display_right') )
+                                           checked
+                                           @endif
+                                       value="{{ config('contants.location_display_right') }}"> Bên phải <br>
+                                @if($errors->first('location_display'))
+                                    <span class="text-danger">{{ $errors->first('location_display') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
                                 <label>Mô tả</label>
                                 <textarea name="description"
                                           cols="30"
@@ -74,17 +102,7 @@
                                     <span class="text-danger">{{ $errors->first('description') }}</span>
                                 @endif
                             </div>
-                            <div class="form-group">
-                                <label>URL</label>
-                                <input type="text"
-                                       class="form-control"
-                                       name="url"
-                                       placeholder="Nhập url"
-                                >
-                                @if($errors->first('url'))
-                                    <span class="text-danger">{{ $errors->first('url') }}</span>
-                                @endif
-                            </div>
+
                         </div>
                         <!-- /.col -->
                     </div>
@@ -137,6 +155,9 @@
                     },
                     description: {
                         maxlength: 200
+                    },
+                    location_display: {
+                        required: true,
                     }
                 },
 
@@ -157,6 +178,9 @@
                     },
                     description: {
                         maxlength: 'Không được vượt quá 200 ký tự',
+                    },
+                    location_display: {
+                        required: "Mục này không được để trống",
                     }
                 }
             });

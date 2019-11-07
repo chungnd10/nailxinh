@@ -17,7 +17,8 @@ class Slides extends Model
       'title',
       'description',
       'url',
-      'display_status_id'
+      'display_status_id',
+      'location_display'
     ];
 
     public function displayStatus()

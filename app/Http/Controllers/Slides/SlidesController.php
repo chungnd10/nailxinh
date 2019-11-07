@@ -4,21 +4,35 @@ namespace App\Http\Controllers\Slides;
 
 use App\DisplayStatus;
 use App\Http\Requests\AddSlideRequest;
+use App\Services\DisplayStatusServices;
+use App\Services\SlideServices;
 use App\Slides;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SlidesController extends Controller
 {
+    protected $slide_services;
+    protected $display_status_services;
+
+    public function  __construct(
+        SlideServices $slide_services,
+        DisplayStatusServices $display_status_services
+    )
+    {
+        $this->slide_services = $slide_services;
+        $this->display_status_services = $display_status_services;
+    }
+
     public function index()
     {
-        $slides = Slides::paginate(10);
+        $slides = $this->slide_services->all();
         return view('admin.slides.index', compact('slides'));
     }
 
     public function create()
     {
-        $display_status = DisplayStatus::all();
+        $display_status = $this->display_status_services->all();
         return view('admin.slides.create', compact('display_status'));
     }
 
@@ -28,10 +42,7 @@ class SlidesController extends Controller
 
         //nếu có nhập ảnh ảnh
         if ($request->hasFile('images')) {
-            // xoá ảnh cũ
-            if (file_exists('upload/images/slides/' . $slide->images) && $slide->images != 'slide-default.png') {
-                unlink('upload/images/slides/' . $slide->images);
-            }
+
             //lưu ảnh mới
             $file = $request->file('images');
             $name = time() . $file->getClientOriginalName();
@@ -51,15 +62,15 @@ class SlidesController extends Controller
     //hiển thị để sửa
     public function show($id)
     {
-        $slide = Slides::find($id);
-        $display_status = DisplayStatus::all();
+        $slide = $this->slide_services->find($id);
+        $display_status = $this->display_status_services->all();
         return view('admin.slides.show', compact('display_status', 'slide'));
     }
 
     //update
     public function update(AddSlideRequest $request, $id)
     {
-        $slide = Slides::find($id);
+        $slide = $this->slide_services->find($id);
 
         //nếu có nhập ảnh
         if ($request->hasFile('images')) {
@@ -87,7 +98,7 @@ class SlidesController extends Controller
     //xóa slide
     public function destroy($id)
     {
-        $slide = Slides::find($id);
+        $slide = $this->slide_services->find($id);
         $slide->delete();
 
         $notify = array(
@@ -100,7 +111,7 @@ class SlidesController extends Controller
     //changeStatus
     public function changeStatus(Request $request)
     {
-        $slide = Slides::find($request->id);
+        $slide = $this->slide_services->find($request->id);
         $slide->display_status_id = $request->display_status_id;
         $slide->save();
 
