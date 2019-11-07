@@ -20,4 +20,10 @@ class ServiceServices
         return $service;
     }
 
+    public function find($id)
+    {
+        $service = Service::find($id);
+        return $service;
+    }
+
 }

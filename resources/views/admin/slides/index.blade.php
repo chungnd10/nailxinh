@@ -6,6 +6,11 @@
             Danh sách
             <small>slides</small>
         </h1>
+        <ol class="breadcrumb">
+            <a href="{{ route('slides.create') }}" class="btn btn-sm btn-success">
+                <i class="fa fa-plus"></i> Thêm
+            </a>
+        </ol>
     </section>
     {{--Main content--}}
     <section class="content">
@@ -17,21 +22,20 @@
                         <table class="table table-bordered table-hover" id="slides_table">
                             <thead>
                             <tr>
-                                <th width="40" >ID</th>
+                                <th width="40" >STT</th>
                                 <th width="100">Ảnh</th>
                                 <th>Tiêu đề</th>
                                 <th width=100>Trạng thái</th>
                                 <th width="120">URL</th>
-                                <th width="50">
-                                    <a href="{{ route('slides.create') }}" class="btn btn-xs btn-success">
-                                        <i class="fa fa-plus"></i> Thêm</a>
+                                <th width="70">
+                                    Hành động
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($slides as $item)
+                            @foreach($slides as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>
                                         <img width="80"
                                              src="upload/images/slides/{{ $item->images }}">
@@ -64,7 +68,6 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $slides->links() !!}
                     </div>
                     <!-- /.box-body -->
                 </div>

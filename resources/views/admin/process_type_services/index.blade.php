@@ -6,6 +6,12 @@
             Danh sách
             <small>quy trình thực hiện</small>
         </h1>
+        <ol class="breadcrumb">
+            <a href="{{ route('process-type-services.create') }}"
+               class="btn btn-sm btn-success">
+                <i class="fa fa-plus"></i> Thêm
+            </a>
+        </ol>
     </section>
     {{--Main content--}}
     <section class="content">
@@ -17,22 +23,20 @@
                         <table class="table table-bordered table-hover" id="datatable">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>STT</th>
                                 <th width="160">Tên quy trình</th>
                                 <th width="100">Loại dịch vụ</th>
                                 <th>Bước</th>
                                 <th>Mô tả</th>
-                                <th width="50">
-                                    <a href="{{ route('process-type-services.create') }}"
-                                       class="btn btn-xs btn-success">
-                                        <i class="fa fa-plus"></i> Thêm</a>
+                                <th width="70">
+                                    Hành động
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($processTypeServices as $item)
+                            @foreach($processTypeServices as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->typeService->name }}</td>
                                     <td>{{ $item->step }}</td>
@@ -103,8 +107,6 @@
                 'searching': true,
                 'ordering': true,
                 'autoWidth': true,
-                "scrollX": true,
-                "scrollCollapse": true,
                 "responsive": true,
                 "columnDefs": [
                     {orderable: false, "targets": [4, 5]}

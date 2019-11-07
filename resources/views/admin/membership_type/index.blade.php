@@ -6,6 +6,12 @@
             Danh sách
             <small>loại thành viên</small>
         </h1>
+        <ol class="breadcrumb">
+            <a href="{{ route('membership_type.create') }}"
+               class="btn btn-sm btn-success">
+                <i class="fa fa-plus"></i> Thêm
+            </a>
+        </ol>
     </section>
     {{--Main content--}}
     <section class="content">
@@ -17,25 +23,31 @@
                         <table class="table table-bordered table-hover" id="membership_type_table">
                             <thead>
                             <tr>
-                                <th width="40">ID</th>
+                                <th width="40">STT</th>
                                 <th>Tên</th>
-                                <th>Mô tả</th>
                                 <th width="100">Mức tiền(VND)</th>
                                 <th width="120">Mức chiết khấu(%)</th>
-                                <th width="80">
-                                    <a href="{{ route('membership_type.create') }}" class="btn btn-xs btn-success">
-                                        <i class="fa fa-plus"></i> Thêm</a>
+
+                                <th>Mô tả</th>
+                                <th width="70">
+                                    Hành động
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($membership_type as $item)
+                            @foreach($membership_type as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ $item->description }}</td>
                                     <td>{{ number_format($item->money_level,2,",",".") }}</td>
                                     <td>{{ $item->discount_level }}</td>
+                                    <td>
+                                        @if($item->description != "")
+                                            <span class="more">
+                                                {{ $item->description }}
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('membership_type.show', $item->id) }}"
                                            class="btn btn-xs btn-warning">
@@ -100,11 +112,14 @@
                 "columnDefs": [
                     {
                         "orderable": false,
-                        "targets": [2,5]
+                        "targets": [2, 5]
                     }
                 ],
 
             });
+
+            //more text
+            moreText(100);
         });
     </script>
 @endsection

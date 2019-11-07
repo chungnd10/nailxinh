@@ -25,7 +25,7 @@ class RestrictedListsController extends Controller
 
     public function destroy($id)
     {
-        $list = RestrictedList::find($id);
+        $list = $this->restricted_lists->find($id);
         $list->delete();
 
         $notify = array(

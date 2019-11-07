@@ -20,4 +20,10 @@ class BranchServices
         return $branch;
     }
 
+    public function find($id)
+    {
+        $branch = Branch::find($id);
+        return $branch;
+    }
+
 }

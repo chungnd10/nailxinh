@@ -30,18 +30,6 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>Mô tả</label>
-                                <textarea name="description"
-                                          cols="30"
-                                          rows="5"
-                                          class="form-control"
-                                          placeholder="Nhập mô tả"
-                                >{{ old('description') }}</textarea>
-                                @if($errors->first('description'))
-                                    <span class="text-danger">{{ $errors->first('description') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
                                 <label>Mức tiền(VND)</label><span class="text-danger">*</span>
                                 <input type="text"
                                        class="form-control"
@@ -63,6 +51,18 @@
                                 >
                                 @if($errors->first('discount_level'))
                                     <span class="text-danger">{{ $errors->first('discount_level') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả</label>
+                                <textarea name="description"
+                                          cols="30"
+                                          rows="5"
+                                          class="form-control"
+                                          placeholder="Nhập mô tả"
+                                >{{ old('description') }}</textarea>
+                                @if($errors->first('description'))
+                                    <span class="text-danger">{{ $errors->first('description') }}</span>
                                 @endif
                             </div>
                         </div>

@@ -13,4 +13,16 @@ class SlideServices
         $slides = Slides::where('display_status_id', $display_status_id)->orderby('id', 'desc')->get();
         return $slides;
     }
+
+    public function all()
+    {
+        $slide = Slides::all();
+        return $slide;
+    }
+
+    public function find($id)
+    {
+        $slide = Slides::find($id);
+        return $slide;
+    }
 }

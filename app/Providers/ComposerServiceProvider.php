@@ -25,7 +25,14 @@ class ComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(
-            '*', 'App\Http\ViewComposers\CommonComposer'
+            [
+                'client.index',
+                'client.booking',
+                'client.contact',
+                'client.gallery',
+                'client.introduction',
+                'client.services'
+            ], 'App\Http\ViewComposers\CommonComposer'
         );
     }
 }

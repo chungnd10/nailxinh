@@ -6,9 +6,9 @@ use App\WebSetting;
 
 class WebSettingServices
 {
-    public function all()
+    public function find($id)
     {
-        $info = WebSetting::find(1);
+        $info = WebSetting::find($id);
         return $info;
     }
 }

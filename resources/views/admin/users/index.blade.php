@@ -6,6 +6,11 @@
             Danh sách
             <small>người dùng</small>
         </h1>
+        <ol class="breadcrumb">
+            <a href="{{ route('users.create') }}"
+               class="btn btn-sm btn-success">
+                <i class="fa fa-plus"></i> Thêm</a>
+        </ol>
     </section>
     {{--Main content--}}
     <section class="content">
@@ -17,22 +22,21 @@
                         <table class="table table-bordered table-hover" id="users_table">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>STT</th>
                                 <th>Họ tên</th>
                                 <th width="60">Ảnh</th>
                                 <th>Số điện thoại</th>
                                 <th>Quyền</th>
                                 <th>Chi nhánh</th>
-                                <th width="50">
-                                    <a href="{{ route('users.create') }}" class="btn btn-xs btn-success">
-                                        <i class="fa fa-plus"></i> Thêm</a>
+                                <th width="70">
+                                    Hành động
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $item)
+                            @foreach($users as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>{{ $item->full_name }}</td>
                                     <td>
                                         <img width="50" style="border-radius: 50%"

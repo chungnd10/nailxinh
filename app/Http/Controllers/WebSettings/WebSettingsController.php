@@ -3,17 +3,25 @@
 namespace App\Http\Controllers\WebSettings;
 
 use App\Http\Requests\WebSettingRequest;
+use App\Services\WebSettingServices;
 use App\WebSetting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class WebSettingsController extends Controller
 {
+    protected $web_setting_services;
+
+    public function __construct( WebSettingServices $web_setting_services)
+    {
+        $this->web_setting_services = $web_setting_services;
+    }
+
     // hiển thị thông tin
     public function index($id)
     {
         //tìm đối tượng
-        $item = WebSetting::find($id);
+        $item = $this->web_setting_services->find($id);
         // điều hướng
         return view('admin.web_settings.index', compact('item'));
     }
@@ -22,7 +30,7 @@ class WebSettingsController extends Controller
     public function update(WebSettingRequest $request, $id)
     {
         // tìm đối tượng
-        $item = WebSetting::find($id);
+        $item = $this->web_setting_services->find($id);
         //nếu có nhập ảnh ảnh
         if ($request->hasFile('avatar')) {
             // xoá ảnh cũ

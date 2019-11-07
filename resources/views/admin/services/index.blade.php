@@ -6,6 +6,12 @@
             Danh sách
             <small>loại dịch vụ</small>
         </h1>
+        <ol class="breadcrumb">
+            <a href="{{ route('services.create') }}"
+               class="btn btn-sm btn-success">
+                <i class="fa fa-plus"></i> Thêm
+            </a>
+        </ol>
     </section>
     {{--Main content--}}
     <section class="content">
@@ -17,23 +23,22 @@
                         <table class="table table-bordered table-hover" id="services_table">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Tên dịch vụ</th>
+                                <th>STT</th>
+                                <th width="100">Tên dịch vụ</th>
                                 <th>Ảnh</th>
                                 <th>Loại dịch vụ</th>
                                 <th>Giá(VND)</th>
                                 <th>Thời gian</th>
                                 <th>Mô tả</th>
-                                <th width="50">
-                                    <a href="{{ route('services.create') }}" class="btn btn-xs btn-success">
-                                        <i class="fa fa-plus"></i> Thêm</a>
+                                <th width="70">
+                                    Hành động
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($services as $item)
+                            @foreach($services as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>
                                         <img width="50" src="upload/images/service/{{ $item->image }}" alt="image">
@@ -41,7 +46,13 @@
                                     <td width="100">{{ $item->typeService->name }}</td>
                                    	<td>{{ number_format($item->price,2,",",".")}}</td>
                                    	<td width="80">{{ $item->completion_time}}</td>
-                                    <td>{{$item->description}}</td>
+                                    <td>
+                                        @if($item->description != "")
+                                            <span class="more">
+                                                {{$item->description}}
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ route('services.show', $item->id) }}" class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
@@ -110,6 +121,10 @@
                     }
                 ]
             });
+
+            // hide content
+            moreText(80);
+            //end hide content
         });
     </script>
 @endsection

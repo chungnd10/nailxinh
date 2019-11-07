@@ -4,7 +4,6 @@ namespace App\Http\Controllers\AccumulatePoints;
 
 use App\AccumulatePoints;
 use App\Services\AccumulatePointServices;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AccumulatePointsController extends Controller
@@ -24,7 +23,7 @@ class AccumulatePointsController extends Controller
 
     public function destroy($id)
     {
-        $point = AccumulatePoints::find($id);
+        $point = $this->accumulate_points_services->find($id);
         $point->delete();
 
         $notify = array(
