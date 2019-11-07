@@ -17,7 +17,7 @@
                         <table class="table table-bordered table-hover" id="restricted_lists_table">
                             <thead>
                             <tr>
-                                <th width="40" >ID</th>
+                                <th width="40" >STT</th>
                                 <th width="100">Số điện thoại</th>
                                 <th>Lý do</th>
                                 <th>Ngày thêm</th>
@@ -25,9 +25,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($lists as $item)
+                            @foreach($lists as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>{{ $item->phone_number }}</td>
                                     <td>{{ $item->note }}</td>
                                     <td>{{ $item->created_at->format('H:i d/m/Y') }}</td>

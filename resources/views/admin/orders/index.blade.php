@@ -17,7 +17,7 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>STT</th>
                                 <th>Họ tên</th>
                                 <th width="60">Ảnh</th>
                                 <th>Số điện thoại</th>

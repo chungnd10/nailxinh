@@ -18,4 +18,6 @@ return [
     'order_status_confimred' => 2,
     'order_status_handling' => 3,
     'order_status_finish' => 4,
+    'location_display_left' => 1,
+    'location_display_right' => 2
 ];

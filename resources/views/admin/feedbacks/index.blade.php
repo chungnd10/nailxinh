@@ -6,6 +6,12 @@
             Danh sách
             <small>phản hồi</small>
         </h1>
+        <ol class="breadcrumb">
+            <a href="javascript:;"
+               class="btn btn-sm btn-success">
+                <i class="fa fa-plus"></i> Thêm
+            </a>
+        </ol>
     </section>
     {{--Main content--}}
     <section class="content">
@@ -17,18 +23,18 @@
                         <table class="table table-bordered table-hover" id="feedbacks_table">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>STT</th>
                                 <th width="100">Ảnh</th>
                                 <th width="150">Họ tên</th>
                                 <th>Nội dung</th>
                                 <th width="70">Trạng thái</th>
-                                <th width="80">Hành động</th>
+                                <th width="70">Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($feedbacks as $item)
+                            @foreach($feedbacks as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>
                                         <img width="80" style="border-radius: 50%"
                                              src="upload/images/feedbacks/{{ $item->image }}">

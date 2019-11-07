@@ -17,7 +17,7 @@
                         <table class="table table-bordered table-hover" id="accumulate_points_table">
                             <thead>
                             <tr>
-                                <th width="40">ID</th>
+                                <th width="40">STT</th>
                                 <th>Số điện thoại</th>
                                 <th>Tổng tiển</th>
                                 <th>Loại thành viên</th>
@@ -25,9 +25,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($points as $item)
+                            @foreach($points as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>{{ $item->phone_number }}</td>
                                     <td>{{ number_format($item->total_money,2,",",".") }}</td>
                                     <td>{{ $item->membership_type->title }}</td>

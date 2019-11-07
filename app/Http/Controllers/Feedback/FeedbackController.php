@@ -24,7 +24,7 @@ class FeedbackController extends Controller
 
     public function destroy($id)
     {
-        $feedback = Feedback::find($id);
+        $feedback = $this->feedback_services->find($id);
         $feedback->delete();
 
         $notify = array(
@@ -36,7 +36,7 @@ class FeedbackController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $feedback = Feedback::find($request->id);
+        $feedback = $this->feedback_services->find($request->id);
         $feedback->display_status_id = $request->display_status_id;
         $feedback->save();
 

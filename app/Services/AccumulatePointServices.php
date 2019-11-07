@@ -10,4 +10,10 @@ class AccumulatePointServices
         $points = AccumulatePoints::all();
         return $points;
     }
+
+    public function find($id)
+    {
+        $points = AccumulatePoints::find($id);
+        return $points;
+    }
 }

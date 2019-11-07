@@ -21,6 +21,12 @@ class UserServices
         return $user;
     }
 
+    public function find($id)
+    {
+        $user = User::find($id);
+        return $user;
+    }
+
     // lấy tất cả user trừ admin
     public function allAndNotAdmin()
     {

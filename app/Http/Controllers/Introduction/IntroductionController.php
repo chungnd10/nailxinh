@@ -4,20 +4,28 @@ namespace App\Http\Controllers\Introduction;
 
 use App\Http\Requests\IntroductionRequest;
 use App\Introduction;
+use App\Services\IntroductionServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class IntroductionController extends Controller
 {
+    protected $introduction_services;
+
+    public function __construct( IntroductionServices $introduction_services)
+    {
+        $this->introduction_services = $introduction_services;
+    }
+
     public function index($id)
     {
-        $item = Introduction::find($id);
+        $item = $this->introduction_services->find($id);
         return view('admin.introductions.index', compact('item'));
     }
 
     public function update(IntroductionRequest $request, $id)
     {
-        $item = Introduction::find($id);
+        $item = $this->introduction_services->find($id);
 
         //nếu có nhập ảnh ảnh
         if ($request->hasFile('image')) {
