@@ -3557,7 +3557,7 @@ button.btn.btn-adress-booking {
     padding: 10px;
     font-size: 14px;
 }
-.select2 .select2-container .select2-container--default{
+span.select2.select2-container.select2-container--default {
     width: 100% !important;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
