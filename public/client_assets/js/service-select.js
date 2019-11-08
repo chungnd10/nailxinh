@@ -5,7 +5,7 @@ $(document).ready(function() {
         }
         var baseUrl = "client_assets/img/testimonial";
         var $state = $(
-          '<div><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + '<span class="ml-5">'+ state.text +'</span>' + '</div>'
+          '<div class="custom_img"><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + '<span class="ml-5">'+ state.text +'</span>' + '</div>'
         );
         return $state;
       };
