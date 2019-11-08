@@ -56,42 +56,42 @@
                                         <button type="button" class="btn btn-adress-booking">
                                             20 Quang Trung
                                             <br>
-                                            Hoàn Kiếm, Hà Nội
-                                        </button>
+                                            <div class="font-11">Hoàn Kiếm, Hà Nội</div>
+                                        </button> 
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <button type="button" class="btn btn-adress-booking">
                                             74B Nguyễn Phi Khanh, Phường Tân Định
                                             <br>
-                                            Quận 1,TP Hồ Chí Minh
+                                            <div class="font-11">Quận 1,TP Hồ Chí Minh</div>
                                         </button>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <button type="button" class="btn btn-adress-booking">
                                             26 N7B Trung Hòa - Nhân Chính
                                             <br>
-                                            Thanh Xuân, Hà Nội
-                                        </button>
+                                            <div class="font-11">Thanh Xuân, Hà Nội</div>
+                                        </button> 
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <button type="button" class="btn btn-adress-booking">
                                             26 N7B Trung Hòa - Nhân Chính
                                             <br>
-                                            Thanh Xuân, Hà Nội
-                                        </button>
+                                            <div class="font-11">Thanh Xuân, Hà Nội</div>
+                                        </button> 
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <button type="button" class="btn btn-adress-booking">
                                             26 N7B Trung Hòa - Nhân Chính
                                             <br>
-                                            Thanh Xuân, Hà Nội
-                                        </button>
+                                            <div class="font-11">Thanh Xuân, Hà Nội</div>
+                                        </button> 
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <button type="button" class="btn btn-adress-booking">
                                             26 N7B Trung Hòa - Nhân Chính
                                             <br>
-                                            Thanh Xuân, Hà Nội
+                                            <div class="font-11">Thanh Xuân, Hà Nội</div>
                                         </button>
                                     </div>
                                 </div>
