@@ -93,15 +93,14 @@
                 rules: {
                     title: {
                         required: true,
-                        minlength: 1,
                         maxlength: 100
                     },
                     description: {
-                        minlength: 10,
                         maxlength: 200
                     },
                     money_level: {
                         required: true,
+                        number: true,
                         min:0,
                         max:1000000000
                     },
@@ -116,22 +115,20 @@
                 messages: {
                     title: {
                         required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 1-100 ký tự",
-                        maxlength: "Yêu cầu từ 1-100 ký tự",
+                        maxlength: "Không được vượt quá 100 ký tự",
                     },
                     description: {
-                        minlength: "Yêu cầu từ 10-200 ký tự",
-                        maxlength: "Yêu cầu từ 10-200 ký tự",
+                        maxlength: "Không được vượt quá 200 ký tự",
                     },
                     money_level: {
                         required: "Mục này không được để trống",
-                        number: true,
+                        number: "Yêu cầu nhập số",
                         min: "Yêu cầu giá trị từ 0 - 1.000.000.000",
                         max: "Yêu cầu giá trị từ 0 - 1.000.000.000",
                     },
                     discount_level: {
                         required: "Mục này không được để trống",
-                        number: true,
+                        number: "Yêu cầu nhập số",
                         min: "Yêu cầu giá trị từ 0 - 100",
                         max: "Yêu cầu giá trị từ 0 - 100",
                     }

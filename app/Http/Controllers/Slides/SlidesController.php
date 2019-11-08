@@ -99,6 +99,13 @@ class SlidesController extends Controller
     public function destroy($id)
     {
         $slide = $this->slide_services->find($id);
+
+        // xoá ảnh cũ
+        if (file_exists('upload/images/slides/'.$slide->images)
+            && $slide->images != 'slide-default.png') {
+            unlink('upload/images/slides/'.$slide->images);
+        }
+
         $slide->delete();
 
         $notify = array(

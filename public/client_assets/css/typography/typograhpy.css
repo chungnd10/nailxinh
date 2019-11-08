@@ -1,5 +1,5 @@
 body {
-    font-family: 'Comfortaa', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 22px;
@@ -11,14 +11,9 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Comfortaa', sans-serif;
-    font-weight: 500;
+    font-family: 'Open Sans', sans-serif;
 }
 
-h2{
-    font-family: 'Comfortaa', sans-serif;
-    font-weight: 700;
-}
 h4 {
     font-size: 20px;
     font-weight: 400;
@@ -103,11 +98,12 @@ h4 {
 
 .header-slider h3 {
     font-family: 'Dancing Script', cursive;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 30px;
 }
 
 .header-slider h1 {
+    font-family: 'Comfortaa', cursive;
     font-size: 48px;
     line-height: 1;
 }
@@ -145,7 +141,7 @@ h4 {
 .tab-content ul li h4 .price {
     font-size: 20px;
     font-weight: 700;
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Open Sans', cursive;
     font-style: italic;
 }
 
@@ -201,7 +197,7 @@ h4 {
 #counter .single-box h3 {
     font-size: 40px;
     font-weight: 700;
-    font-family: 'Comfortaa', cursive;
+    font-family: 'Open Sans', cursive;
 }
 
 #counter .single-box p {

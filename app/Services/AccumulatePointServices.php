@@ -7,7 +7,7 @@ class AccumulatePointServices
 {
     public function all()
     {
-        $points = AccumulatePoints::all();
+        $points = AccumulatePoints::orderby('id', 'desc')->get();
         return $points;
     }
 

@@ -18,7 +18,7 @@ class CreateMembershipTypeTable extends Migration
             $table->string('title', 200);
             $table->string('description', 300)->nullable();
             $table->integer('money_level');
-            $table->tinyInteger('discount_level');
+            $table->integer('discount_level');
             $table->timestamps();
         });
     }

@@ -136,7 +136,7 @@
                                                 @endif
                                         >{{ $item->name.", ".$item->address }}</option>
                                     @endforeach
-                                </select>
+                                </select><br>
                                 @if($errors->first('branch_id'))
                                     <span class="text-danger">{{ $errors->first('branch_id') }}</span>
                                 @endif
@@ -153,7 +153,7 @@
                                                 @endif
                                         >{{ $item->name }}</option>
                                     @endforeach
-                                </select>
+                                </select><br>
                                 @if($errors->first('role_id'))
                                     <span class="text-danger">{{ $errors->first('role_id') }}</span>
                                 @endif
@@ -188,8 +188,8 @@
                 rules: {
                     full_name: {
                         required: true,
-                        minlength: 5,
-                        maxlength: 40
+                        maxlength: 100,
+                        onlyVietnamese: true
                     },
                     phone_number: {
                         required: true,
@@ -198,7 +198,7 @@
                     birthday: "required",
                     address: {
                         required: true,
-                        minlength: 5,
+                        maxlength: 200
                     },
                     password: {
                         required: true,
@@ -211,7 +211,8 @@
                     },
                     email: {
                         required: true,
-                        email: true
+                        email: true,
+                        maxlength: 200
                     },
                     branch_id: "required",
                     role_id: "required",
@@ -222,9 +223,7 @@
                 messages: {
                     full_name: {
                         required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 5-40 ký tự",
-                        maxlength: "Yêu cầu từ 5-40 ký tự",
-                        alpha: "Mục này không được để trống"
+                        maxlength: "Không được vượt quá 100 ký tự",
                     },
                     phone_number: {
                         required: "Mục này không được để trống",
@@ -232,7 +231,7 @@
                     birthday: "Mục này không được để trống",
                     address: {
                         required: "Mục này không được để trống",
-                        minlength: "Yêu cầu tối thiểu 5 ký tự",
+                        maxlength: "Không được vượt quá 200 ký tự",
                     },
                     password: {
                         required: "Mục này không được để trống",
@@ -245,7 +244,8 @@
                     },
                     email: {
                         required: "Mục này không được để trống",
-                        email: "Email không đúng định dạng"
+                        email: "Email không đúng định dạng",
+                        maxlength: "Không được vượt quá 200 ký tự",
                     },
                     branch_id: "Mục này không được để trống",
                     role_id: "Mục này không được để trống",
@@ -253,8 +253,6 @@
                     operation_status_id: "Mục này không được để trống",
                 }
             });
-
-
         });
     </script>
 @endsection

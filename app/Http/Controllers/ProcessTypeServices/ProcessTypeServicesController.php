@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ProcessTypeServices;
 
+use App\Http\Requests\AddProcessRequest;
 use App\Services\ProcessOfServiceServices;
 use App\Services\TypeServiceServices;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class ProcessTypeServicesController extends Controller
         return view('admin.process_type_services.create', compact('type_of_services'));
     }
 
-    public function store(Request $request)
+    public function store(AddProcessRequest $request)
     {
         $process = new ProcessOfService();
         $process->fill($request->all())->save();
@@ -51,7 +52,7 @@ class ProcessTypeServicesController extends Controller
         return view('admin.process_type_services.show', compact('process', 'type_of_services'));
     }
 
-    public function update(Request $request, $id)
+    public function update(AddProcessRequest $request, $id)
     {
         $process = $this->process_of_services->find($id);
         //lưu

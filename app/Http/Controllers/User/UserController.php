@@ -336,7 +336,7 @@ class UserController extends Controller
             'message' => 'Cập nhật ảnh thành công',
             'alert-type' => 'success'
         );
-        return redirect()->route('profile', $id)->with($notify);
+        return redirect()->route('admin.index')->with($notify);
     }
 
     // cập nhật thông tin user
@@ -352,7 +352,7 @@ class UserController extends Controller
             'alert-type' => 'success'
         );
         //điều hướng
-        return redirect()->route('profile', $id)->with($notify);
+        return redirect()->route('admin.index')->with($notify);
     }
 
     // thay đổi trạng thái

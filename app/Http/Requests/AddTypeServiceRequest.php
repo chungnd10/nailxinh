@@ -28,10 +28,10 @@ class AddTypeServiceRequest extends FormRequest
         $validate = [
             'name' => [
                'required',
-               'max:40',
+               'max:100',
                Rule::unique('type_of_services')->ignore($this->id),
             ] ,
-            'description' => 'required',
+            'description' => 'required|max:300',
             'image' => 'nullable||mimes:png,jpg,jpeg'
         ];
 
@@ -47,11 +47,12 @@ class AddTypeServiceRequest extends FormRequest
     {
         return [
             'name.required' => 'Mục này không được để trống',
-            'name.max' => 'Yêu cầu tối đa 40 ký tự',
+            'name.max' => 'Không được vượt quá 100 ký tự',
             'name.unique' => 'Tên đã được sử dụng',
             'image.required' => 'Mục này không được để trống',
             'image.mimes' => 'Chỉ chấp nhận ảnh JPG, JPEG, PNG',
             'description.required' => 'Mục này không được để trống',
+            'description.max' => 'Không được vượt quá 300 ký tự',
         ];
     }
 

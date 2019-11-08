@@ -64,7 +64,7 @@
                         <!-- /.col -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Tiêu đề</label><span class="text-danger">*</span>
+                                <label>Tiêu đề</label>
                                 <input type="text"
                                        class="form-control"
                                        value="{{ old('title', $slide->title)}}"
@@ -75,7 +75,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label for="">Vị trí hiển thị tiêu đề</label><br>
+                                <label for="">Vị trí hiển thị tiêu đề</label><span class="text-danger">*</span><br><br>
                                 <input type="radio"
                                        name="location_display"
                                        @if( $slide->location_display == config('contants.location_display_left'))
@@ -151,7 +151,6 @@
                         required: true,
                     },
                     title: {
-                        required: true,
                         maxlength: 120
                     },
                     description: {

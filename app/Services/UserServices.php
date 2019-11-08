@@ -17,7 +17,7 @@ class UserServices
     //lấy tất cả user
     public function all()
     {
-        $user = User::all();
+        $user = User::orderby('id', 'desc')->get();
         return $user;
     }
 

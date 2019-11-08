@@ -353,8 +353,8 @@
                 rules: {
                     full_name: {
                         required: true,
-                        minlength: 5,
-                        maxlength: 40
+                        maxlength: 100,
+                        onlyVietnamese: true
                     },
                     phone_number: {
                         required: true,
@@ -363,15 +363,14 @@
                     birthday: "required",
                     address: {
                         required: true,
-                        minlength: 5,
+                        maxlength: 200
                     },
                 },
 
                 messages: {
                     full_name: {
                         required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 5-40 ký tự",
-                        maxlength: "Yêu cầu từ 5-40 ký tự",
+                        maxlength: "Không được nhập quá 100 ký tự",
                         alpha: "Mục này không được để trống"
                     },
                     phone_number: {
@@ -380,7 +379,7 @@
                     birthday: "Mục này không được để trống",
                     address: {
                         required: "Mục này không được để trống",
-                        minlength: "Yêu cầu tối thiểu 5 ký tự",
+                        maxlength: "Không được nhập quá 200 ký tự",
                     },
                 }
             });
@@ -562,14 +561,11 @@
             function each(arr, callback) {
                 var length = arr.length;
                 var i;
-
                 for (i = 0; i < length; i++) {
                     callback.call(arr, arr[i], i, arr);
                 }
-
                 return arr;
             }
-
 
         });
     </script>

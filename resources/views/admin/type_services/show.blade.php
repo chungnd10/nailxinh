@@ -83,35 +83,37 @@
 			}
 		}
 
-            // //validate
-            // $("#addTypeService").validate({
-            // 	rules: {
-            // 		image: {
-            // 			extension: "jpg|jpeg|png"
-            // 		},
-            // 		name: {
-            // 			required: true,
-            // 			maxlength: 40
-            // 		},
-            // 		description: {
-            // 			required: true
-            // 		}
-			//
-            // 	},
-			//
-            // 	messages: {
-            // 		image: {
-            // 			extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
-            // 		},
-            // 		name: {
-            // 			required: "Mục này không được để trống",
-            // 			maxlength: "Yêu cầu tối đa 40 ký tự",
-            // 		},
-            // 		description: {
-            // 			required: "Mục này không được để trống"
-            // 		}
-            // 	}
-            // });
+            //validate
+            $("#addTypeService").validate({
+            	rules: {
+            		image: {
+            			extension: "jpg|jpeg|png"
+            		},
+            		name: {
+            			required: true,
+            			maxlength: 100
+            		},
+            		description: {
+            			required: true,
+						maxlength: 300
+            		}
+
+            	},
+
+            	messages: {
+            		image: {
+            			extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+            		},
+            		name: {
+            			required: "Mục này không được để trống",
+            			maxlength: "Không được vượt quá 100 ký tự",
+            		},
+            		description: {
+            			required: "Mục này không được để trống",
+						maxlength: "Không được vượt quá 300 ký tự",
+            		}
+            	}
+            });
 
 
         });
