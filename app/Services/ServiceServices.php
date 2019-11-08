@@ -16,7 +16,7 @@ class ServiceServices
     // lấy tất cả dịch vụ
     public function all()
     {
-        $service = Service::all();
+        $service = Service::orderby('id', 'desc')->get();
         return $service;
     }
 

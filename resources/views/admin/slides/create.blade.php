@@ -62,7 +62,7 @@
                         <!-- /.col -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Tiêu đề</label><span class="text-danger">*</span>
+                                <label>Tiêu đề</label>
                                 <input type="text"
                                        class="form-control"
                                        value="{{ old('title')}}"
@@ -150,7 +150,6 @@
                         required: true,
                     },
                     title: {
-                        required: true,
                         maxlength: 120
                     },
                     description: {

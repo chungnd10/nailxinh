@@ -8,7 +8,7 @@ class ProcessOfServiceServices
 {
     public function all()
     {
-        $process = ProcessOfService::all();
+        $process = ProcessOfService::orderby('id', 'desc')->get();
         return $process;
     }
 

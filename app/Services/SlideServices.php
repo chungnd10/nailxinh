@@ -16,7 +16,7 @@ class SlideServices
 
     public function all()
     {
-        $slide = Slides::all();
+        $slide = Slides::orderby('id', 'desc')->get();
         return $slide;
     }
 

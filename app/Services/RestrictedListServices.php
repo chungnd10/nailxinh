@@ -7,7 +7,7 @@ class RestrictedListServices
 {
     public function all()
     {
-        $list = RestrictedList::all();
+        $list = RestrictedList::orderby('id', 'desc')->get();
         return $list;
     }
 

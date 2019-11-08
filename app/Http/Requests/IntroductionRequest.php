@@ -25,9 +25,9 @@ class IntroductionRequest extends FormRequest
     {
         //trường hợp sửa slide
         $validate = [
-            'images' => 'nullable|mimes:jpg,jpeg,png,gif',
-            'title' => 'nullable|min:10|max:80',
-            'content' => 'nullable|min:10|max:600',
+            'image' => 'nullable|mimes:jpg,jpeg,png,gif',
+            'title' => 'required|max:100',
+            'content' => 'required|max:600',
         ];
 
         return $validate;
@@ -36,11 +36,12 @@ class IntroductionRequest extends FormRequest
     public function messages()
     {
         return [
-            'images.mimes' => 'Chỉ chấp nhận JPG, JPEG, PNG, GIF',
-            'title.min' => 'Yêu cầu từ 10-80 ký tự',
-            'title.max' => 'Yêu cầu từ 10-80 ký tự',
-            'content.min' => 'Yêu cầu từ 100-600 ký tự',
-            'content.max' => 'Yêu cầu từ 100-600 ký tự',
+            'image.required' => "Mục này không được để trống",
+            'image.mimes' => 'Chỉ chấp nhận JPG, JPEG, PNG, GIF',
+            'title.required' => "Mục này không được để trống",
+            'title.max' => 'Không được vượt quá 100 ký tự',
+            'content.required' => "Mục này không được để trống",
+            'content.max' => 'Không được vượt quá 600 ký tự',
         ];
     }
 }

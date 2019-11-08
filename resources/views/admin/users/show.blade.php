@@ -84,8 +84,6 @@
                                             @endif
                                             {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         @endforeach
-                                        <br>
-                                        <label id="gender_id-error" class="error" for="gender_id"></label>
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
@@ -272,9 +270,6 @@
                                                 </div>
                                             @endforeach
                                         </div>
-
-
-
                                     </div>
                                 @endforeach
                             </div>
@@ -313,8 +308,8 @@
                 rules: {
                     full_name: {
                         required: true,
-                        minlength: 5,
-                        maxlength: 40
+                        maxlength: 100,
+                        onlyVietnamese: true
                     },
                     phone_number: {
                         required: true,
@@ -323,19 +318,27 @@
                     birthday: "required",
                     address: {
                         required: true,
-                        minlength: 5,
+                        maxlength: 200
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 40,
+                    },
+                    cf_password: {
+                        required: true,
+                        equalTo: password
                     },
                     branch_id: "required",
                     role_id: "required",
                     gender_id: "required",
+                    operation_status_id: "required",
                 },
 
                 messages: {
                     full_name: {
                         required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 5-40 ký tự",
-                        maxlength: "Yêu cầu từ 5-40 ký tự",
-                        alpha: "Mục này không được để trống"
+                        maxlength: "Không được vượt quá 100 ký tự",
                     },
                     phone_number: {
                         required: "Mục này không được để trống",
@@ -343,14 +346,22 @@
                     birthday: "Mục này không được để trống",
                     address: {
                         required: "Mục này không được để trống",
-                        minlength: "Yêu cầu tối thiểu 5 ký tự",
+                        maxlength: "Không được vượt quá 200 ký tự",
+                    },
+                    password: {
+                        required: "Mục này không được để trống",
+                        minlength: "Yêu cầu từ 6-40 ký tự",
+                        maxlength: "Yêu cầu từ 6-40 ký tự",
+                    },
+                    cf_password: {
+                        required: "Mục này không được để trống",
+                        equalTo: "Nhập lại mật khẩu không đúng"
                     },
                     branch_id: "Mục này không được để trống",
                     role_id: "Mục này không được để trống",
                     gender_id: "Mục này không được để trống",
-                },
-                errorElement : 'label',
-                errorLabelContainer: '#gender_id-error'
+                    operation_status_id: "Mục này không được để trống",
+                }
             });
 
             //validate

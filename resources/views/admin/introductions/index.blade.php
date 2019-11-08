@@ -93,7 +93,7 @@
                 } else {
                     getBase64(file, '#proImg');
                 }
-            }
+            };
 
             //validate
             $("#introductions").validate({
@@ -103,13 +103,11 @@
                     },
                     title: {
                         required: true,
-                        minlength: 10,
-                        maxlength: 40
+                        maxlength: 100
                     },
                     content: {
                         required: true,
-                        minlength: 10,
-                        maxlength: 400
+                        maxlength: 600
                     },
                 },
 
@@ -119,13 +117,11 @@
                     },
                     title: {
                         required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 10-40 ký tự",
-                        maxlength: "Yêu cầu từ 10-40 ký tự",
+                        maxlength: "Không được vượt quá 100 ký tự",
                     },
                     content: {
                         required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 10-400 ký tự",
-                        maxlength: "Yêu cầu từ 10-400 ký tự",
+                        maxlength: "Không được vượt quá 600 ký tự",
                     }
                 }
             });

@@ -2,5 +2,9 @@
     border-radius: 50%;
 }
 .main-menu ul li a{
-    font-weight: 900;
+    font-weight: bold;
+}
+
+#timeFrame .time{
+    font-weight: 600;
 }

@@ -47,6 +47,6 @@ class IntroductionController extends Controller
             'message' => 'Cập nhật thành công',
             'alert-type' => 'success'
         );
-        return redirect()->route('introductions.index', $id)->with($notify);
+        return redirect()->route('admin.index')->with($notify);
     }
 }

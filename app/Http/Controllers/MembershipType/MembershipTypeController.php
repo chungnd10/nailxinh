@@ -32,17 +32,14 @@ class MembershipTypeController extends Controller
     public function store(MembershipTypeRequest $request)
     {
         $membership_type = new MembershipType();
-
         $membership_type->fill($request->all())->save();
 
         $notify = array(
             'message' => 'Thêm loại thành viên thành công',
             'alert-type' => 'success'
         );
-
         return redirect()->route('membership_type.index')->with($notify);
     }
-
 
     //hiển thị để sửa
     public function show($id){
@@ -63,6 +60,7 @@ class MembershipTypeController extends Controller
 
         return redirect()->route('membership_type.index')->with($notify);
     }
+
     //xóa
     public function destroy($id)
     {

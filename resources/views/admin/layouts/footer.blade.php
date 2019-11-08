@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Version</b> 2.4.13
+        <b>Version</b> 1.0
     </div>
-    <strong>Copyright &copy; 2014-2019 AdminLTE</strong>
+    <strong>Copyright &copy; {{date('Y')}} NailXinh</strong>
 </footer>

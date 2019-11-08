@@ -6,30 +6,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AddSlideRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         //trường hợp sửa slide
         $validate = [
-            'images' => 'nullable|mimes:jpg,jpeg,png,gif',
-            'url' => 'nullable|url',
-            'title' => 'nullable|max:120',
-            'description' => 'nullable|max:200',
-            'location_display ' => 'required'
+            'images'            => 'nullable|mimes:jpg,jpeg,png,gif',
+            'url'               => 'nullable|url|max:300',
+            'title'             => 'nullable|max:120',
+            'description'       => 'nullable|max:200',
+            'display_status_id' => 'required',
+            'location_display'  => 'required'
         ];
 
         //trường hợp thêm slide
@@ -44,13 +35,14 @@ class AddSlideRequest extends FormRequest
     public function messages()
     {
         return [
-            'images.required' => 'Mục này không được để trống',
-            'images.mimes' => 'Chỉ chấp nhận JPG, JPEG, PNG, GIF',
-            'url.url' => 'Url sai định dạng',
-            'display_status_id' => 'Mục này không được để trống',
-            'title.max' => 'Không được vượt quá 120 ký tự',
-            'description.max' => 'Không được vượt quá 200 ký tự',
-            'location_display.required' => 'Mục này không được để trống',
+            'images.required'               => 'Mục này không được để trống',
+            'images.mimes'                  => 'Chỉ chấp nhận JPG, JPEG, PNG, GIF',
+            'url.url'                       => 'Url sai định dạng',
+            'url.max'                       => 'Không được vượt quá 300 ký tự',
+            'title.max'                     => 'Không được vượt quá 120 ký tự',
+            'description.max'               => 'Không được vượt quá 200 ký tự',
+            'location_display.required'     => 'Mục này không được để trống',
+            'display_status_id.required'    => 'Mục này không được để trống',
         ];
     }
 }

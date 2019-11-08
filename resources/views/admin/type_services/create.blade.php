@@ -92,12 +92,12 @@
             		},
             		name: {
             			required: true,
-            			maxlength: 40
+            			maxlength: 100
             		},
             		description: {
-            			required: true
+            			required: true,
+						maxlength: 300
             		}
-            		
             	},
 
             	messages: {
@@ -107,10 +107,11 @@
             		},
             		name: {
             			required: "Mục này không được để trống",
-            			maxlength: "Yêu cầu tối đa 40 ký tự",
+            			maxlength: "Không được vượt quá 100 ký tự",
             		},
             		description: {
-            			required: "Mục này không được để trống"
+            			required: "Mục này không được để trống",
+						maxlength: "Không được vượt quá 300 ký tự",
             		}
             	}
             });

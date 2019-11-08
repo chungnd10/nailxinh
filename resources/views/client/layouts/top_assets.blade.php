@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="client_assets/css/responsive.css">
 
 <link rel="stylesheet" href="client_assets/css/custom.css">
-
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="client_assets/css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="client_assets/css/select2.css">
 

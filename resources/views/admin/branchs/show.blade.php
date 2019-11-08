@@ -85,41 +85,45 @@
             //validate
             $("#addBranch").validate({
                 rules: {
-                    name: {
-                        required: true
-                    },
-                    city_id: {
-                        required: true,
-                    },
-                    phone_number: {
-                        required: true,
-                        phoneNumberVietNam: true
-                    },
-                    address: {
-                        required: true,
-                        minlength: 5
-                    }
+            		name: {
+            			required: true,
+						maxlength: 100
+            		},
+            		city_id: {
+            			required: true,
+            		},
+            		phone_number: {
+            			required: true,
+            			phoneNumberVietNam: true,
+						maxlength: 11
+            		},
+            		address: {
+            			required: true,
+            			minlength: 5,
+						maxlength: 200
+            		}
 
-                },
+            	},
 
-                messages: {
-                    name: {
-                        required: "Mục này không được để trống",
-                    },
-                    city_id: {
-                        required: "Vui lòng chọn thành phố",
-                    },
-                    phone_number: {
-                        required: "Mục này không được để trống",
-                    },
-                    address: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu tối thiểu 5 ký tự",
-                    },
-                }
+            	messages: {
+            		name: {
+            			required: "Mục này không được để trống",
+						maxlength : "Không được vượt quá 100 ký tự"
+            		},
+            		city_id: {
+            			required: "Vui lòng chọn thành phố",
+            		},
+            		phone_number: {
+            			required: "Mục này không được để trống",
+						maxlength : "Không được vượt quá 11 ký tự"
+            		},
+            		address: {
+            			required: "Mục này không được để trống",
+            			minlength: "Yêu cầu tối thiểu 5 ký tự",
+						maxlength : "Không được vượt quá 200 ký tự"
+            		},
+            	}
             });
-
-
         });
     </script>
 @endsection

@@ -26,7 +26,11 @@
                                 >
                                     <option value="">Chọn loại dịch vụ</option>
                                     @foreach($type_of_services as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}"
+                                            @if($item->id == old('type_of_services_id'))
+                                                selected
+                                            @endif
+                                        >{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->first('type_of_services_id'))
@@ -76,6 +80,9 @@
                                           rows="10"
                                           placeholder="Nhập mô tả"
                                 ></textarea>
+                                @if($errors->first('content'))
+                                    <span class="text-danger">{{ $errors->first('content') }}</span>
+                                @endif
                             </div>
                             <!-- /.form-group -->
                         </div>
@@ -110,30 +117,38 @@
                     },
                     name: {
                         required: true,
-                        minlength: 5,
-                        maxlength: 40
+                        minlength: 1,
+                        maxlength: 100
                     },
                     step: {
                         required: true,
                         number: true,
-                        min: 1
+                        min: 1,
+                        max: 100
+                    },
+                    content: {
+                        required: true,
+                        maxlength: 200
                     }
-
                 },
-
                 messages: {
                     type_of_services_id: {
                         required: "Mục này không được để trống",
                     },
                     name: {
                         required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 5-40 ký tự",
-                        maxlength: "Yêu cầu từ 5-40 ký tự",
+                        minlength: "Yêu cầu từ 1-100 ký tự",
+                        maxlength: "Yêu cầu từ 1-100 ký tự",
                     },
                     step: {
                         required: "Mục này không được để trống",
                         number: "Vui lòng nhập số",
-                        min: "Giá trị phải lớn hơn 0"
+                        min: "Yêu cầu giá trị từ 1-100 ",
+                        max: "Yêu cầu giá trị từ 1-100 "
+                    },
+                    content: {
+                        required: "Mục này không được để trống",
+                        maxlength: "Không được vượt quá 200 ký tự"
                     }
                 }
             });

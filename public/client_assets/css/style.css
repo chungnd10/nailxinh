@@ -633,7 +633,7 @@ img {
     position: relative;
     -webkit-transition: .3s all;
     transition: .3s all;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .main-menu li.c-dropdowns.active li a {
@@ -1375,7 +1375,7 @@ header {
 .service-box h4 {
     margin-top: 20px;
     margin-bottom: 10px;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .service-box p {

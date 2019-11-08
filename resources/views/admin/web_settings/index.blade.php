@@ -100,7 +100,7 @@
                                 <textarea name="facebook"
                                           cols="30"
                                           rows="7"
-                                          class="form-control">{{ $item->facebook }}</textarea>
+                                          class="form-control">{{ old('facebook', $item->facebook) }}</textarea>
                                 @if($errors->first('facebook'))
                                     <span class="text-danger">{{ $errors->first('facebook') }}</span>
                                 @endif
@@ -110,7 +110,7 @@
                                 <textarea name="introduction"
                                           cols="30"
                                           rows="7"
-                                          class="form-control">{{ $item->introduction }}</textarea>
+                                          class="form-control">{{ old('introduction', $item->introduction) }}</textarea>
                                 @if($errors->first('introduction'))
                                     <span class="text-danger">{{ $errors->first('introduction') }}</span>
                                 @endif
@@ -156,18 +156,34 @@
                     },
                     phone_number: {
                         required: true,
-                        phoneNumberVietNam: true
+                        phoneNumberVietNam: true,
+                        maxlength: 11
                     },
                     email: {
                         required: true,
-                        emailGood: true
+                        emailGood: true,
+                        maxlength: 200
                     },
                     open_time: {
                         required: true,
+                        maxlength: 50
                     },
                     close_time: {
                         required: true,
-                    }
+                        maxlength: 50
+                    },
+                    address: {
+                        required: true,
+                        maxlength: 200
+                    },
+                    facebook: {
+                        required: true,
+                        maxlength: 300
+                    },
+                    introduction: {
+                        required: true,
+                        maxlength: 200
+                    },
                 },
 
                 messages: {
@@ -176,20 +192,34 @@
                     },
                     phone_number: {
                         required: "Mục này không được để trống",
+                        maxlength: "Không được vượt quá 11 ký tự"
                     },
                     email: {
                         required: "Mục này không được để trống",
+                        maxlength: "Không được vượt quá 200 ký tự"
                     },
                     open_time: {
                         required: "Mục này không được để trống",
+                        maxlength: "Không được vượt quá 50 ký tự"
                     },
                     close_time: {
                         required: "Mục này không được để trống",
-                    }
+                        maxlength: "Không được vượt quá 50 ký tự"
+                    },
+                    address: {
+                        required: true,
+                        maxlength: "Không được vượt quá 200 ký tự"
+                    },
+                    facebook: {
+                        required: true,
+                        maxlength: "Không được vượt quá 300 ký tự"
+                    },
+                    introduction: {
+                        required: true,
+                        maxlength: "Không được vượt quá 200 ký tự"
+                    },
                 }
             });
-
-
         });
     </script>
 @endsection

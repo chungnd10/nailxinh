@@ -16,7 +16,7 @@ class CreateProcessOfServicesTable extends Migration
         Schema::create('process_of_services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->tinyInteger('step');
+            $table->string('step', 4);
             $table->string('content', 200);
 
             $table->unsignedInteger('type_of_services_id');
