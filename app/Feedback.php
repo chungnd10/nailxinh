@@ -14,7 +14,6 @@ class Feedback extends Model
     protected $table = 'feedbacks';
 
     protected $fillable = [
-        'phone_number',
         'full_name',
         'content',
         'display_status_id'

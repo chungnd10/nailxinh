@@ -72,7 +72,10 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('membership_type.index') }}" class="btn btn-default">
+                    <a href="{{ route('membership_type.index') }}"
+                       class="btn btn-default"
+                       onclick="return confirmmBack()"
+                    >
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về
                     </a>

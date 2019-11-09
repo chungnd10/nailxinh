@@ -216,7 +216,9 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <a href="{{ route('admin.index') }}" class="btn btn-default">
+                                        <a href="{{ route('admin.index') }}"
+                                           class="btn btn-default"
+                                        >
                                             <i class="fa fa-arrow-circle-o-left"></i>
                                             Trở về
                                         </a>
@@ -287,7 +289,10 @@
                                         </div>
                                         <!-- /.box-body -->
                                         <div class="box-footer">
-                                            <a href="{{ route('admin.index') }}" class="btn btn-default">
+                                            <a href="{{ route('admin.index') }}"
+                                               class="btn btn-default"
+                                               onclick="return confirmmBack()"
+                                            >
                                                 <i class="fa fa-arrow-circle-o-left"></i>
                                                 Trở về
                                             </a>

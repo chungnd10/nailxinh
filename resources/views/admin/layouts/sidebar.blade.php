@@ -218,7 +218,7 @@
                         @endcan
                         @can('add-feedback')
                             <li>
-                                <a href="javascript:;">
+                                <a href="{{ route('feedbacks.create') }}">
                                     <i class="fa fa-angle-right"></i>Thêm mới
                                 </a>
                             </li>

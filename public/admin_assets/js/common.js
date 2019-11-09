@@ -54,3 +54,9 @@ function getBase64(file, selector) {
         console.log('Error: ', error);
     };
 }
+
+
+//confirm back
+function confirmmBack() {
+    return confirm('Mọi thay đổi sẽ không được lưu!');
+}

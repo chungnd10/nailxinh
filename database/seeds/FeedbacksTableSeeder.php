@@ -13,21 +13,18 @@ class FeedbacksTableSeeder extends Seeder
     {
         $feedbacks = [
             [
-                'phone_number' => '0987654321',
                 'full_name' => 'Hương Nhi',
                 'image' => 'feedback1.jpg',
                 'display_status_id' => config('contants.display_status_display'),
                 'content' => 'Làm naill tại Nail Xinh max xinh mà còn bền kinh khủng. Mình làm một bộ móng mà chơi dài mấy tháng liền, nhân viên lại dễ thương, cute nữa, mãi yêu Nail Xinh.'
             ],
             [
-                'phone_number' => '0987654322',
                 'full_name' => 'Ngọc Ánh',
                 'image' => 'feedback2.jpg',
                 'display_status_id' => config('contants.display_status_display'),
                 'content' => 'Mình làm móng 3 lần ở NailXinh đều rất hài lòng. Tiệm đẹp, nhân viên nhẹ nhàng, dễ thương, đi đúng giờ hay gặp người nổi tiếng.'
             ],
             [
-                'phone_number' => '0987654323',
                 'full_name' => 'Thu Phương',
                 'image' => 'feedback3.jpg',
                 'display_status_id' => config('contants.display_status_display'),

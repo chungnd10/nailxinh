@@ -67,6 +67,7 @@ class ClientController extends Controller
         $user = $this->user_services->count();
         $service = $this->service_services->count();
         $orders = $this->order_services->count();
+
         $feedbacks = $this->feedback_services->allWithDisplayStatus($display_status_id);
         $slides = $this->slide_services->allDisplay();
         $technicians = $this->user_services->getTechnician();
@@ -95,7 +96,9 @@ class ClientController extends Controller
 
     public function services()
     {
-        return view('client.services');
+        $display_status_id = config('contants.display_status_display');
+        $feedbacks = $this->feedback_services->allWithDisplayStatus($display_status_id);
+        return view('client.services', compact('feedbacks'));
     }
 
     public function typeServices($id)
