@@ -32,7 +32,7 @@ class AddTypeServiceRequest extends FormRequest
                Rule::unique('type_of_services')->ignore($this->id),
             ] ,
             'description' => 'required|max:300',
-            'image' => 'nullable||mimes:png,jpg,jpeg'
+            'image' => 'nullable|mimes:png,jpg,jpeg'
         ];
 
         // trường hợp thêm

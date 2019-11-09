@@ -120,6 +120,42 @@ class ServicesTableSeeder extends Seeder
                 'completion_time' => '1 giờ',
                 'type_of_services_id' => 3,
                 'image' => '1573045198instagram03.jpg'
+            ],
+            [
+                'name' => 'Phun môi 3D',
+                'slug' => 'phun-moi-3d',
+                'description' => 'Phù hợp với những trường hợp có môi thâm hay màu môi kém tươi.',
+                'price' => 500000,
+                'completion_time' => '2 giờ',
+                'type_of_services_id' => 4,
+                'image' => '1573291957moi4.jpg'
+            ],
+            [
+                'name' => 'Phun môi Pha lê',
+                'slug' => 'phun-moi-pha-le',
+                'description' => 'Sử dụng tinh chất collagen tự nhiên',
+                'price' => 1200000,
+                'completion_time' => '2 giờ',
+                'type_of_services_id' => 4,
+                'image' => '1573292012moi3.jpg'
+            ],
+            [
+                'name' => 'Phun môi Collagen',
+                'slug' => 'phun-moi-collagen',
+                'description' => 'Độ bền 3-5 năm',
+                'price' => 1500000.,
+                'completion_time' => '2 giờ',
+                'type_of_services_id' => 4,
+                'image' => '1573292045moi1.jpg'
+            ],
+            [
+                'name' => 'Phun môi thế bào gốc',
+                'slug' => 'phun-moi-the-bao-goc',
+                'description' => 'Không đau, không sưng tấy',
+                'price' => 2000000,
+                'completion_time' => '1 giờ',
+                'type_of_services_id' => 4,
+                'image' => '1573292104moi2.jpeg'
             ]
 
         ];

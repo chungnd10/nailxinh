@@ -7,7 +7,7 @@
             <small>phản hồi</small>
         </h1>
         <ol class="breadcrumb">
-            <a href="javascript:;"
+            <a href="{{ route('feedbacks.create') }}"
                class="btn btn-sm btn-success">
                 <i class="fa fa-plus"></i> Thêm
             </a>
@@ -58,10 +58,14 @@
                                         </label>
                                     </td>
                                     <td>
+                                        <a href="{{ route('feedbacks.show', $item->id) }}"
+                                           class="btn btn-xs btn-warning">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
                                         <a href="{{ route('feedbacks.destroy', $item->id) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                            <i class="fa fa-trash"></i> Xóa
+                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -134,7 +138,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: "{{ route('feedbacks.update') }}",
+                    url: "{{ route('feedbacks.change-status') }}",
                     data: {'display_status_id': display_status_id, 'id': id},
                     success: function (data) {
                         console.log(data.success)

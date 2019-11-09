@@ -25,16 +25,16 @@ class TypeOfServicesTableSeeder extends Seeder
                 'description' => 'Ở Nail Xinh hiện có 2 dịch vụ chính về mi đó là nối mi và uốn mi'
             ],
             [
-                'name' => 'Môi',
-                'slug' => 'moi',
-                'image' => '1573024124phun-moi-pha-le-sau-bao-lau-thi-duoc-danh-son-tro-lai-2.jpg',
-                'description' => 'Nail Xinh hiện có 2 dịch vụ về môi đó là phun môi collagen và phun môi tráng thâm'
-            ],
-            [
                 'name' => 'Lông mày',
                 'slug' => 'long-may',
                 'image' => '1573024935long may copy.jpg',
                 'description' => 'Nail Xinh đang có các dịch vụ về lông mày như: phun thêu, điêu khắc, waxing'
+            ],
+            [
+                'name' => 'Môi',
+                'slug' => 'moi',
+                'image' => '1573024124phun-moi-pha-le-sau-bao-lau-thi-duoc-danh-son-tro-lai-2.jpg',
+                'description' => 'Nail Xinh hiện có 2 dịch vụ về môi đó là phun môi collagen và phun môi tráng thâm'
             ]
         ];
 

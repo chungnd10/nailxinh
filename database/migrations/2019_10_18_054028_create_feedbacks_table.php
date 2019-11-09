@@ -15,7 +15,6 @@ class CreateFeedbacksTable extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('phone_number', 11);
             $table->string('full_name', 100);
             $table->string('content', 300);
             $table->string('image', 300);

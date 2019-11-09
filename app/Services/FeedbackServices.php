@@ -13,7 +13,6 @@ class FeedbackServices
         return $feedback;
     }
 
-    // lấy tất cả feedback
     public function all()
     {
         $feedbacks = Feedback::orderby('id', 'desc')->get();

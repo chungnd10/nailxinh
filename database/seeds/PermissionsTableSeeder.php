@@ -66,6 +66,10 @@ class PermissionsTableSeeder extends Seeder
                 'name'  => 'view-feedback'
             ],
             [
+                'title' => 'Thêm phản hồi khách hàng',
+                'name'  => 'add-feedback'
+            ],
+            [
                 'title' => 'Sửa phản hồi khách hàng',
                 'name'  => 'edit-feedback'
             ],

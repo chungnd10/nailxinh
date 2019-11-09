@@ -27,9 +27,9 @@
                                     <option value="">Chọn loại dịch vụ</option>
                                     @foreach($type_of_services as $item)
                                         <option value="{{ $item->id }}"
-                                            @if($item->id == old('type_of_services_id'))
+                                                @if($item->id == old('type_of_services_id'))
                                                 selected
-                                            @endif
+                                                @endif
                                         >{{ $item->name }}</option>
                                     @endforeach
                                 </select>
@@ -92,7 +92,8 @@
                 <!-- /.box-body -->
                 <div class="box-footer ">
                     <a href="{{ route('process-type-services.index') }}"
-                       class="btn btn-default">
+                       class="btn btn-default"
+                       onclick="return confirmmBack()">
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về
                     </a>
@@ -159,8 +160,8 @@
 
                 $.ajax({
                     headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     url: "{{ route('get-procces-with-type-services') }}",
                     method: 'POST',
                     data: {
@@ -168,36 +169,35 @@
                     },
                     success: function (data) {
                         $("#result").html('');
-                        if (data.length == 0)
-                        {
+                        if (data.length == 0) {
                             $(".result-process").append(
                                 "<span class='text-danger'>Loại dịch vụ này chưa có quy trình nào!</span>"
                             );
-                        }else{
+                        } else {
                             $(".result-process").append(
                                 "<label>Các quy trình của dịch vụ</label><br>"
                             );
                             $.each(data, function (key, value) {
                                 $("#result").append(
-                                    "<button type='button' class='btn btn-warning' data-toggle='modal' data-target=#modal"+value.step+">"
-                                        +"<b>"+value.step+"</b>"
-                                    +"</button>&nbsp;&nbsp;"
-                                    +"<div class='modal fade' id=modal"+value.step+" style=display: none;>"
-                                        +"<div class='modal-dialog'>"
-                                            +"<div class='modal-content'>"
-                                                +"<div class='modal-header'>"
-                                                    +"<h4 class='modal-title'>"+"BƯỚC "+value.step+":&nbsp;&nbsp;"+value.name+"</h4>"
-                                                +"</div>"
-                                                +"<div class='modal-body'>"
-                                                  + "<p>"+ value.content +"</p>"
-                                                +"</div>"
-                                                +"<div class='modal-footer'>"
-                                                    +"<button type='button' class='btn btn-default pull-right' data-dismiss='modal'>Đóng"
-                                                    +"</button>"
-                                                +"</div>"
-                                            +"</div>"
-                                        +"</div>"
-                                    +"</div>"
+                                    "<button type='button' class='btn btn-warning' data-toggle='modal' data-target=#modal" + value.step + ">"
+                                    + "<b>" + value.step + "</b>"
+                                    + "</button>&nbsp;&nbsp;"
+                                    + "<div class='modal fade' id=modal" + value.step + " style=display: none;>"
+                                    + "<div class='modal-dialog'>"
+                                    + "<div class='modal-content'>"
+                                    + "<div class='modal-header'>"
+                                    + "<h4 class='modal-title'>" + "BƯỚC " + value.step + ":&nbsp;&nbsp;" + value.name + "</h4>"
+                                    + "</div>"
+                                    + "<div class='modal-body'>"
+                                    + "<p>" + value.content + "</p>"
+                                    + "</div>"
+                                    + "<div class='modal-footer'>"
+                                    + "<button type='button' class='btn btn-default pull-right' data-dismiss='modal'>Đóng"
+                                    + "</button>"
+                                    + "</div>"
+                                    + "</div>"
+                                    + "</div>"
+                                    + "</div>"
                                 );
                             });
                         }
