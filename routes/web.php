@@ -11,6 +11,7 @@
 |
 */
 
+Auth::routes(['register' => false]);
 
 //client
 Route::get('/', 'Client\ClientController@index')->name('index');
@@ -23,13 +24,6 @@ Route::get('/type_services/{id}', 'Client\ClientController@typeServices')->name(
 Route::get('/booking', 'Client\ClientController@booking')->name('booking');
 Route::get('/gallery', 'Client\ClientController@gallery')->name('gallery');
 // end client
-
-//login | logout
-Route::get('login', 'Auth\AuthController@login')->name('login');
-
-Route::post('login', 'Auth\AuthController@checkLogin')->name('login');
-
-Route::get('logout', 'Auth\AuthController@logout')->name('logout');
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
@@ -411,3 +405,4 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->name('introductions.update');
     });
 });
+

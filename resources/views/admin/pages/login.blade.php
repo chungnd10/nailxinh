@@ -29,7 +29,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="admin_assets/index2.html"><b>Nail</b>Xinh</a>
+        <a href="/">NailXinh</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -73,7 +73,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    <a href="#">Quên mật khẩu?</a><br>
+                    <a href="{{ route('password.request') }}">Quên mật khẩu?</a><br>
                 </div>
             </div>
         </form>

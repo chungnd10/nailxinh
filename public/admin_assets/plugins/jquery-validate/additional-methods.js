@@ -1511,13 +1511,13 @@
 
     $.validator.addMethod('phoneNumberVietNam', function (value) {
         return /(09|02|03|07|08|05)+([0-9]{8})$/.test(value);
-    }, 'Số điện thoại sai định dạng.');
+    }, '*Số điện thoại sai định dạng.');
     $.validator.addMethod('emailGood', function (value) {
         return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
-    }, 'Email sai định dạng.');
+    }, '*Email sai định dạng.');
 
     $.validator.addMethod("onlyVietnamese", function (value, element) {
         return this.optional(element) || /^[a-zA-ZAÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶEÉÈẺẼẸÊẾỀỂỄỆIÍÌỈĨỊOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢUÚÙỦŨỤƯỨỪỬỮỰYÝỲỶỸỴĐaáàảãạâấầẩẫậăắằẳẵặeéèẻẽẹêếềểễệiíìỉĩịoóòỏõọôốồổỗộơớờởỡợuúùủũụưứừửữựyýỳỷỹỵđ\s]+$/i.test(value);
-    }, "Chỉ nhận chữ cái !");
+    }, "*Chỉ nhận chữ cái !");
     return $;
 }));
