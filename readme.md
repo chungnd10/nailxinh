@@ -23,3 +23,13 @@
 // run project
 8: php artisan serve
 
+cấu hình thêm file env
+APP_NAME=NailXinh
+APP_URL=http://localhost:8000
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=nailxinh1@gmail.com
+MAIL_PASSWORD=Matkhau1
+MAIL_ENCRYPTION=tls
