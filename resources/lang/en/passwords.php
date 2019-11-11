@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'password' => 'Passwords must be at least eight characters and match the confirmation.',
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have e-mailed your password reset link!',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that e-mail address.",
+    'password' => '*Mật khẩu phải có ít nhất 8 ký tự và khớp với xác nhận.',
+    'reset' => '*Đặt lại mật khẩu thành công',
+    'sent' => '*Liên kết đặt lại mật khẩu đã được gửi vào email của bạn! Hãy kiểm tra email.',
+    'token' => '*Token đặt lại mật khẩu này không hợp lệ.',
+    'user' => "*Không tìm thấy tài khoản nào khớp với email bạn cung cấp",
 
 ];

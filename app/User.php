@@ -2,8 +2,8 @@
 
 namespace App;
 
+use App\Notifications\PasswordReset;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Config;
 
@@ -67,8 +67,9 @@ class User extends Authenticatable
         return $this->belongsTo(OperationStatus::class);
     }
 
-    public function services(){
-        return $this->belongsToMany(Service::class,'user_services');
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'user_services');
     }
 
     public function type_services()
@@ -101,5 +102,10 @@ class User extends Authenticatable
         $name = TypeOfService::whereIn('id', $list_id)->get();
 
         return $name;
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordReset($token));
     }
 }

@@ -85,8 +85,13 @@
                             </div>
                             <div class="pull-right">
                                 <a href="{{ route('logout') }}"
-                                   onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                    class="btn btn-default btn-flat">Đăng xuất</a>
+                                    <form id="logout-form"
+                                          action="{{ url('/logout') }}"
+                                          method="POST" style="display: none;">
+                                            @csrf
+                                    </form>
                             </div>
                         </li>
                     </ul>
