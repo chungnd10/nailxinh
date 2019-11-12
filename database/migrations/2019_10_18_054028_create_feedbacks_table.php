@@ -19,7 +19,7 @@ class CreateFeedbacksTable extends Migration
             $table->string('content', 300);
             $table->string('image', 300);
 
-            $table->unsignedInteger('display_status_id');
+            $table->unsignedInteger('display_status_id')->default(config('contants.display_status_hide'));
             $table->foreign('display_status_id')
                 ->references('id')
                 ->on('display_statuses')

@@ -136,7 +136,7 @@
                                                 @endif
                                         >{{ $item->name.", ".$item->address }}</option>
                                     @endforeach
-                                </select><br>
+                                </select>
                                 @if($errors->first('branch_id'))
                                     <span class="text-danger">{{ $errors->first('branch_id') }}</span>
                                 @endif
