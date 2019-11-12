@@ -40,10 +40,7 @@ class SlidesController extends Controller
     {
         $slide = new Slides();
 
-        //nếu có nhập ảnh ảnh
         if ($request->hasFile('images')) {
-
-            //lưu ảnh mới
             $file = $request->file('images');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/slides', $name);
@@ -59,7 +56,6 @@ class SlidesController extends Controller
         return redirect()->route('slides.index')->with($notify);
     }
 
-    //hiển thị để sửa
     public function show($id)
     {
         $slide = $this->slide_services->find($id);
@@ -67,19 +63,17 @@ class SlidesController extends Controller
         return view('admin.slides.show', compact('display_status', 'slide'));
     }
 
-    //update
     public function update(AddSlideRequest $request, $id)
     {
         $slide = $this->slide_services->find($id);
 
-        //nếu có nhập ảnh
         if ($request->hasFile('images')) {
-            // xoá ảnh cũ
-            if (file_exists('upload/images/slides/' . $slide->images) && $slide->images != 'slide-default.png') {
-                unlink('upload/images/slides/' . $slide->images);
+            if (file_exists('upload/images/slides/'.$slide->images)
+                && $slide->images != 'slide-default.png')
+            {
+                unlink('upload/images/slides/'.$slide->images);
             }
 
-            //lưu ảnh mới
             $file = $request->file('images');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/slides', $name);
@@ -95,12 +89,10 @@ class SlidesController extends Controller
         return redirect()->route('slides.index')->with($notify);
     }
 
-    //xóa slide
     public function destroy($id)
     {
         $slide = $this->slide_services->find($id);
 
-        // xoá ảnh cũ
         if (file_exists('upload/images/slides/'.$slide->images)
             && $slide->images != 'slide-default.png') {
             unlink('upload/images/slides/'.$slide->images);
@@ -115,7 +107,7 @@ class SlidesController extends Controller
         return redirect()->route('slides.index')->with($notify);
     }
 
-    //changeStatus
+    //changeStatus AJAX
     public function changeStatus(Request $request)
     {
         $slide = $this->slide_services->find($request->id);

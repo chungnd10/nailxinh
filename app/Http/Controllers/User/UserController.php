@@ -55,31 +55,27 @@ class UserController extends Controller
         $this->user_type_service_services = $user_type_service_services;
     }
 
-    // danh sách user
     public function index()
     {
         //nếu là admin thì lấy all
         if (Auth::user()->isAdmin()) {
-            //lấy dữ liệu
             $users = $this->user_services->allAndNotAdmin();
         }
         if (Auth::user()->isManager()) {
             // chủ tiệm thì lấy nhân viên của tiệm
             $users = $this->user_services->getUserWithBranch(Auth::user()->branch_id);
         }
-        // điều hướng
+
         return view('admin.users.index', compact('users'));
     }
 
-    //tạo mới người dùng
     public function create()
     {
-        //lấy dữ liệu
         $branchs = $this->branch_services->all();
         $genders = $this->gender_services->all();
         $roles = $this->role_services->allNotAdmin();
         $operation_status = $this->operation_status_services->all();
-        // điều hướng
+
         return view('admin.users.create', compact(
                 'branchs',
                 'genders',
@@ -88,29 +84,24 @@ class UserController extends Controller
         );
     }
 
-    // lưu người dùng mới
     public function store(AddUserRequest $request)
     {
-        // khai báo đối tượng
         $user = new User();
-        //lưu
+
         $user->fill($request->all())->save();
-        // xuất thông báo
+
         $notification = array(
             'message' => 'Thêm người dùng thành công !',
             'alert-type' => 'success'
         );
-        //điều hướng
+
         return redirect()->route('users.index')->with($notification);
     }
 
-    // hiển thị 1 user để sửa
     public function show($id)
     {
-        // tìm kiếm đối tượng
         $user = $this->user_services->find($id);
 
-        //lấy dữ liệu
         $branchs = $this->branch_services->all();
         $genders = $this->gender_services->all();
         $roles = $this->role_services->allNotAdmin();
@@ -119,8 +110,6 @@ class UserController extends Controller
         $services_of_user = $this->user_services_services->getServiceWithId($id);
         $type_services_of_user = $this->user_type_service_services->getTypeServicesOfUser($id);
 
-//        dd($type_services_of_user);
-        // điều hướng
         return view('admin.users.show', compact('user',
                 'branchs',
                 'genders',
@@ -133,49 +122,44 @@ class UserController extends Controller
         );
     }
 
-    // cập nhật thông tin 1 user
     public function update(AddUserRequest $request, $id)
     {
-        // khai báo đối tượng
         $user = $this->user_services->find($id);
-        //lưu
+
         $user->fill($request->all())->save();
-        // xuất thông báo
+
         $notify = array(
             'message' => 'Cập nhật người dùng thành công !',
             'alert-type' => 'success'
         );
-        //điều hướng
+
         return redirect()->route('users.index')->with($notify);
     }
 
-    //xóa 1 user
     public function destroy($id)
     {
-        //tìm kiếm đối tượng
         $user = $this->user_services->find($id);
-        // xoá ảnh cũ
-        if (file_exists('upload/images/users/' . $user->avatar) && $user->avatar != 'avatar-default.png') {
-            unlink('upload/images/users/' . $user->avatar);
+
+        if (file_exists('upload/images/users/'.$user->avatar)
+            && $user->avatar != 'avatar-default.png')
+        {
+            unlink('upload/images/users/'.$user->avatar);
         }
-        // thực thi xóa
+
         $user->delete();
-        //xuất thông báo
+
         $notify = array(
             'alert-type' => 'success',
             'message' => 'Xoá người dùng thành công !'
         );
-        // điều hướng
+
         return redirect()->route('users.index')->with($notify);
     }
 
-    // đặt lại mật khẩu
     public function setPassword(Request $request, $id)
     {
-        // tìm kiếm đối tượng
         $user = $this->user_services->find($id);
 
-        //validate
         $validator = Validator::make($request->all(),
             [
                 'password' => 'required|min:6|max:40',
@@ -190,52 +174,47 @@ class UserController extends Controller
             ]
         );
 
-        // điều hướng nếu lỗi
         if ($validator->fails()) {
-            return redirect()->route('users.update', $id . '#tab_2')
+            return redirect()->route('users.update', $id.'#tab_2')
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        //lưu
         $user->password = Hash::make($request->password);
         $user->save();
-        // xuất thông báo
+
         $notify = array(
             'message' => 'Đặt lại mật khẩu thành công !',
             'alert-type' => 'success'
         );
-        // điều hướng
+
         return redirect()->route('users.index')->with($notify);
     }
 
     //set services cho nhan vien
     public function setServices(Request $request, $id)
     {
-        //tìm kiếm đối tượng
         $user = $this->user_services->find($id);
-        // lấy dữ liệu
+
         $services_id = $request->input('services_id');
         $type_services_id = $request->input('type_services_id');
-        //lưu
+
         $user->type_services()->sync($type_services_id);
         $user->services()->sync($services_id);
-        //xuất thông báo
+
         $notify = array(
             'message' => 'Cập nhật thông tin thành công !',
             'alert-type' => 'success'
         );
-        // điều hướng
+
         return redirect()->route('users.show', $id . '#tab_3')->with($notify);
 
     }
 
-    //đổi mật khẩu
     public function changePassword(Request $request, $id)
     {
-        // tìm kiếm đối tượng
         $user = $this->user_services->find($id);
-        //validate
+
         $validator = Validator::make($request->all(),
             [
                 'old_password' => 'required',
@@ -251,23 +230,23 @@ class UserController extends Controller
                 'cf_password.same' => 'Nhập lại mật khẩu không đúng',
             ]
         );
-        // điều hướng nếu lỗi
+
         if ($validator->fails()) {
             return redirect()->route('profile', $id . '#tab_2')
                 ->withErrors($validator)
                 ->withInput();
         }
-        // kiểm tra đúng email và mật khẩu
+
         if (Auth::attempt(['email' => Auth::user()->email, 'password' => $request->old_password])) {
-            //lưu
+
             $user->password = Hash::make($request->password);
             $user->save();
-            // xuất thông báo
+
             $notify = array(
                 'message' => 'Thay đổi mật khẩu thành công !',
                 'alert-type' => 'success'
             );
-            // điều hướng
+
             return redirect()->route('profile', $id)->with($notify);
         } else {
             return redirect()->route('profile', $id . '#tab_2')
@@ -275,12 +254,10 @@ class UserController extends Controller
         }
     }
 
-    // thông tin user
     public function profile($id)
     {
-        //tìm kiếm đối tượng
         $user = $this->user_services->find($id);
-        // trả về trang 404 nếu không tìm thấy
+
         if ($user) {
             if (Auth::user()->id != $user->id) {
                 return view('admin.errors.404');
@@ -288,12 +265,12 @@ class UserController extends Controller
         } else {
             return view('admin.errors.404');
         }
-        //lấy dữ liệu
+
         $branchs = $this->branch_services->all();
         $genders = $this->gender_services->all();
         $roles = $this->role_services->allNotAdmin();
         $operation_status = $this->operation_status_services->all();
-        //điều hướng
+
         return view('admin.users.profile', compact('user',
                 'branchs',
                 'genders',
@@ -302,12 +279,11 @@ class UserController extends Controller
         );
     }
 
-    // cập nhật ảnh user
     public function updateImageProfile(Request $request, $id)
     {
-        //tìm đối tượng
+
         $user = $this->user_services->find($id);
-        //validate
+
         $request->validate(
             [
                 'avatar' => 'required|mimes:png,jpg,jpeg'
@@ -317,20 +293,19 @@ class UserController extends Controller
                 'avatar.mimes' => 'Chỉ chấp nhận ảnh JPG, JPEG, PNG'
             ]
         );
-        //nếu có nhập ảnh ảnh
+
         if ($request->hasFile('avatar')) {
-            // xoá ảnh cũ
             if (file_exists('upload/images/users/'.$user->avatar)
                 && $user->avatar != 'avatar-default.png') {
                 unlink('upload/images/users/'.$user->avatar);
             }
-            //lưu ảnh mới
+
             $file = $request->file('avatar');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/users', $name);
             $user->avatar = $name;
         }
-        //lưu
+
         $user->save();
         $notify = array(
             'message' => 'Cập nhật ảnh thành công',
@@ -339,23 +314,20 @@ class UserController extends Controller
         return redirect()->route('admin.index')->with($notify);
     }
 
-    // cập nhật thông tin user
     public function updateProfile(UpdateProfileRequest $request, $id)
     {
-        //tìm đối tượng
         $user = $this->user_services->find($id);
-        //lưu
+
         $user->fill($request->all())->save();
-        // xuất thông báo
+
         $notify = array(
             'message' => 'Cập nhật thông tin thành công !',
             'alert-type' => 'success'
         );
-        //điều hướng
+
         return redirect()->route('admin.index')->with($notify);
     }
 
-    // thay đổi trạng thái
     public function changeStatus(Request $request)
     {
         $user = $this->user_services->find($request->id);
@@ -373,7 +345,6 @@ class UserController extends Controller
         $file = $request->file('image');
 
         if (!empty($file)) {
-
             $filename = time() . '.png';
             $folderPath = "upload/images/users/";
             $path = "$folderPath/$filename";

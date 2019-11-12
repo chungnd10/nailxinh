@@ -17,41 +17,37 @@ class WebSettingsController extends Controller
         $this->web_setting_services = $web_setting_services;
     }
 
-    // hiển thị thông tin
-    public function index($id)
+    public function index()
     {
-        //tìm đối tượng
-        $item = $this->web_setting_services->find($id);
-        // điều hướng
+        $item = $this->web_setting_services->first();
         return view('admin.web_settings.index', compact('item'));
     }
 
-    // cập nhật thông tin
-    public function update(WebSettingRequest $request, $id)
+    public function update(WebSettingRequest $request)
     {
-        // tìm đối tượng
-        $item = $this->web_setting_services->find($id);
-        //nếu có nhập ảnh ảnh
+
+        $item = $this->web_setting_services->first();
+
         if ($request->hasFile('avatar')) {
-            // xoá ảnh cũ
-            if (file_exists('upload/images/web_settings/'.$item->logo) && $item->logo != 'logo-default.png')
+            if (file_exists('upload/images/web_settings/'.$item->logo)
+                && $item->logo != 'logo-default.png')
             {
                 unlink('upload/images/web_settings/'.$item->logo);
             }
-            //lưu ảnh mới
+
             $file = $request->file('avatar');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/web_settings', $name);
             $item->logo = $name;
         }
-        //lưu
+
         $item->fill($request->all())->save();
-        // thông báo
+
         $notify = array(
             'message' => 'Cập nhật thông tin thành công',
             'alert-type' => 'success'
         );
-        // điều hướng
+
         return redirect()->route('admin.index')->with($notify);
     }
 }

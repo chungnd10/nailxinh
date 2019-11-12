@@ -67,6 +67,8 @@
                                     >&nbsp;&nbsp;
                                     {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 @endforeach
+                                <br>
+                                <label id="gender_id-error" class="error" for="gender_id"></label>
                                 @if($errors->first('gender_id'))
                                     <span class="text-danger">{{ $errors->first('gender_id') }}</span>
                                 @endif
@@ -84,6 +86,8 @@
                                     >&nbsp;&nbsp;
                                     {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 @endforeach
+                                <br>
+                                <label id="operation_status_id-error" class="error" for="operation_status_id"></label>
                                 @if($errors->first('operation_status_id'))
                                     <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
                                 @endif
@@ -222,35 +226,22 @@
 
                 messages: {
                     full_name: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được vượt quá 100 ký tự",
+                        maxlength: "*Không được vượt quá 100 ký tự",
                     },
                     phone_number: {
-                        required: "Mục này không được để trống",
                     },
-                    birthday: "Mục này không được để trống",
+                    birthday: "*Mục này không được để trống",
                     address: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được vượt quá 200 ký tự",
+                        maxlength: "*Không được vượt quá 200 ký tự",
                     },
                     password: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 6-40 ký tự",
-                        maxlength: "Yêu cầu từ 6-40 ký tự",
-                    },
-                    cf_password: {
-                        required: "Mục này không được để trống",
-                        equalTo: "Nhập lại mật khẩu không đúng"
+                        minlength: "*Yêu cầu từ 6-40 ký tự",
+                        maxlength: "*Yêu cầu từ 6-40 ký tự",
                     },
                     email: {
-                        required: "Mục này không được để trống",
-                        email: "Email không đúng định dạng",
-                        maxlength: "Không được vượt quá 200 ký tự",
+                        email: "*Email không đúng định dạng",
+                        maxlength: "*Không được vượt quá 200 ký tự",
                     },
-                    branch_id: "Mục này không được để trống",
-                    role_id: "Mục này không được để trống",
-                    gender_id: "Mục này không được để trống",
-                    operation_status_id: "Mục này không được để trống",
                 }
             });
         });

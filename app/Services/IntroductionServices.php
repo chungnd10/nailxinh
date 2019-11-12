@@ -5,9 +5,9 @@ use App\Introduction;
 
 class IntroductionServices
 {
-    public function find($id)
+    public function first()
     {
-        $introduction = Introduction::find($id);
+        $introduction = Introduction::first();
         return $introduction;
     }
 }

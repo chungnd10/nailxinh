@@ -341,14 +341,13 @@
                 rules: {
                     avatar: {
                         required: true,
-                        extension: "jpg|jpeg|png"
+                        extension: "*jpg|jpeg|png"
                     },
                 },
 
                 messages: {
                     avatar: {
-                        required: "Hãy chọn ảnh",
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG"
                     }
                 }
             });
@@ -374,17 +373,13 @@
 
                 messages: {
                     full_name: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được nhập quá 100 ký tự",
-                        alpha: "Mục này không được để trống"
+                        maxlength: "*Không được nhập quá 100 ký tự",
                     },
                     phone_number: {
-                        required: "Mục này không được để trống",
                     },
-                    birthday: "Mục này không được để trống",
+                    birthday: "*Mục này không được để trống",
                     address: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được nhập quá 200 ký tự",
+                        maxlength: "*Không được nhập quá 200 ký tự",
                     },
                 }
             });
@@ -405,16 +400,9 @@
                     },
                 },
                 messages: {
-                    old_password: {
-                        required: "Mục này không được để trống",
-                    },
                     password: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 6-40 ký tự",
-                        maxlength: "Yêu cầu từ 6-40 ký tự",
-                    },
-                    cf_password: {
-                        equalTo: "Nhập lại mật khẩu không đúng"
+                        minlength: "*Yêu cầu từ 6-40 ký tự",
+                        maxlength: "*Yêu cầu từ 6-40 ký tự",
                     }
                 }
             });

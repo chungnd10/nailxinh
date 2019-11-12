@@ -352,11 +352,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     // web_settings
     Route::prefix('web-settings')->group(function () {
 
-        Route::get('{id}', 'WebSettings\WebSettingsController@index')
+        Route::get('', 'WebSettings\WebSettingsController@index')
             ->middleware('can:view-web-settings')
             ->name('web-settings.index');
 
-        Route::post('update/{id}', 'WebSettings\WebSettingsController@update')
+        Route::post('update', 'WebSettings\WebSettingsController@update')
             ->middleware('can:edit-web-settings')
             ->name('web-settings.update');
     });
@@ -396,11 +396,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     //introductions
     Route::prefix('introductions')->group(function () {
 
-        Route::get('{id}', 'Introduction\IntroductionController@index')
+        Route::get('', 'Introduction\IntroductionController@index')
             ->middleware('can:edit-introduction-page')
             ->name('introductions.index');
 
-        Route::post('update/{id}', 'Introduction\IntroductionController@update')
+        Route::post('update', 'Introduction\IntroductionController@update')
             ->middleware('can:edit-introduction-page')
             ->name('introductions.update');
     });

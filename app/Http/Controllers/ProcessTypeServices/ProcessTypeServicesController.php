@@ -37,7 +37,7 @@ class ProcessTypeServicesController extends Controller
     {
         $process = new ProcessOfService();
         $process->fill($request->all())->save();
-        // xuất thông báo
+
         $notification = array(
             'message' => 'Thêm quy trình thành công !',
             'alert-type' => 'success'
@@ -55,28 +55,28 @@ class ProcessTypeServicesController extends Controller
     public function update(AddProcessRequest $request, $id)
     {
         $process = $this->process_of_services->find($id);
-        //lưu
+
         $process->fill($request->all())->save();
-        // xuất thông báo
+
         $notify = array(
             'message' => 'Cập nhật quy trình thành công !',
             'alert-type' => 'success'
         );
-        //điều hướng
+
         return redirect()->route('process-type-services.index')->with($notify);
     }
 
     public function destroy($id)
     {
         $process = $this->process_of_services->find($id);
-        // thực thi xóa
+
         $process->delete();
-        //xuất thông báo
+
         $notify = array(
             'alert-type' => 'success',
             'message' => 'Xoá quy trình thành công !'
         );
-        // điều hướng
+
         return redirect()->route('process-type-services.index')->with($notify);
     }
 

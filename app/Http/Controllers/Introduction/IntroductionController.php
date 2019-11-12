@@ -17,24 +17,23 @@ class IntroductionController extends Controller
         $this->introduction_services = $introduction_services;
     }
 
-    public function index($id)
+    public function index()
     {
-        $item = $this->introduction_services->find($id);
+        $item = $this->introduction_services->first();
         return view('admin.introductions.index', compact('item'));
     }
 
-    public function update(IntroductionRequest $request, $id)
+    public function update(IntroductionRequest $request)
     {
-        $item = $this->introduction_services->find($id);
+        $item = $this->introduction_services->first();
 
-        //nếu có nhập ảnh ảnh
         if ($request->hasFile('image')) {
-            // xoá ảnh cũ
-            if (file_exists('upload/images/introductions/'.$item->image) && $item->image != 'img-default.png')
+            if (file_exists('upload/images/introductions/'.$item->image)
+                && $item->image != 'img-default.png')
             {
                 unlink('upload/images/introductions/'.$item->image);
             }
-            //lưu ảnh mới
+
             $file = $request->file('image');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/introductions', $name);

@@ -25,9 +25,9 @@ class AddFeebackRequest extends FormRequest
     {
         //trường hợp sửa
         $validate = [
-            'image' => 'nullable|mimes:png,jpg,jpeg',
-            'content' => 'required|max:300',
-            'full_name' => 'required|max:100',
+            'image'         => 'nullable|mimes:png,jpg,jpeg',
+            'content'       => 'required|max:300',
+            'full_name'     => 'required|max:100',
         ];
 
         //trường hợp thêm
@@ -41,12 +41,12 @@ class AddFeebackRequest extends FormRequest
     public function messages()
     {
         return [
-            'image.required'        => 'Mục này không được để trống',
-            'image.mimes'           => 'Chỉ chấp nhận ảnh PNG, JPG, JPEG',
-            'full_name.required'    => 'Mục này không được để trống',
-            'full_name.max'         => 'Không được vượt quá 100 ký tự',
-            'content.required'      => 'Mục này không được để trống',
-            'content.max'           => 'Không được vượt quá 300 ký tự',
+            'image.required'        => '*Mục này không được để trống',
+            'image.mimes'           => '*Chỉ chấp nhận ảnh PNG, JPG, JPEG',
+            'full_name.required'    => '*Mục này không được để trống',
+            'full_name.max'         => '*Không được vượt quá 100 ký tự',
+            'content.required'      => '*Mục này không được để trống',
+            'content.max'           => '*Không được vượt quá 300 ký tự',
         ];
     }
 }

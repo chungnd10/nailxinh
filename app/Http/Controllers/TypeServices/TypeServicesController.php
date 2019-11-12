@@ -66,7 +66,8 @@ class TypeServicesController extends Controller
 
         if ($request->hasFile('image')) {
             if (file_exists('upload/images/type_services/' . $type_of_service->image)
-                && $type_of_service->image != 'type_of_services_default.png') {
+                && $type_of_service->image != 'type_of_services_default.png')
+            {
                 unlink('upload/images/type_services/' . $type_of_service->image);
             }
             $file = $request->file('image');
@@ -90,7 +91,8 @@ class TypeServicesController extends Controller
         $type_of_service = $this->type_services->find($id);
 
         if (file_exists('upload/images/type_services/' . $type_of_service->image)
-            && $type_of_service->image != 'type_of_services_default.png') {
+            && $type_of_service->image != 'type_of_services_default.png')
+        {
             unlink('upload/images/type_services/' . $type_of_service->image);
         }
 

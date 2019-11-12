@@ -113,15 +113,13 @@
 
                 messages: {
                     avatar: {
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF"
+                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF"
                     },
                     title: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được vượt quá 100 ký tự",
+                        maxlength: "*Không được vượt quá 100 ký tự",
                     },
                     content: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được vượt quá 600 ký tự",
+                        maxlength: "*Không được vượt quá 600 ký tự",
                     }
                 }
             });

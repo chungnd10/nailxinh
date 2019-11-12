@@ -117,23 +117,18 @@
 
                 messages: {
                     title: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được vượt quá 100 ký tự",
+                        maxlength: "*Không được vượt quá 100 ký tự",
                     },
                     description: {
-                        maxlength: "Không được vượt quá 200 ký tự",
+                        maxlength: "*Không được vượt quá 200 ký tự",
                     },
                     money_level: {
-                        required: "Mục này không được để trống",
-                        number: "Yêu cầu nhập số",
-                        min: "Yêu cầu giá trị từ 0 - 1.000.000.000",
-                        max: "Yêu cầu giá trị từ 0 - 1.000.000.000",
+                        min: "*Yêu cầu giá trị từ 0 - 1.000.000.000",
+                        max: "*Yêu cầu giá trị từ 0 - 1.000.000.000",
                     },
                     discount_level: {
-                        required: "Mục này không được để trống",
-                        number: "Yêu cầu nhập số",
-                        min: "Yêu cầu giá trị từ 0 - 100",
-                        max: "Yêu cầu giá trị từ 0 - 100",
+                        min: "*Yêu cầu giá trị từ 0 - 100",
+                        max: "*Yêu cầu giá trị từ 0 - 100",
                     }
                 }
             });
