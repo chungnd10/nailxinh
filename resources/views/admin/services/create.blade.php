@@ -159,29 +159,21 @@
                 },
 
                 messages: {
-                    type_of_services_id: {
-                        required: "Mục này không được để trống",
-                    },
                     image: {
-                        required: "Mục này không được để trống",
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG"
                     },
                     name: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được vượt quá 100 ký tự",
+                        maxlength: "*Không được vượt quá 100 ký tự",
                     },
                     price: {
-                        required: "Mục này không được để trống",
-                        number: "Giá dịch vụ phải là số",
-                        min: "Yêu cầu giá trị từ 1-1.000.000.000",
-                        max: "Yêu cầu giá trị từ 1-1.000.000.000",
+                        min: "*Yêu cầu giá trị từ 1-1.000.000.000",
+                        max: "*Yêu cầu giá trị từ 1-1.000.000.000",
                     },
                     completion_time: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được vượt quá 100 ký tự",
+                        maxlength: "*Không được vượt quá 100 ký tự",
                     },
                     description: {
-                        maxlength: "Không được vượt quá 300 ký tự",
+                        maxlength: "*Không được vượt quá 300 ký tự",
                     }
                 }
             });

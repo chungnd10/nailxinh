@@ -6,15 +6,10 @@ use App\WebSetting;
 
 class WebSettingServices
 {
-    public function all()
+    public function first()
     {
-        $info = WebSetting::find(config('contants.web_settings'));
+        $info = WebSetting::first();
         return $info;
     }
 
-    public function find($id)
-    {
-        $info = WebSetting::find($id);
-        return $info;
-    }
 }

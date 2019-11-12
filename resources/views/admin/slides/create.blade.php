@@ -54,6 +54,8 @@
                                     >&nbsp;&nbsp;
                                     {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 @endforeach
+                                <br>
+                                <label id="display_status_id-error" class="error" for="display_status_id"></label>
                                 @if($errors->first('display_status_id'))
                                     <span class="text-danger">{{ $errors->first('display_status_id') }}</span>
                                 @endif
@@ -86,6 +88,7 @@
                                            checked
                                            @endif
                                        value="{{ config('contants.location_display_right') }}"> Bên phải <br>
+                                <label id="location_display-error" class="error" for="location_display"></label>
                                 @if($errors->first('location_display'))
                                     <span class="text-danger">{{ $errors->first('location_display') }}</span>
                                 @endif
@@ -162,25 +165,14 @@
 
                 messages: {
                     images: {
-                        required: "Mục này không được để trống",
                         extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF"
                     },
-                    url: {
-                        url: "Url không đúng định dạng"
-                    },
-                    display_status_id: {
-                        required: "Mục này không được để trống",
-                    },
                     title: {
-                        required: "Mục này không được để trống",
                         maxlength: 'Không được vượt quá 120 ký tự',
                     },
                     description: {
                         maxlength: 'Không được vượt quá 200 ký tự',
                     },
-                    location_display: {
-                        required: "Mục này không được để trống",
-                    }
                 }
             });
 

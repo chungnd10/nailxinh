@@ -23,7 +23,6 @@ class MembershipTypeController extends Controller
         return view('admin.membership_type.index', compact('membership_type'));
     }
 
-    //tạo mới
     public function create()
     {
         return view('admin.membership_type.create');
@@ -41,13 +40,11 @@ class MembershipTypeController extends Controller
         return redirect()->route('membership_type.index')->with($notify);
     }
 
-    //hiển thị để sửa
     public function show($id){
         $membership_type = MembershipType::find($id);
         return view('admin.membership_type.show', compact('membership_type'));
     }
 
-    //cập nhật
     public function update(MembershipTypeRequest $request, $id)
     {
         $membership_type = MembershipType::find($id);
@@ -61,7 +58,6 @@ class MembershipTypeController extends Controller
         return redirect()->route('membership_type.index')->with($notify);
     }
 
-    //xóa
     public function destroy($id)
     {
         $membership_type = MembershipType::find($id);

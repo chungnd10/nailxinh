@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Sai tài khoản hoặc mật khẩu.',
-    'throttle' => 'Quá nhiều lần thử đăng nhập. Vui lòng thử lại sau :seconds giây.',
+    'failed' => '*Sai tài khoản hoặc mật khẩu.',
+    'throttle' => '*Quá nhiều lần thử đăng nhập. Vui lòng thử lại sau :seconds giây.',
 
 ];

@@ -109,20 +109,14 @@
 
             	messages: {
             		name: {
-            			required: "Mục này không được để trống",
-						maxlength : "Không được vượt quá 100 ký tự"
-            		},
-            		city_id: {
-            			required: "Vui lòng chọn thành phố",
+						maxlength : "*Không được vượt quá 100 ký tự"
             		},
             		phone_number: {
-            			required: "Mục này không được để trống",
-						maxlength : "Không được vượt quá 11 ký tự"
+						maxlength : "*Không được vượt quá 11 ký tự"
             		},
             		address: {
-            			required: "Mục này không được để trống",
-            			minlength: "Yêu cầu tối thiểu 5 ký tự",
-						maxlength : "Không được vượt quá 200 ký tự"
+            			minlength: "*Yêu cầu tối thiểu 5 ký tự",
+						maxlength : "*Không được vượt quá 200 ký tự"
             		},
             	}
             });

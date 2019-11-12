@@ -102,15 +102,13 @@
 
             	messages: {
             		image: {
-            			extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+            			extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG"
             		},
             		name: {
-            			required: "Mục này không được để trống",
-            			maxlength: "Không được vượt quá 100 ký tự",
+            			maxlength: "*Không được vượt quá 100 ký tự",
             		},
             		description: {
-            			required: "Mục này không được để trống",
-						maxlength: "Không được vượt quá 300 ký tự",
+						maxlength: "*Không được vượt quá 300 ký tự",
             		}
             	}
             });

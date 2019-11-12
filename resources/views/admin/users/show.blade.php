@@ -84,6 +84,8 @@
                                             @endif
                                             {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         @endforeach
+                                        <br>
+                                        <label id="gender_id-error" class="error" for="gender_id"></label>
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
@@ -98,6 +100,9 @@
                                             >&nbsp;&nbsp;
                                             {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         @endforeach
+                                        <br>
+                                        <label id="operation_status_id-error" class="error"
+                                               for="operation_status_id"></label>
                                         @if($errors->first('operation_status_id'))
                                             <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
                                         @endif
@@ -243,15 +248,15 @@
                                     <div class="col-md-3">
                                         <div class="list-group">
                                             <div class="list-group-item active">
-                                               <input type="checkbox"
-                                                   name="type_services_id[]"
-                                                   value="{{ $type_service->id }}"
-                                                      @foreach($type_services_of_user as $item)
-                                                          @if($item->type_of_service_id == $type_service->id)
-                                                             checked
-                                                          @endif
-                                                      @endforeach
-                                               >
+                                                <input type="checkbox"
+                                                       name="type_services_id[]"
+                                                       value="{{ $type_service->id }}"
+                                                       @foreach($type_services_of_user as $item)
+                                                       @if($item->type_of_service_id == $type_service->id)
+                                                       checked
+                                                        @endif
+                                                        @endforeach
+                                                >
                                                 <label>{{ $type_service->name }}</label>
                                             </div>
                                             @if($type_service->showServices($type_service->id)->isEmpty())
@@ -264,9 +269,9 @@
                                                     <label>
                                                         <input type="checkbox"
                                                                @foreach($services_of_user as $services_of_users)
-                                                                   @if($services_of_users->service_id == $service->id)
-                                                                   checked
-                                                                   @endif
+                                                               @if($services_of_users->service_id == $service->id)
+                                                               checked
+                                                               @endif
                                                                @endforeach
                                                                name="services_id[]"
                                                                value="{{ $service->id }}"
@@ -346,30 +351,17 @@
 
                 messages: {
                     full_name: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được vượt quá 100 ký tự",
+                        maxlength: "*Không được vượt quá 100 ký tự",
                     },
                     phone_number: {
-                        required: "Mục này không được để trống",
                     },
-                    birthday: "Mục này không được để trống",
                     address: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được vượt quá 200 ký tự",
+                        maxlength: "*Không được vượt quá 200 ký tự",
                     },
                     password: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 6-40 ký tự",
-                        maxlength: "Yêu cầu từ 6-40 ký tự",
-                    },
-                    cf_password: {
-                        required: "Mục này không được để trống",
-                        equalTo: "Nhập lại mật khẩu không đúng"
-                    },
-                    branch_id: "Mục này không được để trống",
-                    role_id: "Mục này không được để trống",
-                    gender_id: "Mục này không được để trống",
-                    operation_status_id: "Mục này không được để trống",
+                        minlength: "*Yêu cầu từ 6-40 ký tự",
+                        maxlength: "*Yêu cầu từ 6-40 ký tự",
+                    }
                 }
             });
 
@@ -387,7 +379,6 @@
                 },
                 messages: {
                     password: {
-                        required: "Mục này không được để trống",
                         minlength: "Yêu cầu từ 6-40 ký tự",
                         maxlength: "Yêu cầu từ 6-40 ký tự",
                     },

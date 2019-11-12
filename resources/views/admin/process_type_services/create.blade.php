@@ -133,23 +133,16 @@
                     }
                 },
                 messages: {
-                    type_of_services_id: {
-                        required: "Mục này không được để trống",
-                    },
                     name: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 1-100 ký tự",
-                        maxlength: "Yêu cầu từ 1-100 ký tự",
+                        minlength: "*Yêu cầu từ 1-100 ký tự",
+                        maxlength: "*Yêu cầu từ 1-100 ký tự",
                     },
                     step: {
-                        required: "Mục này không được để trống",
-                        number: "Vui lòng nhập số",
-                        min: "Yêu cầu giá trị từ 1-100 ",
-                        max: "Yêu cầu giá trị từ 1-100 "
+                        min: "*Yêu cầu giá trị từ 1-100 ",
+                        max: "*Yêu cầu giá trị từ 1-100 "
                     },
                     content: {
-                        required: "Mục này không được để trống",
-                        maxlength: "Không được vượt quá 200 ký tự"
+                        maxlength: "*Không được vượt quá 200 ký tự"
                     }
                 }
             });

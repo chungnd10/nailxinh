@@ -191,31 +191,24 @@
                         extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF"
                     },
                     phone_number: {
-                        required: "Mục này không được để trống",
                         maxlength: "Không được vượt quá 11 ký tự"
                     },
                     email: {
-                        required: "Mục này không được để trống",
                         maxlength: "Không được vượt quá 200 ký tự"
                     },
                     open_time: {
-                        required: "Mục này không được để trống",
                         maxlength: "Không được vượt quá 50 ký tự"
                     },
                     close_time: {
-                        required: "Mục này không được để trống",
                         maxlength: "Không được vượt quá 50 ký tự"
                     },
                     address: {
-                        required: true,
                         maxlength: "Không được vượt quá 200 ký tự"
                     },
                     facebook: {
-                        required: true,
                         maxlength: "Không được vượt quá 300 ký tự"
                     },
                     introduction: {
-                        required: true,
                         maxlength: "Không được vượt quá 200 ký tự"
                     },
                 }

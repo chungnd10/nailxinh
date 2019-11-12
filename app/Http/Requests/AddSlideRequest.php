@@ -26,8 +26,8 @@ class AddSlideRequest extends FormRequest
         //trường hợp thêm slide
         if (!$this->id)
         {
-            $validate['images'] = 'required|mimes:jpg,jpeg,png,gif';
-            $validate['display_status_id'] = 'required';
+            $validate['images']             = 'required|mimes:jpg,jpeg,png,gif';
+            $validate['display_status_id']  = 'required';
         }
         return $validate;
     }
@@ -35,14 +35,14 @@ class AddSlideRequest extends FormRequest
     public function messages()
     {
         return [
-            'images.required'               => 'Mục này không được để trống',
-            'images.mimes'                  => 'Chỉ chấp nhận JPG, JPEG, PNG, GIF',
-            'url.url'                       => 'Url sai định dạng',
-            'url.max'                       => 'Không được vượt quá 300 ký tự',
-            'title.max'                     => 'Không được vượt quá 120 ký tự',
-            'description.max'               => 'Không được vượt quá 200 ký tự',
-            'location_display.required'     => 'Mục này không được để trống',
-            'display_status_id.required'    => 'Mục này không được để trống',
+            'images.required'               => '*Mục này không được để trống',
+            'images.mimes'                  => '*Chỉ chấp nhận JPG, JPEG, PNG, GIF',
+            'url.url'                       => '*Url sai định dạng',
+            'url.max'                       => '*Không được vượt quá 300 ký tự',
+            'title.max'                     => '*Không được vượt quá 120 ký tự',
+            'description.max'               => '*Không được vượt quá 200 ký tự',
+            'location_display.required'     => '*Mục này không được để trống',
+            'display_status_id.required'    => '*Mục này không được để trống',
         ];
     }
 }

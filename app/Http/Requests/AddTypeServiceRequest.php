@@ -26,13 +26,13 @@ class AddTypeServiceRequest extends FormRequest
     {
         // trường hợp sửa
         $validate = [
-            'name' => [
+            'name'          => [
                'required',
                'max:100',
                Rule::unique('type_of_services')->ignore($this->id),
             ] ,
-            'description' => 'required|max:300',
-            'image' => 'nullable|mimes:png,jpg,jpeg'
+            'description'   => 'required|max:300',
+            'image'         => 'nullable|mimes:png,jpg,jpeg'
         ];
 
         // trường hợp thêm
@@ -46,13 +46,13 @@ class AddTypeServiceRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Mục này không được để trống',
-            'name.max' => 'Không được vượt quá 100 ký tự',
-            'name.unique' => 'Tên đã được sử dụng',
-            'image.required' => 'Mục này không được để trống',
-            'image.mimes' => 'Chỉ chấp nhận ảnh JPG, JPEG, PNG',
-            'description.required' => 'Mục này không được để trống',
-            'description.max' => 'Không được vượt quá 300 ký tự',
+            'name.required'             => '*Mục này không được để trống',
+            'name.max'                  => '*Không được vượt quá 100 ký tự',
+            'name.unique'               => '*Tên đã được sử dụng',
+            'image.required'            => '*Mục này không được để trống',
+            'image.mimes'               => '*Chỉ chấp nhận ảnh JPG, JPEG, PNG',
+            'description.required'      => '*Mục này không được để trống',
+            'description.max'           => '*Không được vượt quá 300 ký tự',
         ];
     }
 

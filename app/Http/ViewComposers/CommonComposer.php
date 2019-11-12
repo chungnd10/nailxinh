@@ -22,7 +22,7 @@ class CommonComposer
 
     public function compose(View $view)
     {
-        $view->with( 'info', $this->web_setting_services->all() );
+        $view->with( 'info', $this->web_setting_services->first() );
 
         $view->with( 'type_services', $this->type_services->all() );
     }

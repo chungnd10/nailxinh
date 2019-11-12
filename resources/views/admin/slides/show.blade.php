@@ -56,6 +56,7 @@
                                     >&nbsp;&nbsp;
                                     {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 @endforeach
+                                <label id="display_status_id-error" class="error" for="display_status_id"></label>
                                 @if($errors->first('display_status_id'))
                                     <span class="text-danger">{{ $errors->first('display_status_id') }}</span>
                                 @endif
@@ -75,7 +76,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label for="">Vị trí hiển thị tiêu đề</label><span class="text-danger">*</span><br><br>
+                                <label for="">Vị trí hiển thị tiêu đề</label><span class="text-danger">*</span><br>
                                 <input type="radio"
                                        name="location_display"
                                        @if( $slide->location_display == config('contants.location_display_left'))
@@ -88,6 +89,7 @@
                                        checked
                                        @endif
                                        value="{{ config('contants.location_display_right') }}"> Bên phải <br>
+                                <label id="location_display-error" class="error" for="location_display"></label>
                                 @if($errors->first('location_display'))
                                     <span class="text-danger">{{ $errors->first('location_display') }}</span>
                                 @endif
