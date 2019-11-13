@@ -207,7 +207,7 @@ class UserController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('users.show', $id . '#tab_3')->with($notify);
+        return redirect()->route('users.index')->with($notify);
 
     }
 
