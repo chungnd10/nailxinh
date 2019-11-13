@@ -25,15 +25,14 @@
     <section id="booking" style="padding-top:80px;">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 offset-md-2">
+                <div class=" col-lg-8 offset-lg-2 col-md-12">
                     <form action="" id="booking-form">
                         <div class="row">
-                            <div class="col-md-12 d-flex justify-content-between mb-3">
+                            <div class="col-md-12 mb-3">
                                 <span class="text-pink">Thông tin của bạn</span>
-                                <span class="text-danger">(*) Bắt buộc nhập dữ liệu</span>
                             </div>
                             <div class="form-group col-md-12">
-                                <input type="text" class="form-control form-border" value=""
+                                <input type="text" class="form-control form-border form-require" value=""
                                        placeholder="Số điện thoại">
                             </div>
                             <div class="form-group col-md-4">
@@ -44,7 +43,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-8">
-                                <input type="text" class="form-control form-border" value="" placeholder="Họ và tên">
+                                <input type="text" class="form-control form-border form-require" value="" placeholder="Họ và tên">
                             </div>
                             <div class="adress col-md-12">
                                 <div class="mb-3">
