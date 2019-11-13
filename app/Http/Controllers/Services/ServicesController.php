@@ -28,12 +28,14 @@ class ServicesController extends Controller
     public function index()
     {
         $services = $this->service_services->all();
+
         return view('admin.services.index', compact('services'));
     }
 
     public function create()
     {
         $type_of_services = $this->type_services->all();
+
         return view('admin.services.create', compact('type_of_services'));
     }
 
@@ -41,7 +43,8 @@ class ServicesController extends Controller
     {
         $service = new Service();
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image'))
+        {
             $file = $request->file('image');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/service', $name);
@@ -52,10 +55,7 @@ class ServicesController extends Controller
 
         $service->fill($request->all())->save();
 
-        $notification = array(
-            'message' => 'Thêm dịch vụ thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Thêm thành công !');
 
         return redirect()->route('services.index')->with($notification);
     }
@@ -63,7 +63,9 @@ class ServicesController extends Controller
     public function show($id)
     {
         $service = $this->service_services->find($id);
+
         $type_of_services = $this->type_services->all();
+
         return view('admin.services.show', compact('service', 'type_of_services'));
     }
 
@@ -71,43 +73,41 @@ class ServicesController extends Controller
     {
         $service = $this->service_services->find($id);
 
-        if ($request->hasFile('image')) {
-            if (file_exists('upload/images/service/' . $service->image)
-                && $service->image != 'services-default.png') {
-                unlink('upload/images/service/' . $service->image);
+        if ($request->hasFile('image'))
+        {
+            if (file_exists('upload/images/service/'.$service->image)
+                && $service->image != 'services-default.png')
+            {
+                unlink('upload/images/service/'.$service->image);
             }
-
             $file = $request->file('image');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/service', $name);
             $service->image = $name;
         }
+
         $service->slug = Str::slug($request->name);
 
         $service->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Cập nhật dịch vụ thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Cập nhật thành công !');
 
-        return redirect()->route('services.index')->with($notify);
+        return redirect()->route('services.index')->with($notification);
     }
 
     public function destroy($id)
     {
         $service = $this->service_services->find($id);
+
         if (file_exists('upload/images/service/'.$service->image)
-            && $service->image != 'services-default.png') {
+            && $service->image != 'services-default.png')
+        {
             unlink('upload/images/service/'.$service->image);
         }
         $service->delete();
 
-        $notify = array(
-            'alert-type' => 'success',
-            'message' => 'Xoá dịch vụ thành công !'
-        );
+        $notification = notification('success', 'Xoá thành công !');
 
-        return redirect()->route('services.index')->with($notify);
+        return redirect()->route('services.index')->with($notification);
     }
 }

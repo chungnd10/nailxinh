@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
     		[
 	            'full_name' => 'Super Admin',
 	            'email' => 'admin@localhost.com',
-	            'password' => bcrypt('123456'),
+	            'password' => bcrypt('12345678'),
                 'role_id'   => config('contants.role_admin'),
                 'birthday'  =>  '1990-10-25',
                 'phone_number'  => '0987654321',
@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
     		[
 	            'full_name' => 'Ngô Thu Phương',
 	            'email' => 'phuongnt@localhost.com',
-	            'password' => bcrypt('123456'),
+	            'password' => bcrypt('12345678'),
                 'role_id'   => config('contants.role_manager'),
                 'birthday'  =>  '1990-10-25',
                 'phone_number'  => '0987654322',
@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
     		[
 	            'full_name' => 'Nguyễn Đức Chung',
 	            'email' => 'chungnd@localhost.com',
-	            'password' => bcrypt('123456'),
+	            'password' => bcrypt('12345678'),
                 'role_id'   => config('contants.role_technician'),
                 'birthday'  =>  '1990-10-25',
                 'phone_number'  => '0987654323',
@@ -59,7 +59,7 @@ class UsersTableSeeder extends Seeder
     		[
 	            'full_name' => 'Đào Uyên',
 	            'email' => 'uyendt@localhost.com',
-	            'password' => bcrypt('123456'),
+	            'password' => bcrypt('12345678'),
                 'role_id'   => config('contants.role_technician'),
                 'birthday'  =>  '1990-10-25',
                 'phone_number'  => '0987654324',
@@ -73,7 +73,7 @@ class UsersTableSeeder extends Seeder
     		[
 	            'full_name' => 'Nguyễn Nhật Hảo',
 	            'email' => 'haonn@localhost.com',
-	            'password' => bcrypt('123456'),
+	            'password' => bcrypt('12345678'),
                 'role_id'   => config('contants.role_technician'),
                 'birthday'  =>  '1990-10-25',
                 'phone_number'  => '0987654325',
@@ -87,7 +87,7 @@ class UsersTableSeeder extends Seeder
             [
 	            'full_name' => 'Nguyễn Thị Bích Ngọc',
 	            'email' => 'ngocntb@localhost.com',
-	            'password' => bcrypt('123456'),
+	            'password' => bcrypt('12345678'),
                 'role_id'   => config('contants.role_technician'),
                 'birthday'  =>  '1990-10-25',
                 'phone_number'  => '0987654326',
@@ -101,7 +101,7 @@ class UsersTableSeeder extends Seeder
     		[
 	            'full_name' => 'Nguyễn Phương Anh',
 	            'email' => 'anhnp@localhost.com',
-	            'password' => bcrypt('123456'),
+	            'password' => bcrypt('12345678'),
                 'role_id'   => config('contants.role_cashier'),
                 'birthday'  =>  '1990-10-25',
                 'phone_number'  => '0987654327',
@@ -115,7 +115,7 @@ class UsersTableSeeder extends Seeder
     		[
 	            'full_name' => 'Bùi Thị Ánh',
 	            'email' => 'anhbt@localhost.com',
-	            'password' => bcrypt('123456'),
+	            'password' => bcrypt('12345678'),
                 'role_id'   => config('contants.role_receptionist'),
                 'birthday'  =>  '1990-10-25',
                 'phone_number'  => '0987654328',

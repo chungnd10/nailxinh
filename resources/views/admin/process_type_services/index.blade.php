@@ -25,7 +25,7 @@
                             <tr>
                                 <th>STT</th>
                                 <th width="160">Tên quy trình</th>
-                                <th width="100">Loại dịch vụ</th>
+                                <th width="100">Dịch vụ</th>
                                 <th>Bước</th>
                                 <th>Mô tả</th>
                                 <th width="70">
@@ -38,7 +38,7 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->typeService->name }}</td>
+                                    <td>{{ $item->services->name }}</td>
                                     <td>{{ $item->step }}</td>
                                     <td>
                                         <span class="more">

@@ -55,70 +55,9 @@
                                 @endif
                             </div>
                             <!-- /.form-group -->
-                            <div class="form-group">
-                                <label>Giới tính</label><span class="text-danger">*</span><br>
-                                @foreach($genders as $item)
-                                    <input type="radio"
-                                           name="gender_id"
-                                           value="{{ $item->id }}"
-                                           @if($item->id == old('gender_id'))
-                                           checked
-                                            @endif
-                                    >&nbsp;&nbsp;
-                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                @endforeach
-                                <br>
-                                <label id="gender_id-error" class="error" for="gender_id"></label>
-                                @if($errors->first('gender_id'))
-                                    <span class="text-danger">{{ $errors->first('gender_id') }}</span>
-                                @endif
-                            </div>
-                            <!-- /.form-group -->
-                            <div class="form-group">
-                                <label>Trạng thái hoạt động</label><span class="text-danger">*</span><br>
-                                @foreach($operation_status as $item)
-                                    <input type="radio"
-                                           name="operation_status_id"
-                                           value="{{ $item->id }}"
-                                           @if($item->id == old('operation_status_id'))
-                                           checked
-                                            @endif
-                                    >&nbsp;&nbsp;
-                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                @endforeach
-                                <br>
-                                <label id="operation_status_id-error" class="error" for="operation_status_id"></label>
-                                @if($errors->first('operation_status_id'))
-                                    <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
-                                @endif
-                            </div>
-                            <!-- /.form-group -->
                         </div>
                         <!-- /.col -->
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Mật khẩu</label><span class="text-danger">*</span>
-                                <input type="password"
-                                       class="form-control"
-                                       name="password"
-                                       id="password"
-                                       placeholder="Nhập mật khẩu"
-                                >
-                                @if($errors->first('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label>Nhập lại mật khẩu</label><span class="text-danger">*</span>
-                                <input type="password"
-                                       class="form-control"
-                                       name="cf_password"
-                                       placeholder="Nhập lại mật khẩu"
-                                >
-                                @if($errors->first('cf_password'))
-                                    <span class="text-danger">{{ $errors->first('cf_password') }}</span>
-                                @endif
-                            </div>
                             <!-- /.form-group -->
                             <div class="form-group">
                                 <label>Email</label><span class="text-danger">*</span>
@@ -163,6 +102,44 @@
                                 @endif
                             </div>
                             <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Giới tính</label><span class="text-danger">*</span><br>
+                                @foreach($genders as $item)
+                                    <input type="radio"
+                                           name="gender_id"
+                                           value="{{ $item->id }}"
+                                           @if($item->id == old('gender_id'))
+                                           checked
+                                            @endif
+                                    >&nbsp;&nbsp;
+                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @endforeach
+                                <br>
+                                <label id="gender_id-error" class="error" for="gender_id"></label>
+                                @if($errors->first('gender_id'))
+                                    <span class="text-danger">{{ $errors->first('gender_id') }}</span>
+                                @endif
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Trạng thái hoạt động</label><span class="text-danger">*</span><br>
+                                @foreach($operation_status as $item)
+                                    <input type="radio"
+                                           name="operation_status_id"
+                                           value="{{ $item->id }}"
+                                           @if($item->id == old('operation_status_id'))
+                                           checked
+                                            @endif
+                                    >&nbsp;&nbsp;
+                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @endforeach
+                                <br>
+                                <label id="operation_status_id-error" class="error" for="operation_status_id"></label>
+                                @if($errors->first('operation_status_id'))
+                                    <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
+                                @endif
+                            </div>
+                            <!-- /.form-group -->
                         </div>
                         <!-- /.col -->
                     </div>
@@ -204,15 +181,6 @@
                         required: true,
                         maxlength: 200
                     },
-                    password: {
-                        required: true,
-                        minlength: 6,
-                        maxlength: 40,
-                    },
-                    cf_password: {
-                        required: true,
-                        equalTo: password
-                    },
                     email: {
                         required: true,
                         email: true,
@@ -233,10 +201,6 @@
                     birthday: "*Mục này không được để trống",
                     address: {
                         maxlength: "*Không được vượt quá 200 ký tự",
-                    },
-                    password: {
-                        minlength: "*Yêu cầu từ 6-40 ký tự",
-                        maxlength: "*Yêu cầu từ 6-40 ký tự",
                     },
                     email: {
                         email: "*Email không đúng định dạng",

@@ -16,20 +16,20 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label>Loại dịch vụ</label><span class="text-danger">*</span>
-							<select name="type_of_services_id" id="type_of_services_id" class="form-control">
-								<option value="">Chọn loại dịch vụ</option>
-								@foreach($type_of_services as $item)
+							<label>Dịch vụ</label><span class="text-danger">*</span>
+							<select name="service_id" id="service_id" class="form-control">
+								<option value="">Chọn dịch vụ</option>
+								@foreach($services as $item)
 								<option value="{{ $item->id }}"
-										@if($process->type_of_services_id == $item->id)
+										@if($process->service_id == $item->id)
 											selected
 										@endif>
 									{{ $item->name }}
 								</option>
 								@endforeach
 							</select>
-							@if($errors->first('type_of_services_id'))
-							<span class="text-danger">{{ $errors->first('type_of_services_id') }}</span>
+							@if($errors->first('service_id'))
+							<span class="text-danger">{{ $errors->first('service_id') }}</span>
 							@endif
 						</div>
 						<!-- /.form-group -->
@@ -59,7 +59,7 @@
 							<label>Mô tả</label><span class="text-danger">*</span>
 							<textarea name="content"
 									  class="form-control"
-									  cols="30" rows="10">{{$process->content}}</textarea>
+									  cols="30" rows="10">{{ old('content', $process->content) }}</textarea>
 							@if($errors->first('content'))
                                 <span class="text-danger">{{ $errors->first('content') }}</span>
                             @endif
@@ -93,7 +93,7 @@
             //validate
             $("#addProcess").validate({
             	rules: {
-                    type_of_services_id: {
+                    service_id: {
                         required: true,
                     },
                     name: {
@@ -128,17 +128,17 @@
             });
 
 			// ajax get process with type services
-            $('#type_of_services_id').change(function () {
-                var type_of_services_id = $('#type_of_services_id').val();
+            $('#service_id').change(function () {
+                var service_id = $('#service_id').val();
 
                 $.ajax({
                     headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
-                    url: "{{ route('get-procces-with-type-services') }}",
+                    url: "{{ route('get-procces-with-services') }}",
                     method: 'POST',
                     data: {
-                        type_of_services_id: type_of_services_id
+                        service_id: service_id
                     },
                     success: function (data) {
                         $("#result").html('');

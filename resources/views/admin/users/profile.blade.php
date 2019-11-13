@@ -392,7 +392,7 @@
                     },
                     password: {
                         required: true,
-                        minlength: 6,
+                        minlength: 8,
                         maxlength: 40,
                     },
                     cf_password: {
@@ -401,8 +401,8 @@
                 },
                 messages: {
                     password: {
-                        minlength: "*Yêu cầu từ 6-40 ký tự",
-                        maxlength: "*Yêu cầu từ 6-40 ký tự",
+                        minlength: "*Yêu cầu từ 8-40 ký tự",
+                        maxlength: "*Yêu cầu từ 8-40 ký tự",
                     }
                 }
             });

@@ -31,12 +31,14 @@ class BranchController extends Controller
     public function index()
     {
     	$branchs = $this->branch_services->all();
+
     	return view('admin.branchs.index', compact('branchs'));
     }
 
     public function create()
     {
     	$cities = $this->city_services->all();
+
     	return view('admin.branchs.create', compact('cities'));
 
     }
@@ -47,10 +49,7 @@ class BranchController extends Controller
 
         $branch->fill($request->all())->save();
 
-        $notification = array(
-            'message' => 'Thêm chi nhánh thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Thêm thành công !');
 
         return redirect()->route('branch.index')->with($notification);
     }
@@ -58,6 +57,7 @@ class BranchController extends Controller
     public function show($id)
     {
         $branch = $this->branch_services->find($id);
+
         $cities = $this->city_services->all();
 
         return view('admin.branchs.show', compact('branch','cities'));
@@ -69,12 +69,9 @@ class BranchController extends Controller
 
         $branch->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Cập nhật chi nhánh thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Cập nhật thành công !');
 
-        return redirect()->route('branch.index')->with($notify);
+        return redirect()->route('branch.index')->with($notification);
     }
 
     public function destroy($id)
@@ -84,11 +81,8 @@ class BranchController extends Controller
 
         $branch->delete();
 
-        $notify = array(
-            'alert-type' => 'success',
-            'message' => 'Xoá chi nhánh thành công !'
-        );
+        $notification = notification('success', 'Xoá thành công !');
 
-        return redirect()->route('branch.index')->with($notify);
+        return redirect()->route('branch.index')->with($notification);
     }
 }

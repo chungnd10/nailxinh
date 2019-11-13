@@ -14,7 +14,8 @@ class TypeServicesController extends Controller
 
     public function __construct(
         TypeServiceServices $type_services
-    ) {
+    )
+    {
         $this->type_services = $type_services;
     }
 
@@ -34,7 +35,8 @@ class TypeServicesController extends Controller
     {
         $type_of_service = new TypeOfService();
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image'))
+        {
             $file = $request->file('image');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/type_services', $name);
@@ -45,10 +47,7 @@ class TypeServicesController extends Controller
 
         $type_of_service->fill($request->all())->save();
 
-        $notification = array(
-            'message' => 'Thêm loại dịch vụ thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Thêm thành công !');
 
         return redirect()->route('type-services.index')->with($notification);
     }
@@ -64,11 +63,12 @@ class TypeServicesController extends Controller
     {
         $type_of_service = $this->type_services->find($id);
 
-        if ($request->hasFile('image')) {
-            if (file_exists('upload/images/type_services/' . $type_of_service->image)
+        if ($request->hasFile('image'))
+        {
+            if (file_exists('upload/images/type_services/'.$type_of_service->image)
                 && $type_of_service->image != 'type_of_services_default.png')
             {
-                unlink('upload/images/type_services/' . $type_of_service->image);
+                unlink('upload/images/type_services/'.$type_of_service->image);
             }
             $file = $request->file('image');
             $name = time() . $file->getClientOriginalName();
@@ -78,32 +78,26 @@ class TypeServicesController extends Controller
 
         $type_of_service->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Cập nhật loại dịch vụ thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Cập nhật thành công !');
 
-        return redirect()->route('type-services.index')->with($notify);
+        return redirect()->route('type-services.index')->with($notification);
     }
 
     public function destroy($id)
     {
         $type_of_service = $this->type_services->find($id);
 
-        if (file_exists('upload/images/type_services/' . $type_of_service->image)
+        if (file_exists('upload/images/type_services/'.$type_of_service->image)
             && $type_of_service->image != 'type_of_services_default.png')
         {
-            unlink('upload/images/type_services/' . $type_of_service->image);
+            unlink('upload/images/type_services/'.$type_of_service->image);
         }
 
         $type_of_service->delete();
 
-        $notify = array(
-            'alert-type' => 'success',
-            'message' => 'Xoá loại dịch vụ thành công !'
-        );
+        $notification = notification('success', 'Xoá thành công !');
 
-        return redirect()->route('type-services.index')->with($notify);
+        return redirect()->route('type-services.index')->with($notification);
     }
 
 }
