@@ -5,6 +5,15 @@
 
 
 
+        
+        let count_testimonial = $(".testimonial-img img").length;
+        
+        $(".testimonial-img img").each( function(index){
+            let img_testimonial = $(this).attr('src');
+            $('.testimonial-carousel .owl-dots .owl-dot');
+            
+            $(this).css('background-image',img_testimonial);
+        });
          // Time frame
 
          $(".time-frame").on('click', function(){
@@ -29,6 +38,30 @@
             animateOut: 'fadeInDown',
             smartSpeed: 250
         });
+        //feature-carousel
+        $(".feature-carousel").owlCarousel({
+            items: 4,
+            loop: true,
+            margin:30,
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            autoplay: true,
+            autoplayTimeout: 3000,
+            animateIn: 'fadeInLeft',
+            animateOut: 'fadeInLeft',
+            smartSpeed: 250,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:4
+                }
+            }
+        });
+
 
         // Beauticans Slider
         $(".beauticians-slider").owlCarousel({
@@ -51,7 +84,8 @@
                     items:3
                 },
                 1000:{
-                    items:4
+                    items:4,
+                    dots:true
                 }
             }
         });
@@ -115,7 +149,7 @@
         // testimonial Carousel
         $(".testimonial-carousel").owlCarousel({
             loop: true,
-            dots: false,
+            dots: true,
             nav: true,
             navText: ['<i class="fa fa-long-arrow-alt-left"></i>', '<i class="fa fa-long-arrow-alt-right"></i>'],
             margin: 30,
