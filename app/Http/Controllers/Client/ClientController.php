@@ -108,7 +108,10 @@ class ClientController extends Controller
 
     public function booking()
     {
-        return view('client.booking');
+        $branchs = $this->branch_services->all();
+        $type_services = $this->type_services->all();
+        $users = $this->user_services->getTechnician();
+        return view('client.booking', compact('branchs', 'type_services', 'users'));
     }
 
     public function gallery()

@@ -1,20 +1,37 @@
-$(document).ready(function() {
-    function formatState (state) {
+$(document).ready(function () {
+
+    function formatState(state) {
         if (!state.id) {
-          return state.text;
+            return state.text;
         }
-        var baseUrl = "client_assets/img/testimonial";
+        var baseUrl = "upload/images/service";
+
         var $state = $(
-          '<div class="custom_img"><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + '<span class="ml-5">'+ state.text +'</span>' + '</div>'
+            "<div class=custom_img><img src=" + baseUrl + "/" + state.element.getAttribute('data-image') +
+            " class=img-flag /> " + "<span class=ml-5 >" + state.text + "</span>" + "</div>"
         );
         return $state;
-      };
-      
+    }
+
+    function formatStateUser(state) {
+        if (!state.id) {
+            return state.text;
+        }
+        var baseUrl = "upload/images/users";
+
+        var $state = $(
+            "<div class=custom_img><img src=" + baseUrl + "/" + state.element.getAttribute('data-image') +
+            " class=img-flag /> " + "<span class=ml-5 >" + state.text + "</span>" + "</div>"
+        );
+        return $state;
+    }
+
     $(".services").select2({
         templateResult: formatState
     });
+
     $(".staff").select2({
-        templateResult: formatState
+        templateResult: formatStateUser
     });
     $('.datepicker').datepicker();
 });

@@ -15,14 +15,20 @@ Auth::routes(['register' => false]);
 
 //client
 Route::get('/', 'Client\ClientController@index')->name('index');
+
 Route::get('/introduction', 'Client\ClientController@introduction')->name('introduction');
+
 Route::get('/contact', 'Client\ClientController@contact')->name('contact');
 
 Route::get('/services', 'Client\ClientController@services')->name('services');
+
 Route::get('/type_services/{id}', 'Client\ClientController@typeServices')->name('type_services');
 
 Route::get('/booking', 'Client\ClientController@booking')->name('booking');
+Route::post('/booking', 'Client\OrderController@store');
+
 Route::get('/gallery', 'Client\ClientController@gallery')->name('gallery');
+
 // end client
 
 
@@ -137,10 +143,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:remove-process-of-services')
             ->name('process-type-services.destroy');
 
-        Route::post('get-procces-with-type-services',
+        Route::post('get-procces-with-services',
             'ProcessTypeServices\ProcessTypeServicesController@getProcessWithTypeServices')
             ->middleware('can:add-process-of-services')
-            ->name('get-procces-with-type-services');
+            ->name('get-procces-with-services');
     });
 
     //services

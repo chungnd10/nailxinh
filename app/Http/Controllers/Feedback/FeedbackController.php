@@ -41,12 +41,10 @@ class FeedbackController extends Controller
         }
 
         $feedback->display_status_id = config('contants.display_status_hide');
+
         $feedback->fill($request->all())->save();
 
-        $notification = array(
-            'message' => 'Thêm phản hồi thành công',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Thêm thành công !');
 
         return redirect()->route('feedbacks.index')->with($notification);
     }
@@ -64,7 +62,8 @@ class FeedbackController extends Controller
 
         if ($request->hasFile('image')) {
             if (file_exists('upload/images/feedbacks/'.$feedback->image)
-                && $feedback->image != 'feedback-default.png') {
+                && $feedback->image != 'feedback-default.png')
+            {
                 unlink('upload/images/feedbacks/'.$feedback->image);
             }
             $file = $request->file('image');
@@ -75,10 +74,7 @@ class FeedbackController extends Controller
 
         $feedback->fill($request->all())->save();
 
-        $notification = array(
-            'message' => 'Sửa phản hồi thành công',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Sửa thành công !');
 
         return redirect()->route('feedbacks.index')->with($notification);
 
@@ -89,18 +85,16 @@ class FeedbackController extends Controller
         $feedback = $this->feedback_services->find($id);
 
         if (file_exists('upload/images/feedbacks/'.$feedback->image)
-            && $feedback->image != 'feedback-default.png') {
+            && $feedback->image != 'feedback-default.png')
+        {
             unlink('upload/images/feedbacks/'.$feedback->image);
         }
 
         $feedback->delete();
 
-        $notify = array(
-            'message' => 'Xoá phản hồi thành công',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Xoá thành công !');
 
-        return redirect()->route('feedbacks.index')->with($notify);
+        return redirect()->route('feedbacks.index')->with($notification);
     }
 
     public function changeStatus(Request $request)

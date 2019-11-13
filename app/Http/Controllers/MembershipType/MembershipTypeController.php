@@ -20,6 +20,7 @@ class MembershipTypeController extends Controller
     public function index()
     {
         $membership_type = $this->membership_type->all();
+
         return view('admin.membership_type.index', compact('membership_type'));
     }
 
@@ -31,43 +32,39 @@ class MembershipTypeController extends Controller
     public function store(MembershipTypeRequest $request)
     {
         $membership_type = new MembershipType();
+
         $membership_type->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Thêm loại thành viên thành công',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('membership_type.index')->with($notify);
+        $notification = notification('success', 'Thêm thành công !');
+
+        return redirect()->route('membership_type.index')->with($notification);
     }
 
     public function show($id){
         $membership_type = MembershipType::find($id);
+
         return view('admin.membership_type.show', compact('membership_type'));
     }
 
     public function update(MembershipTypeRequest $request, $id)
     {
         $membership_type = MembershipType::find($id);
+
         $membership_type->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Cập nhật loại thành viên thành công',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Cập nhật thành công !');
 
-        return redirect()->route('membership_type.index')->with($notify);
+        return redirect()->route('membership_type.index')->with($notification);
     }
 
     public function destroy($id)
     {
         $membership_type = MembershipType::find($id);
+
         $membership_type->delete();
 
-        $notify = array(
-            'message' => 'Xoá thành công',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Xoá thành công !');
 
-        return redirect()->route('membership_type.index')->with($notify);
+        return redirect()->route('membership_type.index')->with($notification);
     }
 }

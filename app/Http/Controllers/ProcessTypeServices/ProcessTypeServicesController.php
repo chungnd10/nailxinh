@@ -4,52 +4,54 @@ namespace App\Http\Controllers\ProcessTypeServices;
 
 use App\Http\Requests\AddProcessRequest;
 use App\Services\ProcessOfServiceServices;
-use App\Services\TypeServiceServices;
+use App\Services\ServiceServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProcessOfService;
-use App\TypeOfService;
 
 class ProcessTypeServicesController extends Controller
 {
     protected $process_of_services;
-    protected $type_services;
+    protected $services;
 
-    public function __construct(ProcessOfServiceServices $process_of_services, TypeServiceServices $type_services)
+    public function __construct(ProcessOfServiceServices $process_of_services, ServiceServices $services)
     {
         $this->process_of_services = $process_of_services;
-        $this->type_services = $type_services;
+        $this->services = $services;
     }
 
     public function index()
     {
         $processTypeServices = $this->process_of_services->all();
+
         return view('admin.process_type_services.index', compact('processTypeServices'));
     }
 
     public function create()
     {
-        $type_of_services = $this->type_services->all();
-        return view('admin.process_type_services.create', compact('type_of_services'));
+        $services = $this->services->all();
+
+        return view('admin.process_type_services.create', compact('services'));
     }
 
     public function store(AddProcessRequest $request)
     {
         $process = new ProcessOfService();
+
         $process->fill($request->all())->save();
 
-        $notification = array(
-            'message' => 'Thêm quy trình thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Thêm thành công !');
+
         return redirect()->route('process-type-services.index')->with($notification);
     }
 
     public function show($id)
     {
         $process = $this->process_of_services->find($id);
-        $type_of_services = $this->type_services->all();
-        return view('admin.process_type_services.show', compact('process', 'type_of_services'));
+
+        $services = $this->services->all();
+
+        return view('admin.process_type_services.show', compact('process', 'services'));
     }
 
     public function update(AddProcessRequest $request, $id)
@@ -58,10 +60,7 @@ class ProcessTypeServicesController extends Controller
 
         $process->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Cập nhật quy trình thành công !',
-            'alert-type' => 'success'
-        );
+        $notify = notification('success', 'Cập nhật thành công !');
 
         return redirect()->route('process-type-services.index')->with($notify);
     }
@@ -72,10 +71,7 @@ class ProcessTypeServicesController extends Controller
 
         $process->delete();
 
-        $notify = array(
-            'alert-type' => 'success',
-            'message' => 'Xoá quy trình thành công !'
-        );
+        $notify = notification('success', 'Xoá thành công !');
 
         return redirect()->route('process-type-services.index')->with($notify);
     }
@@ -84,7 +80,7 @@ class ProcessTypeServicesController extends Controller
     public function getProcessWithTypeServices(Request $request)
     {
         if ($request->ajax()) {
-            $process = $this->process_of_services->getProcessWithType($request->type_of_services_id);
+            $process = $this->process_of_services->getProcessWithType($request->service_id);
             return response()->json($process);
         }
 

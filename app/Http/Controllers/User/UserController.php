@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Services\BranchServices;
+use App\Services\DisplayStatusServices;
 use App\Services\GenderServices;
 use App\Services\OperationStatusServices;
 use App\Services\RoleServices;
@@ -32,6 +33,7 @@ class UserController extends Controller
     protected $type_services;
     protected $user_services_services;
     protected $user_type_service_services;
+    protected $display_status_services;
 
     public function __construct(
         UserServices $user_services,
@@ -42,7 +44,8 @@ class UserController extends Controller
         ServiceServices $service_services,
         TypeServiceServices $type_services,
         UserServiceServices $user_services_services,
-        UserTypeServiceServices $user_type_service_services
+        UserTypeServiceServices $user_type_service_services,
+        DisplayStatusServices $display_status_services
     ) {
         $this->user_services = $user_services;
         $this->branch_services = $branch_services;
@@ -53,6 +56,7 @@ class UserController extends Controller
         $this->type_services = $type_services;
         $this->user_services_services = $user_services_services;
         $this->user_type_service_services = $user_type_service_services;
+        $this->display_status_services = $display_status_services;
     }
 
     public function index()
@@ -88,12 +92,10 @@ class UserController extends Controller
     {
         $user = new User();
 
+        $user->display_status_id = config('contants.display_status_hide');
         $user->fill($request->all())->save();
 
-        $notification = array(
-            'message' => 'Thêm người dùng thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Thêm thành công !');
 
         return redirect()->route('users.index')->with($notification);
     }
@@ -101,11 +103,11 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->user_services->find($id);
-
         $branchs = $this->branch_services->all();
         $genders = $this->gender_services->all();
         $roles = $this->role_services->allNotAdmin();
         $operation_status = $this->operation_status_services->all();
+        $display_status = $this->display_status_services->all();
         $type_services = $this->type_services->all();
         $services_of_user = $this->user_services_services->getServiceWithId($id);
         $type_services_of_user = $this->user_type_service_services->getTypeServicesOfUser($id);
@@ -117,7 +119,8 @@ class UserController extends Controller
                 'operation_status',
                 'type_services',
                 'services_of_user',
-                'type_services_of_user'
+                'type_services_of_user',
+                'display_status'
             )
         );
     }
@@ -128,12 +131,9 @@ class UserController extends Controller
 
         $user->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Cập nhật người dùng thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Cập nhật thành công !');
 
-        return redirect()->route('users.index')->with($notify);
+        return redirect()->route('users.index')->with($notification);
     }
 
     public function destroy($id)
@@ -148,12 +148,9 @@ class UserController extends Controller
 
         $user->delete();
 
-        $notify = array(
-            'alert-type' => 'success',
-            'message' => 'Xoá người dùng thành công !'
-        );
+        $notification = notification('success', 'Xoá thành công !');
 
-        return redirect()->route('users.index')->with($notify);
+        return redirect()->route('users.index')->with($notification);
     }
 
     public function setPassword(Request $request, $id)
@@ -162,13 +159,13 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(),
             [
-                'password' => 'required|min:6|max:40',
+                'password' => 'required|min:8|max:40',
                 'cf_password' => 'required|same:password'
             ],
             [
                 'password.required' => 'Mục này không được để trống',
-                'password.min' => 'Yêu cầu từ 6-40 ký tự',
-                'password.max' => 'Yêu cầu từ 6-40 ký tự',
+                'password.min' => 'Yêu cầu từ 8-40 ký tự',
+                'password.max' => 'Yêu cầu từ 8-40 ký tự',
                 'cf_password.required' => 'Mục này không được để trống',
                 'cf_password.same' => 'Nhập lại mật khẩu không đúng',
             ]
@@ -183,12 +180,9 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        $notify = array(
-            'message' => 'Đặt lại mật khẩu thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Đặt lại mật khẩu thành công !');
 
-        return redirect()->route('users.index')->with($notify);
+        return redirect()->route('users.index')->with($notification);
     }
 
     //set services cho nhan vien
@@ -202,12 +196,9 @@ class UserController extends Controller
         $user->type_services()->sync($type_services_id);
         $user->services()->sync($services_id);
 
-        $notify = array(
-            'message' => 'Cập nhật thông tin thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Cập nhật thành công !');
 
-        return redirect()->route('users.show', $id . '#tab_3')->with($notify);
+        return redirect()->route('users.index')->with($notification);
 
     }
 
@@ -218,21 +209,21 @@ class UserController extends Controller
         $validator = Validator::make($request->all(),
             [
                 'old_password' => 'required',
-                'password' => 'required|min:6|max:40',
+                'password' => 'required|min:8|max:40',
                 'cf_password' => 'required|same:password'
             ],
             [
-                'old_password.required' => 'Mục này không được để trống',
-                'password.required' => 'Mục này không được để trống',
-                'password.min' => 'Yêu cầu từ 6-40 ký tự',
-                'password.max' => 'Yêu cầu từ 6-40 ký tự',
-                'cf_password.required' => 'Mục này không được để trống',
-                'cf_password.same' => 'Nhập lại mật khẩu không đúng',
+                'old_password.required' => '*Mục này không được để trống',
+                'password.required' => '*Mục này không được để trống',
+                'password.min' => '*Yêu cầu từ 8-40 ký tự',
+                'password.max' => '*Yêu cầu từ 8-40 ký tự',
+                'cf_password.required' => '*Mục này không được để trống',
+                'cf_password.same' => '*Nhập lại mật khẩu không đúng',
             ]
         );
 
         if ($validator->fails()) {
-            return redirect()->route('profile', $id . '#tab_2')
+            return redirect()->route('profile', $id .'#tab_2')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -242,15 +233,12 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
-            $notify = array(
-                'message' => 'Thay đổi mật khẩu thành công !',
-                'alert-type' => 'success'
-            );
+            $notification = notification('success', 'Cập nhật mật khẩu thành công !');
 
-            return redirect()->route('profile', $id)->with($notify);
+            return redirect()->route('admin.index')->with($notification);
         } else {
-            return redirect()->route('profile', $id . '#tab_2')
-                ->with('old_password', 'Mật khẩu cũ không đúng');
+            return redirect()->route('profile', $id.'#tab_2')
+                ->with('old_password', '*Mật khẩu cũ không đúng');
         }
     }
 
@@ -275,7 +263,8 @@ class UserController extends Controller
                 'branchs',
                 'genders',
                 'roles',
-                'operation_status')
+                'operation_status'
+            )
         );
     }
 
@@ -289,14 +278,16 @@ class UserController extends Controller
                 'avatar' => 'required|mimes:png,jpg,jpeg'
             ],
             [
-                'avatar.required' => 'Hãy chọn ảnh',
-                'avatar.mimes' => 'Chỉ chấp nhận ảnh JPG, JPEG, PNG'
+                'avatar.required' => '*Hãy chọn ảnh',
+                'avatar.mimes' => '*Chỉ chấp nhận ảnh JPG, JPEG, PNG'
             ]
         );
 
-        if ($request->hasFile('avatar')) {
+        if ($request->hasFile('avatar'))
+        {
             if (file_exists('upload/images/users/'.$user->avatar)
-                && $user->avatar != 'avatar-default.png') {
+                && $user->avatar != 'avatar-default.png')
+            {
                 unlink('upload/images/users/'.$user->avatar);
             }
 
@@ -307,11 +298,10 @@ class UserController extends Controller
         }
 
         $user->save();
-        $notify = array(
-            'message' => 'Cập nhật ảnh thành công',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('admin.index')->with($notify);
+
+        $notification = notification('success', 'Cập nhật thành công !');
+
+        return redirect()->route('admin.index')->with($notification);
     }
 
     public function updateProfile(UpdateProfileRequest $request, $id)
@@ -320,12 +310,9 @@ class UserController extends Controller
 
         $user->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Cập nhật thông tin thành công !',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Cập nhật thành công !');
 
-        return redirect()->route('admin.index')->with($notify);
+        return redirect()->route('admin.index')->with($notification);
     }
 
     public function changeStatus(Request $request)

@@ -19,10 +19,10 @@ class CreateProcessOfServicesTable extends Migration
             $table->string('step', 4);
             $table->string('content', 200);
 
-            $table->unsignedInteger('type_of_services_id');
-            $table->foreign('type_of_services_id')
+            $table->unsignedInteger('service_id');
+            $table->foreign('service_id')
                 ->references('id')
-                ->on('type_of_services')
+                ->on('services')
                 ->onDelete('CASCADE');
 
             $table->timestamps();
