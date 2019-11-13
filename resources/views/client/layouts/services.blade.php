@@ -33,13 +33,14 @@
                                 @if($service)
                                     <ul>
                                         <li>
-                                            <img width="80" class="fix-border-radius"
-                                                 src="upload/images/service/{{ $service->image }}" alt="services">
-                                            <a href="#"><h4>{{ limit($service->name, 19, '...') }}
-                                                    <span class="price">{{ number_format($service->price) }} VNĐ</span>
-                                                </h4>
+                                            <a href="#">
+                                                <img width="80" class="fix-border-radius"
+                                                    src="upload/images/service/{{ $service->image }}" alt="services">
+                                                <h4>{{ limit($service->name, 19, '...') }}
+                                                        <span class="price">{{ number_format($service->price) }} VNĐ</span>
+                                                    </h4>
+                                                <p class="text-white">{{ limit($service->description, 70, '...') }}</p>
                                             </a>
-                                            <p>{{ limit($service->description, 70, '...') }}</p>
                                         </li>
                                     </ul>
                                 @endif
