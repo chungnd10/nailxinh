@@ -40,7 +40,6 @@ class AddBranchRequest extends FormRequest
             'city_id'           => 'required|numeric',
             'address'           => [
                 'required',
-                'min:5',
                 'max:200',
                 Rule::unique('branches')->ignore($this->id),
             ]
@@ -63,7 +62,6 @@ class AddBranchRequest extends FormRequest
             'city_id.numeric'           => '*ID không đúng định dạng',
             'address.max'               => '*Không được vượt quá 200 ký tự',
             'address.required'          => '*Mục này không được để trống',
-            'address.min'               => '*Yêu cầu tối thiểu 5 ký tự',
             'address.unique'            => '*Địa chỉ đã được sử dụng'
         ];
     }

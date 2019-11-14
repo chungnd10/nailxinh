@@ -27,6 +27,7 @@ class User extends Authenticatable
         'branch_id',
         'gender_id',
         'operation_status_id',
+        'display_status_id',
         'role_id'
     ];
 

@@ -17,10 +17,10 @@ class ProcessOfService extends Model
     	'name',
     	'step',
     	'content',
-    	'type_of_services_id'
+    	'service_id'
     ];
 
-    public function typeService(){
-    	return $this->belongsTo(TypeOfService::class, 'type_of_services_id');
+    public function services(){
+    	return $this->belongsTo(Service::class, 'service_id');
     }
 }

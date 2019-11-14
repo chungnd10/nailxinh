@@ -143,10 +143,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:remove-process-of-services')
             ->name('process-type-services.destroy');
 
-        Route::post('get-procces-with-type-services',
+        Route::post('get-procces-with-services',
             'ProcessTypeServices\ProcessTypeServicesController@getProcessWithTypeServices')
             ->middleware('can:add-process-of-services')
-            ->name('get-procces-with-type-services');
+            ->name('get-procces-with-services');
     });
 
     //services

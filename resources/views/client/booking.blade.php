@@ -25,18 +25,17 @@
     <section id="booking" style="padding-top:80px;">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <form id="booking-form">
+                <div class="col-lg-8 offset-lg-2 col-md-12" >
+                    <form action="" id="booking-form">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12 d-flex justify-content-between mb-3">
+                            <div class="col-md-12 mb-3">
                                 <span class="text-pink">Thông tin của bạn</span>
-                                <span class="text-danger">(*) Bắt buộc nhập dữ liệu</span>
                             </div>
                             <div class="form-group col-md-12">
                                 <input type="text"
-                                       class="form-control form-border"
                                        id="phone_number"
+                                       class="form-control form-border form-require"
                                        name="phone_number"
                                        value="{{ old('phone_number') }}"
                                        placeholder="Số điện thoại">
@@ -52,7 +51,7 @@
                                 <input type="text"
                                        id="full_name"
                                        name="full_name"
-                                       class="form-control form-border"
+                                       class="form-control form-border form-require"
                                        value="{{ old('full_name') }}"
                                        placeholder="Họ và tên">
                             </div>

@@ -25,7 +25,7 @@ class AddProcessRequest extends FormRequest
     {
         // trường hợp sửa
         $validate = [
-            'type_of_services_id'   => 'required|numeric',
+            'service_id'            => 'required|numeric',
             'name'                  => 'required|min:1|max:100',
             'step'                  => 'numeric|between:1,100',
             'content'               => 'nullable|max:200',
@@ -40,8 +40,8 @@ class AddProcessRequest extends FormRequest
     public function messages()
     {
         return [
-            'type_of_services_id.required'      => '*Không để trống mục này',
-            'type_of_services_id.numeric'       => '*ID không đúng định dạng',
+            'service_id.required'      => '*Không để trống mục này',
+            'service_id.numeric'       => '*ID không đúng định dạng',
             'name.required'                     => '*Không để trống mục này',
             'name.min'                          => '*Yêu cầu từ 1-100 ký tự',
             'name.max'                          => '*Yêu cầu từ 1-100 ký tự',

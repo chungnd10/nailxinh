@@ -43,8 +43,6 @@ class AddUserRequest extends FormRequest
         //trường hợp thêm người dùng
         if (!$this->id){
             $validate['email']          = 'required|unique:users,email|max:200';
-            $validate['password']       = 'required|min:6|max:40';
-            $validate['cf_password']    = 'required|same:password';
         }
 
         return $validate;
@@ -61,11 +59,6 @@ class AddUserRequest extends FormRequest
             'birthday.required'             => '*Mục này không được để trống',
             'address.required'              => '*Mục này không được để trống',
             'address.max'                   => '*Không được vượt quá 200 ký tự',
-            'password.required'             => '*Mục này không được để trống',
-            'password.min'                  => '*Yêu cầu từ 6-40 ký tự',
-            'password.max'                  => '*Yêu cầu từ 6-40 ký tự',
-            'cf_password.required'          => '*Mục này không được để trống',
-            'cf_password.same'              => '*Nhập lại mật khẩu không đúng',
             'email.required'                => '*Mục này không được để trống',
             'email.unique'                  => '*Email đã được sử dụng',
             'email.max'                     => '*Không được vượt quá 200 ký tự',

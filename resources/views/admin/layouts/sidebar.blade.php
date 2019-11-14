@@ -73,7 +73,7 @@
             @can('view-process-of-services')
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-book"></i> <span>Quy trình loại dịch vụ</span>
+                        <i class="fa fa-book"></i> <span>Quy trình dịch vụ</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

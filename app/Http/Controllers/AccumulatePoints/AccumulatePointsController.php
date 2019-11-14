@@ -18,18 +18,18 @@ class AccumulatePointsController extends Controller
     public function index()
     {
         $points = $this->accumulate_points_services->all();
+
         return view('admin.accumulate_points.index', compact('points'));
     }
 
     public function destroy($id)
     {
         $point = $this->accumulate_points_services->find($id);
+
         $point->delete();
 
-        $notify = array(
-            'message' => 'Xoá thành công',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('accumulate-points.index')->with($notify);
+        $notification = notification('success', 'Xoá thành công !');
+
+        return redirect()->route('accumulate-points.index')->with($notification);
     }
 }

@@ -117,6 +117,9 @@
 /* Tablet Layout: 768px */
 
 @media only screen and (min-width:768px) and (max-width:991px) {
+    #breadcrumb-area{
+        padding: 10px 0;
+    }
 
 
 }
@@ -132,11 +135,13 @@
         padding-bottom: 128px;
     }
 
-    #testimonial,
-    #counter {
+    #testimonial{
         background: #FAFAFA;
     }
-
+    #counter {
+        background: #ffffff;
+        padding-top: 15px;
+    }
     .single-testimonial p {
         width: 100%;
     }
@@ -505,6 +510,15 @@
 }
 
 @media only screen and (max-width:480px) {
+    .show-mobile{
+        display:block;
+    }
+    .hidden-mobile{
+        display:none;
+    }
+    .nav-tabs{
+        justify-content: center;
+    }
     .header-slider h3 {
         font-size: 20px;
     }
@@ -577,8 +591,13 @@
 
     .tab-content ul li h4 .price {
         font-size: 80%;
+        display: block;
+        float:unset;
+        margin-top: 10px;
     }
-
+    .widget_links{
+        display:none;
+    }
     .tab-content ul li h4 {
         margin-top: 0;
     }

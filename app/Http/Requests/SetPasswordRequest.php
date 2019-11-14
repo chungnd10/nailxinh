@@ -24,7 +24,7 @@ class SetPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => 'required|min:6|max:40',
+            'password' => 'required|min:8|max:40',
             'cf_password' => 'required|same:password'
         ];
     }
@@ -33,8 +33,8 @@ class SetPasswordRequest extends FormRequest
     {
         return [
             'password.required'         => '*Mục này không được để trống',
-            'password.min'              => '*Yêu cầu từ 6-40 ký tự',
-            'password.max'              => '*Yêu cầu từ 6-40 ký tự',
+            'password.min'              => '*Yêu cầu từ 8-40 ký tự',
+            'password.max'              => '*Yêu cầu từ 8-40 ký tự',
             'cf_password.required'      => '*Mục này không được để trống',
             'cf_password.same'          => '*Nhập lại mật khẩu không đúng',
         ];

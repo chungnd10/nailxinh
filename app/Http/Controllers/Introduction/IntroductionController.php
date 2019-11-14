@@ -33,7 +33,6 @@ class IntroductionController extends Controller
             {
                 unlink('upload/images/introductions/'.$item->image);
             }
-
             $file = $request->file('image');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/introductions', $name);
@@ -42,10 +41,8 @@ class IntroductionController extends Controller
 
         $item->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Cập nhật thành công',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('admin.index')->with($notify);
+        $notification = notification('success', 'Cập nhật thành công !');
+
+        return redirect()->route('admin.index')->with($notification);
     }
 }

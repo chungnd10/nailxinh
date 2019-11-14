@@ -45,6 +45,17 @@
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
+                                        <label>Số điện thoại</label><span class="text-danger">*</span>
+                                        <input type="text"
+                                               class="form-control"
+                                               value="{{ old('phone_number', $user->phone_number)}}"
+                                               name="phone_number">
+                                        @if($errors->first('phone_number'))
+                                            <span class="text-danger">{{ $errors->first('phone_number') }}</span>
+                                        @endif
+                                    </div>
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
                                         <label>Ngày sinh</label><span class="text-danger">*</span>
                                         <input type="text"
                                                class="form-control"
@@ -69,6 +80,67 @@
                                         @endif
                                     </div>
                                     <!-- /.form-group -->
+                                    @if($user->role_id == config('contants.role_technician'))
+                                        <div class="form-group">
+                                            <label>Trạng thái hiển thị</label><span class="text-danger">*</span><br>
+                                            @foreach($display_status as $item)
+                                                <input type="radio"
+                                                       name="display_status_id"
+                                                       value="{{ $item->id }}"
+                                                       @if($item->id == old('display_status_id', $user->display_status_id))
+                                                       checked
+                                                        @endif
+                                                >&nbsp;&nbsp;
+                                                {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            @endforeach
+                                            <br>
+                                            <label id="display_status_id-error" class="error"
+                                                   for="display_status_id"></label>
+                                            @if($errors->first('display_status_id'))
+                                                <span class="text-danger">{{ $errors->first('display_status_id') }}</span>
+                                            @endif
+                                        </div>
+                                        <!-- /.form-group -->
+                                    @endif
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email:</label><span class="text-danger"></span>
+                                        <p>{{ $user->email }}</p>
+                                    </div>
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Chi nhánh</label><span class="text-danger">*</span>
+                                        <select name="branch_id" class="form-control">
+                                            @foreach($branchs as $item)
+                                                <option value="{{ $item->id }}"
+                                                        @if($user->branch_id == $item->id)
+                                                        selected
+                                                        @endif
+                                                >{{ $item->name.", ".$item->address }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->first('branch_id'))
+                                            <span class="text-danger">{{ $errors->first('branch_id') }}</span>
+                                        @endif
+                                    </div>
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Quyền</label><span class="text-danger">*</span>
+                                        <select name="role_id" id="" class="form-control">
+                                            @foreach($roles as $item)
+                                                <option value="{{ $item->id }}"
+                                                        @if($user->role_id == $item->id)
+                                                        selected
+                                                        @endif
+                                                >{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->first('role_id'))
+                                            <span class="text-danger">{{ $errors->first('role_id') }}</span>
+                                        @endif
+                                    </div><!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Giới tính</label><span class="text-danger">*</span><br>
                                         @foreach($genders as $item)
@@ -107,57 +179,7 @@
                                             <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
                                         @endif
                                     </div>
-                                    <!-- /.form-group -->
-                                </div>
-                                <!-- /.col -->
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Email:</label><span class="text-danger"></span>
-                                        <p>{{ $user->email }}</p>
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                        <label>Số điện thoại</label><span class="text-danger">*</span>
-                                        <input type="text"
-                                               class="form-control"
-                                               value="{{ old('phone_number', $user->phone_number)}}"
-                                               name="phone_number">
-                                        @if($errors->first('phone_number'))
-                                            <span class="text-danger">{{ $errors->first('phone_number') }}</span>
-                                        @endif
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                        <label>Chi nhánh</label><span class="text-danger">*</span>
-                                        <select name="branch_id" class="form-control">
-                                            @foreach($branchs as $item)
-                                                <option value="{{ $item->id }}"
-                                                        @if($user->branch_id == $item->id)
-                                                        selected
-                                                        @endif
-                                                >{{ $item->name.", ".$item->address }}</option>
-                                            @endforeach
-                                        </select>
-                                        @if($errors->first('branch_id'))
-                                            <span class="text-danger">{{ $errors->first('branch_id') }}</span>
-                                        @endif
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
-                                        <label>Quyền</label><span class="text-danger">*</span>
-                                        <select name="role_id" id="" class="form-control">
-                                            @foreach($roles as $item)
-                                                <option value="{{ $item->id }}"
-                                                        @if($user->role_id == $item->id)
-                                                        selected
-                                                        @endif
-                                                >{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @if($errors->first('role_id'))
-                                            <span class="text-danger">{{ $errors->first('role_id') }}</span>
-                                        @endif
-                                    </div><!-- /.form-group -->
+
                                 </div><!-- /.col -->
                             </div><!-- /.row -->
                         </div>
@@ -259,11 +281,6 @@
                                                 >
                                                 <label>{{ $type_service->name }}</label>
                                             </div>
-                                            @if($type_service->showServices($type_service->id)->isEmpty())
-                                                <div class="list-group-item">
-                                                    <span class="text-danger">Không có dịch vụ nào</span>
-                                                </div>
-                                            @endif
                                             @foreach($type_service->showServices($type_service->id) as $service)
                                                 <div class="checkbox list-group-item">
                                                     <label>
@@ -280,6 +297,11 @@
                                                     </label>
                                                 </div>
                                             @endforeach
+                                            @if($type_service->showServices($type_service->id)->isEmpty())
+                                                <div class="list-group-item">
+                                                    <span class="text-danger">Không có dịch vụ nào</span>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
@@ -334,15 +356,6 @@
                         required: true,
                         maxlength: 200
                     },
-                    password: {
-                        required: true,
-                        minlength: 6,
-                        maxlength: 40,
-                    },
-                    cf_password: {
-                        required: true,
-                        equalTo: password
-                    },
                     branch_id: "required",
                     role_id: "required",
                     gender_id: "required",
@@ -353,14 +366,9 @@
                     full_name: {
                         maxlength: "*Không được vượt quá 100 ký tự",
                     },
-                    phone_number: {
-                    },
+                    phone_number: {},
                     address: {
                         maxlength: "*Không được vượt quá 200 ký tự",
-                    },
-                    password: {
-                        minlength: "*Yêu cầu từ 6-40 ký tự",
-                        maxlength: "*Yêu cầu từ 6-40 ký tự",
                     }
                 }
             });
@@ -400,15 +408,15 @@
             }
 
             @if($user->role_id == config('contants.role_technician'))
-            //active table
-            if (window.location.hash === '#tab_3') {
-                $('#li_tab_1').removeClass('active');//remove active class
-                $('#tab_1').removeClass('active');
-                $('#li_tab_2').removeClass('active');
-                $('#tab_2').removeClass('active');
-                $('#li_tab_3').addClass('active');
-                $('#tab_3').addClass('active');
-            }
+                //active table
+                if (window.location.hash === '#tab_3') {
+                    $('#li_tab_1').removeClass('active');//remove active class
+                    $('#tab_1').removeClass('active');
+                    $('#li_tab_2').removeClass('active');
+                    $('#tab_2').removeClass('active');
+                    $('#li_tab_3').addClass('active');
+                    $('#tab_3').addClass('active');
+                }
             @endif
 
         });

@@ -24,3 +24,13 @@ function get_last_words($amount, $string)
 
     return $words;
 }
+
+function notification($alert_type, $message)
+{
+    $notification = array(
+        'alert-type' => $alert_type,
+        'message' => $message
+    );
+
+    return $notification;
+}

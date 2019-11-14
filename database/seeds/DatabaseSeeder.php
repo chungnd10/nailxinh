@@ -19,13 +19,13 @@ class DatabaseSeeder extends Seeder
          $this->call(OperationStatusTableSeeder::class);
          $this->call(OrdersStatusTableSeeder::class);
          $this->call(TypeOfServicesTableSeeder::class);
-         $this->call(ProcessOfServicesTableSeeder::class);
          $this->call(RolesTableSeeder::class);
          $this->call(PermissionsTableSeeder::class);
          $this->call(RolesPermissionsTableSeeder::class);
          $this->call(UsersTableSeeder::class);
          $this->call(SlidesTableSeeder::class);
          $this->call(ServicesTableSeeder::class);
+         $this->call(ProcessOfServicesTableSeeder::class);
          $this->call(IntroductionTableSeeder::class);
          $this->call(MembershipTypeTableSeeder::class);
          $this->call(WebSettingTableSeeder::class);

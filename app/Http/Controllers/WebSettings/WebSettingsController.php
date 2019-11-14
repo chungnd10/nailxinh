@@ -20,6 +20,7 @@ class WebSettingsController extends Controller
     public function index()
     {
         $item = $this->web_setting_services->first();
+
         return view('admin.web_settings.index', compact('item'));
     }
 
@@ -28,7 +29,8 @@ class WebSettingsController extends Controller
 
         $item = $this->web_setting_services->first();
 
-        if ($request->hasFile('avatar')) {
+        if ($request->hasFile('avatar'))
+        {
             if (file_exists('upload/images/web_settings/'.$item->logo)
                 && $item->logo != 'logo-default.png')
             {
@@ -43,11 +45,8 @@ class WebSettingsController extends Controller
 
         $item->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Cập nhật thông tin thành công',
-            'alert-type' => 'success'
-        );
+        $notification = notification('success', 'Cập nhật thành công !');
 
-        return redirect()->route('admin.index')->with($notify);
+        return redirect()->route('admin.index')->with($notification);
     }
 }
