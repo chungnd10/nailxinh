@@ -9,7 +9,7 @@
                 <div class="col-12 text-center">
                     <h2>NailXinh</h2>
                     <ul class="breadcrumb-nav list-inline">
-                        <li><a href="index-2.html">NailXinh</a></li>
+                        <li><a href="/">NailXinh</a></li>
                         <li>Dịch vụ</li>
                     </ul>
                 </div>
