@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Validator;
 
 class OrderController extends Controller
 {
@@ -20,6 +22,22 @@ class OrderController extends Controller
         $time = $request->time;
         $note = $request->note;
 
+        dd($request->all());
+        if($request->ajax())
+        {
+            $order = new Order();
+            $validator = Validator::make($request->all(), [
+
+            ]);
+
+            if ($validator->passes())
+            {
+                $order->save();
+                return response()->json(['message'=>'Updated Successfully', 'success'=>true]);
+            }
+
+            return response()->json(['message'=>$validator->errors()->all()]);
+        }
         dd($phone_number,
             $sir,
             $full_name,

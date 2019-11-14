@@ -36,19 +36,21 @@
                             <div class="form-group col-md-12">
                                 <input type="text"
                                        class="form-control form-border"
+                                       id="phone_number"
                                        name="phone_number"
                                        value="{{ old('phone_number') }}"
                                        placeholder="Số điện thoại">
                             </div>
                             <div class="form-group col-md-4">
-                                <select class="form-control form-border">
-                                    <option value="">Mrs/Miss</option>
-                                    <option value="">Mrs</option>
-                                    <option value="">Miss</option>
+                                <select class="form-control form-border" id="sir">
+                                    <option value="Mrs/Miss">Mrs/Miss</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-8">
                                 <input type="text"
+                                       id="full_name"
                                        name="full_name"
                                        class="form-control form-border"
                                        value="{{ old('full_name') }}"
@@ -65,7 +67,7 @@
                                             <button type="button"
                                                     name="branch_id"
                                                     value="{{ $branch->id }}"
-                                                    class="btn btn-adress-booking">
+                                                    class="btn btn-adress-booking branch_id">
                                                 {{ $branch->name }}
                                                 <br>
                                                 <div class="font-11">{{ $branch->address }}</div>
@@ -76,7 +78,7 @@
                             </div>
                             <div class="col-md-12 mb-4">
                                 <div class="mb-2">Dịch vụ <span class="text-danger">*</span></div>
-                                <select class="services form-control form-border" name="service_id">
+                                <select class="services form-control form-border" id="service_id" name="service_id">
                                     <option value="">Chọn dịch vụ</option>
                                     @foreach($type_services as $type_service)
                                         <optgroup label="{{ $type_service->name }}">
@@ -90,7 +92,7 @@
                             </div>
                             <div class="col-md-12 mb-4">
                                 <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
-                                <select class="staff form-control form-border" name="user_id">
+                                <select class="staff form-control form-border" id="user_id" name="user_id">
                                     <option value="">Chọn nhân viên</option>
                                     @foreach($users as $user)
                                         <option data-image="{{ $user->avatar }}"
@@ -114,9 +116,8 @@
                                                 time-frame="09:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 09:00
                                             </div>
                                         </button>
@@ -126,9 +127,8 @@
                                                 time-frame="10:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 10:00
                                             </div>
                                         </button>
@@ -138,9 +138,8 @@
                                                 time-frame="11:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 11:00
                                             </div>
                                         </button>
@@ -150,9 +149,8 @@
                                                 time-frame="12:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 12:00
                                             </div>
                                         </button>
@@ -162,9 +160,8 @@
                                                 time-frame="13:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 13:00
                                             </div>
                                         </button>
@@ -174,9 +171,8 @@
                                                 time-frame="14:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 14:00
                                             </div>
                                         </button>
@@ -186,9 +182,8 @@
                                                 time-frame="15:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 15:00
                                             </div>
                                         </button>
@@ -198,9 +193,8 @@
                                                 time-frame="16:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 16:00
                                             </div>
                                         </button>
@@ -210,9 +204,8 @@
                                                 time-frame="17:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 17:00
                                             </div>
                                         </button>
@@ -222,9 +215,8 @@
                                                 time-frame="18:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 18:00
                                             </div>
                                         </button>
@@ -234,9 +226,8 @@
                                                 time-frame="19:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 19:00
                                             </div>
                                         </button>
@@ -246,9 +237,8 @@
                                                 time-frame="20:00"
                                                 name="time[]"
                                                 value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
+                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
                                                 20:00
                                             </div>
                                         </button>
@@ -256,9 +246,9 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mb-4">
-                                <label for="ghichu">Ghi chú</label>
+                                <label for="note">Ghi chú</label>
                                 <textarea class="form-control form-border"
-                                          id="ghichu"
+                                          id="note"
                                           rows="5"
                                           name="note"
                                 ></textarea>
@@ -286,36 +276,34 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            {{--$("#btn-booking").click(function () {--}}
+            {{--    var phone_number = $("#phone_number").val();--}}
+            {{--    var sir = $("#sir").val();--}}
+            {{--    var full_name = $("#full_name").val();--}}
 
-            $("#btn-booking").click(function () {
-                var phone_number = $("#phone_number").val();
-                var sir = $("#sir").val();
-                var full_name = $("#full_name").val();
-                var branch_id = $("#branch_id").val();
-                var service_id = $("#service_id").val();
-                var user_id = $("#user_id").val();
-                var date = $("#date").val();
-                var time = $("#time").val();
-                var note = $("#note").val();
+            {{--    var service_id = $("#service_id").val();--}}
+            {{--    var user_id = $("#user_id").val();--}}
+            {{--    var date = $("#date").val();--}}
+            {{--    var note = $("#note").val();--}}
 
-                var url = "{{ route('booking') }}";
+            {{--    var url = "{{ route('booking') }}";--}}
 
-                $.post({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: url,
-                    data: phone_number,
-                    sir,
-                    full_name,
-                    branch_id,
-                    service_id,
-                    user_id,
-                    date,
-                    time,
-                    note
-                })
-            });
+            {{--    $.post({--}}
+            {{--        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },--}}
+            {{--        url: url,--}}
+            {{--        data: {--}}
+            {{--            phone_number: phone_number,--}}
+            {{--            sir:          sir,--}}
+            {{--            full_name:    full_name,--}}
+            {{--            branch_id:    branch_id,--}}
+            {{--            service_id:   service_id,--}}
+            {{--            user_id:      user_id,--}}
+            {{--            date:         date,--}}
+            {{--            time:         time,--}}
+            {{--            note:         note--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--});--}}
         });
     </script>
 @endsection
