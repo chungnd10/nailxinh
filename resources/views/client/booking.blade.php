@@ -24,8 +24,8 @@
     ============================= -->
     <section id="booking" style="padding-top:80px;">
         <div class="container">
-            <div class="row>
-                <div class="col-lg-8 offset-lg-2 col-md-12"">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
                     <form action="" id="booking-form">
                         @csrf
                         <div class="row">

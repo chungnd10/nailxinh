@@ -89,6 +89,12 @@
                 }
             }
         });
+        // Introduction section
+        $("#lightgallery").lightGallery({
+            thumbnail:true,
+            animateThumb: false,
+            showThumbByDefault: false
+        }); 
 
         // Header Slide items with animate.css
         var owl = $('.header-slider');

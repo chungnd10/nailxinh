@@ -1958,7 +1958,7 @@ header {
     color: #9598a2;
     cursor: pointer;
     position: absolute;
-    top: 76%;
+    top: 50%;
     -webkit-transition: .7s;
     transition: .7s;
 }
@@ -2668,11 +2668,11 @@ header {
 }
 
 .gallery-page .gallery-item figure:hover img {
-    -webkit-transform: scale(10);
-    transform: scale(10);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
     -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: alpha(opacity=0);
-    opacity: 0;
+  
 }
 
 .gallery-page .gallery-item figcaption {
@@ -2708,23 +2708,21 @@ header {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
 
-.gallery-page .gallery-item figcaption ul li {
-    display: inline-block;
-    margin-right: 5px;
-}
 
-.gallery-page .gallery-item figcaption ul li a {
-    width: 50px;
-    height: 50px;
+.gallery-page .gallery-item figcaption a {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: #fff;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     -webkit-transition: all 0.4s ease-in;
     transition: all 0.4s ease-in;
 }
 
-.gallery-page .gallery-item figcaption ul li a:hover {
+.gallery-page .gallery-item figcaption a:hover {
     color: #fff;
 }
 
@@ -2734,7 +2732,7 @@ header {
 }
 
 .gallery-page .gallery-item figcaption h4,
-.gallery-page .gallery-item figcaption ul li,
+.gallery-page .gallery-item figcaption a,
 .gallery-page .gallery-item figcaption p {
     -webkit-transition: all 0.5s linear;
     transition: all 0.5s linear;
@@ -2746,7 +2744,7 @@ header {
 }
 
 .gallery-page .gallery-item figure:hover figcaption h4,
-.gallery-page .gallery-item figure:hover figcaption ul li,
+.gallery-page .gallery-item figure:hover figcaption a,
 .gallery-page .gallery-item figure:hover figcaption p {
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -3658,9 +3656,13 @@ img.img-flag {
 	padding-bottom: 10px;
 }
 .showroom ul{
-	padding-left: 17px;
+    padding-left: 17px;
+    list-style: inherit;
 }   
-
+.showroom .aos-init a{
+    display: block;
+    color: #ec5598;
+}
 .button-a {
     display: inline-block;
     background-color: #b7752b;
@@ -3725,4 +3727,71 @@ section#calltoaction {
 }
 .show-mobile{
     display:none;
+}
+
+.jg-entry {
+    position: relative;
+}
+
+.demo-gallery-poster {
+    /* position: absolute; */
+    background-color: rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    /* left: 0; */
+    position: absolute;
+    /* right: 0; */
+    top: 0;
+    -webkit-transition: background-color 0.15s ease 0s;
+    -o-transition: background-color 0.15s ease 0s;
+    transition: background-color 0.15s ease 0s;
+    width: 255px;
+}
+
+.demo-gallery-poster>i {
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    -webkit-transition: opacity 0.3s ease 0s;
+    -o-transition: opacity 0.3s ease 0s;
+    transition: opacity 0.3s ease 0s;
+    color: #fff;
+    font-size: 25px;
+}
+
+.jp-entry:hover .demo-gallery-poster {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.jg-entry:hover .demo-gallery-poster>i {
+    opacity: 1;
+}
+
+.jg-entry:hover .demo-gallery-poster {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Footer */
+.widget-adress>div {
+    padding: 20px;
+    text-align: center;
+    background-position: center;
+    background-size: contain;
+    margin-bottom: 5px;
+}
+.widget-adress>div a{
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+.adress-hn{
+    background-image: url('../../client_assets/img/footer/hn-1.jpg');
+}
+.adress-dn{
+    background-image: url('../../client_assets/img/footer/dn-1.jpg');
+}
+.adress-sg{
+    background-image: url('../../client_assets/img/footer/hcm-1.jpg');
 }

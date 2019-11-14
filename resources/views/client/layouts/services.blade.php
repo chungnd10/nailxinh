@@ -39,7 +39,7 @@
                                                 <h4>{{ limit($service->name, 19, '...') }}
                                                         <span class="price">{{ number_format($service->price) }} VNĐ</span>
                                                     </h4>
-                                                <p class="text-white">{{ limit($service->description, 70, '...') }}</p>
+                                                <p class="text-dark">{{ limit($service->description, 70, '...') }}</p>
                                             </a>
                                         </li>
                                     </ul>
