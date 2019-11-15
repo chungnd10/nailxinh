@@ -60,13 +60,19 @@
                                     Địa điểm
                                     <span class="text-danger">*</span>
                                 </div>
+                                <script>
+                                    function addClassData() {
+                                        $(this).addClass('branch-data');
+                                    }
+                                </script>
                                 <div class="row">
                                     @foreach($branchs as $branch)
                                         <div class="col-md-6 mb-3">
                                             <button type="button"
                                                     name="branch_id"
-                                                    value="{{ $branch->id }}"
-                                                    class="btn btn-adress-booking branch_id">
+                                                    data-branch-id="{{ $branch->id }}"
+                                                    onclick="addClassData()"
+                                                    class="btn btn-adress-booking">
                                                 {{ $branch->name }}
                                                 <br>
                                                 <div class="font-11">{{ $branch->address }}</div>
@@ -236,6 +242,7 @@
                                                 time-frame="20:00"
                                                 name="time[]"
                                                 value="08:00"
+                                                onclick="addTime('08:00')"
                                                 class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
                                             <div class="time">
                                                 20:00
@@ -273,36 +280,36 @@
 
 @section('script')
     <script type="text/javascript">
+
         $(document).ready(function () {
 
-            {{--$("#btn-booking").click(function () {--}}
-            {{--    var phone_number = $("#phone_number").val();--}}
-            {{--    var sir = $("#sir").val();--}}
-            {{--    var full_name = $("#full_name").val();--}}
+            $("#btn-booking").click(function () {
+                var phone_number = $("#phone_number").val();
+                var sir = $("#sir").val();
+                var full_name = $("#full_name").val();
 
-            {{--    var service_id = $("#service_id").val();--}}
-            {{--    var user_id = $("#user_id").val();--}}
-            {{--    var date = $("#date").val();--}}
-            {{--    var note = $("#note").val();--}}
+                var service_id = $("#service_id").val();
+                var user_id = $("#user_id").val();
+                var date = $("#date").val();
+                var note = $("#note").val();
+                var url = "{{ route('booking') }}";
 
-            {{--    var url = "{{ route('booking') }}";--}}
-
-            {{--    $.post({--}}
-            {{--        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },--}}
-            {{--        url: url,--}}
-            {{--        data: {--}}
-            {{--            phone_number: phone_number,--}}
-            {{--            sir:          sir,--}}
-            {{--            full_name:    full_name,--}}
-            {{--            branch_id:    branch_id,--}}
-            {{--            service_id:   service_id,--}}
-            {{--            user_id:      user_id,--}}
-            {{--            date:         date,--}}
-            {{--            time:         time,--}}
-            {{--            note:         note--}}
-            {{--        }--}}
-            {{--    })--}}
-            {{--});--}}
+                $.post({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    url: url,
+                    data: {
+                        phone_number: phone_number,
+                        sir:          sir,
+                        full_name:    full_name,
+                        branch_id:    branch_id,
+                        service_id:   service_id,
+                        user_id:      user_id,
+                        date:         date,
+                        time:         time,
+                        note:         note
+                    }
+                })
+            });
         });
     </script>
 @endsection

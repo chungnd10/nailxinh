@@ -23,6 +23,7 @@ class OrderController extends Controller
         $note = $request->note;
 
         dd($request->all());
+
         if($request->ajax())
         {
             $order = new Order();
@@ -38,15 +39,5 @@ class OrderController extends Controller
 
             return response()->json(['message'=>$validator->errors()->all()]);
         }
-        dd($phone_number,
-            $sir,
-            $full_name,
-            $branch_id,
-            $service_id,
-            $user_id,
-            $date,
-            $time,
-            $note
-        );
     }
 }
