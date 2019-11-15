@@ -64,63 +64,55 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-5">
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 gallery-item" data-groups='["beautyspa", "haircut", "skincare", "Show All"]'>
-                    <figure>
-                        <img src="client_assets/img/gallery/gallery01.jpg" alt="">
-                        <figcaption>
-                            <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery01.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 gallery-item" data-groups='["beautyspa", "haircut", "skincare", "Show All"]'>
-                    <figure>
-                        <img src="client_assets/img/gallery/gallery01.jpg" alt="">
-                        <figcaption>
-                            <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery01.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 gallery-item" data-groups='["beautyspa", "haircut", "skincare", "Show All"]'>
-                    <figure>
-                        <img src="client_assets/img/gallery/gallery01.jpg" alt="">
-                        <figcaption>
-                            <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery01.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 gallery-item" data-groups='["beautyspa", "haircut", "skincare", "Show All"]'>
-                    <figure>
-                        <img src="client_assets/img/gallery/gallery01.jpg" alt="">
-                        <figcaption>
-                            <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery01.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
-                            </div>
-                        </figcaption>
-                    </figure>
-                </div>
+            <div class="row mt-5" id="lightgallery">
+                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                    <img src="client_assets/img/gallery/gallery10.jpg" />
+                    <div class="demo-gallery-poster">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
+                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                    <img src="client_assets/img/gallery/gallery10.jpg" />
+                    <div class="demo-gallery-poster">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
+                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                    <img src="client_assets/img/gallery/gallery10.jpg" />
+                    <div class="demo-gallery-poster">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
+                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                    <img src="client_assets/img/gallery/gallery10.jpg" />
+                    <div class="demo-gallery-poster">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
+                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                    <img src="client_assets/img/gallery/gallery10.jpg" />
+                    <div class="demo-gallery-poster">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
+                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                    <img src="client_assets/img/gallery/gallery10.jpg" />
+                    <div class="demo-gallery-poster">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
+                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                    <img src="client_assets/img/gallery/gallery10.jpg" />
+                    <div class="demo-gallery-poster">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
+                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                    <img src="client_assets/img/gallery/gallery10.jpg" />
+                    <div class="demo-gallery-poster">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                </a>
             </div>
         </div>
     </section>

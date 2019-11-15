@@ -15,23 +15,24 @@
             <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-md-0 mb-4">
                 <aside class="widget widget_recent widget_links">
                     <h4 class="widget-title"><img src="client_assets/img/section-icon.png" alt="">Chi nhánh</h4>
-                    <ul>
-                        <li class="latest-news">
+                    
+                    <div class="widget-adress">
+                        <div class="adress-hn">
                             <a href="#">
                                 Hà Nội
                             </a>
-                        </li>
-                        <li class="latest-news">
+                        </div>
+                        <div class="adress-dn">
                             <a href="#">
                                 Đà Nẵng
                             </a>
-                        </li>
-                        <li class="latest-news">
+                        </div>
+                        <div class="adress-sg">
                             <a href="#">
-                                Hồ Chí Minh
+                                Hồ chí minh
                             </a>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </aside>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-4">
