@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Services\BranchServices;
+use App\Services\CityServices;
 use App\Services\FeedbackServices;
 use App\Services\GenderServices;
 use App\Services\OperationStatusServices;
@@ -30,6 +31,7 @@ class ClientController extends Controller
     protected $order_services;
     protected $feedback_services;
     protected $slide_services;
+    protected $city_services;
 
     public function __construct(
         OrderServices $order_services,
@@ -43,7 +45,8 @@ class ClientController extends Controller
         UserServiceServices $user_services_services,
         WebSettingServices $web_setting_services,
         FeedbackServices $feedback_services,
-        SlideServices $slide_services
+        SlideServices $slide_services,
+        CityServices $city_services
     ) {
         $this->slide_services = $slide_services;
         $this->feedback_services = $feedback_services;
@@ -57,6 +60,7 @@ class ClientController extends Controller
         $this->type_services = $type_services;
         $this->user_services_services = $user_services_services;
         $this->web_setting_services = $web_setting_services;
+        $this->city_services = $city_services;
     }
 
     public function index()
@@ -67,10 +71,10 @@ class ClientController extends Controller
         $user = $this->user_services->count();
         $service = $this->service_services->count();
         $orders = $this->order_services->count();
-
         $feedbacks = $this->feedback_services->allWithDisplayStatus($display_status_id);
         $slides = $this->slide_services->allDisplay();
         $technicians = $this->user_services->getTechnician();
+        $index_active = true;
 
         return view('client.index', compact(
                 'branch',
@@ -79,43 +83,52 @@ class ClientController extends Controller
                 'orders',
                 'feedbacks',
                 'slides',
-                'technicians'
+                'technicians',
+                'index_active'
             )
         );
     }
 
     public function introduction()
     {
-        return view('client.introduction');
+        $introduction_active = true;
+
+        return view('client.introduction', compact('introduction_active'));
     }
 
     public function contact()
     {
-        return view('client.contact');
+        $contact_active = true;
+
+        $cities = $this->city_services->all();
+
+        return view('client.contact', compact('contact_active', 'cities'));
     }
 
     public function services()
     {
+        $services_active = true;
+
         $display_status_id = config('contants.display_status_display');
         $feedbacks = $this->feedback_services->allWithDisplayStatus($display_status_id);
-        return view('client.services', compact('feedbacks'));
-    }
 
-    public function typeServices($id)
-    {
-
+        return view('client.services', compact('feedbacks', 'services_active'));
     }
 
     public function booking()
     {
+        $booking_active = true;
         $branchs = $this->branch_services->all();
         $type_services = $this->type_services->all();
         $users = $this->user_services->getTechnician();
-        return view('client.booking', compact('branchs', 'type_services', 'users'));
+
+        return view('client.booking', compact('branchs', 'type_services', 'users', 'booking_active'));
     }
 
     public function gallery()
     {
-        return view('client.gallery');
+        $gallery_active = true;
+
+        return view('client.gallery', compact('gallery_active'));
     }
 }

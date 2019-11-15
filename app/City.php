@@ -16,4 +16,9 @@ class City extends Model
     public function branchs(){
     	return $this->hasMany(Branch::class);
     }
+
+    public function getBranch($id)
+    {
+        return Branch::where('city_id', $id)->get();
+    }
 }

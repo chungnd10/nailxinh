@@ -49,22 +49,22 @@
                 <div class="col-lg-10 col-md-10 d-none d-lg-block text-right">
                     <nav class="main-menu">
                         <ul>
-                            <li class="active">
+                            <li {{ isset($index_active) ? 'class=active' : ''}}>
                                 <a href="{{ route('index') }}">TRANG CHỦ</a>
                             </li>
-                            <li>
+                            <li {{ isset($introduction_active) ? 'class=active' : ''}}>
                                 <a href="{{ route('introduction') }}">GIỚI THIỆU</a>
                             </li>
-                            <li>
+                            <li {{ isset($services_active) ? 'class=active' : ''}}>
                                 <a href="{{ route('services') }}">DỊCH VỤ</a>
                             </li>
-                            <li>
+                            <li {{ isset($gallery_active) ? 'class=active' : ''}}>
                                 <a href="{{ route('gallery') }}">THƯ VIỆN ẢNH</a>
                             </li>
-                            <li>
+                            <li {{ isset($contact_active) ? 'class=active' : ''}}>
                                 <a href="{{ route('contact') }}">LIÊN HỆ</a>
                             </li>
-                            <li>
+                            <li {{ isset($booking_active) ? 'class=active' : ''}}>
                                 <a href="{{ route('booking') }}">ĐẶT LỊCH</a>
                             </li>
                         </ul>

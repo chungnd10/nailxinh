@@ -104,7 +104,6 @@
             		},
             		address: {
             			required: true,
-            			minlength: 5,
 						maxlength: 200
             		}
             		
@@ -118,7 +117,6 @@
 						maxlength : "*Không được vượt quá 11 ký tự"
             		},
             		address: {
-            			minlength: "*Yêu cầu tối thiểu 5 ký tự",
 						maxlength : "*Không được vượt quá 200 ký tự"
             		},
             	}
