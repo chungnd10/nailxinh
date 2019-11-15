@@ -64,7 +64,7 @@
                         <ul>
                             @foreach($type_services as $type_service)
                                 <li>
-                                    <a href="{{ route('type_services', $type_service->id) }}">{{ $type_service->name }}
+                                    <a href="{{ route('type-service', [$type_service->slug, $type_service->id ]) }}">{{ $type_service->name }}
                                     </a>
                                 </li>
                             @endforeach

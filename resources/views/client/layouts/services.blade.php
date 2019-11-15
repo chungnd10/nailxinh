@@ -33,7 +33,7 @@
                                 @if($service)
                                     <ul>
                                         <li>
-                                            <a href="#">
+                                            <a href="{{ route('service-detail', [ $service->slug, $service->id ] ) }}">
                                                 <img width="80" class="fix-border-radius"
                                                     src="upload/images/service/{{ $service->image }}" alt="services">
                                                 <h4>{{ limit($service->name, 19, '...') }}

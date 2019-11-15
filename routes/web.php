@@ -21,11 +21,15 @@ Route::get('/introduction', 'Client\ClientController@introduction')->name('intro
 Route::get('/contact', 'Client\ClientController@contact')->name('contact');
 
 Route::get('/services', 'Client\ClientController@services')->name('services');
+Route::get('/services-detail/{slug}/{id}', 'Client\ClientController@servicesDetail')->name('service-detail');
 
-Route::get('/type_services/{id}', 'Client\ClientController@typeServices')->name('type_services');
+Route::get('/type-services/{slug}/{id}', 'Client\ClientController@typeServices')->name('type-service');
 
 Route::get('/booking', 'Client\ClientController@booking')->name('booking');
 Route::post('/booking', 'Client\OrderController@store');
+
+Route::get('/booking-test', 'Client\ClientController@bookingTest')->name('booking-test');
+Route::post('/booking-test', 'Client\OrderController@bookingTestStore');
 
 Route::get('/gallery', 'Client\ClientController@gallery')->name('gallery');
 

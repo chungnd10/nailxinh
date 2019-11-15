@@ -28,10 +28,13 @@ class ComposerServiceProvider extends ServiceProvider
             [
                 'client.index',
                 'client.booking',
+                'client.booking-test',
                 'client.contact',
                 'client.gallery',
                 'client.introduction',
-                'client.services'
+                'client.services',
+                'client.service-detail'
+
             ], 'App\Http\ViewComposers\CommonComposer'
         );
     }

@@ -105,6 +105,13 @@ class ClientController extends Controller
         return view('client.contact', compact('contact_active', 'cities'));
     }
 
+    public function typeServices($id)
+    {
+        $display_status_id = config('contants.display_status_display');
+        $feedbacks = $this->feedback_services->allWithDisplayStatus($display_status_id);
+        return view('client.services', compact('feedbacks', 'services_active'));
+    }
+
     public function services()
     {
         $services_active = true;
@@ -115,6 +122,12 @@ class ClientController extends Controller
         return view('client.services', compact('feedbacks', 'services_active'));
     }
 
+    public function servicesDetail($id)
+    {
+        $service = $this->service_services->find($id);
+        return view('client.service-detail', compact('service'));
+    }
+
     public function booking()
     {
         $booking_active = true;
@@ -123,6 +136,16 @@ class ClientController extends Controller
         $users = $this->user_services->getTechnician();
 
         return view('client.booking', compact('branchs', 'type_services', 'users', 'booking_active'));
+    }
+
+    public function bookingTest()
+    {
+        $booking_active = true;
+        $branchs = $this->branch_services->all();
+        $type_services = $this->type_services->all();
+        $users = $this->user_services->getTechnician();
+
+        return view('client.booking-test', compact('branchs', 'type_services', 'users', 'booking_active'));
     }
 
     public function gallery()

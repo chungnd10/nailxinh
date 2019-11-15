@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-12 text-center">
                 <div class="section-title">
-                    <h2>GẶP MẶT CÁC CHUYÊN GIA</h2>
+                    <h2>KỸ THUẬT VIÊN CHUYÊN NGHIỆP</h2>
                     <hr>
                     <p>Hãy đến với NAILXINH để được nhận những dịch vụ tốt nhất</p>
                 </div>
