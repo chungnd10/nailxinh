@@ -48,11 +48,7 @@
                         <img src="client_assets/img/gallery/gallery01.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery01.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery01.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -63,11 +59,7 @@
                         <img src="client_assets/img/gallery/gallery02.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery02.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery02.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -78,11 +70,7 @@
                         <img src="client_assets/img/gallery/gallery03.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery03.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery03.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -93,11 +81,7 @@
                         <img src="client_assets/img/gallery/gallery04.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery04.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery04.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -108,11 +92,7 @@
                         <img src="client_assets/img/gallery/gallery05.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery05.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery05.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -123,11 +103,7 @@
                         <img src="client_assets/img/gallery/gallery06.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery06.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery06.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -138,11 +114,7 @@
                         <img src="client_assets/img/gallery/gallery07.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery07.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery07.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -153,11 +125,7 @@
                         <img src="client_assets/img/gallery/gallery08.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery08.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery08.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -168,11 +136,7 @@
                         <img src="client_assets/img/gallery/gallery09.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery09.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery09.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -183,11 +147,7 @@
                         <img src="client_assets/img/gallery/gallery10.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery10.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery10.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -198,11 +158,7 @@
                         <img src="client_assets/img/gallery/gallery11.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery11.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery11.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
@@ -213,11 +169,7 @@
                         <img src="client_assets/img/gallery/gallery12.jpg" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-search"></i></a></li>
-                                    <li><a class="popup" href="client_assets/img/gallery/gallery12.jpg"><i class="fas fa-eye"></i></a></li>
-                                </ul>
-                                <a href="#" class="btn btn-pink btn-custom">Đặt lịch</a>
+                                <a class="popup" href="client_assets/img/gallery/gallery12.jpg"><i class="fas fa-eye" title="Phóng to ảnh"></i></a>
                             </div>
                         </figcaption>
                     </figure>
