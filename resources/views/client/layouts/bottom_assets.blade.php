@@ -15,13 +15,13 @@
 <script src="client_assets/js/jquery.magnific-popup.min.js"></script>
 <script src="client_assets/js/select2.js"></script>
 <script src="client_assets/js/bootstrap-datepicker.js"></script>
-<script src="client_assets/js/jquery.flex-photo-gallery.js"></script>
 <script src="client_assets/js/service-select.js"></script>
 <script src="client_assets/js/jquery.mousewheel.min.js"></script>
 <script src="client_assets/js/lightgallery.js"></script>
 <script src="client_assets/js/lg-thumbnail.js"></script>
-    <script src="client_assets/js/lg-fullscreen.js"></script>
+<script src="client_assets/js/lg-fullscreen.js"></script>
+<script src="client_assets/js/jquery.validate.js"></script>
 <!-- Custom Script -->
 <script src="client_assets/js/custom.js"></script>
-<script src="client_assets/js/service-select.js"></script>
+<script src="client_assets/js/booking.js"></script>
 

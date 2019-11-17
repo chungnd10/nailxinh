@@ -10,6 +10,7 @@
                     <h2>NailXinh</h2>
                     <ul class="breadcrumb-nav list-inline">
                         <li><a href="/">NailXinh</a></li>
+                        <i class="fas fa-chevron-right"></i>
                         <li>Liên hệ</li>
                     </ul>
                 </div>
