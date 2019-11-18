@@ -27,7 +27,8 @@ $(document).ready(function () {
     }
 
     $(".services").select2({
-        templateResult: formatState
+        templateResult: formatState,
+        maximumSelectionLength: 5
     });
 
     $(".staff").select2({

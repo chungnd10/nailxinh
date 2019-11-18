@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-md-12 mb-4">
                                 <div class="mb-2">Dịch vụ <span class="text-danger">*</span></div>
-                                <select class="services form-control form-border" name="service_id" id="service_id">
+                                <select class="services form-control form-border" multiple="multiple" name="service_id" id="service_id">
                                     <option value="">Chọn dịch vụ</option>
                                     @foreach($type_services as $type_service)
                                         <optgroup label="{{ $type_service->name }}">
@@ -268,7 +268,7 @@
                                 ></textarea>
                             </div>
                             <div class="col-md-6 offset-md-3 mt-5 mb-5">
-                                <button class="btn btn-block btn-pink" type="button" id="btn-booking">
+                                <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
                                     <i class="far fa-calendar-alt"></i>
                                     ĐẶT LỊCH NGAY
                                 </button>
