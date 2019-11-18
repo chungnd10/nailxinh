@@ -19,6 +19,8 @@ class CreateOrdersTable extends Migration
             $table->string('phone_number', 11);
             $table->dateTime('time');
             $table->string('note', 200)->nullable();
+            $table->string('created_by', 100)->nullable();
+            $table->string('updated_by', 100)->nullable();
 
             $table->unsignedInteger('branch_id');
             $table->foreign('branch_id')

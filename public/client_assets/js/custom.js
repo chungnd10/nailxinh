@@ -12,7 +12,6 @@
             a = $(this).val();
         });
 
-        console.log(a);
 
         let count_testimonial = $(".testimonial-img img").length;
         

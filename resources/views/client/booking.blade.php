@@ -27,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form action="" id="booking-form">
+                    <form id="booking-form">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-3">
@@ -268,7 +268,7 @@
                                 ></textarea>
                             </div>
                             <div class="col-md-6 offset-md-3 mt-5 mb-5">
-                                <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
+                                <button class="btn btn-block btn-pink" type="button" id="btn-booking">
                                     <i class="far fa-calendar-alt"></i>
                                     ĐẶT LỊCH NGAY
                                 </button>
@@ -289,36 +289,35 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            {{--$("#btn-booking").click(function () {--}}
+            {{--    var phone_number = $("#phone_number").val();--}}
+            {{--    var sir = $("#sir").val();--}}
+            {{--    var full_name = $("#full_name").val();--}}
+            {{--    var branch_id = $("#branch_id").val();--}}
+            {{--    var service_id = $("#service_id").val();--}}
+            {{--    var user_id = $("#user_id").val();--}}
+            {{--    var date = $("#date").val();--}}
+            {{--    var time = $("#time").val();--}}
+            {{--    var note = $("#note").val();--}}
 
-            $("#btn-booking").click(function () {
-                var phone_number = $("#phone_number").val();
-                var sir = $("#sir").val();
-                var full_name = $("#full_name").val();
-                var branch_id = $("#branch_id").val();
-                var service_id = $("#service_id").val();
-                var user_id = $("#user_id").val();
-                var date = $("#date").val();
-                var time = $("#time").val();
-                var note = $("#note").val();
+            {{--    var url = "{{ route('booking') }}";--}}
 
-                var url = "{{ route('booking') }}";
-
-                $.post({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: url,
-                    data: phone_number,
-                    sir,
-                    full_name,
-                    branch_id,
-                    service_id,
-                    user_id,
-                    date,
-                    time,
-                    note
-                })
-            });
+            {{--    $.post({--}}
+            {{--        headers: {--}}
+            {{--            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+            {{--        },--}}
+            {{--        url: url,--}}
+            {{--        data: phone_number,--}}
+            {{--        sir,--}}
+            {{--        full_name,--}}
+            {{--        branch_id,--}}
+            {{--        service_id,--}}
+            {{--        user_id,--}}
+            {{--        date,--}}
+            {{--        time,--}}
+            {{--        note--}}
+            {{--    })--}}
+            {{--});--}}
         });
     </script>
 @endsection

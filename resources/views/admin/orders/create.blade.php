@@ -65,7 +65,7 @@
                                                         @if(old('service_id') == $service->id)
                                                         selected
                                                         @endif
-                                                >{{ $service->name }}</option>
+                                                >{{ $service->name.'-'.$service->price }}</option>
                                             @endforeach
                                         </optgroup>
                                     @endforeach

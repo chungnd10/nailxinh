@@ -162,7 +162,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_2,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -176,7 +176,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_2,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -190,7 +190,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_2,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
             [
@@ -204,7 +204,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_2,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -261,7 +261,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_3,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -275,7 +275,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_3,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -289,7 +289,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_3,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
             [
@@ -303,7 +303,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_3,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -360,7 +360,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_4,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -374,7 +374,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_4,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -388,7 +388,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_4,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
             [
@@ -402,7 +402,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_4,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -459,7 +459,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_5,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -473,7 +473,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_5,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -487,7 +487,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_5,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
             [
@@ -501,7 +501,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_5,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -558,7 +558,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_6,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -572,7 +572,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_6,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -586,7 +586,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_6,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
             [
@@ -600,7 +600,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_6,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -657,7 +657,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_7,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -671,7 +671,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_7,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -685,7 +685,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_7,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
             [
@@ -699,7 +699,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_7,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -756,7 +756,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_8,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -770,7 +770,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_8,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -784,7 +784,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_8,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
             [
@@ -798,7 +798,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_8,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -855,7 +855,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_9,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -869,7 +869,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_9,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[
@@ -883,7 +883,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_9,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
             [
@@ -897,7 +897,7 @@ class UsersTableSeeder extends Seeder
                 'branch_id' => $branch_id_9,
                 'gender_id' => config('contants.gender_female'),
                 'operation_status_id' => config('contants.operation_status_active'),
-                'display_status_id' => config('contants.display_status_display'),
+                'display_status_id' => config('contants.display_status_hide'),
                 'avatar' => 'avatar-default.png'
             ],
     		[

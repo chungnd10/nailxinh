@@ -17,7 +17,6 @@
 <script src="client_assets/js/bootstrap-datepicker.js"></script>
 <!-- bootstrap datepimepicker -->
 <script src="admin_assets/bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-<script src="client_assets/js/jquery.flex-photo-gallery.js"></script>
 <script src="client_assets/js/service-select.js"></script>
 <script src="client_assets/js/jquery.mousewheel.min.js"></script>
 <script src="client_assets/js/lightgallery.js"></script>

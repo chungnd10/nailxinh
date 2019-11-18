@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Order extends Model
 {
@@ -52,4 +53,5 @@ class Order extends Model
         return implode(', ', $services->toArray());
 
     }
+
 }

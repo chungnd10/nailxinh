@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers\Order;
 
-use App\Http\Requests\OrderRequest;
 use App\Http\Controllers\Controller;
 use App\Order;
-use Hashids\HashidsException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Contracts\Encryption\DecryptException;
 use Vinkla\Hashids\Facades\Hashids;
 
 class OrderController extends Controller
