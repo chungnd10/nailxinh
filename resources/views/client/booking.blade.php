@@ -268,7 +268,7 @@
                                 ></textarea>
                             </div>
                             <div class="col-md-6 offset-md-3 mt-5 mb-5">
-                                <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
+                                <button class="btn btn-block btn-pink" type="button" id="btn-booking">
                                     <i class="far fa-calendar-alt"></i>
                                     ĐẶT LỊCH NGAY
                                 </button>

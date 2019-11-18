@@ -160,7 +160,7 @@ nên bóng và bảo vệ móng bền hơn
 
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6 mb-4 mb-lg-0">
-                    <div class="card service-box">
+                    <div class="card services-box">
                         <img src="client_assets/img/beauticians/beauticians02.jpg" class="card-img-top" alt="...">
                         <div class="card-body text-center">
                             <h5 class="card-title text-pink">DA</h5>
@@ -180,7 +180,7 @@ nên bóng và bảo vệ móng bền hơn
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 mb-4 mb-lg-0">
-                    <div class="card service-box">
+                    <div class="card services-box">
                         <img src="client_assets/img/beauticians/beauticians02.jpg" class="card-img-top" alt="...">
                         <div class="card-body text-center">
                             <h5 class="card-title text-pink">DA</h5>
@@ -200,7 +200,7 @@ nên bóng và bảo vệ móng bền hơn
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 mb-4 mb-lg-0">
-                    <div class="card service-box">
+                    <div class="card services-box">
                         <img src="client_assets/img/beauticians/beauticians02.jpg" class="card-img-top" alt="...">
                         <div class="card-body text-center">
                             <h5 class="card-title text-pink">DA</h5>
