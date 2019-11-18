@@ -3,31 +3,11 @@
 namespace App\Http\Controllers\Branch;
 
 use App\Http\Requests\AddBranchRequest;
-use App\Services\BranchServices;
-use App\Services\CityServices;
-use App\Services\UserServices;
 use App\Http\Controllers\Controller;
-use App\City;
 use App\Branch;
 
 class BranchController extends Controller
 {
-
-    protected $user_sercices;
-    protected $branch_services;
-    protected $city_services;
-
-    public function __construct(
-        UserServices $user_sercices,
-        BranchServices $branch_services,
-        CityServices $city_services
-    )
-    {
-        $this->user_sercices = $user_sercices;
-        $this->branch_services = $branch_services;
-        $this->city_services = $city_services;
-    }
-
     public function index()
     {
     	$branchs = $this->branch_services->all();

@@ -4,21 +4,11 @@ namespace App\Http\Controllers\TypeServices;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddTypeServiceRequest;
-use App\Services\TypeServiceServices;
 use App\TypeOfService;
 use Illuminate\Support\Str;
 
 class TypeServicesController extends Controller
 {
-    protected $type_services;
-
-    public function __construct(
-        TypeServiceServices $type_services
-    )
-    {
-        $this->type_services = $type_services;
-    }
-
     public function index()
     {
         $type_services = $this->type_services->all();

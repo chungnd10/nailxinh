@@ -139,3 +139,23 @@ div.dataTables_wrapper div.dataTables_filter input {
 .panel-style{
     padding-top: 100px;
 }
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background: #3c8dbc;
+    padding: 4px 6px;
+    border: none;
+    color: #fff;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+    color: #fff;
+}
+
+.select2-container--default .select2-results__option .select2-results__option:hover{
+    background: #3c8dbc;
+    color: #fff;
+}
+
+.error-page .error-content{
+    padding-top: 20px;
+}

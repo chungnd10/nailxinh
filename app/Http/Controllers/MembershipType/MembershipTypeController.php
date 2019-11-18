@@ -4,19 +4,10 @@ namespace App\Http\Controllers\MembershipType;
 
 use App\Http\Requests\MembershipTypeRequest;
 use App\MembershipType;
-use App\Services\MembershipTypeServices;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class MembershipTypeController extends Controller
 {
-    protected $membership_type;
-
-    public function __construct(MembershipTypeServices $membership_type)
-    {
-        $this->membership_type = $membership_type;
-    }
-
     public function index()
     {
         $membership_type = $this->membership_type->all();
@@ -40,7 +31,8 @@ class MembershipTypeController extends Controller
         return redirect()->route('membership_type.index')->with($notification);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $membership_type = MembershipType::find($id);
 
         return view('admin.membership_type.show', compact('membership_type'));

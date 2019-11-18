@@ -124,10 +124,10 @@
                     </a>
                     <ul class="treeview-menu">
                         @can('view-orders')
-                            <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                            <li><a href="{{ route('orders.index') }}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                         @endcan
                         @can('add-orders')
-                            <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                            <li><a href="{{ route('orders.create') }}"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                         @endcan
                     </ul>
                 </li>

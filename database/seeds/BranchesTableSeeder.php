@@ -20,7 +20,7 @@ class BranchesTableSeeder extends Seeder
                 'city_id' => 24
             ],
             [
-                'name' => '199 Thanh Xuân',
+                'name' => '86 Nguyễn Trãi',
                 'phone_number'  => '0987654322',
                 'address'   => 'Quận Thanh Xuân, TP Hà Nội',
                 'city_id' => 24

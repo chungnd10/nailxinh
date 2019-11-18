@@ -3,22 +3,12 @@
 namespace App\Http\Controllers\ProcessTypeServices;
 
 use App\Http\Requests\AddProcessRequest;
-use App\Services\ProcessOfServiceServices;
-use App\Services\ServiceServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProcessOfService;
 
 class ProcessTypeServicesController extends Controller
 {
-    protected $process_of_services;
-    protected $services;
-
-    public function __construct(ProcessOfServiceServices $process_of_services, ServiceServices $services)
-    {
-        $this->process_of_services = $process_of_services;
-        $this->services = $services;
-    }
 
     public function index()
     {
@@ -29,7 +19,7 @@ class ProcessTypeServicesController extends Controller
 
     public function create()
     {
-        $services = $this->services->all();
+        $services = $this->service_services->all();
 
         return view('admin.process_type_services.create', compact('services'));
     }
@@ -49,7 +39,7 @@ class ProcessTypeServicesController extends Controller
     {
         $process = $this->process_of_services->find($id);
 
-        $services = $this->services->all();
+        $services = $this->service_services->all();
 
         return view('admin.process_type_services.show', compact('process', 'services'));
     }

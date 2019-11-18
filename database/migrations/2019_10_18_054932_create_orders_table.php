@@ -32,11 +32,7 @@ class CreateOrdersTable extends Migration
                 ->on('users')
                 ->onDelete('CASCADE');
 
-            $table->unsignedInteger('service_id');
-            $table->foreign('service_id')
-                ->references('id')
-                ->on('services')
-                ->onDelete('CASCADE');
+            $table->string('service_id',100);
 
             $table->unsignedInteger('order_status_id');
             $table->foreign('order_status_id')

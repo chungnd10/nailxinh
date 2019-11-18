@@ -26,10 +26,10 @@ Route::get('/services-detail/{slug}/{id}', 'Client\ClientController@servicesDeta
 Route::get('/type-services/{slug}/{id}', 'Client\ClientController@typeServices')->name('type-service');
 
 Route::get('/booking', 'Client\ClientController@booking')->name('booking');
-Route::post('/booking', 'Client\OrderController@store');
+Route::post('/booking', 'Client\ClientController@store');
 
 Route::get('/booking-test', 'Client\ClientController@bookingTest')->name('booking-test');
-Route::post('/booking-test', 'Client\OrderController@bookingTestStore');
+Route::post('/booking-test', 'Client\ClientController@bookingTestStore');
 
 Route::get('/gallery', 'Client\ClientController@gallery')->name('gallery');
 
@@ -225,16 +225,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->name('orders.store');
 
         Route::get('update/{id}', 'Order\OrderController@show')
-            ->middleware('can:edit-orders')
+            ->middleware('can:update-orders')
             ->name('orders.show');
 
         Route::post('update/{id}', 'Order\OrderController@update')
-            ->middleware('can:edit-orders')
+            ->middleware('can:update-orders')
             ->name('orders.update');
 
-        Route::get('destroy/{id}', 'Order\OrderController@destroy')
-            ->middleware('can:remove-orders')
-            ->name('orders.destroy');
     });
 
     //branch
