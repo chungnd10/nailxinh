@@ -15,9 +15,6 @@ jQuery(document).ready(function($) {
             service_id:{
                 required:true
             },
-            user_id:{
-                required:true
-            },
             date:{
                 required:true
             }
@@ -33,9 +30,6 @@ jQuery(document).ready(function($) {
             },
             service_id:{
                 required:"Mời bạn chọn dịch vụ"
-            },
-            user_id:{
-                required:"Mời bạn chọn nhân viên"
             },
             date:{
                 required:"Mời bạn chọn ngày"

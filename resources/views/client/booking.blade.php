@@ -93,16 +93,6 @@
                                 </select>
                             </div>
                             <div class="col-md-12 mb-4">
-                                <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
-                                <select class="staff form-control form-border" name="user_id" id="user_id">
-                                    <option value="">Chọn nhân viên</option>
-                                    @foreach($users as $user)
-                                        <option data-image="{{ $user->avatar }}"
-                                                value="{{ $user->id }}">{{ $user->full_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-12 mb-4">
                                 <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div>
                                 <input class="datepicker form-control form-border"
                                        name="date"
