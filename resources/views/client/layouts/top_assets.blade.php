@@ -11,6 +11,5 @@
 
 <link rel="stylesheet" href="admin_assets/bower_components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
 <link rel="stylesheet" href="client_assets/css/select2.css">
-<link rel="stylesheet" href="client_assets/css/jquery.flex-photo-gallery.css">
 <link rel="stylesheet" href="client_assets/css/lightgallery.css">
 
