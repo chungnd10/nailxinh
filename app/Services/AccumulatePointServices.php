@@ -16,4 +16,18 @@ class AccumulatePointServices
         $points = AccumulatePoints::find($id);
         return $points;
     }
+
+    //lấy tiền tích điểm của khách
+    public function getPointsOfServices($phone_number)
+    {
+        $accumulate = AccumulatePoints::where('phone_number', $phone_number)->get();
+        if ($accumulate->first()){
+            return $accumulate->first()->total_money;
+        }else{
+            return null;
+        }
+
+    }
+
+
 }

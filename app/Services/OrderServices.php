@@ -27,6 +27,15 @@ class OrderServices
         return $orders;
     }
 
+    public function allWhereStatus($branch_id, $status)
+    {
+        $orders = Order::where('branch_id', $branch_id)
+                        ->where('order_status_id', $status)
+                        ->orderby('id', 'desc')->get();
+
+        return $orders;
+    }
+
     public function allOfTechnician($branch_id, $user_id)
     {
         $orders = Order::where('branch_id', $branch_id)->where('user_id', $user_id)->orderby('id', 'desc')->get();

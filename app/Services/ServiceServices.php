@@ -32,4 +32,11 @@ class ServiceServices
     {
         return UserServices::where('user_id', $user_id)->get();
     }
+
+    // lấy giá của tất cả dịch vụ đã sử dụng
+    public function getPriceWithServices($services_id)
+    {
+        $service_price =   Service::whereIn('id',$services_id)->get();
+        return array_sum($service_price->pluck('price')->toArray());
+    }
 }

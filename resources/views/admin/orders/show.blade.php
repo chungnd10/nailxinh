@@ -10,7 +10,7 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('orders.update', $order->id) }}" method="POST" id="orders">
+            <form action="{{ route('orders.update', Hashids::encode($order->id,'123456789')) }}" method="POST" id="orders">
                 @csrf
                 <div class="box-body">
                     <div class="row">
@@ -38,6 +38,7 @@
                                 <label>Thời gian</label><span class="text-danger">*</span>
                                 <input type="text" class="form-control"
                                        name="time"
+                                       id="time"
                                        value="{{ old('time', $order->time) }}"
                                 >
                                 @if($errors->first('time'))
@@ -76,7 +77,8 @@
                                             @foreach($type_service->showServices($type_service->id) as $service)
                                                 <option data-image="{{ $service->image }}"
                                                         value="{{ $service->id }}"
-                                                >{{ $service->name }}</option>
+                                                >{{ $service->name.' - '.number_format( $service->price, 0, ',', '.').'đ' }}
+                                                </option>
                                             @endforeach
                                         </optgroup>
                                     @endforeach
@@ -121,6 +123,11 @@
             //Initialize Select2 Elements
             $('.select2').select2();
             $('#select2').val([ <?= $order->service_id ?> ]).change();
+
+            $('#time').datepicker({
+                format: 'yyyy-mm-dd',
+                minView: 1,
+            });
 
             //validate
             $("#addBranch").validate({

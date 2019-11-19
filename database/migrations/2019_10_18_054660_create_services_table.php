@@ -18,7 +18,7 @@ class CreateServicesTable extends Migration
             $table->string('name', 100);
             $table->string('image', 300)->default('services-default.png');
             $table->string('description', 300)->nullable();
-            $table->double('price', 10, 2);
+            $table->double('price', 15, 2);
             $table->string('completion_time', 100);
             $table->string('slug', 300);
 

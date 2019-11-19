@@ -7,10 +7,12 @@
             <small>lịch đặt</small>
         </h1>
         <ol class="breadcrumb">
-            <a href="{{ route('orders.create') }}"
-               class="btn btn-sm btn-success">
-                <i class="fa fa-plus"></i> Thêm
-            </a>
+            @can('update-orders')
+                <a href="{{ route('orders.create') }}"
+                   class="btn btn-sm btn-success">
+                    <i class="fa fa-plus"></i> Thêm
+                </a>
+            @endcan
         </ol>
     </section>
     {{--Main content--}}
@@ -23,12 +25,12 @@
                         <table class="table table-bordered table-hover" id="datatable">
                             <thead>
                             <tr>
-                                <th>STT</th>
+                                <th width="40">STT</th>
                                 <th width="100">Người đặt</th>
                                 <th>Dịch vụ</th>
                                 <th width="100">Thời gian</th>
                                 <th width="100">Trạng thái</th>
-                                <th width="50">
+                                <th width="80">
                                     Hành động
                                 </th>
                             </tr>
@@ -38,27 +40,29 @@
                                     <tr>
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $order->full_name }}</td>
-                                        <td>{{ $order->getServices($order->service_id) }}</td>
+                                        <td>{{ $order->getNameServices($order->service_id) }}</td>
                                         <td>{{ date('H:i d-m-Y', strtotime($order->time)) }}</td>
                                         <td>{{ $order->orderStatus->name }}</td>
                                         <td>
                                             <a href="#"
                                                class="btn btn-xs btn-primary"
                                                data-toggle="modal"
-                                               data-target="#modal-{{ $order->id }}">
+                                               data-target="#modal-{{ Hashids::encode($order->id,'123456789') }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('orders.show', Hashids::encode($order->id, '0363223618')) }}"
-                                               class="btn btn-xs btn-warning">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
+                                            @can('update-orders')
+                                                <a href="{{ route('orders.show', Hashids::encode($order->id,'123456789')) }}"
+                                                   class="btn btn-xs btn-warning">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                         @foreach($orders as $key => $order)
-                            <div class="modal fade" id="modal-{{ $order->id }}" style="display: none;">
+                            <div class="modal fade" id="modal-{{ Hashids::encode($order->id,'123456789') }}" style="display: none;">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -86,7 +90,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Dịch vụ:</th>
-                                                    <td>{{ $order->getServices($order->service_id) }}</td>
+                                                    <td>{{ $order->getNameServices($order->service_id) }}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Kỹ thuật viên:</th>

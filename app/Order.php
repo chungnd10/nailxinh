@@ -44,13 +44,24 @@ class Order extends Model
         return $this->belongsTo(Branch::class);
     }
 
-    public function getServices($services_id)
+    // lấy nhiều tên dịch vụ theo mảng id
+    public function getNameServices($services_id)
     {
         $services_id = explode(',', $services_id);
         $services = Service::whereIn('id', $services_id)->get();
 
         $services = $services->pluck('name');
         return implode(', ', $services->toArray());
+
+    }
+
+    // lấy danh sách dịch vụ cho hóa đơn
+    public function getServices($services_id)
+    {
+        $services_id = explode(',', $services_id);
+        $services = Service::whereIn('id', $services_id)->get();
+
+        return $services;
 
     }
 

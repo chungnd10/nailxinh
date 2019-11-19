@@ -58,16 +58,4 @@ class Handler extends ExceptionHandler
         return parent::render($request, $exception);
     }
 
-     protected function prepareException(Exception $e)
-    {
-        if ($e instanceof ModelNotFoundException) {
-            $e = new NotFoundHttpException($e->getMessage(), $e);
-        } elseif ($e instanceof AuthorizationException) {
-            $e = new AccessDeniedHttpException($e->getMessage(), $e);
-        } elseif ($e instanceof TokenMismatchException) {
-              return redirect()->route('login');
-        }
-
-        return $e;
-    }
 }

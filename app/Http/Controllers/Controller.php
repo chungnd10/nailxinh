@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\BillServices;
 use App\Services\OrderStatusServices;
 use App\Services\UserTypeServiceServices;
+use Hashids\Hashids;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -27,6 +29,7 @@ use App\Services\AccumulatePointServices;
 use App\Services\MembershipTypeServices;
 use App\Services\IntroductionServices;
 use App\Services\DisplayStatusServices;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -52,6 +55,8 @@ class Controller extends BaseController
     protected $display_status_services;
     protected $user_type_service_services;
     protected $order_status_services;
+    protected $bill_services;
+    protected $hashids;
 
     public function __construct(
         OrderServices $order_services,
@@ -74,7 +79,8 @@ class Controller extends BaseController
         IntroductionServices $introduction_services,
         DisplayStatusServices $display_status_services,
         UserTypeServiceServices $user_type_service_services,
-        OrderStatusServices $order_status_services
+        OrderStatusServices $order_status_services,
+        BillServices $bill_services
     ) {
         $this->slide_services = $slide_services;
         $this->feedback_services = $feedback_services;
@@ -97,5 +103,8 @@ class Controller extends BaseController
         $this->display_status_services = $display_status_services;
         $this->user_type_service_services = $user_type_service_services;
         $this->order_status_services = $order_status_services;
+        $this->bill_services = $bill_services;
+
+        $this->hashids = new Hashids('0363223618', 8, 'abcdefghijklmnopqrstuvwxyz');
     }
 }

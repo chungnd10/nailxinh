@@ -182,31 +182,27 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     });
 
     //bill
-    Route::prefix('bill')->group(function () {
+    Route::prefix('bills')->group(function () {
 
         Route::get('', 'Bill\BillController@index')
             ->middleware('can:view-bills')
-            ->name('bill.index');
+            ->name('bills.index');
 
-        Route::get('create', 'Bill\BillController@create')
-            ->middleware('can:add-bills')
-            ->name('bill.create');
+        Route::get('show/{id}', 'Bill\BillController@show')
+            ->middleware('can:print-bills')
+            ->name('bills.show');
 
-        Route::post('create', 'Bill\BillController@store')
-            ->middleware('can:add-bills')
-            ->name('bill.store');
+        Route::get('print/{id}', 'Bill\BillController@print')
+            ->middleware('can:print-bills')
+            ->name('bills.print');
 
-        Route::get('update/{id}', 'Bill\BillController@show')
-            ->middleware('can:edit-bills')
-            ->name('bill.show');
+        Route::get('update/{id}', 'Bill\BillController@showUpdate')
+            ->middleware('can:update-bill-status')
+            ->name('bills.update');
 
         Route::post('update/{id}', 'Bill\BillController@update')
-            ->middleware('can:edit-bills')
-            ->name('bill.update');
-
-        Route::get('destroy/{id}', 'Bill\BillController@destroy')
-            ->middleware('can:remove-bills')
-            ->name('bill.destroy');
+            ->middleware('can:update-bill-status')
+            ->name('bills.update');
     });
 
     //order

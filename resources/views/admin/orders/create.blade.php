@@ -38,6 +38,7 @@
                                 <label>Thời gian</label><span class="text-danger">*</span>
                                 <input type="text" class="form-control"
                                        name="time"
+                                       id="time"
                                        value="{{ old('time') }}"
                                 >
                                 @if($errors->first('time'))
@@ -65,7 +66,8 @@
                                                         @if(old('service_id') == $service->id)
                                                         selected
                                                         @endif
-                                                >{{ $service->name.'-'.$service->price }}</option>
+                                                >{{ $service->name.' - '.number_format( $service->price, 0, ',', '.').'đ' }}
+                                                </option>
                                             @endforeach
                                         </optgroup>
                                     @endforeach
@@ -110,6 +112,10 @@
             //Initialize Select2 Elements
             $('.select2').select2();
 
+            $('#time').datetimepicker({
+                format: 'yyyy-mm-dd hh:00',
+                minView: 1,
+            });
 
             //validate
             $("#addBranch").validate({
