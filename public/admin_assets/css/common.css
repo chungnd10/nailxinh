@@ -170,3 +170,36 @@ div.dataTables_wrapper div.dataTables_filter input {
         font-size: 18px;
     }
 }
+
+.text-success-lv2{
+    color: #00a65a;
+}
+
+.text-warning-lv2{
+    color: #f39c12;
+}
+
+.text-danger-lv2{
+    color: #f56954;
+}
+
+.text-info-lv2{
+    color: #00c0ef;
+}
+
+.text-purple-lv2{
+    color: #605ca8;
+}
+
+.text-primary-lv2{
+    color: #3c8dbc;
+}
+.text-success-lv2,
+.text-warning-lv2,
+.text-danger-lv2,
+.text-info-lv2,
+.text-purple-lv2,
+.text-primary-lv2
+{
+    font-size: 18px
+}

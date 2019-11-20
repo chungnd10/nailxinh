@@ -20,7 +20,6 @@ class Order extends Model
         'time',
         'note',
         'branch_id',
-        'user_id',
         'order_status_id'
     ];
 
@@ -44,6 +43,11 @@ class Order extends Model
         return $this->belongsTo(Branch::class);
     }
 
+    public function bill()
+    {
+        return $this->hasOne(Bill::class);
+    }
+
     // lấy nhiều tên dịch vụ theo mảng id
     public function getNameServices($services_id)
     {
@@ -64,5 +68,21 @@ class Order extends Model
         return $services;
 
     }
+
+    //kiểm tra xem lịch đã được thanh toán chưa
+    public function checkPaid($order_id)
+    {
+        $order_join_bill = Bill::join('orders', 'orders.id', '=', 'bills.order_id')
+            ->select('bill_status_id')
+            ->where('orders.id', $order_id)
+            ->first();
+
+        if ($order_join_bill->bill_status_id == config('contants.bill_status_paid')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

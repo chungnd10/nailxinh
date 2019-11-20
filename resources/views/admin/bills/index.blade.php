@@ -41,12 +41,15 @@
                                     <tr>
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $bill->full_name }}</td>
-                                        <td>{{ number_format($bill->total_payment, 2, ',', '.') }}</td>
+                                        <td>{{ number_format($bill->total_payment, 0, ',', '.') }}</td>
                                         <td>{{ $bill->getNameUser($bill->user_id) }}</td>
                                         <td>{{ date('H:i d-m-Y', strtotime($bill->created_at)) }}</td>
-                                        <td>{{ $bill->billStatus->name }}</td>
                                         <td>
-                                            <a href="{{ route('bills.show', Hashids::encode($bill->id, '123456789')) }}"
+                                            <i class="fa fa-tag {{ tagColorStatus($bill->billStatus->name) }}" ></i>
+                                            {{ $bill->billStatus->name }}
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('bills.show', Hashids::encode($bill->order_id, '123456789')) }}"
                                                class="btn btn-xs btn-primary">
                                                 <i class="fa fa-eye"></i>
                                             </a>

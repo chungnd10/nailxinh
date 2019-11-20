@@ -42,7 +42,10 @@
                                         <td>{{ $order->full_name }}</td>
                                         <td>{{ $order->getNameServices($order->service_id) }}</td>
                                         <td>{{ date('H:i d-m-Y', strtotime($order->time)) }}</td>
-                                        <td>{{ $order->orderStatus->name }}</td>
+                                        <td >
+                                            <i class="fa fa-tag {{ tagColorStatus($order->orderStatus->name) }}" ></i>
+                                            {{ $order->orderStatus->name }}
+                                        </td>
                                         <td>
                                             <a href="#"
                                                class="btn btn-xs btn-primary"
@@ -51,10 +54,19 @@
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             @can('update-orders')
-                                                <a href="{{ route('orders.show', Hashids::encode($order->id,'123456789')) }}"
-                                                   class="btn btn-xs btn-warning">
-                                                    <i class="fa fa-pencil"></i>
-                                                </a>
+                                                @if($order->order_status_id == config('contants.order_status_finish'))
+                                                    @if($order->checkPaid($order->id) == false)
+                                                        <a href="{{ route('orders.show', Hashids::encode($order->id,'123456789')) }}"
+                                                           class="btn btn-xs btn-warning">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                    @endif
+                                                @else
+                                                    <a href="{{ route('orders.show', Hashids::encode($order->id,'123456789')) }}"
+                                                       class="btn btn-xs btn-warning">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                @endif
                                             @endcan
                                         </td>
                                     </tr>
@@ -94,11 +106,20 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Kỹ thuật viên:</th>
-                                                    <td>{{ $order->user->full_name }}</td>
+                                                    <td>
+                                                        @if($order->user_id == null)
+                                                            Chưa xác định
+                                                        @else
+                                                            {{ $order->user->full_name }}
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Trạng thái:</th>
-                                                    <td>{{ $order->orderStatus->name }}</td>
+                                                    <td>
+                                                        <i class="fa fa-tag {{ tagColorStatus($order->orderStatus->name) }}" ></i>
+                                                        {{ $order->orderStatus->name }}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Người tạo:</th>

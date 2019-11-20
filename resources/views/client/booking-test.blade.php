@@ -124,33 +124,6 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mb-4">
-                                <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
-                                <select name="user_id" id="" class="form-control">
-                                    @foreach($users as $user)
-                                        <option data-image="{{ $user->avatar }}"
-                                                value="{{ $user->id }}"
-                                                @if(old('user_id') == $user->id)
-                                                    selected
-                                                @endif
-                                        >{{ $user->full_name }}</option>
-                                    @endforeach
-                                </select>
-{{--                                <select class="staff form-control form-border" name="user_id">--}}
-{{--                                    <option value="">Chọn nhân viên</option>--}}
-{{--                                    @foreach($users as $user)--}}
-{{--                                        <option data-image="{{ $user->avatar }}"--}}
-{{--                                                value="{{ $user->id }}"--}}
-{{--                                                @if(old('user_id') == $user->id)--}}
-{{--                                                    selected--}}
-{{--                                                @endif--}}
-{{--                                        >{{ $user->full_name }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-                                @if($errors->first('user_id'))
-                                    <span class="text-danger">{{ $errors->first('user_id') }}</span>
-                                @endif
-                            </div>
-                            <div class="col-md-12 mb-4">
                                 <div class="mb-2">Chọn thời gian <span class="text-danger">*</span></div>
                                 <input class=" form-control form-border"
                                        name="time"

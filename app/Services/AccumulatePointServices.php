@@ -7,7 +7,7 @@ class AccumulatePointServices
 {
     public function all()
     {
-        $points = AccumulatePoints::orderby('id', 'desc')->get();
+        $points = AccumulatePoints::orderby('created_at', 'desc')->get();
         return $points;
     }
 
@@ -27,6 +27,13 @@ class AccumulatePointServices
             return null;
         }
 
+    }
+
+    // lấy thông tin tích điểm của khách theo số điện thoại
+    public function getAccumulateWithPhoneNumber($phone_number)
+    {
+         $accumulate = AccumulatePoints::where('phone_number', $phone_number)->first();
+         return $accumulate;
     }
 
 

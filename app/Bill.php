@@ -19,6 +19,11 @@ class Bill extends Model
       'bill_status_id'
     ];
 
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
     public function billStatus()
     {
         return $this->belongsTo(BillStatus::class);

@@ -19,7 +19,7 @@
                                 <select name="bill_status_id" class="form-control">
                                     @foreach($bill_status as $item)
                                         <option value="{{ $item->id }}"
-                                                @if($item->id == $bill->bill_status_id)
+                                                @if( $bill->bill_status_id == $item->id)
                                                     selected
                                                 @endif
                                         >{{ $item->name }}</option>
@@ -40,7 +40,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('branch.index') }}"
+                    <a href="{{ route('bills.index') }}"
                        class="btn btn-default"
                     >
                         <i class="fa fa-arrow-circle-o-left"></i>

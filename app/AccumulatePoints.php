@@ -13,8 +13,24 @@ class AccumulatePoints extends Model
      */
     protected $table = 'accumulate_points';
 
+    protected $primaryKey = 'phone_number';
+
     public function membership_type()
     {
         return $this->belongsTo(MembershipType::class);
+    }
+
+    public function membershipType($money)
+    {
+
+        $membership_type = MembershipType::all();
+
+        foreach ($membership_type as $membershipType) {
+            if ($money <= $membershipType->money_level) {
+                $title =  $membershipType->title;
+            }
+        }
+
+        return $title;
     }
 }
