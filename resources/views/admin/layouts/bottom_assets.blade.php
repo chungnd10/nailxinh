@@ -27,5 +27,7 @@
 <script src="admin_assets/plugins/cropperjs/cropper.min.js"></script>
 <!-- iCheck 1.0.1 -->
 <script src="admin_assets/plugins/iCheck/icheck.min.js"></script>
+<!-- CK Editor -->
+<script src="admin_assets/bower_components/ckeditor-4.13/ckeditor.js"></script>
 {{--common js--}}
 <script src="admin_assets/js/common.js"></script>

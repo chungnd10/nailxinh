@@ -15,7 +15,7 @@ class AddSlideRequest extends FormRequest
     {
         //trường hợp sửa slide
         $validate = [
-            'images'            => 'nullable|mimes:jpg,jpeg,png,gif',
+            'images'            => 'nullable|mimes:jpg,jpeg,png,gif|max:2048',
             'url'               => 'nullable|url|max:300',
             'title'             => 'nullable|max:120',
             'description'       => 'nullable|max:200',
@@ -26,7 +26,7 @@ class AddSlideRequest extends FormRequest
         //trường hợp thêm slide
         if (!$this->id)
         {
-            $validate['images']             = 'required|mimes:jpg,jpeg,png,gif';
+            $validate['images']             = 'required|mimes:jpg,jpeg,png,gif|max:2048';
             $validate['display_status_id']  = 'required';
         }
         return $validate;
@@ -37,6 +37,7 @@ class AddSlideRequest extends FormRequest
         return [
             'images.required'               => '*Mục này không được để trống',
             'images.mimes'                  => '*Chỉ chấp nhận JPG, JPEG, PNG, GIF',
+            'images.max'                 => '*Ảnh dung lượng quá cao, chỉ nhận ảnh không vượt quá 2MB',
             'url.url'                       => '*Url sai định dạng',
             'url.max'                       => '*Không được vượt quá 300 ký tự',
             'title.max'                     => '*Không được vượt quá 120 ký tự',

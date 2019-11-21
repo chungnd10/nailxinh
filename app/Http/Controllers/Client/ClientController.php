@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Introduction;
 use App\Services\BranchServices;
 use App\Services\CityServices;
 use App\Services\FeedbackServices;
@@ -92,8 +93,9 @@ class ClientController extends Controller
     public function introduction()
     {
         $introduction_active = true;
+        $introduction = Introduction::first();
 
-        return view('client.introduction', compact('introduction_active'));
+        return view('client.introduction', compact('introduction_active', 'introduction'));
     }
 
     public function contact()

@@ -9,8 +9,9 @@
                 <div class="col-12 text-center">
                     <h2>Giới thiệu</h2>
                     <ul class="breadcrumb-nav list-inline">
-                        <li><a href="#">NailXinh</a></li>
-                        <li>Giới thiệu</li>
+                        <li><a href="{{ route('index') }}">NailXinh</a></li>
+                        <li><i class="fa fa-angle-right"></i></li>
+                        <li><a href="{{ route('introduction') }}" style="color: #fff">Giới thiệu</a></li>
                     </ul>
                 </div>
             </div>
@@ -24,18 +25,18 @@
     ============================= -->
     <section id="nailit">
         <div class="container">
-            <h2 class="section-title text-center pt-5">VỚI NAIL XINH <br>“AI CŨNG CÓ THỂ TRỞ NÊN ĐẸP HƠN”</h2>
+            <h2 class="section-title text-center pt-5">{!! $introduction->title !!}</h2>
             <div class="row">
                 <div class="col-md-6">
                     <div class="nail-img">
-                        <img src="https://nailroom.vn/wp-content/uploads/2019/08/Untitled-1-2.jpg" alt="">
+                        <img src="upload/images/introductions/{{ $introduction->image }}" alt="{{ $introduction->title }}">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="nail-content">
-                        <p>Sở hữu các dịch vụ từ làm nail, spa, waxing, phun thêu lông mày, nối mi,… và một không gian cửa hàng yên tĩnh, long lanh dành riêng cho phái đẹp khiến Nail Room trở thành điểm đến yêu thích của hơn 500.000 khách hàng trong và ngoài nước.</p>
-                        <p><span style="font-weight: 400;">Với đội ngũ chuyên viên tài năng, dễ thương cùng hệ thống máy móc, dụng cụ nhập từ Hàn Quốc và các sản phẩm organic của Hàn – Anh – Pháp – Mỹ, 15 cơ sở của NAIL&nbsp; ROOM chắc chắn sẽ đem lại những xu hướng làm đẹp mới nhất đến khách hàng</span></p>
-                        <p><span style="color: #b7752b;">Hãy ghé chơi với chúng mình để cảm nhận niềm vui từ việc yêu chiều bản thân nhé!</span></p>
+                        <p>
+                            {!! $introduction->content !!}
+                        </p>
                     </div>
                 </div>
             </div>
