@@ -3861,4 +3861,9 @@ input.error{
 .error{
     color:red;
 }
+.text-error,
+.text-error2{
+    display: none;
+    margin-bottom: 10px;
+}
 
