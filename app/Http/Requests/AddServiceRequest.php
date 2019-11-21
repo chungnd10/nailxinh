@@ -28,13 +28,9 @@ class AddServiceRequest extends FormRequest
             ],
             'completion_time'       => 'required|max:100',
             'type_of_services_id'   => 'required',
-            'description'           => 'nullable|max:300'
+            'description'           => 'nullable|max:300',
+            'image'                 => 'nullable|mimes:png,jpg,jpeg|max:2048'
         ];
-
-        // trưởng hợp thêm
-        if (!$this->id){
-            $validate['image']  = 'required|mimes:png,jpg,jpeg';
-        }
 
         return $validate;
     }
@@ -46,6 +42,7 @@ class AddServiceRequest extends FormRequest
             'name.max'                          => '*Không được vượt quá 100 ký tự',
             'image.required'                    => '*Mục này không được để trống',
             'image.mimes'                       => '*Chỉ chấp nhận ảnh JPG, JPEG, PNG',
+            'image.max'                         => '*Kích thước ảnh không được vượt quá 2MB',
             'price.required'                    => '*Mục này không được để trống',
             'price.between'                     => '*Yêu cầu giá trị từ 1-1.000.000.000',
             'completion_time.required'          => '*Mục này không được để trống',

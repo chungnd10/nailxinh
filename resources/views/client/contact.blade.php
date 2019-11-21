@@ -65,7 +65,7 @@
                 <h3 class="mb-3"><span style="color: #b7752b;">Đặt lịch liền tay</span></h3>
                 <h3 class="mb-3">HƯỞNG NGAY ƯU ĐÃI</h3>
                 <div class="cta-booking">
-                    <a href="#" class="btn btn-default button-a text-uppercase" target="_blank">Đặt lịch online</a>
+                    <a href="{{ route('booking') }}" class="btn btn-default button-a text-uppercase">Đặt lịch online</a>
                 </div>
             </div>
         </div>

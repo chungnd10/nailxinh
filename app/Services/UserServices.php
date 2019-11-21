@@ -31,7 +31,7 @@ class UserServices
     public function allAndNotAdmin()
     {
         $role_admin = config('contants.role_admin');
-        $user = User::where('role_id','<>', $role_admin)->get();
+        $user = User::where('role_id','<>', $role_admin)->orderby('id', 'desc')->get();
         return $user;
     }
 
