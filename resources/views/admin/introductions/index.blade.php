@@ -10,7 +10,7 @@
     {{--  content  --}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('introductions.update', 1) }}"
+            <form action="{{ route('introductions.update') }}"
                   method="POST"
                   enctype="multipart/form-data"
                   id="introductions">
@@ -81,13 +81,121 @@
             //editor
             CKEDITOR.replace('title', {
 
-                // // Remove the redundant buttons from toolbar groups defined above.
-                removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
-            });
-            CKEDITOR.replace('content', {
+                toolbarGroups: toolbarGroups = [
+                    {
+                        "name": "document",
+                        "groups": ["mode", "document", "doctools"]
+                    },
+                    {
+                        "name": "basicstyles",
+                        "groups": ["basicstyles", "cleanup"]
+                    },
+                    {
+                        "name": "paragraph",
+                        "groups": ["list", "indent", "blocks", "align", "bidi", "paragraph"]
+                    },
+                    {
+                        "name": "colors",
+                        "groups": ["colors"]
+                    },
+                    {
+                        "name": "styles",
+                        "groups": ["styles"]
+                    },
+                    {
+                        "name": "clipboard",
+                        "groups": ["clipboard", "undo"]
+                    },
+                    {
+                        "name": "editing",
+                        "groups": ["find", "selection", "spellchecker", "editing"]
+                    },
+                    {
+                        "name": "forms",
+                        "groups": ["forms"]
+                    },
+                    {
+                        "name": "links",
+                        "groups": ["links"]
+                    },
+                    {
+                        "name": "insert",
+                        "groups": ["insert"]
+                    },
+                    {
+                        "name": "tools",
+                        "groups": ["tools"]
+                    },
+                    {
+                        "name": "others",
+                        "groups": ["others"]
+                    },
+                    {
+                        "name": "about",
+                        "groups": ["about"]
+                    }
+                ],
 
-                // Remove the redundant buttons from toolbar groups defined above.
-                removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar'
+                removeButtons: 'Save,NewPage,Preview,Print,Templates,Copy,Paste,PasteText,PasteFromWord,Redo,Undo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,Textarea,Select,TextField,Button,ImageButton,HiddenField,Maximize,About,ShowBlocks,Image,Flash,Table,Smiley,SpecialChar,PageBreak,Iframe,Superscript,Subscript,Strike,RemoveFormat,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Link,Unlink,Anchor,Cut,CopyFormatting,Indent,Outdent,HorizontalRule'
+            });
+
+            CKEDITOR.replace('content', {
+                toolbarGroups: toolbarGroups = [
+                    {
+                        "name": "document",
+                        "groups": ["mode", "document", "doctools"]
+                    },
+                    {
+                        "name": "basicstyles",
+                        "groups": ["basicstyles", "cleanup"]
+                    },
+                    {
+                        "name": "paragraph",
+                        "groups": ["list", "indent", "blocks", "align", "bidi", "paragraph"]
+                    },
+                    {
+                        "name": "colors",
+                        "groups": ["colors"]
+                    },
+                    {
+                        "name": "styles",
+                        "groups": ["styles"]
+                    },
+                    {
+                        "name": "clipboard",
+                        "groups": ["clipboard", "undo"]
+                    },
+                    {
+                        "name": "editing",
+                        "groups": ["find", "selection", "spellchecker", "editing"]
+                    },
+                    {
+                        "name": "forms",
+                        "groups": ["forms"]
+                    },
+                    {
+                        "name": "links",
+                        "groups": ["links"]
+                    },
+                    {
+                        "name": "insert",
+                        "groups": ["insert"]
+                    },
+                    {
+                        "name": "tools",
+                        "groups": ["tools"]
+                    },
+                    {
+                        "name": "others",
+                        "groups": ["others"]
+                    },
+                    {
+                        "name": "about",
+                        "groups": ["about"]
+                    }
+                ],
+
+                removeButtons: 'Save,NewPage,Preview,Print,Templates,Copy,Paste,PasteText,PasteFromWord,Redo,Undo,Find,Replace,SelectAll,Scayt,Form,Checkbox,Radio,Textarea,Select,TextField,Button,ImageButton,HiddenField,Maximize,About,ShowBlocks,Image,Flash,Table,Smiley,SpecialChar,PageBreak,Iframe,Superscript,Subscript,Strike,RemoveFormat,CreateDiv,Blockquote,BidiLtr,BidiRtl,Language,Link,Unlink,Anchor,Cut,CopyFormatting,Indent,Outdent,HorizontalRule'
             });
 
             //image
