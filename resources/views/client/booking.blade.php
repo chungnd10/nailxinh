@@ -64,6 +64,7 @@
                                     <span class="text-danger">*</span>
                                 </div>
                                 <div class="row">
+                                    <div class=" col-md-12 text-error text-danger">Vui lòng chọn địa chỉ</div>
                                     @foreach($branchs as $branch)
                                         <div class="col-md-6 mb-3">
                                             <button type="button"
@@ -76,6 +77,7 @@
                                             </button>
                                         </div>
                                     @endforeach
+                                    
                                 </div>
                             </div>
                             <div class="col-md-12 mb-4">
@@ -102,6 +104,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
+                                <div class=" col-md-12 text-error2 text-danger">Vui lòng chọn thời gian</div>
                                 <div id="timeFrame" class="row">
                                     <div class="col-md-2 col-6">
                                         <button type="button"
