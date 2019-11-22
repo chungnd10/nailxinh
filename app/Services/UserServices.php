@@ -28,15 +28,16 @@ class UserServices
     }
 
     // lấy tất cả user trừ admin
-    public function allAndNotAdmin()
+    public function allForAdmin()
     {
         $role_admin = config('contants.role_admin');
         $user = User::where('role_id','<>', $role_admin)->orderby('id', 'desc')->get();
         return $user;
     }
 
+
     //lấy user theo chi nhánh
-    public function getUserWithBranch($branch_id)
+    public function allForManager($branch_id)
     {
         $role_admin = config('contants.role_admin');
 

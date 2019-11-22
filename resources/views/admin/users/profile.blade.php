@@ -150,7 +150,7 @@
                                                     @endforeach
                                                 </select>
                                             @else
-                                                <p>{{ $user->branch->name }}</p>
+                                                <p>{{ $user->branch->name. ', '.$user->branch->address }}</p>
                                             @endif
                                         @endif
 
