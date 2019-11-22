@@ -53,7 +53,7 @@ class ClientController extends Controller
         return view('client.contact', compact('contact_active', 'cities'));
     }
 
-    public function typeServices($id)
+    public function typeServices()
     {
         $display_status_id = config('contants.display_status_display');
         $feedbacks = $this->feedback_services->allWithDisplayStatus($display_status_id);
@@ -70,10 +70,13 @@ class ClientController extends Controller
         return view('client.services', compact('feedbacks', 'services_active'));
     }
 
-    public function servicesDetail($id)
+    public function servicesDetail($slug, $id)
     {
         $service = $this->service_services->find($id);
-        return view('client.service-detail', compact('service'));
+
+        $process = $this->process_of_services->getProcessWithType($id);
+
+        return view('client.service-detail', compact('service', 'process'));
     }
 
     public function booking()
