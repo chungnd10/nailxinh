@@ -16,7 +16,8 @@ class CreateBillsTable extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
             $table->double('total_price', 15, 2);
-            $table->integer('discount', 11);
+            $table->double('total_payment', 15, 2);
+            $table->integer('discount');
             $table->string('note', 200)->nullable();
 
             $table->unsignedInteger('order_id');
