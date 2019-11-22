@@ -17,14 +17,13 @@ class UserController extends Controller
     public function index()
     {
         //nếu là admin thì lấy all
-        if (Auth::user()->isAdmin())
-        {
-            $users = $this->user_services->allAndNotAdmin();
+        if (Auth::user()->isAdmin()) {
+            $users = $this->user_services->allForAdmin();
         }
         if (Auth::user()->isManager())
         {
             // chủ tiệm thì lấy nhân viên của tiệm
-            $users = $this->user_services->getUserWithBranch(Auth::user()->branch_id);
+            $users = $this->user_services->allForManager(Auth::user()->branch_id);
         }
 
         return view('admin.users.index', compact('users'));
@@ -32,9 +31,17 @@ class UserController extends Controller
 
     public function create()
     {
-        $branchs = $this->branch_services->all();
         $genders = $this->gender_services->all();
-        $roles = $this->role_services->allNotAdmin();
+
+        if (Auth::user()->isAdmin()){
+            $roles = $this->role_services->allForAdmin();
+            $branchs = $this->branch_services->all();
+        }
+        if (Auth::user()->isManager()) {
+            $roles = $this->role_services->allForManager();
+            $branchs = Auth::user()->branch->name.', '.Auth::user()->branch->address;
+        }
+
         $operation_status = $this->operation_status_services->all();
 
         return view('admin.users.create', compact(
@@ -60,14 +67,24 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->user_services->find($id);
-        $branchs = $this->branch_services->all();
+
+        $this->authorize('show',$user);
+
         $genders = $this->gender_services->all();
-        $roles = $this->role_services->allNotAdmin();
         $operation_status = $this->operation_status_services->all();
         $display_status = $this->display_status_services->all();
         $type_services = $this->type_services->all();
         $services_of_user = $this->user_services_services->getServiceWithId($id);
         $type_services_of_user = $this->user_type_service_services->getTypeServicesOfUser($id);
+
+        if (Auth::user()->isAdmin()){
+            $roles = $this->role_services->allForAdmin();
+            $branchs = $this->branch_services->all();
+        }
+        if (Auth::user()->isManager()) {
+            $roles = $this->role_services->allForManager();
+            $branchs = Auth::user()->branch->name.', '.Auth::user()->branch->address;
+        }
 
         return view('admin.users.show', compact('user',
                 'branchs',
@@ -213,7 +230,7 @@ class UserController extends Controller
 
         $branchs = $this->branch_services->all();
         $genders = $this->gender_services->all();
-        $roles = $this->role_services->allNotAdmin();
+        $roles = $this->role_services->allForAdmin();
         $operation_status = $this->operation_status_services->all();
 
         return view('admin.users.profile', compact('user',

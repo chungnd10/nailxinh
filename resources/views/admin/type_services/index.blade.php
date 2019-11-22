@@ -48,13 +48,11 @@
                                            class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        @if($item->role_id != 1)
-                                            <a href="{{ route('type-services.destroy', $item->id) }}"
-                                               class="btn btn-xs btn-danger"
-                                               onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('type-services.destroy', $item->id) }}"
+                                           class="btn btn-xs btn-danger"
+                                           onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -70,16 +70,20 @@
                             <!-- /.form-group -->
                             <div class="form-group">
                                 <label>Chi nhánh</label><span class="text-danger">*</span>
-                                <select name="branch_id" id="branch_id" class="form-control">
-                                    <option value="">Chọn chi nhánh</option>
-                                    @foreach($branchs as $item)
-                                        <option value="{{ $item->id }}"
-                                                @if($item->id == old('branch_id'))
-                                                selected
-                                                @endif
-                                        >{{ $item->name.", ".$item->address }}</option>
-                                    @endforeach
-                                </select>
+                                @if(Auth::user()->isAdmin())
+                                    <select name="branch_id" id="branch_id" class="form-control">
+                                        <option value="">Chọn chi nhánh</option>
+                                        @foreach($branchs as $item)
+                                            <option value="{{ $item->id }}"
+                                                    @if($item->id == old('branch_id'))
+                                                    selected
+                                                    @endif
+                                            >{{ $item->name.", ".$item->address }}</option>
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <p>{{ $branchs }}</p>
+                                @endif
                                 @if($errors->first('branch_id'))
                                     <span class="text-danger">{{ $errors->first('branch_id') }}</span>
                                 @endif

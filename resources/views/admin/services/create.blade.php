@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Ảnh dịch vụ</label><span class="text-danger">*</span>
+                                <label>Ảnh dịch vụ</label>
                                 <img style="width: 100px;" class="profile-user-img img-responsive img-circle"
                                      src="upload/images/service/services-default.png"
                                      id="proImg"
@@ -136,8 +136,8 @@
                         required: true,
                     },
                     image: {
-                        required: true,
-                        extension: "jpg|jpeg|png"
+                        extension: "jpg|jpeg|png",
+                        fileSize : 2097152,
                     },
                     name: {
                         required: true,
@@ -160,7 +160,8 @@
 
                 messages: {
                     image: {
-                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG",
+                        fileSize: "*Kích thước ảnh không được quá 2MB "
                     },
                     name: {
                         maxlength: "*Không được vượt quá 100 ký tự",

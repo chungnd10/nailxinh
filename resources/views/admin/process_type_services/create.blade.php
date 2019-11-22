@@ -164,7 +164,7 @@
                         $("#result").html('');
                         if (data.length == 0) {
                             $(".result-process").append(
-                                "<span class='text-danger'>*Dịch vụ này chưa có quy trình nào!</span>"
+                                "<span class='text-warning'>*Dịch vụ này chưa có quy trình nào!</span>"
                             );
                         } else {
                             $(".result-process").append(

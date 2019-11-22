@@ -87,7 +87,8 @@
             $("#addTypeService").validate({
             	rules: {
             		image: {
-            			extension: "jpg|jpeg|png"
+            			extension: "jpg|jpeg|png",
+						fileSize : 2097152,
             		},
             		name: {
             			required: true,
@@ -102,7 +103,8 @@
 
             	messages: {
             		image: {
-            			extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+            			extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG",
+						fileSize: "*Kích thước ảnh không được quá 2MB "
             		},
             		name: {
             			maxlength: "*Không được vượt quá 100 ký tự",

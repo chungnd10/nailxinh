@@ -237,7 +237,7 @@
                     <ul class="treeview-menu">
                         @can('edit-web-settings')
                             <li>
-                                <a href="{{ route('web-settings.index', 1) }}">
+                                <a href="{{ route('web-settings.index') }}">
                                     <i class="fa fa-angle-right"></i>Thông tin
                                 </a>
                             </li>
@@ -251,7 +251,7 @@
                         @endcan
                         @can('edit-introductions-page')
                             <li>
-                                <a href="{{ route('introductions.index', 1) }}">
+                                <a href="{{ route('introductions.index') }}">
                                     <i class="fa fa-angle-right"></i>Trang giới thiệu
                                 </a>
                             </li>

@@ -32,13 +32,8 @@ class AddTypeServiceRequest extends FormRequest
                Rule::unique('type_of_services')->ignore($this->id),
             ] ,
             'description'   => 'required|max:300',
-            'image'         => 'nullable|mimes:png,jpg,jpeg'
+            'image'         => 'nullable|mimes:png,jpg,jpeg|max:2048'
         ];
-
-        // trường hợp thêm
-        if(!$this->id){
-            $validate['image']  = 'required|mimes:png,jpg,jpeg';
-        }
 
         return $validate;
     }
@@ -51,6 +46,7 @@ class AddTypeServiceRequest extends FormRequest
             'name.unique'               => '*Tên đã được sử dụng',
             'image.required'            => '*Mục này không được để trống',
             'image.mimes'               => '*Chỉ chấp nhận ảnh JPG, JPEG, PNG',
+            'image.max'                 => '*Kích thước ảnh không được vượt quá 2MB',
             'description.required'      => '*Mục này không được để trống',
             'description.max'           => '*Không được vượt quá 300 ký tự',
         ];

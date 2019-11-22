@@ -3,6 +3,7 @@ jQuery(document).ready(function($) {
 
 
     $('#booking-form').validate({
+        ignore: 'input[type="hidden"]',
         rules: {
             phone_number: {
                 required: true,
@@ -36,8 +37,12 @@ jQuery(document).ready(function($) {
             }
         }
     });
+    $('select').on('change', function() {
+        $(this).valid();
+    });
 
     $('#btn-booking').click(function(){
+
         let adress = $('.btn-adress-booking.active').val();
         let phone = $('#phone_number').val();
         let gender = $('#gender').find(":selected").text();
@@ -46,7 +51,18 @@ jQuery(document).ready(function($) {
         let date =  $('#date').val();
         let time_frame = $('.time-frame.active').val();
         let note = $('#ghichu').val();
-        
+        if( !adress ){
+            $('.text-error').css('display','block');
+        }else{
+            $('.text-error').css('display','none');
+            return true;
+        }
+        if( !time_frame ){
+            $('.text-error2').css('display','block');
+        }else{
+            $('.text-error2').css('display','none');
+            return true;
+        }
         console.log(adress,phone,gender,service_id,user_id,date,time_frame,note);
     });
 });

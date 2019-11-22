@@ -26,7 +26,7 @@
                         	>
 						</div>
 						<div class="form-group">
-							<label>Ảnh loại dịch vụ</label><span class="text-danger">*</span>
+							<label>Ảnh loại dịch vụ</label>
 							<input type="file" class="form-control" name="image" id="image">
 							@if($errors->first('image'))
                                     <span class="text-danger">{{ $errors->first('image') }}</span>
@@ -87,8 +87,8 @@
             $("#addTypeService").validate({
             	rules: {
             		image: {
-            			required: true,
-            			extension: "jpg|jpeg|png"
+            			extension: "jpg|jpeg|png",
+						fileSize : 2097152,
             		},
             		name: {
             			required: true,
@@ -102,7 +102,8 @@
 
             	messages: {
             		image: {
-            			extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+            			extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG",
+						fileSize: "*Kích thước ảnh không được quá 2MB "
             		},
             		name: {
             			maxlength: "*Không được vượt quá 100 ký tự",

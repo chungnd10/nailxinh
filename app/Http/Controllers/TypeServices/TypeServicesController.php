@@ -25,6 +25,7 @@ class TypeServicesController extends Controller
     {
         $type_of_service = new TypeOfService();
 
+
         if ($request->hasFile('image'))
         {
             $file = $request->file('image');

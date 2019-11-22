@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Client;
 
+
+use App\Introduction;
 use App\Http\Controllers\Controller;
 use App\Order;
-use App\Service;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -38,8 +39,9 @@ class ClientController extends Controller
     public function introduction()
     {
         $introduction_active = true;
+        $introduction = Introduction::first();
 
-        return view('client.introduction', compact('introduction_active'));
+        return view('client.introduction', compact('introduction_active', 'introduction'));
     }
 
     public function contact()
