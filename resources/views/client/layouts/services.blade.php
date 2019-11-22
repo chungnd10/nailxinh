@@ -37,7 +37,7 @@
                                                 <img width="80" class="fix-border-radius"
                                                     src="upload/images/service/{{ $service->image }}" alt="services">
                                                 <h4>{{ limit($service->name, 19, '...') }}
-                                                        <span class="price">{{ number_format($service->price) }} VNĐ</span>
+                                                        <span class="price">{{ number_format($service->price) }} đ</span>
                                                     </h4>
                                                 <p class="text-dark">{{ limit($service->description, 70, '...') }}</p>
                                             </a>

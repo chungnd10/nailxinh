@@ -9,6 +9,5 @@
 <!-- bootstrap datepicker -->
 <link rel="stylesheet" href="client_assets/css/bootstrap-datepicker.css">
 <link rel="stylesheet" href="client_assets/css/select2.css">
-<link rel="stylesheet" href="client_assets/css/jquery.flex-photo-gallery.css">
 <link rel="stylesheet" href="client_assets/css/lightgallery.css">
 

@@ -10,6 +10,7 @@
                     <h2>Gallery</h2>
                     <ul class="breadcrumb-nav list-inline">
                         <li><a href="index-2.html">Home</a></li>
+                        <i class="fas fa-chevron-right"></i>
                         <li>Gallery</li>
                     </ul>
                 </div>

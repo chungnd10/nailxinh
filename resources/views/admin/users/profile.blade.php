@@ -150,7 +150,7 @@
                                                     @endforeach
                                                 </select>
                                             @else
-                                                <p>{{ $user->branch->name }}</p>
+                                                <p>{{ $user->branch->name. ', '.$user->branch->address }}</p>
                                             @endif
                                         @endif
 
@@ -341,13 +341,15 @@
                 rules: {
                     avatar: {
                         required: true,
-                        extension: "*jpg|jpeg|png"
+                        extension: "*jpg|jpeg|png",
+                        fileSize : 2097152,
                     },
                 },
 
                 messages: {
                     avatar: {
-                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG",
+                        fileSize: "*Kích thước ảnh không được quá 2MB "
                     }
                 }
             });

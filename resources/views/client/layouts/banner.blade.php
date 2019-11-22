@@ -14,7 +14,9 @@
                                         <h3>Chào mừng bạn đến với Nail Xinh</h3>
                                         <h1>{{ $slide->title }}</h1>
                                         <p>{{ limit($slide->description, 100, '...') }}</p>
-                                        <a href="#" class="boxed-btn">Xem thêm</a>
+                                        @if($slide->url != '')
+                                            <a href="{{ $slide->url  }}" class="boxed-btn">Xem thêm</a>
+                                        @endif
                                     </div>
                                 </div>
                             </figcaption>

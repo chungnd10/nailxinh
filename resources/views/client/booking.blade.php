@@ -10,6 +10,7 @@
                     <h2>NailXinh</h2>
                     <ul class="breadcrumb-nav list-inline">
                         <li><a href="/">NailXinh</a></li>
+                        <i class="fas fa-chevron-right"></i>
                         <li>Đặt lịch</li>
                     </ul>
                 </div>
@@ -33,25 +34,29 @@
                                 <span class="text-pink">Thông tin của bạn</span>
                             </div>
                             <div class="form-group col-md-12">
+                                <span class="text-danger validation">*</span>
                                 <input type="text"
                                        class="form-control form-border form-require"
                                        name="phone_number"
                                        value="{{ old('phone_number') }}"
-                                       placeholder="Số điện thoại">
+                                       placeholder="Số điện thoại"
+                                       id="phone_number">
                             </div>
                             <div class="form-group col-md-4">
-                                <select class="form-control form-border">
+                                <select class="form-control form-border" id="gender">
                                     <option value="">Mrs/Miss</option>
                                     <option value="">Mrs</option>
                                     <option value="">Miss</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-8">
+                                <span class="text-danger validation">*</span>
                                 <input type="text"
                                        name="full_name"
                                        class="form-control form-border form-require"
                                        value="{{ old('full_name') }}"
-                                       placeholder="Họ và tên">
+                                       placeholder="Họ và tên"
+                                       id="full_name">
                             </div>
                             <div class="adress col-md-12">
                                 <div class="mb-3">
@@ -59,6 +64,7 @@
                                     <span class="text-danger">*</span>
                                 </div>
                                 <div class="row">
+                                    <div class=" col-md-12 text-error text-danger">Vui lòng chọn địa chỉ</div>
                                     @foreach($branchs as $branch)
                                         <div class="col-md-6 mb-3">
                                             <button type="button"
@@ -71,11 +77,12 @@
                                             </button>
                                         </div>
                                     @endforeach
+                                    
                                 </div>
                             </div>
                             <div class="col-md-12 mb-4">
                                 <div class="mb-2">Dịch vụ <span class="text-danger">*</span></div>
-                                <select class="services form-control form-border" name="service_id">
+                                <select class="services form-control form-border" multiple="multiple" name="service_id" id="service_id">
                                     <option value="">Chọn dịch vụ</option>
                                     @foreach($type_services as $type_service)
                                         <optgroup label="{{ $type_service->name }}">
@@ -84,16 +91,6 @@
                                                         value="{{ $service->id }}">{{ $service->name }}</option>
                                             @endforeach
                                         </optgroup>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-12 mb-4">
-                                <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
-                                <select class="staff form-control form-border" name="user_id">
-                                    <option value="">Chọn nhân viên</option>
-                                    @foreach($users as $user)
-                                        <option data-image="{{ $user->avatar }}"
-                                                value="{{ $user->id }}">{{ $user->full_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -107,6 +104,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
+                                <div class=" col-md-12 text-error2 text-danger">Vui lòng chọn thời gian</div>
                                 <div id="timeFrame" class="row">
                                     <div class="col-md-2 col-6">
                                         <button type="button"
@@ -263,13 +261,12 @@
                                 ></textarea>
                             </div>
                             <div class="col-md-6 offset-md-3 mt-5 mb-5">
-                                <button class="btn btn-block btn-pink" type="button" id="btn-booking">
+                                <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
                                     <i class="far fa-calendar-alt"></i>
                                     ĐẶT LỊCH NGAY
                                 </button>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>

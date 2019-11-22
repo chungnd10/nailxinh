@@ -2392,11 +2392,11 @@ header {
     margin-right: 10px;
 }
 
-#breadcrumb-area ul li:after {
-    content: '\f105';
+/* #breadcrumb-area ul li:after {
+    content: '\f054';
     font-family: FontAwesome;
     margin-left: 10px;
-}
+} */
 
 #breadcrumb-area ul li:last-child:after {
     display: none;
@@ -3795,3 +3795,75 @@ section#calltoaction {
 .adress-sg{
     background-image: url('../../client_assets/img/footer/hcm-1.jpg');
 }
+
+.btn-dl{
+    margin-top: 10px;
+    background: #ec5598;
+    color: #fff !important;
+    border-radius: unset;
+    font-size: 13px;
+    padding: 5px 10px;
+}
+.service-detail-img{
+    position: relative;
+}
+.service-detail-img:after {
+    content: "";
+    border: 3px solid #EFCEC9;
+    width: 90%;
+    height: 100%;
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    z-index: -1;
+}
+.text-brown{
+    color:#b7752b;
+}
+.process-content{
+    background-color:#faefed;
+    min-height: 180px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+#process {
+    padding-bottom: 80px;
+}
+.services-box{
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.38);
+}
+.overlay-service {
+    position: absolute;
+    height: 100%;
+    transform: translate(5);
+    background-color: #00000069;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    padding: 0px 20px;
+    transition: ease-in-out .4s;
+}
+.overlay-service .boxed-btn {
+    border-radius: unset;
+}
+.service-box:hover .overlay-service{
+    opacity: 1;
+}
+.validation {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+}
+input.error{
+    border:1px solid red;
+}
+.error{
+    color:red;
+}
+.text-error,
+.text-error2{
+    display: none;
+    margin-bottom: 10px;
+}
+

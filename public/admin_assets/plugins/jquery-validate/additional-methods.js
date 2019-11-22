@@ -1519,5 +1519,12 @@
     $.validator.addMethod("onlyVietnamese", function (value, element) {
         return this.optional(element) || /^[a-zA-ZAÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶEÉÈẺẼẸÊẾỀỂỄỆIÍÌỈĨỊOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢUÚÙỦŨỤƯỨỪỬỮỰYÝỲỶỸỴĐaáàảãạâấầẩẫậăắằẳẵặeéèẻẽẹêếềểễệiíìỉĩịoóòỏõọôốồổỗộơớờởỡợuúùủũụưứừửữựyýỳỷỹỵđ\s]+$/i.test(value);
     }, "*Chỉ nhận chữ cái !");
+
+    $.validator.addMethod('fileSize', function (value, element, param) {
+        return this.optional(element) || (element.files[0].size <= param)
+    });
+
     return $;
+
+
 }));
