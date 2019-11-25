@@ -2,68 +2,14 @@
 
 namespace App\Http\Controllers\Client;
 
+
 use App\Introduction;
-use App\Services\BranchServices;
-use App\Services\CityServices;
-use App\Services\FeedbackServices;
-use App\Services\GenderServices;
-use App\Services\OperationStatusServices;
-use App\Services\OrderServices;
-use App\Services\RoleServices;
-use App\Services\ServiceServices;
-use App\Services\SlideServices;
-use App\Services\TypeServiceServices;
-use App\Services\UserServices;
-use App\Services\UserServiceServices;
 use App\Http\Controllers\Controller;
-use App\Services\WebSettingServices;
+use App\Order;
+use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    protected $user_services;
-    protected $branch_services;
-    protected $gender_services;
-    protected $role_services;
-    protected $operation_status_services;
-    protected $service_services;
-    protected $type_services;
-    protected $user_services_services;
-    protected $web_setting_services;
-    protected $order_services;
-    protected $feedback_services;
-    protected $slide_services;
-    protected $city_services;
-
-    public function __construct(
-        OrderServices $order_services,
-        UserServices $user_services,
-        BranchServices $branch_services,
-        GenderServices $gender_services,
-        RoleServices $role_services,
-        OperationStatusServices $operation_status_services,
-        ServiceServices $service_services,
-        TypeServiceServices $type_services,
-        UserServiceServices $user_services_services,
-        WebSettingServices $web_setting_services,
-        FeedbackServices $feedback_services,
-        SlideServices $slide_services,
-        CityServices $city_services
-    ) {
-        $this->slide_services = $slide_services;
-        $this->feedback_services = $feedback_services;
-        $this->order_services = $order_services;
-        $this->user_services = $user_services;
-        $this->branch_services = $branch_services;
-        $this->gender_services = $gender_services;
-        $this->role_services = $role_services;
-        $this->operation_status_services = $operation_status_services;
-        $this->service_services = $service_services;
-        $this->type_services = $type_services;
-        $this->user_services_services = $user_services_services;
-        $this->web_setting_services = $web_setting_services;
-        $this->city_services = $city_services;
-    }
-
     public function index()
     {
         $display_status_id = config('contants.display_status_display');
@@ -107,7 +53,7 @@ class ClientController extends Controller
         return view('client.contact', compact('contact_active', 'cities'));
     }
 
-    public function typeServices($id)
+    public function typeServices()
     {
         $display_status_id = config('contants.display_status_display');
         $feedbacks = $this->feedback_services->allWithDisplayStatus($display_status_id);
@@ -124,10 +70,13 @@ class ClientController extends Controller
         return view('client.services', compact('feedbacks', 'services_active'));
     }
 
-    public function servicesDetail($id)
+    public function servicesDetail($slug, $id)
     {
         $service = $this->service_services->find($id);
-        return view('client.service-detail', compact('service'));
+
+        $process = $this->process_of_services->getProcessWithType($id);
+
+        return view('client.service-detail', compact('service', 'process'));
     }
 
     public function booking()
@@ -148,6 +97,23 @@ class ClientController extends Controller
         $users = $this->user_services->getTechnician();
 
         return view('client.booking-test', compact('branchs', 'type_services', 'users', 'booking_active'));
+    }
+
+
+    public function bookingTestStore(Request $request)
+    {
+        $order = new Order();
+
+        $order->order_status_id = config('contants.order_status_unconfimred');
+        $order->full_name = $request->sir.' '.$request->full_name;
+        $order->service_id = implode(',',$request->service_id);
+        $order->order_status_id = config('contants.order_status_unconfimred');
+
+        $order->fill($request->all())->save();
+
+        $notification = notification('success', 'Đặt lịch thành công, chúng tôi sẽ liên hệ để xác nhận với bạn trong thời gian sớm nhất');
+        return redirect(route('index'))->with($notification);
+
     }
 
     public function gallery()

@@ -2,19 +2,10 @@
 
 namespace App\Http\Controllers\AccumulatePoints;
 
-use App\AccumulatePoints;
-use App\Services\AccumulatePointServices;
 use App\Http\Controllers\Controller;
 
 class AccumulatePointsController extends Controller
 {
-    protected $accumulate_points_services;
-
-    public function __construct( AccumulatePointServices $accumulate_points_services)
-    {
-        $this->accumulate_points_services = $accumulate_points_services;
-    }
-
     public function index()
     {
         $points = $this->accumulate_points_services->all();

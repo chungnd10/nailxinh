@@ -5,11 +5,11 @@
             <h2 class="headline text-yellow"> 404</h2>
 
             <div class="error-content">
-                <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+                <h3><i class="fa fa-warning text-yellow"></i>Không tìm thấy trang.</h3>
 
                 <p>
-                    We could not find the page you were looking for.
-                    Meanwhile, you may <a href="{{ route('admin.index') }}">return to dashboard</a> or try using the search form.
+                    Chúng tôi không thể tìm thấy trang bạn đang tìm kiếm. Trong khi đó,
+                    bạn có thể quay lại <a href="{{ route('admin.index') }}">bảng điều khiển</a> .
                 </p>
             </div>
             <!-- /.error-content -->

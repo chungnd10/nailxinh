@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form action="" id="booking-form">
+                    <form action="{{ route('booking-test') }}" id="booking-form" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-3">
@@ -38,13 +38,29 @@
                                        name="phone_number"
                                        value="{{ old('phone_number') }}"
                                        placeholder="Số điện thoại">
+                                @if($errors->first('phone_number'))
+                                    <span class="text-danger">{{ $errors->first('phone_number') }}</span>
+                                @endif
                             </div>
                             <div class="form-group col-md-4">
-                                <select class="form-control form-border">
+                                <select class="form-control form-border" name="sir">
                                     <option value="">Mrs/Miss</option>
-                                    <option value="">Mrs</option>
-                                    <option value="">Miss</option>
+                                    <option value="Mrs"
+                                        @if(old('sir') == 'Mrs')
+                                            selected
+                                        @endif
+                                    >
+                                        Mrs</option>
+                                    <option value="Miss"
+                                        @if(old('sir') == 'Miss')
+                                            selected
+                                        @endif
+                                    >
+                                        Miss</option>
                                 </select>
+                                @if($errors->first('sir'))
+                                    <span class="text-danger">{{ $errors->first('sir') }}</span>
+                                @endif
                             </div>
                             <div class="form-group col-md-8">
                                 <input type="text"
@@ -52,218 +68,86 @@
                                        class="form-control form-border form-require"
                                        value="{{ old('full_name') }}"
                                        placeholder="Họ và tên">
+                                @if($errors->first('full_name'))
+                                    <span class="text-danger">{{ $errors->first('full_name') }}</span>
+                                @endif
                             </div>
-                            <div class="adress col-md-12">
+                            <div class="col-md-12 mb-4">
                                 <div class="mb-3">
                                     Địa điểm
                                     <span class="text-danger">*</span>
                                 </div>
-                                <div class="row">
-                                    @foreach($branchs as $branch)
-                                        <div class="col-md-6 mb-3">
-                                            <button type="button"
-                                                    name="branch_id"
-                                                    value="{{ $branch->id }}"
-                                                    class="btn btn-adress-booking">
-                                                {{ $branch->name }}
-                                                <br>
-                                                <div class="font-11">{{ $branch->address }}</div>
-                                            </button>
-                                        </div>
-                                    @endforeach
+                                <div class="mb-12">
+                                    <select name="branch_id" id="" class="form-control form-border">
+                                        <option value="">Chọn chi nhánh</option>
+                                        @foreach($branchs as $branch)
+                                            <option value="{{ $branch->id }}"
+                                                @if(old('branch_id') == $branch->id)
+                                                     selected
+                                                @endif
+                                            >{{ $branch->name.', '.$branch->address }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->first('branch_id'))
+                                    <span class="text-danger">{{ $errors->first('branch_id') }}</span>
+                                @endif
                                 </div>
                             </div>
                             <div class="col-md-12 mb-4">
                                 <div class="mb-2">Dịch vụ <span class="text-danger">*</span></div>
-                                <select class="services form-control form-border" name="service_id">
-                                    <option value="">Chọn dịch vụ</option>
-                                    @foreach($type_services as $type_service)
-                                        <optgroup label="{{ $type_service->name }}">
-                                            @foreach($type_service->showServices($type_service->id) as $service)
-                                                <option data-image="{{ $service->image }}"
-                                                        value="{{ $service->id }}">{{ $service->name }}</option>
-                                            @endforeach
-                                        </optgroup>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-12 mb-4">
-                                <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
-                                <select class="staff form-control form-border" name="user_id">
-                                    <option value="">Chọn nhân viên</option>
-                                    @foreach($users as $user)
-                                        <option data-image="{{ $user->avatar }}"
-                                                value="{{ $user->id }}">{{ $user->full_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-12 mb-4">
-                                <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div>
-                                <input class="datepicker form-control form-border"
-                                       name="date"
-                                       id="date"
-                                       placeholder="mm/dd/yyyy"
-                                       data-date-format="mm/dd/yyyy">
-                            </div>
-                            <div class="col-md-12">
-                                <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
-                                <div id="timeFrame" class="row">
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="09:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                09:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="10:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                10:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="11:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                11:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="12:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                12:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="13:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                13:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="14:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                14:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="15:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                15:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="16:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                16:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="17:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                17:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="18:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                18:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="19:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                19:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="20:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                <input type="hidden" name="time[]" value="12:00">
-                                                20:00
-                                            </div>
-                                        </button>
-                                    </div>
+                                <div class="form-group">
+                                    <select class="form-control select2 select2-hidden-accessible"
+                                            multiple="" data-placeholder="Select a State"
+                                            style="width: 100%;" data-select2-id="7"
+                                            tabindex="-1"
+                                            aria-hidden="true"
+                                            name="service_id[]"
+                                    >
+                                        <option value="">Chọn dịch vụ</option>
+                                        @foreach($type_services as $type_service)
+                                            <optgroup label="{{ $type_service->name }}">
+                                                @foreach($type_service->showServices($type_service->id) as $service)
+                                                    <option data-image="{{ $service->image }}"
+                                                            value="{{ $service->id }}"
+                                                            @if(old('service_id') == $service->id)
+                                                            selected
+                                                            @endif
+                                                    >{{ $service->name }}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->first('service_id'))
+                                        <span class="text-danger">{{ $errors->first('service_id') }}</span>
+                                    @endif
                                 </div>
+                            </div>
+                            <div class="col-md-12 mb-4">
+                                <div class="mb-2">Chọn thời gian <span class="text-danger">*</span></div>
+                                <input class=" form-control form-border"
+                                       name="time"
+                                       id="time"
+                                       placeholder="mm/dd/yyyy"
+                                       value="{{ old('time') }}"
+                                >
+                                @if($errors->first('time'))
+                                    <span class="text-danger">{{ $errors->first('time') }}</span>
+                                @endif
                             </div>
                             <div class="col-md-12 mb-4">
                                 <label for="ghichu">Ghi chú</label>
                                 <textarea class="form-control form-border"
-                                          id="ghichu"
+                                          id="note"
                                           rows="5"
                                           name="note"
-                                ></textarea>
+                                >{{ old('note') }}</textarea>
+                                @if($errors->first('note'))
+                                    <span class="text-danger">{{ $errors->first('note') }}</span>
+                                @endif
                             </div>
                             <div class="col-md-6 offset-md-3 mt-5 mb-5">
-                                <button class="btn btn-block btn-pink" type="button" id="btn-booking">
+                                <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
                                     <i class="far fa-calendar-alt"></i>
                                     ĐẶT LỊCH NGAY
                                 </button>
@@ -285,36 +169,41 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-
-            $("#btn-booking").click(function () {
-                var phone_number = $("#phone_number").val();
-                var sir = $("#sir").val();
-                var full_name = $("#full_name").val();
-                var branch_id = $("#branch_id").val();
-                var service_id = $("#service_id").val();
-                var user_id = $("#user_id").val();
-                var date = $("#date").val();
-                var time = $("#time").val();
-                var note = $("#note").val();
-
-                var url = "{{ route('booking') }}";
-
-                $.post({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: url,
-                    data: phone_number,
-                    sir,
-                    full_name,
-                    branch_id,
-                    service_id,
-                    user_id,
-                    date,
-                    time,
-                    note
-                })
+            $('#time').datetimepicker({
+                format: 'yyyy-mm-dd hh:00',
+                minView: 1,
             });
+
+            $('.select2').select2();
+            {{--$("#btn-booking").click(function () {--}}
+            {{--    var phone_number = $("#phone_number").val();--}}
+            {{--    var sir = $("#sir").val();--}}
+            {{--    var full_name = $("#full_name").val();--}}
+            {{--    var branch_id = $("#branch_id").val();--}}
+            {{--    var service_id = $("#service_id").val();--}}
+            {{--    var user_id = $("#user_id").val();--}}
+            {{--    var date = $("#date").val();--}}
+            {{--    var time = $("#time").val();--}}
+            {{--    var note = $("#note").val();--}}
+
+            {{--    var url = "{{ route('booking') }}";--}}
+
+            {{--    $.post({--}}
+            {{--        headers: {--}}
+            {{--            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+            {{--        },--}}
+            {{--        url: url,--}}
+            {{--        data: phone_number,--}}
+            {{--        sir,--}}
+            {{--        full_name,--}}
+            {{--        branch_id,--}}
+            {{--        service_id,--}}
+            {{--        user_id,--}}
+            {{--        date,--}}
+            {{--        time,--}}
+            {{--        note--}}
+            {{--    })--}}
+            {{--});--}}
         });
     </script>
 @endsection

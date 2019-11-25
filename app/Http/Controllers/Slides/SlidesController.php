@@ -2,27 +2,13 @@
 
 namespace App\Http\Controllers\Slides;
 
-use App\DisplayStatus;
 use App\Http\Requests\AddSlideRequest;
-use App\Services\DisplayStatusServices;
-use App\Services\SlideServices;
 use App\Slides;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SlidesController extends Controller
 {
-    protected $slide_services;
-    protected $display_status_services;
-
-    public function  __construct(
-        SlideServices $slide_services,
-        DisplayStatusServices $display_status_services
-    )
-    {
-        $this->slide_services = $slide_services;
-        $this->display_status_services = $display_status_services;
-    }
 
     public function index()
     {

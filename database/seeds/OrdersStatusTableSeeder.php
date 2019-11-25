@@ -20,6 +20,9 @@ class OrdersStatusTableSeeder extends Seeder
                 'name' => 'Đã xác nhận'
             ],
             [
+                'name' => 'Xác nhận thất bại'
+            ],
+            [
                 'name' => 'Đang xử lý'
             ],
             [

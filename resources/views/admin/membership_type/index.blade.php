@@ -39,7 +39,7 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ number_format($item->money_level,2,",",".") }}</td>
+                                    <td>{{ number_format($item->money_level,0,",",".") }}</td>
                                     <td>{{ $item->discount_level }}</td>
                                     <td>
                                         @if($item->description != "")

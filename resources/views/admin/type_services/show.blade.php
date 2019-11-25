@@ -57,7 +57,7 @@
 			</div>
 			<!-- /.box-body -->
 			<div class="box-footer ">
-				<a href="{{ route('type-services.index') }}" class="btn btn-default" onclick="return confirmmBack()">
+				<a href="{{ route('type-services.index') }}" class="btn btn-default" >
 					<i class="fa fa-arrow-circle-o-left"></i>
 					Trở về
 				</a>

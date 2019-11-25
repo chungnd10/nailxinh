@@ -174,8 +174,12 @@ class PermissionsTableSeeder extends Seeder
                 'name'  => 'view-orders'
             ],
             [
-                'title' => 'Cập nhật trạng thái lịch',
-                'name'  => 'update-order-status'
+                'title' => 'Thêm lịch đặt',
+                'name'  => 'add-orders'
+            ],
+            [
+                'title' => 'Cập nhật lịch đặt',
+                'name'  => 'update-orders'
             ],
             [
                 'title' => 'Xem nhân viên',

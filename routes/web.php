@@ -26,10 +26,10 @@ Route::get('/services-detail/{slug}/{id}', 'Client\ClientController@servicesDeta
 Route::get('/type-services/{slug}/{id}', 'Client\ClientController@typeServices')->name('type-service');
 
 Route::get('/booking', 'Client\ClientController@booking')->name('booking');
-Route::post('/booking', 'Client\OrderController@store');
+Route::post('/booking', 'Client\ClientController@store');
 
 Route::get('/booking-test', 'Client\ClientController@bookingTest')->name('booking-test');
-Route::post('/booking-test', 'Client\OrderController@bookingTestStore');
+Route::post('/booking-test', 'Client\ClientController@bookingTestStore');
 
 Route::get('/gallery', 'Client\ClientController@gallery')->name('gallery');
 
@@ -182,31 +182,27 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     });
 
     //bill
-    Route::prefix('bill')->group(function () {
+    Route::prefix('bills')->group(function () {
 
         Route::get('', 'Bill\BillController@index')
             ->middleware('can:view-bills')
-            ->name('bill.index');
+            ->name('bills.index');
 
-        Route::get('create', 'Bill\BillController@create')
-            ->middleware('can:add-bills')
-            ->name('bill.create');
+        Route::get('show/{id}', 'Bill\BillController@show')
+            ->middleware('can:print-bills')
+            ->name('bills.show');
 
-        Route::post('create', 'Bill\BillController@store')
-            ->middleware('can:add-bills')
-            ->name('bill.store');
+        Route::get('print/{id}', 'Bill\BillController@print')
+            ->middleware('can:print-bills')
+            ->name('bills.print');
 
-        Route::get('update/{id}', 'Bill\BillController@show')
-            ->middleware('can:edit-bills')
-            ->name('bill.show');
+        Route::get('update/{id}', 'Bill\BillController@showUpdate')
+            ->middleware('can:update-bill-status')
+            ->name('bills.update');
 
         Route::post('update/{id}', 'Bill\BillController@update')
-            ->middleware('can:edit-bills')
-            ->name('bill.update');
-
-        Route::get('destroy/{id}', 'Bill\BillController@destroy')
-            ->middleware('can:remove-bills')
-            ->name('bill.destroy');
+            ->middleware('can:update-bill-status')
+            ->name('bills.update');
     });
 
     //order
@@ -225,16 +221,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->name('orders.store');
 
         Route::get('update/{id}', 'Order\OrderController@show')
-            ->middleware('can:edit-orders')
+            ->middleware('can:update-orders')
             ->name('orders.show');
 
         Route::post('update/{id}', 'Order\OrderController@update')
-            ->middleware('can:edit-orders')
+            ->middleware('can:update-orders')
             ->name('orders.update');
 
-        Route::get('destroy/{id}', 'Order\OrderController@destroy')
-            ->middleware('can:remove-orders')
-            ->name('orders.destroy');
     });
 
     //branch

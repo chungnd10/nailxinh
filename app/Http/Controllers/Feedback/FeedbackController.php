@@ -4,19 +4,11 @@ namespace App\Http\Controllers\Feedback;
 
 use App\Feedback;
 use App\Http\Requests\AddFeebackRequest;
-use App\Services\FeedbackServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class FeedbackController extends Controller
 {
-    protected $feedback_services;
-
-    public function __construct(FeedbackServices $feedback_services)
-    {
-        $this->feedback_services = $feedback_services;
-    }
-
     public function index()
     {
         $feedbacks = $this->feedback_services->all();

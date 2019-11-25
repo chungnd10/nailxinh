@@ -26,7 +26,7 @@
                                 <th>STT</th>
                                 <th>Tên loại dịch vụ</th>
                                 <th>Ảnh</th>
-                                <th>Đường dẫn</th>
+                                <th>Slug</th>
                                 <th>Số dịch vụ</th>
                                 <th width="70">
                                     Hành động

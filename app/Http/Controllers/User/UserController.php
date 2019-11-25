@@ -4,16 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
-use App\Services\BranchServices;
-use App\Services\DisplayStatusServices;
-use App\Services\GenderServices;
-use App\Services\OperationStatusServices;
-use App\Services\RoleServices;
-use App\Services\ServiceServices;
-use App\Services\TypeServiceServices;
-use App\Services\UserServices;
-use App\Services\UserServiceServices;
-use App\Services\UserTypeServiceServices;
 use App\User;
 use Intervention\Image\Image;
 use App\Http\Controllers\Controller;
@@ -24,48 +14,14 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    protected $user_services;
-    protected $branch_services;
-    protected $gender_services;
-    protected $role_services;
-    protected $operation_status_services;
-    protected $service_services;
-    protected $type_services;
-    protected $user_services_services;
-    protected $user_type_service_services;
-    protected $display_status_services;
-
-    public function __construct(
-        UserServices $user_services,
-        BranchServices $branch_services,
-        GenderServices $gender_services,
-        RoleServices $role_services,
-        OperationStatusServices $operation_status_services,
-        ServiceServices $service_services,
-        TypeServiceServices $type_services,
-        UserServiceServices $user_services_services,
-        UserTypeServiceServices $user_type_service_services,
-        DisplayStatusServices $display_status_services
-    ) {
-        $this->user_services = $user_services;
-        $this->branch_services = $branch_services;
-        $this->gender_services = $gender_services;
-        $this->role_services = $role_services;
-        $this->operation_status_services = $operation_status_services;
-        $this->service_services = $service_services;
-        $this->type_services = $type_services;
-        $this->user_services_services = $user_services_services;
-        $this->user_type_service_services = $user_type_service_services;
-        $this->display_status_services = $display_status_services;
-    }
-
     public function index()
     {
         //nếu là admin thì lấy all
         if (Auth::user()->isAdmin()) {
             $users = $this->user_services->allForAdmin();
         }
-        if (Auth::user()->isManager()) {
+        if (Auth::user()->isManager())
+        {
             // chủ tiệm thì lấy nhân viên của tiệm
             $users = $this->user_services->allForManager(Auth::user()->branch_id);
         }

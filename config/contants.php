@@ -20,5 +20,5 @@ return [
     'order_status_finish'           => 4,
     'location_display_left'         => 1,
     'location_display_right'        => 2,
-    'web_settings'                  => 1
+    'web_settings'                  => 1,
 ];
