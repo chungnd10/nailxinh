@@ -22,7 +22,7 @@ class BranchServices
 
     public function find($id)
     {
-        $branch = Branch::find($id);
+        $branch = Branch::findOrFail($id);
         return $branch;
     }
 

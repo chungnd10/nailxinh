@@ -13,7 +13,7 @@ class RestrictedListServices
 
     public function find($id)
     {
-        $list = RestrictedList::find($id);
+        $list = RestrictedList::findOrFail($id);
         return $list;
     }
 }

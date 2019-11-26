@@ -60,5 +60,4 @@ function tagColorStatus($status)
             return 'text-warning-lv2';
             break;
     }
-
 }

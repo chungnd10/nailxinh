@@ -2,13 +2,17 @@
 @section('content')
     {{--START: banner
     =======================--}}
-    @include('client.layouts.banner')
+    @if($slides->first())
+        @include('client.layouts.banner')
+    @endif
     {{--END: banner
     ==============================================--}}
 
     {{--START:type services
     =======================--}}
-    @include('client.layouts.type_services')
+    @if($type_services->first())
+        @include('client.layouts.type_services')
+    @endif
     {{--END: type services
     ==============================================--}}
 
@@ -26,19 +30,25 @@
 
     {{--START: technician
     =======================--}}
-    @include('client.layouts.technician')
+    @if($technicians->first())
+        @include('client.layouts.technician')
+    @endif
     {{--END:  technician
     ==============================================--}}
 
     {{--START: feedbacks
     =======================--}}
-    @include('client.layouts.feedbacks')
+    @if($feedbacks->first())
+        @include('client.layouts.feedbacks')
+    @endif
     {{--END:  feedbacks
     ==============================================--}}
 
     {{--START: statistic
     =======================--}}
-    @include('client.layouts.statistic')
+    @if($branch && $user && $service && $orders)
+        @include('client.layouts.statistic')
+    @endif
     {{--END:  statistic
     ==============================================--}}
 

@@ -8,6 +8,12 @@ use App\Branch;
 
 class BranchController extends Controller
 {
+
+    /*
+     * Show branch
+     *
+     * @return array
+     */
     public function index()
     {
     	$branchs = $this->branch_services->all();
@@ -15,6 +21,11 @@ class BranchController extends Controller
     	return view('admin.branchs.index', compact('branchs'));
     }
 
+    /*
+     * Show page add branch
+     *
+     * @return object
+     */
     public function create()
     {
     	$cities = $this->city_services->all();
@@ -23,6 +34,10 @@ class BranchController extends Controller
 
     }
 
+    /*
+     * Store  branch
+     *
+     */
     public function store(AddBranchRequest $request)
     {
     	$branch = new Branch();
@@ -34,6 +49,12 @@ class BranchController extends Controller
         return redirect()->route('branch.index')->with($notification);
     }
 
+    /*
+     * Show branch for editing
+     *
+     * @param int $id
+     * @return object
+     */
     public function show($id)
     {
         $branch = $this->branch_services->find($id);
@@ -43,6 +64,12 @@ class BranchController extends Controller
         return view('admin.branchs.show', compact('branch','cities'));
     }
 
+    /*
+     * Update branch
+     *
+     * @param request $request
+     * @param int $id
+     */
     public function update(AddBranchRequest $request, $id)
     {
         $branch = $this->branch_services->find($id);
@@ -54,9 +81,13 @@ class BranchController extends Controller
         return redirect()->route('branch.index')->with($notification);
     }
 
+    /*
+     * Delete branch
+     *
+     * @param int $id
+     */
     public function destroy($id)
     {
-
         $branch = $this->branch_services->find($id);
 
         $branch->delete();

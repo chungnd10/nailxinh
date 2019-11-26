@@ -42,27 +42,28 @@
                                     <span class="text-danger">{{ $errors->first('phone_number') }}</span>
                                 @endif
                             </div>
-                            <div class="form-group col-md-4">
-                                <select class="form-control form-border" name="sir">
-                                    <option value="">Mrs/Miss</option>
-                                    <option value="Mrs"
-                                        @if(old('sir') == 'Mrs')
-                                            selected
-                                        @endif
-                                    >
-                                        Mrs</option>
-                                    <option value="Miss"
-                                        @if(old('sir') == 'Miss')
-                                            selected
-                                        @endif
-                                    >
-                                        Miss</option>
-                                </select>
-                                @if($errors->first('sir'))
-                                    <span class="text-danger">{{ $errors->first('sir') }}</span>
-                                @endif
+                            <div class="form-group col-md-3">
+                                <label>Họ và tên</label>
+{{--                                <select class="form-control form-border" name="sir">--}}
+{{--                                    <option value="">Mrs/Miss</option>--}}
+{{--                                    <option value="Mrs"--}}
+{{--                                        @if(old('sir') == 'Mrs')--}}
+{{--                                            selected--}}
+{{--                                        @endif--}}
+{{--                                    >--}}
+{{--                                        Mrs</option>--}}
+{{--                                    <option value="Miss"--}}
+{{--                                        @if(old('sir') == 'Miss')--}}
+{{--                                            selected--}}
+{{--                                        @endif--}}
+{{--                                    >--}}
+{{--                                        Miss</option>--}}
+{{--                                </select>--}}
+{{--                                @if($errors->first('sir'))--}}
+{{--                                    <span class="text-danger">{{ $errors->first('sir') }}</span>--}}
+{{--                                @endif--}}
                             </div>
-                            <div class="form-group col-md-8">
+                            <div class="form-group col-md-9">
                                 <input type="text"
                                        name="full_name"
                                        class="form-control form-border form-require"
@@ -72,7 +73,7 @@
                                     <span class="text-danger">{{ $errors->first('full_name') }}</span>
                                 @endif
                             </div>
-                            <div class="col-md-12 mb-4">
+                            <div class="col-md-6 mb-4">
                                 <div class="mb-3">
                                     Địa điểm
                                     <span class="text-danger">*</span>
@@ -94,9 +95,12 @@
                                 @endif
                                 </div>
                             </div>
-                            <div class="col-md-12 mb-4">
-                                <div class="mb-2">Dịch vụ <span class="text-danger">*</span></div>
-                                <div class="form-group">
+                            <div class="col-md-6 mb-4">
+                                <div class="mb-3">
+                                    Dịch vụ
+                                    <span class="text-danger">*</span>
+                                </div>
+                                <div class="mb-12">
                                     <select class="form-control select2 select2-hidden-accessible"
                                             multiple="" data-placeholder="Select a State"
                                             style="width: 100%;" data-select2-id="7"
@@ -123,8 +127,8 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-12 mb-4">
-                                <div class="mb-2">Chọn thời gian <span class="text-danger">*</span></div>
+                            <div class="col-md-6 mb-4">
+                                <div class="mb-3">Chọn thời gian <span class="text-danger">*</span></div>
                                 <input class=" form-control form-border"
                                        name="time"
                                        id="time"
@@ -134,6 +138,33 @@
                                 @if($errors->first('time'))
                                     <span class="text-danger">{{ $errors->first('time') }}</span>
                                 @endif
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="mb-3">
+                                    Chọn giờ
+                                    <span class="text-danger">*</span>
+                                </div>
+                                <div class="mb-12">
+                                    <select class="form-control "name="service_id[]"
+                                    >
+                                        <option value="">Chọn dịch vụ</option>
+                                        @foreach($type_services as $type_service)
+                                            <optgroup label="{{ $type_service->name }}">
+                                                @foreach($type_service->showServices($type_service->id) as $service)
+                                                    <option data-image="{{ $service->image }}"
+                                                            value="{{ $service->id }}"
+                                                            @if(old('service_id') == $service->id)
+                                                            selected
+                                                            @endif
+                                                    >{{ $service->name }}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->first('service_id'))
+                                        <span class="text-danger">{{ $errors->first('service_id') }}</span>
+                                    @endif
+                                </div>
                             </div>
                             <div class="col-md-12 mb-4">
                                 <label for="ghichu">Ghi chú</label>

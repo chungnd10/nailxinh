@@ -10,7 +10,7 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('slides.update', $slide->id) }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('slides.update', Hashids::encode($slide->id)) }}" method="POST" enctype="multipart/form-data"
                   id="addSlide">
                 @csrf
                 <div class="box-body">

@@ -51,7 +51,7 @@ class MembershipTypeController extends Controller
 
     public function destroy($id)
     {
-        $membership_type = MembershipType::find($id);
+        $membership_type = MembershipType::findOrFail($id);
 
         $membership_type->delete();
 

@@ -104,7 +104,8 @@ class Controller extends BaseController
         $this->user_type_service_services = $user_type_service_services;
         $this->order_status_services = $order_status_services;
         $this->bill_services = $bill_services;
+        $this->hashids = new Hashids();
 
-        $this->hashids = new Hashids('0363223618', 8, 'abcdefghijklmnopqrstuvwxyz');
     }
+
 }

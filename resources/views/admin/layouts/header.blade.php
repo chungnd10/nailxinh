@@ -80,7 +80,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ route('profile', Auth::check() ? Auth::user()->id :'' ) }}"
+                                <a href="{{ route('profile', Auth::check() ? Hashids::encode(Auth::user()->id) :'' ) }}"
                                    class="btn btn-default btn-flat">Thông tin</a>
                             </div>
                             <div class="pull-right">

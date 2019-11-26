@@ -23,7 +23,7 @@ class ServiceServices
 
     public function find($id)
     {
-        $service = Service::find($id);
+        $service = Service::findOrFail($id);
         return $service;
     }
 

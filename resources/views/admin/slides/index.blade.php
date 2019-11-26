@@ -55,10 +55,11 @@
                                     </td>
                                     <td>{{ $item->url }}</td>
                                     <td>
-                                        <a href="{{ route('slides.show', $item->id) }}" class="btn btn-xs btn-warning">
+                                        <a href="{{ route('slides.show', Hashids::encode($item->id)) }}"
+                                           class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="{{ route('slides.destroy', $item->id) }}"
+                                        <a href="{{ route('slides.destroy', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                             <i class="fa fa-trash"></i>

@@ -23,7 +23,7 @@ class UserServices
 
     public function find($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return $user;
     }
 
