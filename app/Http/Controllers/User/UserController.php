@@ -4,68 +4,24 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
-use App\Services\BranchServices;
-use App\Services\DisplayStatusServices;
-use App\Services\GenderServices;
-use App\Services\OperationStatusServices;
-use App\Services\RoleServices;
-use App\Services\ServiceServices;
-use App\Services\TypeServiceServices;
-use App\Services\UserServices;
-use App\Services\UserServiceServices;
-use App\Services\UserTypeServiceServices;
 use App\User;
+use Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Image;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    protected $user_services;
-    protected $branch_services;
-    protected $gender_services;
-    protected $role_services;
-    protected $operation_status_services;
-    protected $service_services;
-    protected $type_services;
-    protected $user_services_services;
-    protected $user_type_service_services;
-    protected $display_status_services;
-
-    public function __construct(
-        UserServices $user_services,
-        BranchServices $branch_services,
-        GenderServices $gender_services,
-        RoleServices $role_services,
-        OperationStatusServices $operation_status_services,
-        ServiceServices $service_services,
-        TypeServiceServices $type_services,
-        UserServiceServices $user_services_services,
-        UserTypeServiceServices $user_type_service_services,
-        DisplayStatusServices $display_status_services
-    ) {
-        $this->user_services = $user_services;
-        $this->branch_services = $branch_services;
-        $this->gender_services = $gender_services;
-        $this->role_services = $role_services;
-        $this->operation_status_services = $operation_status_services;
-        $this->service_services = $service_services;
-        $this->type_services = $type_services;
-        $this->user_services_services = $user_services_services;
-        $this->user_type_service_services = $user_type_service_services;
-        $this->display_status_services = $display_status_services;
-    }
-
     public function index()
     {
         //nếu là admin thì lấy all
         if (Auth::user()->isAdmin()) {
             $users = $this->user_services->allForAdmin();
         }
-        if (Auth::user()->isManager()) {
+        if (Auth::user()->isManager())
+        {
             // chủ tiệm thì lấy nhân viên của tiệm
             $users = $this->user_services->allForManager(Auth::user()->branch_id);
         }
@@ -101,11 +57,10 @@ class UserController extends Controller
         $user = new User();
 
         $user->display_status_id = config('contants.display_status_hide');
+
         $user->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -130,6 +85,8 @@ class UserController extends Controller
             $branchs = Auth::user()->branch->name.', '.Auth::user()->branch->address;
         }
 
+//        dd($branchs);
+
         return view('admin.users.show', compact('user',
                 'branchs',
                 'genders',
@@ -149,9 +106,7 @@ class UserController extends Controller
 
         $user->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -166,9 +121,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Xoá thành công !');
     }
 
     public function setPassword(Request $request, $id)
@@ -198,9 +151,8 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        $notification = notification('success', 'Đặt lại mật khẩu thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')
+            ->with('toast_success', 'Đặt lại mật khẩu thành công !');
     }
 
     //set services cho nhan vien
@@ -214,9 +166,7 @@ class UserController extends Controller
         $user->type_services()->sync($type_services_id);
         $user->services()->sync($services_id);
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Cập nhật thành công !');
 
     }
 
@@ -251,9 +201,8 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
-            $notification = notification('success', 'Cập nhật mật khẩu thành công !');
-
-            return redirect()->route('admin.index')->with($notification);
+            return redirect()->route('admin.index')
+                ->with('toast_success', 'Cập nhật mật khẩu thành công !');
         } else {
             return redirect()->route('profile', $id.'#tab_2')
                 ->with('old_password', '*Mật khẩu cũ không đúng');
@@ -317,9 +266,7 @@ class UserController extends Controller
 
         $user->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('admin.index')->with($notification);
+        return redirect()->route('admin.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function updateProfile(UpdateProfileRequest $request, $id)
@@ -328,15 +275,17 @@ class UserController extends Controller
 
         $user->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('admin.index')->with($notification);
+        return redirect()->route('admin.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function changeStatus(Request $request)
     {
-        $user = $this->user_services->find($request->id);
-        $user->operation_status_id = $request->operation_status_id;
+        $rq = $request->all();
+
+        $user = $this->user_services->find($rq->id);
+
+        $user->operation_status_id = $rq->operation_status_id;
+
         $user->save();
 
         return response()->json(['success' => 'Status change successfully.']);

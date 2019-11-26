@@ -24,7 +24,7 @@
                         <p class="text-muted text-center">{{ $user->role->name }}</p>
 
                         <ul class="list-group list-group-unbordered list-group-border-top">
-                            <form action="{{ route('update-image-profile', $user->id) }}"
+                            <form action="{{ route('update-image-profile', Hashids::encode($user->id)) }}"
                                   method="POST"
                                   enctype="multipart/form-data"
                                   id="updateImageProfile">
@@ -291,7 +291,6 @@
                                         <div class="box-footer">
                                             <a href="{{ route('admin.index') }}"
                                                class="btn btn-default"
-                                               onclick="return confirmmBack()"
                                             >
                                                 <i class="fa fa-arrow-circle-o-left"></i>
                                                 Trở về
@@ -509,7 +508,7 @@
                         console.log(formData);
                         formData.append('avatar', blob);
 
-                        $.ajax("{{ route('users.change-image-profile', $user->id)}}", {
+                        $.ajax("{{ route('users.change-image-profile', Hashids::encode($user->id) )}}", {
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },

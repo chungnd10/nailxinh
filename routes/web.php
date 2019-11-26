@@ -11,44 +11,62 @@
 |
 */
 
+
 Auth::routes(['register' => false]);
-
 //client
-Route::get('/', 'Client\ClientController@index')->name('index');
 
-Route::get('/introduction', 'Client\ClientController@introduction')->name('introduction');
+Route::get('/', 'Client\ClientController@index')
+    ->name('index');
 
-Route::get('/contact', 'Client\ClientController@contact')->name('contact');
+Route::get('/introduction', 'Client\ClientController@introduction')
+    ->name('introduction');
 
-Route::get('/services', 'Client\ClientController@services')->name('services');
-Route::get('/services-detail/{slug}/{id}', 'Client\ClientController@servicesDetail')->name('service-detail');
+Route::get('/contact', 'Client\ClientController@contact')
+    ->name('contact');
 
-Route::get('/type-services/{slug}/{id}', 'Client\ClientController@typeServices')->name('type-service');
+Route::get('/services', 'Client\ClientController@services')
+    ->name('services');
+Route::get('/services-detail/{slug}/{id}', 'Client\ClientController@servicesDetail')
+    ->name('service-detail');
 
-Route::get('/booking', 'Client\ClientController@booking')->name('booking');
-Route::post('/booking', 'Client\OrderController@store');
+Route::get('/type-services/{slug}/{id}', 'Client\ClientController@typeServices')
+    ->name('type-service');
 
-Route::get('/booking-test', 'Client\ClientController@bookingTest')->name('booking-test');
-Route::post('/booking-test', 'Client\OrderController@bookingTestStore');
+Route::get('/booking', 'Client\ClientController@booking')
+    ->name('booking');
+Route::post('/booking', 'Client\ClientController@store');
 
-Route::get('/gallery', 'Client\ClientController@gallery')->name('gallery');
+Route::get('/booking-test', 'Client\ClientController@bookingTest')
+    ->name('booking-test');
+Route::post('/booking-test', 'Client\ClientController@bookingTestStore');
+
+Route::get('/gallery', 'Client\ClientController@gallery')
+    ->name('gallery');
+
+Route::post('/subscribe','Client\ClientController@subscribe')
+    ->name('subscribe');
 
 // end client
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
 
-    Route::get('', 'Dashboard\DashboardController@index')->name('admin.index');
+
+    Route::get('', 'Dashboard\DashboardController@index')
+        ->name('admin.index');
 
     //profile
-    Route::get('profile/{id}', 'User\UserController@profile')->name('profile');
+    Route::get('profile/{id}', 'User\UserController@profile')
+        ->name('profile');
 
-    Route::post('profile/{id}', 'User\UserController@updateProfile')->name('profile');
+    Route::post('profile/{id}', 'User\UserController@updateProfile')
+        ->name('profile');
 
     Route::post('update-image-profile/{id}', 'User\UserController@updateImageProfile')
         ->name('update-image-profile');
 
-    Route::post('changePassword/{id}', 'User\UserController@changePassword')->name('changePassword');
+    Route::post('changePassword/{id}', 'User\UserController@changePassword')
+        ->name('changePassword');
     //user
     Route::prefix('users')->group(function () {
 
@@ -182,31 +200,27 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     });
 
     //bill
-    Route::prefix('bill')->group(function () {
+    Route::prefix('bills')->group(function () {
 
         Route::get('', 'Bill\BillController@index')
             ->middleware('can:view-bills')
-            ->name('bill.index');
+            ->name('bills.index');
 
-        Route::get('create', 'Bill\BillController@create')
-            ->middleware('can:add-bills')
-            ->name('bill.create');
+        Route::get('show/{id}', 'Bill\BillController@show')
+            ->middleware('can:print-bills')
+            ->name('bills.show');
 
-        Route::post('create', 'Bill\BillController@store')
-            ->middleware('can:add-bills')
-            ->name('bill.store');
+        Route::get('print/{id}', 'Bill\BillController@print')
+            ->middleware('can:print-bills')
+            ->name('bills.print');
 
-        Route::get('update/{id}', 'Bill\BillController@show')
-            ->middleware('can:edit-bills')
-            ->name('bill.show');
+        Route::get('update/{id}', 'Bill\BillController@showUpdate')
+            ->middleware('can:update-bill-status')
+            ->name('bills.update');
 
         Route::post('update/{id}', 'Bill\BillController@update')
-            ->middleware('can:edit-bills')
-            ->name('bill.update');
-
-        Route::get('destroy/{id}', 'Bill\BillController@destroy')
-            ->middleware('can:remove-bills')
-            ->name('bill.destroy');
+            ->middleware('can:update-bill-status')
+            ->name('bills.update');
     });
 
     //order
@@ -225,16 +239,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->name('orders.store');
 
         Route::get('update/{id}', 'Order\OrderController@show')
-            ->middleware('can:edit-orders')
+            ->middleware('can:update-orders')
             ->name('orders.show');
 
         Route::post('update/{id}', 'Order\OrderController@update')
-            ->middleware('can:edit-orders')
+            ->middleware('can:update-orders')
             ->name('orders.update');
 
-        Route::get('destroy/{id}', 'Order\OrderController@destroy')
-            ->middleware('can:remove-orders')
-            ->name('orders.destroy');
     });
 
     //branch
@@ -400,7 +411,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
         Route::get('change-status', 'Slides\SlidesController@changeStatus')
             ->middleware('can:edit-slide')
-        ->name('slides.change-status');
+            ->name('slides.change-status');
     });
 
     //introductions
@@ -414,5 +425,25 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:edit-introduction-page')
             ->name('introductions.update');
     });
+
+    //subscribe
+    Route::prefix('subscribe')->group(function () {
+
+        Route::get('', 'Subscribe\SubscribeController@index')
+            ->middleware('can:view-subscribe')
+            ->name('subscribe.index');
+
+        Route::get('destroy/{id}', 'Subscribe\SubscribeController@destroy')
+            ->middleware('can:remove-subscribe')
+            ->name('subscribe.destroy');
+
+        Route::post('delete-many', 'Subscribe\SubscribeController@deleteMany')
+            ->middleware('can:remove-subscribe')
+            ->name('subscribe.delete-many');
+    });
+});
+
+Route::bind('id', function ($id) {
+    return Hashids::decode($id)[0] ?? $id;
 });
 

@@ -19,6 +19,8 @@ class CreateOrdersTable extends Migration
             $table->string('phone_number', 11);
             $table->dateTime('time');
             $table->string('note', 200)->nullable();
+            $table->string('created_by', 100)->nullable();
+            $table->string('updated_by', 100)->nullable();
 
             $table->unsignedInteger('branch_id');
             $table->foreign('branch_id')
@@ -32,11 +34,7 @@ class CreateOrdersTable extends Migration
                 ->on('users')
                 ->onDelete('CASCADE');
 
-            $table->unsignedInteger('service_id');
-            $table->foreign('service_id')
-                ->references('id')
-                ->on('services')
-                ->onDelete('CASCADE');
+            $table->string('service_id',100);
 
             $table->unsignedInteger('order_status_id');
             $table->foreign('order_status_id')

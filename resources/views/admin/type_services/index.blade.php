@@ -26,7 +26,7 @@
                                 <th>STT</th>
                                 <th>Tên loại dịch vụ</th>
                                 <th>Ảnh</th>
-                                <th>Đường dẫn</th>
+                                <th>Slug</th>
                                 <th>Số dịch vụ</th>
                                 <th width="70">
                                     Hành động
@@ -44,11 +44,11 @@
                                     <td>{{ $item->slug }}</td>
                                     <td>{{ $item->countServicesWithType($item->id) }}</td>
                                     <td>
-                                        <a href="{{ route('type-services.show', $item->id) }}"
+                                        <a href="{{ route('type-services.show', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="{{ route('type-services.destroy', $item->id) }}"
+                                        <a href="{{ route('type-services.destroy', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                             <i class="fa fa-trash"></i>

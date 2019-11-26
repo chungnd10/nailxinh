@@ -10,7 +10,10 @@
 {{--Main content--}}
 <section class="content">
 	<div class="box box-default">
-		<form action="{{ route('process-type-services.update', $process->id) }}" method="POST" enctype="multipart/form-data" id="addProcess">
+		<form action="{{ route('process-type-services.update', Hashids::encode($process->id)) }}"
+              method="POST"
+              enctype="multipart/form-data"
+              id="addProcess">
 			@csrf
 			<div class="box-body">
 				<div class="row">
@@ -40,14 +43,18 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Bước</label><span class="text-danger">*</span>
-							<input type="text" class="form-control" value="{{ old('step',$process->step) }}" name="step" id="step">
+							<input type="text" class="form-control" value="{{ old('step',$process->step) }}"
+                                   name="step"
+                                   id="step">
 							@if($errors->first('step'))
 							<span class="text-danger">{{ $errors->first('step') }}</span>
 							@endif
 						</div>
 						<div class="form-group">
 							<label>Tên quy trình</label><span class="text-danger">*</span>
-							<input type="text" class="form-control" value="{{ old('name',$process->name) }}" name="name"  id="name">
+							<input type="text" class="form-control" value="{{ old('name',$process->name) }}"
+                                   name="name"
+                                   id="name">
 							@if($errors->first('name'))
 							<span class="text-danger">{{ $errors->first('name') }}</span>
 							@endif
@@ -73,7 +80,7 @@
 			<div class="box-footer ">
 				<a href="{{ route('process-type-services.index') }}"
                    class="btn btn-default"
-                   onclick="return confirmmBack()">
+                >
 					<i class="fa fa-arrow-circle-o-left"></i>
 					Trở về
 				</a>

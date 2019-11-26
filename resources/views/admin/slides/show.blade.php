@@ -10,7 +10,7 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('slides.update', $slide->id) }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('slides.update', Hashids::encode($slide->id)) }}" method="POST" enctype="multipart/form-data"
                   id="addSlide">
                 @csrf
                 <div class="box-body">
@@ -114,7 +114,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('slides.index') }}" class="btn btn-default" onclick="return confirmmBack()">
+                    <a href="{{ route('slides.index') }}" class="btn btn-default" >
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về
                     </a>

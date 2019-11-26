@@ -30,7 +30,7 @@ class FeedbackServices
 
     public function find($id)
     {
-        $feedback = Feedback::find($id);
+        $feedback = Feedback::findOrFail($id);
         return $feedback;
     }
 }

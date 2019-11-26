@@ -25,13 +25,17 @@
 <script src="client_assets/js/jquery.magnific-popup.min.js"></script>
 <script src="client_assets/js/select2.js"></script>
 <script src="client_assets/js/bootstrap-datepicker.js"></script>
+<!-- bootstrap datepimepicker -->
+<script src="admin_assets/bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 <script src="client_assets/js/service-select.js"></script>
 <script src="client_assets/js/jquery.mousewheel.min.js"></script>
 <script src="client_assets/js/lightgallery.js"></script>
 <script src="client_assets/js/lg-thumbnail.js"></script>
 <script src="client_assets/js/lg-fullscreen.js"></script>
-<script src="client_assets/js/jquery.validate.js"></script>
+<script src="admin_assets/plugins/jquery-validate/jquery.validate.min.js"></script>
+<script src="admin_assets/plugins/jquery-validate/additional-methods.js"></script>
 <!-- Custom Script -->
 <script src="client_assets/js/custom.js"></script>
 <script src="client_assets/js/booking.js"></script>
+
 

@@ -29,18 +29,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="service-detail-img">
-                        <img src="https://nailroom.vn/wp-content/uploads/2019/08/Untitled-1-2.jpg" alt="">
+                        <img src="upload/images/service/{{ $service->image }}" alt="">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="service-detaill-content p-4">
-                        <h2 class="text-upercase">Nail</h2>
-                        <p>Sở hữu các dịch vụ từ làm nail, spa, waxing, phun thêu lông mày, nối mi,… và một không gian cửa hàng yên tĩnh, long lanh dành riêng cho phái đẹp khiến Nail Room trở thành điểm đến yêu thích của hơn 500.000 khách hàng trong và ngoài nước.
-Với đội ngũ chuyên viên tài năng, dễ thương cùng hệ thống máy móc, dụng cụ nhập từ Hàn Quốc và các sản phẩm organic của Hàn – Anh – Pháp – Mỹ, 15 cơ sở của NAIL  XINH chắc chắn sẽ đem lại những xu hướng làm đẹp mới nhất đến khách hàng</p>
-                        <p>Sở hữu các dịch vụ từ làm nail, spa, waxing, phun thêu lông mày, nối mi,… và một không gian cửa hàng yên tĩnh, long lanh dành riêng cho phái đẹp khiến Nail Room trở thành điểm đến yêu thích của hơn 500.000 khách hàng trong và ngoài nước.
-Với đội ngũ chuyên viên tài năng, dễ thương cùng hệ thống máy móc, dụng cụ nhập từ Hàn Quốc và các sản phẩm organic của Hàn – Anh – Pháp – Mỹ, 15 cơ sở của NAIL  XINH chắc chắn sẽ đem lại những xu hướng làm đẹp mới nhất đến khách hàng</p>
-                    
-                        <a class="btn btn-dl text-uppercase">Đặt lịch</a>
+                        <h2 class="text-upercase">{{ $service->name }}</h2>
+                        <h4>Giá: {{ number_format($service->price, 0, ',', '.') }}</h4>
+                        <h4>Thời gian hoàn thành: {{ $service->completion_time }}</h4>
+                        <p>{{ $service->description }}</p>
+                        <a class="btn btn-dl text-uppercase" href="{{ route('booking') }}">Đặt lịch</a>
                     </div>
                 </div>
             </div>
@@ -52,7 +50,8 @@ Với đội ngũ chuyên viên tài năng, dễ thương cùng hệ thống má
     <!-- Start : Implementation Process 
     ============================= -->
 
-    <section id="process">
+    @if($process->first())
+        <section id="process">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-12 text-center">
@@ -63,65 +62,18 @@ Với đội ngũ chuyên viên tài năng, dễ thương cùng hệ thống má
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="process-content text-center">
-                        <div class="text-brown mb-2">1. VỆ SINH MÓNG VÀ MẶT DA </div>
-                        <div>Khách hàng sẽ ngâm tay và được các 
-                            chuyên viên vệ sinh sạch sẽ. Sau đó, các 
-                            chuyên sẽ sẽ nhặt sạch da chết xung 
-                            quanh móng
+                @foreach($process as $item)
+                    <div class="col-md-4">
+                        <div class="process-content text-center">
+                            <div class="text-brown mb-2">{{ $item->step }}. {{ $item->name }}</div>
+                            <div>{{ $item->content }}</div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="process-content text-center">
-                        <div class="text-brown mb-2">2. TẠO FORM MÓNG</div>
-                        <div>Khách hàng lựa chọn form móng yêu thích 
-và các chuyên viên sẽ dũa móng để tạo 
-được form chuẩn
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="process-content text-center">
-                        <div class="text-brown mb-2">3. SƠN MỘT LỚP NỀN (SƠN BASE)</div>
-                        <div>Chuyên viên sẽ sơn một lớp nền lên móng. 
-Sau đó, móng sẽ được hong khô dưới đèn 
-khoảng 20s - 30s
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="process-content text-center">
-                        <div class="text-brown mb-2">4. SƠN GEL, TẠO KIỂU</div>
-                        <div>Khách hàng sẽ lựa chọn dòng gel và mẫu
- nail theo mong muốn. Các chuyên viên sẽ
- design theo mẫu của khách hàng
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="process-content text-center">
-                        <div class="text-brown mb-2">5. SƠN BÓNG GEL ( SƠN GEL TOP NONE
- CLEANER)</div>
-                        <div>Sau khi đã làm xong bộ nail ưng ý, chuyên
- viên sẽ sơn một lớp sơn top giúp móng trở 
-nên bóng và bảo vệ móng bền hơn
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="process-content text-center">
-                        <div class="text-brown mb-2">6. DƯỠNG VIỀN MÓNG</div>
-                        <div>Bước cuối cùng, chuyên viên sẽ dưỡng viền
- móng để tránh việc da bị khô sau khi làm
- móng
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
 
 
     <!-- End : Implementation Process 
@@ -135,7 +87,7 @@ nên bóng và bảo vệ móng bền hơn
                 <h3 class="mb-3"><span style="color: #b7752b;">Đặt lịch liền tay</span></h3>
                 <h3 class="mb-3">HƯỞNG NGAY ƯU ĐÃI</h3>
                 <div class="cta-booking">
-                    <a href="#" class="btn btn-default button-a text-uppercase" target="_blank">Đặt lịch online</a>
+                    <a href="{{ route('booking') }}" class="btn btn-default button-a text-uppercase" >Đặt lịch online</a>
                 </div>
             </div>
         </div>

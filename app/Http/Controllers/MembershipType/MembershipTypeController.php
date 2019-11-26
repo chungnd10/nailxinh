@@ -4,19 +4,10 @@ namespace App\Http\Controllers\MembershipType;
 
 use App\Http\Requests\MembershipTypeRequest;
 use App\MembershipType;
-use App\Services\MembershipTypeServices;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class MembershipTypeController extends Controller
 {
-    protected $membership_type;
-
-    public function __construct(MembershipTypeServices $membership_type)
-    {
-        $this->membership_type = $membership_type;
-    }
-
     public function index()
     {
         $membership_type = $this->membership_type->all();
@@ -35,12 +26,12 @@ class MembershipTypeController extends Controller
 
         $membership_type->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('membership_type.index')->with($notification);
+        return redirect()->route('membership_type.index')
+            ->with('toast_success', 'Thêm thành công !');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $membership_type = MembershipType::find($id);
 
         return view('admin.membership_type.show', compact('membership_type'));
@@ -52,19 +43,17 @@ class MembershipTypeController extends Controller
 
         $membership_type->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('membership_type.index')->with($notification);
+        return redirect()->route('membership_type.index')
+            ->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
     {
-        $membership_type = MembershipType::find($id);
+        $membership_type = MembershipType::findOrFail($id);
 
         $membership_type->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('membership_type.index')->with($notification);
+        return redirect()->route('membership_type.index')
+            ->with('toast_success', 'Xoá thành công !');
     }
 }

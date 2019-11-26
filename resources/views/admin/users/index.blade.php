@@ -46,10 +46,11 @@
                                     <td>{{ $item->role->name }}</td>
                                     <td>{{ $item->branch->name.", ".$item->branch->address  }}</td>
                                     <td>
-                                        <a href="{{ route('users.show', $item->id) }}" class="btn btn-xs btn-warning">
+                                        <a href="{{ route('users.show', Hashids::encode($item->id)) }}"
+                                           class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="{{ route('users.destroy', $item->id) }}"
+                                        <a href="{{ route('users.destroy', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                             <i class="fa fa-trash"></i>

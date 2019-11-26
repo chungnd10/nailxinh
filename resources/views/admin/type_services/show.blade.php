@@ -10,7 +10,10 @@
 {{--Main content--}}
 <section class="content">
 	<div class="box box-default">
-		<form action="{{ route('type-services.update', $type_of_service->id) }}" method="POST" enctype="multipart/form-data" id="addTypeService">
+		<form action="{{ route('type-services.update', Hashids::encode($type_of_service->id)) }}"
+			  method="POST"
+			  enctype="multipart/form-data"
+			  id="addTypeService">
 			@csrf
 			<div class="box-body">
 				<div class="row">
@@ -57,7 +60,7 @@
 			</div>
 			<!-- /.box-body -->
 			<div class="box-footer ">
-				<a href="{{ route('type-services.index') }}" class="btn btn-default" onclick="return confirmmBack()">
+				<a href="{{ route('type-services.index') }}" class="btn btn-default" >
 					<i class="fa fa-arrow-circle-o-left"></i>
 					Trở về
 				</a>

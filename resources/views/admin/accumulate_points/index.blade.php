@@ -28,11 +28,11 @@
                             @foreach($points as $key => $item)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
-                                    <td>{{ $item->phone_number }}</td>
-                                    <td>{{ number_format($item->total_money,2,",",".") }}</td>
-                                    <td>{{ $item->membership_type->title }}</td>
+                                    <td>{{ '0'.$item->phone_number }}</td>
+                                    <td>{{ number_format($item->total_money,0,",",".") }}</td>
+                                    <td>{{ $item->membershipType($item->total_money) }}</td>
                                     <td>
-                                        <a href="{{ route('accumulate-points.destroy', $item->id) }}"
+                                        <a href="{{ route('accumulate-points.destroy', $item->phone_number) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                             <i class="fa fa-trash"></i> Xóa
