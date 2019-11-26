@@ -11,44 +11,59 @@
 |
 */
 
+
 Auth::routes(['register' => false]);
 
 //client
-Route::get('/', 'Client\ClientController@index')->name('index');
+Route::get('/', 'Client\ClientController@index')
+    ->name('index');
 
-Route::get('/introduction', 'Client\ClientController@introduction')->name('introduction');
+Route::get('/introduction', 'Client\ClientController@introduction')
+    ->name('introduction');
 
-Route::get('/contact', 'Client\ClientController@contact')->name('contact');
+Route::get('/contact', 'Client\ClientController@contact')
+    ->name('contact');
 
-Route::get('/services', 'Client\ClientController@services')->name('services');
-Route::get('/services-detail/{slug}/{id}', 'Client\ClientController@servicesDetail')->name('service-detail');
+Route::get('/services', 'Client\ClientController@services')
+    ->name('services');
+Route::get('/services-detail/{slug}/{id}', 'Client\ClientController@servicesDetail')
+    ->name('service-detail');
 
-Route::get('/type-services/{slug}/{id}', 'Client\ClientController@typeServices')->name('type-service');
+Route::get('/type-services/{slug}/{id}', 'Client\ClientController@typeServices')
+    ->name('type-service');
 
-Route::get('/booking', 'Client\ClientController@booking')->name('booking');
+Route::get('/booking', 'Client\ClientController@booking')
+    ->name('booking');
 Route::post('/booking', 'Client\ClientController@store');
 
-Route::get('/booking-test', 'Client\ClientController@bookingTest')->name('booking-test');
+Route::get('/booking-test', 'Client\ClientController@bookingTest')
+    ->name('booking-test');
 Route::post('/booking-test', 'Client\ClientController@bookingTestStore');
 
-Route::get('/gallery', 'Client\ClientController@gallery')->name('gallery');
+Route::get('/gallery', 'Client\ClientController@gallery')
+    ->name('gallery');
 
 // end client
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
 
-    Route::get('', 'Dashboard\DashboardController@index')->name('admin.index');
+
+    Route::get('', 'Dashboard\DashboardController@index')
+        ->name('admin.index');
 
     //profile
-    Route::get('profile/{id}', 'User\UserController@profile')->name('profile');
+    Route::get('profile/{id}', 'User\UserController@profile')
+        ->name('profile');
 
-    Route::post('profile/{id}', 'User\UserController@updateProfile')->name('profile');
+    Route::post('profile/{id}', 'User\UserController@updateProfile')
+        ->name('profile');
 
     Route::post('update-image-profile/{id}', 'User\UserController@updateImageProfile')
         ->name('update-image-profile');
 
-    Route::post('changePassword/{id}', 'User\UserController@changePassword')->name('changePassword');
+    Route::post('changePassword/{id}', 'User\UserController@changePassword')
+        ->name('changePassword');
     //user
     Route::prefix('users')->group(function () {
 
@@ -393,7 +408,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
         Route::get('change-status', 'Slides\SlidesController@changeStatus')
             ->middleware('can:edit-slide')
-        ->name('slides.change-status');
+            ->name('slides.change-status');
     });
 
     //introductions
@@ -407,5 +422,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:edit-introduction-page')
             ->name('introductions.update');
     });
+});
+
+Route::bind('id', function ($id) {
+    return Hashids::decode($id)[0] ?? $id;
 });
 

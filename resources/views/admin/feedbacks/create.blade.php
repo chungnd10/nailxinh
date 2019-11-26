@@ -63,7 +63,6 @@
                 <div class="box-footer ">
                     <a href="{{ route('feedbacks.index') }}"
                        class="btn btn-default"
-                       onclick="return confirm('Mọi thay đổi sẽ không được lưu!')"
                     >
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về

@@ -54,16 +54,15 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('services.show', $item->id) }}" class="btn btn-xs btn-warning">
+                                        <a href="{{ route('services.show', Hashids::encode($item->id)) }}"
+                                           class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        @if($item->role_id != 1)
-                                            <a href="{{ route('services.destroy', $item->id) }}"
-                                               class="btn btn-xs btn-danger"
-                                               onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                                <i class="fa fa-trash"></i>
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('services.destroy', Hashids::encode($item->id)) }}"
+                                           class="btn btn-xs btn-danger"
+                                           onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

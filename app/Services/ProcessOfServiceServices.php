@@ -14,7 +14,7 @@ class ProcessOfServiceServices
 
     public function find($id)
     {
-        $process = ProcessOfService::find($id);
+        $process = ProcessOfService::findOrFail($id);
         return $process;
     }
     // lấy tất cả quy trình dịch vụ theo loại dịch vụ

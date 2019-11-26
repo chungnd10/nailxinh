@@ -15,7 +15,7 @@ class OrderServices
 
     public function find($id)
     {
-        $orders = Order::find($id);
+        $orders = Order::findOrFail($id);
 
         return $orders;
     }

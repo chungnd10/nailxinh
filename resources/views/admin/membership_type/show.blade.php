@@ -10,7 +10,7 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('membership_type.update', $membership_type->id) }}"
+            <form action="{{ route('membership_type.update', Hashids::encode($membership_type->id)) }}"
                   method="POST"
                   id="membership_type"
             >

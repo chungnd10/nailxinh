@@ -13,7 +13,7 @@ class AccumulatePointServices
 
     public function find($id)
     {
-        $points = AccumulatePoints::find($id);
+        $points = AccumulatePoints::findOrFail($id);
         return $points;
     }
 

@@ -5,12 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\User;
+use Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Image;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -85,6 +85,8 @@ class UserController extends Controller
             $roles = $this->role_services->allForManager();
             $branchs = Auth::user()->branch->name.', '.Auth::user()->branch->address;
         }
+
+//        dd($branchs);
 
         return view('admin.users.show', compact('user',
                 'branchs',
@@ -291,8 +293,12 @@ class UserController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $user = $this->user_services->find($request->id);
-        $user->operation_status_id = $request->operation_status_id;
+        $rq = $request->all();
+
+        $user = $this->user_services->find($rq->id);
+
+        $user->operation_status_id = $rq->operation_status_id;
+
         $user->save();
 
         return response()->json(['success' => 'Status change successfully.']);

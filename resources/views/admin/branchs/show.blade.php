@@ -9,7 +9,7 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('branch.update', $branch->id) }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('branch.update', Hashids::encode($branch->id)) }}" method="POST" enctype="multipart/form-data"
                   id="addBranch">
                 @csrf
                 <div class="box-body">
@@ -101,7 +101,6 @@
             		},
             		address: {
             			required: true,
-            			minlength: 5,
 						maxlength: 200
             		}
 
@@ -115,7 +114,6 @@
 						maxlength : "*Không được vượt quá 11 ký tự"
             		},
             		address: {
-            			minlength: "*Yêu cầu tối thiểu 5 ký tự",
 						maxlength : "*Không được vượt quá 200 ký tự"
             		},
             	}

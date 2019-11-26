@@ -4,6 +4,32 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\TypeOfService
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property string $image
+ * @property string $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ProcessOfService[] $processOfServices
+ * @property-read int|null $process_of_services_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Service[] $services
+ * @property-read int|null $services_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TypeOfService newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TypeOfService newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TypeOfService query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TypeOfService whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TypeOfService whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TypeOfService whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TypeOfService whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TypeOfService whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TypeOfService whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TypeOfService whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class TypeOfService extends Model
 {
     /**

@@ -10,7 +10,9 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('services.update', $service->id) }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('services.update', Hashids::encode($service->id)) }}"
+                    method="POST"
+                    enctype="multipart/form-data"
                   id="addService">
                 @csrf
                 <div class="box-body">

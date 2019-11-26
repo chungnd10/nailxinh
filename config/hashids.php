@@ -40,8 +40,9 @@ return [
     'connections' => [
 
         'main' => [
-            'salt' => 'your-salt-string',
-            'length' => 'your-length-integer',
+            'salt' => env('APP_KEY'),
+            'length' => '8',
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyz',
         ],
 
         'alternative' => [

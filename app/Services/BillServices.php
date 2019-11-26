@@ -13,7 +13,7 @@ class BillServices
 
     public function find($id)
     {
-        $bills = Bill::find($id);
+        $bills = Bill::findOrFail($id);
         return $bills;
     }
 

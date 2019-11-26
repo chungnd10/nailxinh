@@ -22,7 +22,7 @@ class SlideServices
 
     public function find($id)
     {
-        $slide = Slides::find($id);
+        $slide = Slides::findOrFail($id);
         return $slide;
     }
 }
