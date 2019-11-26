@@ -26,9 +26,8 @@ class MembershipTypeController extends Controller
 
         $membership_type->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('membership_type.index')->with($notification);
+        return redirect()->route('membership_type.index')
+            ->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -44,9 +43,8 @@ class MembershipTypeController extends Controller
 
         $membership_type->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('membership_type.index')->with($notification);
+        return redirect()->route('membership_type.index')
+            ->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -55,8 +53,7 @@ class MembershipTypeController extends Controller
 
         $membership_type->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('membership_type.index')->with($notification);
+        return redirect()->route('membership_type.index')
+            ->with('toast_success', 'Xoá thành công !');
     }
 }

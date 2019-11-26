@@ -57,11 +57,10 @@ class UserController extends Controller
         $user = new User();
 
         $user->display_status_id = config('contants.display_status_hide');
+
         $user->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -107,9 +106,7 @@ class UserController extends Controller
 
         $user->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -124,9 +121,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Xoá thành công !');
     }
 
     public function setPassword(Request $request, $id)
@@ -156,9 +151,8 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        $notification = notification('success', 'Đặt lại mật khẩu thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')
+            ->with('toast_success', 'Đặt lại mật khẩu thành công !');
     }
 
     //set services cho nhan vien
@@ -172,9 +166,7 @@ class UserController extends Controller
         $user->type_services()->sync($type_services_id);
         $user->services()->sync($services_id);
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Cập nhật thành công !');
 
     }
 
@@ -209,9 +201,8 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
-            $notification = notification('success', 'Cập nhật mật khẩu thành công !');
-
-            return redirect()->route('admin.index')->with($notification);
+            return redirect()->route('admin.index')
+                ->with('toast_success', 'Cập nhật mật khẩu thành công !');
         } else {
             return redirect()->route('profile', $id.'#tab_2')
                 ->with('old_password', '*Mật khẩu cũ không đúng');
@@ -275,9 +266,7 @@ class UserController extends Controller
 
         $user->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('admin.index')->with($notification);
+        return redirect()->route('admin.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function updateProfile(UpdateProfileRequest $request, $id)
@@ -286,9 +275,7 @@ class UserController extends Controller
 
         $user->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('admin.index')->with($notification);
+        return redirect()->route('admin.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function changeStatus(Request $request)

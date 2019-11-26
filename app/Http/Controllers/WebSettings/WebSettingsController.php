@@ -16,7 +16,6 @@ class WebSettingsController extends Controller
 
     public function update(WebSettingRequest $request)
     {
-
         $item = $this->web_setting_services->first();
 
         if ($request->hasFile('avatar'))
@@ -35,8 +34,6 @@ class WebSettingsController extends Controller
 
         $item->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('admin.index')->with($notification);
+        return redirect()->route('admin.index')->with('toast_success', 'Cập nhật thành công !');
     }
 }

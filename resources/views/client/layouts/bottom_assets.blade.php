@@ -32,8 +32,10 @@
 <script src="client_assets/js/lightgallery.js"></script>
 <script src="client_assets/js/lg-thumbnail.js"></script>
 <script src="client_assets/js/lg-fullscreen.js"></script>
-<script src="client_assets/js/jquery.validate.js"></script>
+<script src="admin_assets/plugins/jquery-validate/jquery.validate.min.js"></script>
+<script src="admin_assets/plugins/jquery-validate/additional-methods.js"></script>
 <!-- Custom Script -->
 <script src="client_assets/js/custom.js"></script>
 <script src="client_assets/js/booking.js"></script>
+
 

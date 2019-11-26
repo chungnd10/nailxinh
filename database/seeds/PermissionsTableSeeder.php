@@ -212,7 +212,23 @@ class PermissionsTableSeeder extends Seeder
             [
                 'title' => 'Thay đổi ảnh đại diện',
                 'name'  => 'change-image-profile'
-            ]
+            ],
+            [
+                'title' => 'Xem danh sách đăng ký nhận tin khuyến mãi',
+                'name'  => 'view-subscribe'
+            ],
+            [
+                'title' => 'Thêm danh sách đăng ký nhận tin khuyến mãi',
+                'name'  => 'add-subscribe'
+            ],
+            [
+                'title' => 'Sửa danh sách đăng ký nhận tin khuyến mãi',
+                'name'  => 'edit-subscribe'
+            ],
+            [
+                'title' => 'Xóa danh sách đăng ký nhận tin khuyến mãi',
+                'name'  => 'remove-subscribe'
+            ],
         ];
 
         DB::table('permissions')->insert($permission);

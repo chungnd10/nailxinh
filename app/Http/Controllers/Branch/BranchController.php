@@ -44,9 +44,7 @@ class BranchController extends Controller
 
         $branch->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('branch.index')->with($notification);
+        return redirect()->route('branch.index')->with('toast_success', 'Thêm thành công !');
     }
 
     /*
@@ -76,9 +74,7 @@ class BranchController extends Controller
 
         $branch->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('branch.index')->with($notification);
+        return redirect()->route('branch.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     /*
@@ -92,8 +88,6 @@ class BranchController extends Controller
 
         $branch->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('branch.index')->with($notification);
+        return redirect()->route('branch.index')->with('toast_success', 'Xoá thành công !');
     }
 }

@@ -9,7 +9,6 @@ use App\ProcessOfService;
 
 class ProcessTypeServicesController extends Controller
 {
-
     public function index()
     {
         $processTypeServices = $this->process_of_services->all();
@@ -30,9 +29,8 @@ class ProcessTypeServicesController extends Controller
 
         $process->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('process-type-services.index')->with($notification);
+        return redirect()->route('process-type-services.index')
+            ->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -50,9 +48,8 @@ class ProcessTypeServicesController extends Controller
 
         $process->fill($request->all())->save();
 
-        $notify = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('process-type-services.index')->with($notify);
+        return redirect()->route('process-type-services.index')
+            ->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -61,18 +58,20 @@ class ProcessTypeServicesController extends Controller
 
         $process->delete();
 
-        $notify = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('process-type-services.index')->with($notify);
+        return redirect()->route('process-type-services.index')
+            ->with('toast_success', 'Xoá thành công !');
     }
 
-    //get process with type services
+    /*
+     *  Get process with type services
+     *
+     * @return void
+     */
     public function getProcessWithTypeServices(Request $request)
     {
         if ($request->ajax()) {
             $process = $this->process_of_services->getProcessWithType($request->service_id);
             return response()->json($process);
         }
-
     }
 }

@@ -6,7 +6,9 @@ namespace App\Http\Controllers\Client;
 use App\Introduction;
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\Subscribe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
@@ -79,6 +81,11 @@ class ClientController extends Controller
         return view('client.service-detail', compact('service', 'process'));
     }
 
+    /*
+     * Display page booking
+     *
+     */
+
     public function booking()
     {
         $booking_active = true;
@@ -99,27 +106,65 @@ class ClientController extends Controller
         return view('client.booking-test', compact('branchs', 'type_services', 'users', 'booking_active'));
     }
 
-
+    /*
+     * Store booking
+     *
+     */
     public function bookingTestStore(Request $request)
     {
         $order = new Order();
 
         $order->order_status_id = config('contants.order_status_unconfimred');
-        $order->full_name = $request->sir.' '.$request->full_name;
-        $order->service_id = implode(',',$request->service_id);
+        $order->full_name = $request->sir . ' ' . $request->full_name;
+        $order->service_id = implode(',', $request->service_id);
         $order->order_status_id = config('contants.order_status_unconfimred');
 
         $order->fill($request->all())->save();
 
-        $notification = notification('success', 'Đặt lịch thành công, chúng tôi sẽ liên hệ để xác nhận với bạn trong thời gian sớm nhất');
+        $notification = notification('success',
+            'Đặt lịch thành công, chúng tôi sẽ liên hệ để xác nhận với bạn trong thời gian sớm nhất');
         return redirect(route('index'))->with($notification);
 
     }
 
+    /*
+     * Display gallery
+     *
+     */
     public function gallery()
     {
         $gallery_active = true;
 
         return view('client.gallery', compact('gallery_active'));
+    }
+
+    /*
+     * Register email
+     *
+     */
+    public function subscribe(Request $request)
+    {
+        $subscribe = new Subscribe();
+
+        $validator = Validator::make($request->all(),
+            [
+                'email' => 'required|max:300|unique:subscribes',
+            ],
+            [
+                'email.required'    => '*Mục này không được để trống',
+                'email.max'         => '*Không được vượt quá 300 ký tự',
+                'email.unique'      => '*Email này đã được đăng ký trước đây',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect('/#error-email')->withErrors($validator)->withInput();
+        }else {
+            $subscribe->fill($request->all())->save();
+            return redirect()->route('index')->with(
+                'success',
+                'Chúc mừng bạn đã đăng ký thành công !'
+            );
+        }
     }
 }

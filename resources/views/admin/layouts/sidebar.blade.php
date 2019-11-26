@@ -226,6 +226,25 @@
                     </ul>
                 </li>
             @endcan
+            @can('view-subscribe')
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-envelope"></i> <span>Đăng ký nhận tin </span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @can('view-subscribe')
+                            <li>
+                                <a href="{{ route('subscribe.index') }}">
+                                    <i class="fa fa-angle-right"></i>Danh sách
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
             @can('view-web-settings')
                 <li class="treeview">
                     <a href="#">

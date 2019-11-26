@@ -39,9 +39,8 @@ class ServicesController extends Controller
 
         $service->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('services.index')->with($notification);
+        return redirect()->route('services.index')
+            ->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -74,9 +73,8 @@ class ServicesController extends Controller
 
         $service->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('services.index')->with($notification);
+        return redirect()->route('services.index')
+            ->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -90,8 +88,7 @@ class ServicesController extends Controller
         }
         $service->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('services.index')->with($notification);
+        return redirect()->route('services.index')
+            ->with('toast_success', 'Xoá thành công !');
     }
 }

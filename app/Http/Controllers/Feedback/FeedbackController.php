@@ -36,9 +36,7 @@ class FeedbackController extends Controller
 
         $feedback->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('feedbacks.index')->with($notification);
+        return redirect()->route('feedbacks.index')->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -66,9 +64,7 @@ class FeedbackController extends Controller
 
         $feedback->fill($request->all())->save();
 
-        $notification = notification('success', 'Sửa thành công !');
-
-        return redirect()->route('feedbacks.index')->with($notification);
+        return redirect()->route('feedbacks.index')->with('toast_success', 'Cập nhật thành công !');
 
     }
 
@@ -84,9 +80,7 @@ class FeedbackController extends Controller
 
         $feedback->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('feedbacks.index')->with($notification);
+        return redirect()->route('feedbacks.index')->with('toast_success', 'Xoá thành công !');
     }
 
     public function changeStatus(Request $request)

@@ -20,8 +20,7 @@ class RestrictedListsController extends Controller
 
         $list->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('restricted-lists.index')->with($notification);
+        return redirect()->route('restricted-lists.index')
+            ->with('toast_success', 'Xoá thành công !');
     }
 }

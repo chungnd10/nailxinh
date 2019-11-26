@@ -13,8 +13,8 @@
 
 
 Auth::routes(['register' => false]);
-
 //client
+
 Route::get('/', 'Client\ClientController@index')
     ->name('index');
 
@@ -42,6 +42,9 @@ Route::post('/booking-test', 'Client\ClientController@bookingTestStore');
 
 Route::get('/gallery', 'Client\ClientController@gallery')
     ->name('gallery');
+
+Route::post('/subscribe','Client\ClientController@subscribe')
+    ->name('subscribe');
 
 // end client
 
@@ -421,6 +424,22 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('update', 'Introduction\IntroductionController@update')
             ->middleware('can:edit-introduction-page')
             ->name('introductions.update');
+    });
+
+    //subscribe
+    Route::prefix('subscribe')->group(function () {
+
+        Route::get('', 'Subscribe\SubscribeController@index')
+            ->middleware('can:view-subscribe')
+            ->name('subscribe.index');
+
+        Route::get('destroy/{id}', 'Subscribe\SubscribeController@destroy')
+            ->middleware('can:remove-subscribe')
+            ->name('subscribe.destroy');
+
+        Route::post('delete-many', 'Subscribe\SubscribeController@deleteMany')
+            ->middleware('can:remove-subscribe')
+            ->name('subscribe.delete-many');
     });
 });
 

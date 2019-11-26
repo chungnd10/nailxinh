@@ -37,10 +37,7 @@ class TypeServicesController extends Controller
         $type_of_service->slug = Str::slug($request->name);
 
         $type_of_service->fill($request->all())->save();
-
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('type-services.index')->with($notification);
+        return redirect()->route('type-services.index')->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -68,10 +65,7 @@ class TypeServicesController extends Controller
         }
 
         $type_of_service->fill($request->all())->save();
-
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('type-services.index')->with($notification);
+        return redirect()->route('type-services.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -85,10 +79,7 @@ class TypeServicesController extends Controller
         }
 
         $type_of_service->delete();
-
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('type-services.index')->with($notification);
+        return redirect()->route('type-services.index')->with('toast_success', 'Xoá thành công !');
     }
 
 }

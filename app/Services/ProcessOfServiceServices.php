@@ -20,7 +20,9 @@ class ProcessOfServiceServices
     // lấy tất cả quy trình dịch vụ theo loại dịch vụ
     public function getProcessWithType($service_id)
     {
-        $process = ProcessOfService::where('service_id', $service_id)->orderby('step', 'asc')->get();
+        $process = ProcessOfService::where('service_id', $service_id)
+            ->orderby('step', 'asc')
+            ->get();
         return $process;
     }
 }

@@ -55,7 +55,7 @@ class WebSettingRequest extends FormRequest
             'phone_number.unique'       => '*Số điện thoại đã được sử dụng',
             'phone_number.max'          => '*Không được vượt quá 11 ký tự',
             'email.required'            => '*Mục này không được để trống',
-            'email.regex'               => '*Email sai định dạng',
+            'email.regex'               => '*Email không đúng định dạng',
             'email.max'                 => '*Không được vượt quá 200 ký tự',
             'open_time.required'        => '*Mục này không được để trống',
             'open_time.max'             => '*Không được vượt quá 50 ký tự',

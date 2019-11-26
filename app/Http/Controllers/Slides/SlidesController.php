@@ -38,9 +38,7 @@ class SlidesController extends Controller
 
         $slide->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('slides.index')->with($notification);
+        return redirect()->route('slides.index')->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -72,9 +70,7 @@ class SlidesController extends Controller
 
         $slide->fill($request->all())->save();
 
-        $notification = notification('success', 'Sửa thành công !');
-
-        return redirect()->route('slides.index')->with($notification);
+        return redirect()->route('slides.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -89,9 +85,7 @@ class SlidesController extends Controller
 
         $slide->delete();
 
-        $notification = notification('success', 'Xóa thành công !');
-
-        return redirect()->route('slides.index')->with($notification);
+        return redirect()->route('slides.index')->with('toast_success', 'Xoá thành công !');
     }
 
     //changeStatus AJAX
