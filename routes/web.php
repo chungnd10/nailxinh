@@ -46,6 +46,9 @@ Route::get('/gallery', 'Client\ClientController@gallery')
 Route::post('/subscribe','Client\ClientController@subscribe')
     ->name('subscribe');
 
+Route::get('/download-excel','Subscribe\SubscribeController@downloadExcel')
+    ->name('download-excel');
+
 // end client
 
 

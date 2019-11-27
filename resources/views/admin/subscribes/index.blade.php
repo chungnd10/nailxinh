@@ -72,8 +72,15 @@
                                 </tbody>
                             </table>
                             <div class="form-footer">
-                                <button class="btn btn-sm btn-danger btn-delete-many"
-                                        type="submit" style="display: none">Xoá mục đã chọn</button>
+                                <button class="btn btn-sm btn-danger btn-delete-many pull-left"
+                                        type="submit" style="display: none; margin-right: 10px"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xóa?')"
+                                >
+                                    <i class="fa fa-trash"></i>&nbsp;Xoá mục đã chọn
+                                </button>
+                                <a href="{{ route('download-excel') }}" class="btn btn-sm btn-default">
+                                    <i class="fa fa-file-excel-o "></i>&nbsp;&nbsp;Excel
+                                </a>
                             </div>
                         </form>
                     </div>
@@ -97,8 +104,8 @@
             });
 
             //check all
-            var checkAll = $('#checkedAll');
-            var checkboxes = $('.delete-many');
+            let checkAll = $('#checkedAll');
+            let checkboxes = $('.delete-many');
             checkAll.on('ifChecked ifUnchecked', function (event) {
                 if (event.type === 'ifChecked') {
                     checkboxes.iCheck('check');
@@ -110,17 +117,22 @@
             checkboxes.on('ifChanged', function (event) {
                 if (checkboxes.filter(':checked').length === checkboxes.length) {
                     checkAll.prop('checked', 'checked');
+                    console.log(checkboxes.filter(':checked').length);
                 } else {
                     checkAll.prop('checked', false);
+                    console.log(checkboxes.filter(':checked').length);
                 }
                 checkAll.iCheck('update');
+
+                if (checkboxes.filter(':checked').length >= 1) {
+                    $('.btn-delete-many').css('display', 'block');
+                } else {
+                    $('.btn-delete-many').css('display', 'none');
+                }
             });
 
 
-            var numberChecked = $('.delete-many:checked').length;
-            if (numberChecked > 0){
-                $('.btn-delete-many:checked').css('display', 'block');
-            }
+
 
             //data table
             $('#restricted_lists_table').DataTable({
