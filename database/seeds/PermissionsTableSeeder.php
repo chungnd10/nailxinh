@@ -229,6 +229,22 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'Xóa danh sách đăng ký nhận tin khuyến mãi',
                 'name'  => 'remove-subscribe'
             ],
+            [
+                'title' => 'Xem thư viện ảnh',
+                'name'  => 'view-photo-library'
+            ],
+            [
+                'title' => 'Thêm thư viện ảnh',
+                'name'  => 'add-photo-library'
+            ],
+            [
+                'title' => 'Sửa thư viện ảnh',
+                'name'  => 'edit-photo-library'
+            ],
+            [
+                'title' => 'Xóa thư viện ảnh',
+                'name'  => 'remove-photo-library'
+            ],
         ];
 
         DB::table('permissions')->insert($permission);

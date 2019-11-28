@@ -444,6 +444,26 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:remove-subscribe')
             ->name('subscribe.delete-many');
     });
+
+    //photo-library
+    Route::prefix('photo-library')->group(function () {
+
+        Route::get('', 'PhotoLibrary\PhotoLibraryController@index')
+            ->middleware('can:view-photo-library')
+            ->name('photo-library.index');
+
+        Route::get('create', 'PhotoLibrary\PhotoLibraryController@create')
+            ->middleware('can:add-photo-library')
+            ->name('photo-library.create');
+
+        Route::post('create', 'PhotoLibrary\PhotoLibraryController@store')
+            ->middleware('can:add-photo-library')
+            ->name('photo-library.create');
+
+        Route::get('destroy/{id}', 'PhotoLibrary\PhotoLibraryController@destroy')
+            ->middleware('can:remove-photo-library')
+            ->name('photo-library.destroy');
+    });
 });
 
 Route::bind('id', function ($id) {

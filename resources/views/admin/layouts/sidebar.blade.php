@@ -245,6 +245,25 @@
                     </ul>
                 </li>
             @endcan
+            @can('photo-library')
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-image"></i> <span>Thư viện ảnh</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @can('view-photo-library')
+                            <li>
+                                <a href="{{ route('photo-library.index') }}">
+                                    <i class="fa fa-angle-right"></i>Danh sách
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
             @can('view-web-settings')
                 <li class="treeview">
                     <a href="#">

@@ -239,3 +239,7 @@ div.dataTables_wrapper div.dataTables_filter input {
     position: absolute;
     opacity: 0;
 }
+/*Bootstrap 3*/
+.modal.large {
+     width: 80%;
+}
