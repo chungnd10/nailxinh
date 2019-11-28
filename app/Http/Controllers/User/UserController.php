@@ -271,6 +271,13 @@ class UserController extends Controller
 
     public function updateProfile(UpdateProfileRequest $request, $id)
     {
+//        dd($request->all());
+
+        $data = json_decode($request->get('image'), true);
+        $file = $request->file('image');
+
+        dd($data, $file);
+
         $user = $this->user_services->find($id);
 
         $user->fill($request->all())->save();
@@ -293,35 +300,27 @@ class UserController extends Controller
 
     public function changeImageProfile(Request $request, $id)
     {
-        $user = $this->user_services->find($id);
 
-        $data = json_decode($request->get('image'), true);
-        $file = $request->file('image');
+        if ($request->hasFile('avatar'))
+        {
+            $file = $request->file('avatar');
+            $user = $this->user_services->find($id);
 
-        if (!empty($file)) {
-            $filename = time() . '.png';
-            $folderPath = "upload/images/users/";
-            $path = "$folderPath/$filename";
+            $file_name = time().uniqid().$file->getClientOriginalName();
 
-            Image::make($file)->crop(
-                intval($data['height']),
-                intval($data['width']),
-                intval($data['x']),
-                intval($data['y'])
-            )->save($path);
+            if (file_exists('upload/images/users/'.$user->avatar)
+                && $user->avatar != 'avatar-default.png')
+            {
+                unlink('upload/images/users/'.$user->avatar);
+            }
 
-            $user->update([
-                "image" => $path
-            ]);
-
-            return [
-                'state' => 200,
-                'message' => 'success',
-                'result' => "/$path"
-            ];
+            $file->storeAs('images/users', $file_name);
         }
 
-        return response()->json(['status' => true]);
+        $user->avatar = $file_name;
+        $user->save();
+
+        return response('success', 200);
 
     }
 }

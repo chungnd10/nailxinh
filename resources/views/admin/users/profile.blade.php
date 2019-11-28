@@ -14,69 +14,44 @@
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle"
-                             src="upload/images/users/{{ $user->avatar }}"
-                             alt="User profile picture"
-                             id="proImg"
-                        >
-                        <h3 class="profile-username text-center">{{ $user->full_name }}</h3>
-
-                        <p class="text-muted text-center">{{ $user->role->name }}</p>
-
                         <ul class="list-group list-group-unbordered list-group-border-top">
-                            <form action="{{ route('update-image-profile', Hashids::encode($user->id)) }}"
-                                  method="POST"
-                                  enctype="multipart/form-data"
-                                  id="updateImageProfile">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="file" class="form-control" name="avatar">
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    <i class="fa fa-camera-retro"></i> Cập nhật ảnh
-                                </button>
-                            </form>
-                            <label class="label" data-toggle="tooltip" title="Change your avatar">
-                                <form action="" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <img class="rounded profile-user-img img-responsive img-circle" id="avatar"
-                                         src="upload/images/users/{{ $user->avatar }}" alt="avatar">
-                                    <input type="file" class="sr-only" id="input" name="image" accept="image/*">
-                                </form>
+                            <label class="label" data-toggle="tooltip" title="Thay đổi ảnh">
+                                <img class="rounded profile-user-img img-responsive img-circle" id="avatar"
+                                     src="upload/images/users/{{ $user->avatar }}" alt="avatar">
+                                <input type="file" class="sr-only" id="input" name="image" accept="image/*">
                             </label>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%
-                                </div>
-                            </div>
-                            <div class="alert" role="alert"></div>
-                            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+                            <div class="modal fade" id="modal" tabindex="-1" role="dialog"
+                                 aria-labelledby="modalLabel"
                                  aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="modalLabel">Cắt và tải lên ảnh</h5>
+                                            <h5 class="modal-title" id="modalLabel">Cắt ảnh</h5>
                                         </div>
                                         <div class="modal-body">
                                             <div class="img-container">
                                                 <img id="image"
                                                      src="upload/images/users/{{ $user->avatar }}"
-                                                     height="240"
+                                                     height="300"
                                                      width="100%">
                                             </div>
                                             <div class="preview"></div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">
                                                 Hủy
                                             </button>
-                                            <button type="button" class="btn btn-primary" id="crop">Cắt & tải lên
+                                            <button type="button" class="btn btn-primary" id="crop">Cắt
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </ul>
+                        <h3 class="profile-username text-center">{{ $user->full_name }}</h3>
+                        <p class="text-muted text-center">{{ $user->role->name }}</p>
+
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -319,15 +294,6 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            var inputImage = document.querySelector(`[name="avatar"]`);
-            inputImage.onchange = function () {
-                var file = this.files[0];
-                if (file == undefined) {
-                    document.querySelector('#proImg').src = 'upload/images/users/{{ $user->avatar }}';
-                } else {
-                    getBase64(file, '#proImg');
-                }
-            };
 
             //Date picker
             $('#birthday').datepicker({
@@ -341,7 +307,7 @@
                     avatar: {
                         required: true,
                         extension: "*jpg|jpeg|png",
-                        fileSize : 2097152,
+                        fileSize: 2097152,
                     },
                 },
 
@@ -376,8 +342,7 @@
                     full_name: {
                         maxlength: "*Không được nhập quá 100 ký tự",
                     },
-                    phone_number: {
-                    },
+                    phone_number: {},
                     birthday: "*Mục này không được để trống",
                     address: {
                         maxlength: "*Không được nhập quá 200 ký tự",
@@ -410,41 +375,41 @@
             //end validate
 
             // remove active class
-            if (window.location.hash == '#tab_2') {
+            if (window.location.hash === '#tab_2') {
                 $('#li_tab_1').removeClass('active');
                 $('#tab_1').removeClass('active');
                 $('#li_tab_2').addClass('active');
                 $('#tab_2').addClass('active');
-            }
-            ;
+            };
             // end remove active class
+
         });
     </script>
 
     <script>
         window.addEventListener('DOMContentLoaded', function () {
-            var avatar = document.getElementById('avatar');
-            var image = document.getElementById('image');
-            var input = document.getElementById('input');
-            var $progress = $('.progress');
-            var $progressBar = $('.progress-bar');
-            var $alert = $('.alert');
-            var $modal = $('#modal');
-            var cropper;
+            let avatar = document.getElementById('avatar');
+            let image = document.getElementById('image');
+            let input = document.getElementById('input');
+            let $progress = $('.progress');
+            let $progressBar = $('.progressBar');
+            let $alert = $('.alert');
+            let $modal = $('#modal');
+            let cropper;
 
             $('[data-toggle="tooltip"]').tooltip();
 
             input.addEventListener('change', function (e) {
-                var files = e.target.files;
-                var done = function (url) {
+                let files = e.target.files;
+                let done = function (url) {
                     input.value = '';
                     image.src = url;
                     $alert.hide();
                     $modal.modal('show');
                 };
-                var reader;
-                var file;
-                var url;
+                let reader;
+                let file;
+                let url;
 
                 if (files && files.length > 0) {
                     file = files[0];
@@ -464,7 +429,6 @@
             $modal.on('shown.bs.modal', function () {
                 cropper = new Cropper(image, {
                     modal: true,
-                    // checkCrossOrigin: true,
                     autoCrop: true,
                     autoCropArea: 1,
                     responsive: true,
@@ -485,8 +449,8 @@
             });
 
             document.getElementById('crop').addEventListener('click', function () {
-                var initialAvatarURL;
-                var canvas;
+                let initialAvatarURL;
+                let canvas;
 
                 $modal.modal('hide');
 
@@ -504,9 +468,9 @@
                     $progress.show();
                     $alert.removeClass('alert-success alert-warning');
                     canvas.toBlob(function (blob) {
-                        var formData = new FormData();
+                        let formData = new FormData();
                         console.log(formData);
-                        formData.append('avatar', blob);
+                        formData.append('avatar', blob, '.jpg');
 
                         $.ajax("{{ route('users.change-image-profile', Hashids::encode($user->id) )}}", {
                             headers: {
@@ -518,11 +482,11 @@
                             contentType: false,
 
                             xhr: function () {
-                                var xhr = new XMLHttpRequest();
+                                let xhr = new XMLHttpRequest();
 
                                 xhr.upload.onprogress = function (e) {
-                                    var percent = '0';
-                                    var percentage = '0%';
+                                    let percent = '0';
+                                    let percentage = '0%';
 
                                     if (e.lengthComputable) {
                                         percent = Math.round((e.loaded / e.total) * 100);
@@ -530,37 +494,40 @@
                                         $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
                                     }
                                 };
-
                                 return xhr;
                             },
                             success: function () {
-                                $alert.show().addClass('alert-success').text('Upload success');
+                                const Toast = Swal.mixin({
+                                    //when firing the toast, the first window closes automatically
+                                    toast: true,
+                                    position: 'top',
+                                    showConfirmButton: false,
+                                    timer: 5000,
+                                    showCloseButton: true
+                                });
+
+                                Toast.fire({
+                                    type: 'success',
+                                    title: 'Thay đổi ảnh thành công'
+                                })
                             },
 
                             error: function () {
                                 avatar.src = initialAvatarURL;
-                                $alert.show().addClass('alert-warning').text('Upload error');
+                                Toast.fire({
+                                    type: 'error',
+                                    title: 'Thay đổi ảnh thất bại'
+                                })
                             },
                             complete: function () {
                                 $progress.hide();
                             },
                         });
-
                     });
                 }
-
             });
-
-            // end
-            function each(arr, callback) {
-                var length = arr.length;
-                var i;
-                for (i = 0; i < length; i++) {
-                    callback.call(arr, arr[i], i, arr);
-                }
-                return arr;
-            }
 
         });
     </script>
+
 @endsection

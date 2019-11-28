@@ -27,6 +27,8 @@
 <script src="admin_assets/bower_components/chart.js/Chart.bundle.min.js"></script>
 {{--cropper js--}}
 <script src="admin_assets/plugins/cropperjs/cropper.min.js"></script>
+{{-- jquery cropper js--}}
+<script src="admin_assets/plugins/jquery-cropperjs/jquery-cropper.min.js"></script>
 <!-- Select2 -->
 <script src="admin_assets/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- iCheck 1.0.1 -->
