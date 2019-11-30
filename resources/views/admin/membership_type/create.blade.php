@@ -30,18 +30,6 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>Mô tả</label>
-                                <textarea name="description"
-                                          cols="30"
-                                          rows="5"
-                                          class="form-control"
-                                          placeholder="Nhập mô tả"
-                                >{{ old('description') }}</textarea>
-                                @if($errors->first('description'))
-                                    <span class="text-danger">{{ $errors->first('description') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
                                 <label>Mức tiền(VND)</label><span class="text-danger">*</span>
                                 <input type="text"
                                        class="form-control"
@@ -65,6 +53,18 @@
                                     <span class="text-danger">{{ $errors->first('discount_level') }}</span>
                                 @endif
                             </div>
+                            <div class="form-group">
+                                <label>Mô tả</label>
+                                <textarea name="description"
+                                          cols="30"
+                                          rows="5"
+                                          class="form-control"
+                                          placeholder="Nhập mô tả"
+                                >{{ old('description') }}</textarea>
+                                @if($errors->first('description'))
+                                    <span class="text-danger">{{ $errors->first('description') }}</span>
+                                @endif
+                            </div>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -72,7 +72,9 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('membership_type.index') }}" class="btn btn-default">
+                    <a href="{{ route('membership_type.index') }}"
+                       class="btn btn-default"
+                    >
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về
                     </a>
@@ -93,15 +95,14 @@
                 rules: {
                     title: {
                         required: true,
-                        minlength: 1,
                         maxlength: 100
                     },
                     description: {
-                        minlength: 10,
                         maxlength: 200
                     },
                     money_level: {
                         required: true,
+                        number: true,
                         min:0,
                         max:1000000000
                     },
@@ -115,25 +116,18 @@
 
                 messages: {
                     title: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 1-100 ký tự",
-                        maxlength: "Yêu cầu từ 1-100 ký tự",
+                        maxlength: "*Không được vượt quá 100 ký tự",
                     },
                     description: {
-                        minlength: "Yêu cầu từ 10-200 ký tự",
-                        maxlength: "Yêu cầu từ 10-200 ký tự",
+                        maxlength: "*Không được vượt quá 200 ký tự",
                     },
                     money_level: {
-                        required: "Mục này không được để trống",
-                        number: true,
-                        min: "Yêu cầu giá trị từ 0 - 1.000.000.000",
-                        max: "Yêu cầu giá trị từ 0 - 1.000.000.000",
+                        min: "*Yêu cầu giá trị từ 0 - 1.000.000.000",
+                        max: "*Yêu cầu giá trị từ 0 - 1.000.000.000",
                     },
                     discount_level: {
-                        required: "Mục này không được để trống",
-                        number: true,
-                        min: "Yêu cầu giá trị từ 0 - 100",
-                        max: "Yêu cầu giá trị từ 0 - 100",
+                        min: "*Yêu cầu giá trị từ 0 - 100",
+                        max: "*Yêu cầu giá trị từ 0 - 100",
                     }
                 }
             });

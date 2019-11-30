@@ -3,30 +3,28 @@
 namespace App\Http\Controllers\Introduction;
 
 use App\Http\Requests\IntroductionRequest;
-use App\Introduction;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class IntroductionController extends Controller
 {
-    public function index($id)
+    public function index()
     {
-        $item = Introduction::find($id);
+        $item = $this->introduction_services->first();
         return view('admin.introductions.index', compact('item'));
     }
 
-    public function update(IntroductionRequest $request, $id)
+    public function update(IntroductionRequest $request)
     {
-        $item = Introduction::find($id);
+        $item = $this->introduction_services->first();
 
-        //nếu có nhập ảnh ảnh
-        if ($request->hasFile('image')) {
-            // xoá ảnh cũ
-            if (file_exists('upload/images/introductions/'.$item->image) && $item->image != 'img-default.png')
+        if ($request->hasFile('image'))
+        {
+            if (file_exists('upload/images/introductions/'.$item->image)
+                && $item->image != 'img-default.png')
             {
                 unlink('upload/images/introductions/'.$item->image);
             }
-            //lưu ảnh mới
+
             $file = $request->file('image');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/introductions', $name);
@@ -35,10 +33,6 @@ class IntroductionController extends Controller
 
         $item->fill($request->all())->save();
 
-        $notify = array(
-            'message' => 'Cập nhật thành công',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('introductions.index', $id)->with($notify);
+        return redirect()->route('admin.index')->with('toast_success', 'Cập nhật thành công !');
     }
 }

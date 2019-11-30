@@ -6,6 +6,12 @@
             Danh sách
             <small>phản hồi</small>
         </h1>
+        <ol class="breadcrumb">
+            <a href="{{ route('feedbacks.create') }}"
+               class="btn btn-sm btn-success">
+                <i class="fa fa-plus"></i> Thêm
+            </a>
+        </ol>
     </section>
     {{--Main content--}}
     <section class="content">
@@ -17,18 +23,18 @@
                         <table class="table table-bordered table-hover" id="feedbacks_table">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>STT</th>
                                 <th width="100">Ảnh</th>
                                 <th width="150">Họ tên</th>
                                 <th>Nội dung</th>
                                 <th width="70">Trạng thái</th>
-                                <th width="80">Hành động</th>
+                                <th width="70">Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($feedbacks as $item)
+                            @foreach($feedbacks as $key => $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>
                                         <img width="80" style="border-radius: 50%"
                                              src="upload/images/feedbacks/{{ $item->image }}">
@@ -52,17 +58,20 @@
                                         </label>
                                     </td>
                                     <td>
-                                        <a href="{{ route('feedbacks.destroy', $item->id) }}"
+                                        <a href="{{ route('feedbacks.show', Hashids::encode($item->id)) }}"
+                                           class="btn btn-xs btn-warning">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a href="{{ route('feedbacks.destroy', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                            <i class="fa fa-trash"></i> Xóa
+                                            <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $feedbacks->links() !!}
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -81,54 +90,45 @@
             $('#feedbacks_table').DataTable({
                 "language": {
                     "emptyTable": "Không có bản ghi nào",
-                    "infoEmpty": "Không có bản ghi nào",
-                    "zeroRecords": "Không có bản ghi nào"
+                    "zeroRecords": "Không tìm thấy bản ghi nào",
+                    "decimal": "",
+                    "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
+                    "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
+                    "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Hiển thị _MENU_ mục",
+                    "loadingRecords": "Loading...",
+                    "processing": "Processing...",
+                    "search": "Tìm kiếm:",
+                    "paginate": {
+                        "first": "Đầu",
+                        "last": "Cuối",
+                        "next": "Sau",
+                        "previous": "Trước"
+                    },
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
                 },
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'info': true,
                 'autoWidth': true,
+                "responsive": true,
                 "columnDefs": [
                     {
                         "orderable": false,
-                        "targets": [ 1,3,5]
+                        "targets": [1, 3, 5]
                     }
                 ]
             });
 
             // hide content
-            var showChar = 100;  // Số ký tự muốn hiển thị
-            var ellipsestext = "...";
-            var moretext = "Xem thêm >";
-            var lesstext = "Ẩn bớt >";
-
-            $('.more').each(function () {
-                var content = $(this).html();
-                if (content.length > showChar) {
-                    var c = content.substr(0, showChar);
-                    var h = content.substr(showChar, content.length - showChar);
-                    var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span>' +
-                        '<span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;' +
-                        '<a href="" class="morelink">' + moretext + '</a></span>';
-                    $(this).html(html);
-                }
-            });
-
-            $(".morelink").click(function () {
-                if ($(this).hasClass("less")) {
-                    $(this).removeClass("less");
-                    $(this).html(moretext);
-                } else {
-                    $(this).addClass("less");
-                    $(this).html(lesstext);
-                }
-                $(this).parent().prev().toggle();
-                $(this).prev().toggle();
-                return false;
-            });
-            // end hide content
+            moreText(100);
+            //end hide content
 
             // change status
             $('.display_status_id').change(function () {
@@ -138,7 +138,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: "{{ route('feedbacks.update') }}",
+                    url: "{{ route('feedbacks.change-status') }}",
                     data: {'display_status_id': display_status_id, 'id': id},
                     success: function (data) {
                         console.log(data.success)

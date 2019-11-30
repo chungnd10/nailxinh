@@ -9,7 +9,7 @@ class BranchServices
     // lấy tất cả branch
     public function all()
     {
-        $branch = Branch::all();
+        $branch = Branch::orderby('id', 'desc')->get();
         return $branch;
     }
 
@@ -19,4 +19,11 @@ class BranchServices
         $branch = Branch::count();
         return $branch;
     }
+
+    public function find($id)
+    {
+        $branch = Branch::findOrFail($id);
+        return $branch;
+    }
+
 }

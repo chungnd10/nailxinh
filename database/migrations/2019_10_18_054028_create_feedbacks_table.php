@@ -15,12 +15,11 @@ class CreateFeedbacksTable extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('phone_number', 11);
             $table->string('full_name', 100);
             $table->string('content', 300);
             $table->string('image', 300);
 
-            $table->unsignedInteger('display_status_id');
+            $table->unsignedInteger('display_status_id')->default(config('contants.display_status_hide'));
             $table->foreign('display_status_id')
                 ->references('id')
                 ->on('display_statuses')

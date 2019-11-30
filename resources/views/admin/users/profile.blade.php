@@ -14,30 +14,43 @@
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle"
-                             src="upload/images/users/{{ $user->avatar }}"
-                             alt="User profile picture"
-                             id="proImg"
-                        >
-                        <h3 class="profile-username text-center">{{ $user->full_name }}</h3>
-
-                        <p class="text-muted text-center">{{ $user->role->name }}</p>
-
                         <ul class="list-group list-group-unbordered list-group-border-top">
-                            <form action="{{ route('update-image-profile', $user->id) }}"
-                                  method="POST"
-                                  enctype="multipart/form-data"
-                                  id="updateImageProfile">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="file" class="form-control" name="avatar">
+                            <label class="label" data-toggle="tooltip" title="Thay đổi ảnh">
+                                <img class="rounded profile-user-img img-responsive img-circle" id="avatar"
+                                     src="upload/images/users/{{ $user->avatar }}" alt="avatar">
+                                <input type="file" class="sr-only" id="input" name="image" accept="image/*">
+                            </label>
+                            <div class="modal fade" id="modal" tabindex="-1" role="dialog"
+                                 aria-labelledby="modalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalLabel">Cắt ảnh</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="img-container">
+                                                <img id="image"
+                                                     src="upload/images/users/{{ $user->avatar }}"
+                                                     height="300"
+                                                     width="100%">
+                                            </div>
+                                            <div class="preview"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">
+                                                Hủy
+                                            </button>
+                                            <button type="button" class="btn btn-primary" id="crop">Cắt
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    <i class="fa fa-camera-retro"></i> Cập nhật ảnh
-                                </button>
-                            </form>
+                            </div>
                         </ul>
-
+                        <h3 class="profile-username text-center">{{ $user->full_name }}</h3>
+                        <p class="text-muted text-center">{{ $user->role->name }}</p>
 
                     </div>
                     <!-- /.box-body -->
@@ -48,9 +61,11 @@
             <div class="col-md-9">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active" id="li_tab_1"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Thông tin</a>
+                        <li class="active" id="li_tab_1"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Thông
+                                tin</a>
                         </li>
-                        <li class="" id="li_tab_2"><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đổi mật khẩu</a>
+                        <li class="" id="li_tab_2"><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đổi mật
+                                khẩu</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -110,7 +125,7 @@
                                                     @endforeach
                                                 </select>
                                             @else
-                                                <p>{{ $user->branch->name }}</p>
+                                                <p>{{ $user->branch->name. ', '.$user->branch->address }}</p>
                                             @endif
                                         @endif
 
@@ -176,7 +191,9 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <a href="{{ route('admin.index') }}" class="btn btn-default">
+                                        <a href="{{ route('admin.index') }}"
+                                           class="btn btn-default"
+                                        >
                                             <i class="fa fa-arrow-circle-o-left"></i>
                                             Trở về
                                         </a>
@@ -247,7 +264,9 @@
                                         </div>
                                         <!-- /.box-body -->
                                         <div class="box-footer">
-                                            <a href="{{ route('admin.index') }}" class="btn btn-default">
+                                            <a href="{{ route('admin.index') }}"
+                                               class="btn btn-default"
+                                            >
                                                 <i class="fa fa-arrow-circle-o-left"></i>
                                                 Trở về
                                             </a>
@@ -275,15 +294,6 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            var inputImage = document.querySelector(`[name="avatar"]`);
-            inputImage.onchange = function () {
-                var file = this.files[0];
-                if (file == undefined) {
-                    document.querySelector('#proImg').src = 'upload/images/users/{{ $user->avatar }}';
-                } else {
-                    getBase64(file, '#proImg');
-                }
-            };
 
             //Date picker
             $('#birthday').datepicker({
@@ -296,14 +306,15 @@
                 rules: {
                     avatar: {
                         required: true,
-                        extension: "jpg|jpeg|png"
+                        extension: "*jpg|jpeg|png",
+                        fileSize: 2097152,
                     },
                 },
 
                 messages: {
                     avatar: {
-                        required: "Hãy chọn ảnh",
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG",
+                        fileSize: "*Kích thước ảnh không được quá 2MB "
                     }
                 }
             });
@@ -313,8 +324,8 @@
                 rules: {
                     full_name: {
                         required: true,
-                        minlength: 5,
-                        maxlength: 40
+                        maxlength: 100,
+                        onlyVietnamese: true
                     },
                     phone_number: {
                         required: true,
@@ -323,24 +334,18 @@
                     birthday: "required",
                     address: {
                         required: true,
-                        minlength: 5,
+                        maxlength: 200
                     },
                 },
 
                 messages: {
                     full_name: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 5-40 ký tự",
-                        maxlength: "Yêu cầu từ 5-40 ký tự",
-                        alpha: "Mục này không được để trống"
+                        maxlength: "*Không được nhập quá 100 ký tự",
                     },
-                    phone_number: {
-                        required: "Mục này không được để trống",
-                    },
-                    birthday: "Mục này không được để trống",
+                    phone_number: {},
+                    birthday: "*Mục này không được để trống",
                     address: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu tối thiểu 5 ký tự",
+                        maxlength: "*Không được nhập quá 200 ký tự",
                     },
                 }
             });
@@ -353,34 +358,176 @@
                     },
                     password: {
                         required: true,
-                        minlength: 6,
+                        minlength: 8,
                         maxlength: 40,
                     },
                     cf_password: {
-                        equalTo:password
+                        equalTo: password
                     },
                 },
                 messages: {
-                    old_password: {
-                        required: "Mục này không được để trống",
-                    },
                     password: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 6-40 ký tự",
-                        maxlength: "Yêu cầu từ 6-40 ký tự",
-                    },
-                    cf_password: {
-                        equalTo: "Nhập lại mật khẩu không đúng"
+                        minlength: "*Yêu cầu từ 8-40 ký tự",
+                        maxlength: "*Yêu cầu từ 8-40 ký tự",
+                    }
+                }
+            });
+            //end validate
+
+            // remove active class
+            if (window.location.hash === '#tab_2') {
+                $('#li_tab_1').removeClass('active');
+                $('#tab_1').removeClass('active');
+                $('#li_tab_2').addClass('active');
+                $('#tab_2').addClass('active');
+            };
+            // end remove active class
+
+        });
+    </script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            let avatar = document.getElementById('avatar');
+            let image = document.getElementById('image');
+            let input = document.getElementById('input');
+            let $progress = $('.progress');
+            let $progressBar = $('.progressBar');
+            let $alert = $('.alert');
+            let $modal = $('#modal');
+            let cropper;
+
+            $('[data-toggle="tooltip"]').tooltip();
+
+            input.addEventListener('change', function (e) {
+                let files = e.target.files;
+                let done = function (url) {
+                    input.value = '';
+                    image.src = url;
+                    $alert.hide();
+                    $modal.modal('show');
+                };
+                let reader;
+                let file;
+                let url;
+
+                if (files && files.length > 0) {
+                    file = files[0];
+
+                    if (URL) {
+                        done(URL.createObjectURL(file));
+                    } else if (FileReader) {
+                        reader = new FileReader();
+                        reader.onload = function (e) {
+                            done(reader.result);
+                        };
+                        reader.readAsDataURL(file);
                     }
                 }
             });
 
-            if (window.location.hash == '#tab_2') {
-                $('#li_tab_1').removeClass('active');//remove active class
-                $('#tab_1').removeClass('active');
-                $('#li_tab_2').addClass('active');
-                $('#tab_2').addClass('active');
-            }
+            $modal.on('shown.bs.modal', function () {
+                cropper = new Cropper(image, {
+                    modal: true,
+                    autoCrop: true,
+                    autoCropArea: 1,
+                    responsive: true,
+                    background: false,
+                    zoomOnTouch: true,
+                    viewMode: 2,
+                    dragMode: 'move',
+                    aspectRatio: 1 / 1,
+                    minContainerWidth: 320,
+                    maxContainerHeight: 180,
+                    built: function () {
+                        $toCrop.cropper("setCropBoxData", {width: "200", height: "200"});
+                    }
+                });
+            }).on('hidden.bs.modal', function () {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            document.getElementById('crop').addEventListener('click', function () {
+                let initialAvatarURL;
+                let canvas;
+
+                $modal.modal('hide');
+
+                if (cropper) {
+                    canvas = cropper.getCroppedCanvas({
+                        width: 300,
+                        height: 300,
+                        minWidth: 300,
+                        minHeight: 300,
+                        maxWidth: 600,
+                        maxHeight: 600,
+                    });
+                    initialAvatarURL = avatar.src;
+                    avatar.src = canvas.toDataURL();
+                    $progress.show();
+                    $alert.removeClass('alert-success alert-warning');
+                    canvas.toBlob(function (blob) {
+                        let formData = new FormData();
+                        console.log(formData);
+                        formData.append('avatar', blob, '.jpg');
+
+                        $.ajax("{{ route('users.change-image-profile', Hashids::encode($user->id) )}}", {
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            method: "POST",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+
+                            xhr: function () {
+                                let xhr = new XMLHttpRequest();
+
+                                xhr.upload.onprogress = function (e) {
+                                    let percent = '0';
+                                    let percentage = '0%';
+
+                                    if (e.lengthComputable) {
+                                        percent = Math.round((e.loaded / e.total) * 100);
+                                        percentage = percent + '%';
+                                        $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
+                                    }
+                                };
+                                return xhr;
+                            },
+                            success: function () {
+                                const Toast = Swal.mixin({
+                                    //when firing the toast, the first window closes automatically
+                                    toast: true,
+                                    position: 'top',
+                                    showConfirmButton: false,
+                                    timer: 5000,
+                                    showCloseButton: true
+                                });
+
+                                Toast.fire({
+                                    type: 'success',
+                                    title: 'Thay đổi ảnh thành công'
+                                })
+                            },
+
+                            error: function () {
+                                avatar.src = initialAvatarURL;
+                                Toast.fire({
+                                    type: 'error',
+                                    title: 'Thay đổi ảnh thất bại'
+                                })
+                            },
+                            complete: function () {
+                                $progress.hide();
+                            },
+                        });
+                    });
+                }
+            });
+
         });
     </script>
+
 @endsection

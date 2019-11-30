@@ -66,6 +66,10 @@ class PermissionsTableSeeder extends Seeder
                 'name'  => 'view-feedback'
             ],
             [
+                'title' => 'Thêm phản hồi khách hàng',
+                'name'  => 'add-feedback'
+            ],
+            [
                 'title' => 'Sửa phản hồi khách hàng',
                 'name'  => 'edit-feedback'
             ],
@@ -170,8 +174,12 @@ class PermissionsTableSeeder extends Seeder
                 'name'  => 'view-orders'
             ],
             [
-                'title' => 'Cập nhật trạng thái lịch',
-                'name'  => 'update-order-status'
+                'title' => 'Thêm lịch đặt',
+                'name'  => 'add-orders'
+            ],
+            [
+                'title' => 'Cập nhật lịch đặt',
+                'name'  => 'update-orders'
             ],
             [
                 'title' => 'Xem nhân viên',
@@ -200,7 +208,27 @@ class PermissionsTableSeeder extends Seeder
             [
                 'title' => 'Phân quyền chức năng',
                 'name'  => 'set-role'
-            ]
+            ],
+            [
+                'title' => 'Thay đổi ảnh đại diện',
+                'name'  => 'change-image-profile'
+            ],
+            [
+                'title' => 'Xem danh sách đăng ký nhận tin khuyến mãi',
+                'name'  => 'view-subscribe'
+            ],
+            [
+                'title' => 'Thêm danh sách đăng ký nhận tin khuyến mãi',
+                'name'  => 'add-subscribe'
+            ],
+            [
+                'title' => 'Sửa danh sách đăng ký nhận tin khuyến mãi',
+                'name'  => 'edit-subscribe'
+            ],
+            [
+                'title' => 'Xóa danh sách đăng ký nhận tin khuyến mãi',
+                'name'  => 'remove-subscribe'
+            ],
         ];
 
         DB::table('permissions')->insert($permission);

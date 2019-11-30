@@ -15,12 +15,14 @@ class CreateWebSettingsTable extends Migration
     {
         Schema::create('web_settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('open_time', 10);
-            $table->string('close_time', 10);
+            $table->string('open_time', 50);
+            $table->string('close_time', 50);
+            $table->string('address', 200);
+            $table->string('introduction', 200);
             $table->string('facebook', 300)->nullable();
             $table->string('phone_number', 11);
             $table->string('email', 200);
-            $table->string('logo',200)->default('logo-default.png');
+            $table->string('logo',300)->default('logo-default.png');
             $table->timestamps();
         });
     }

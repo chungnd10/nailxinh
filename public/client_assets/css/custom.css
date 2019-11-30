@@ -1,0 +1,19 @@
+.fix-border-radius{
+    border-radius: 50%;
+}
+
+#timeFrame .time{
+    font-weight: 600;
+}
+
+#subscribe-form .error{
+    color: #fff !important;
+    margin-left: 15px;
+}
+.swal2-popup, .swal2-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+        "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+}
+.swal2-styled.swal2-confirm{
+    background: #ec5598 !important;
+}

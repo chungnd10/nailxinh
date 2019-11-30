@@ -10,7 +10,8 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('slides.update', $slide->id) }}" method="POST" enctype="multipart/form-data" id="addSlide">
+            <form action="{{ route('slides.update', Hashids::encode($slide->id)) }}" method="POST" enctype="multipart/form-data"
+                  id="addSlide">
                 @csrf
                 <div class="box-body">
                     <div class="row">
@@ -31,34 +32,8 @@
                                     <span class="text-danger">{{ $errors->first('images') }}</span>
                                 @endif
                             </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-6">
                             <div class="form-group">
-                                <label>Tiêu đề</label><span class="text-danger">*</span>
-                                <input type="text"
-                                       class="form-control"
-                                       value="{{ old('title', $slide->title)}}"
-                                       name="title"
-                                       placeholder="Nhập tiêu đề">
-                                @if($errors->first('title'))
-                                    <span class="text-danger">{{ $errors->first('title') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label>Mô tả</label><span class="text-danger">*</span>
-                                <textarea name="description"
-                                          cols="30"
-                                          rows="6"
-                                          class="form-control"
-                                          placeholder="Nhập mô tả"
-                                >{{ old('description', $slide->description) }}</textarea>
-                                @if($errors->first('description'))
-                                    <span class="text-danger">{{ $errors->first('description') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label>URL</label><span class="text-danger">*</span>
+                                <label>URL</label>
                                 <input type="text"
                                        class="form-control"
                                        name="url"
@@ -69,6 +44,69 @@
                                     <span class="text-danger">{{ $errors->first('url') }}</span>
                                 @endif
                             </div>
+                            <div class="form-group">
+                                <label>Trạng thái hiển thị</label><span class="text-danger">*</span><br>
+                                @foreach($display_status as $item)
+                                    <input type="radio"
+                                           name="display_status_id"
+                                           value="{{ $item->id }}"
+                                           @if($item->id == old('display_status_id', $slide->display_status_id))
+                                           checked
+                                            @endif
+                                    >&nbsp;&nbsp;
+                                    {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @endforeach
+                                <label id="display_status_id-error" class="error" for="display_status_id"></label>
+                                @if($errors->first('display_status_id'))
+                                    <span class="text-danger">{{ $errors->first('display_status_id') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Tiêu đề</label>
+                                <input type="text"
+                                       class="form-control"
+                                       value="{{ old('title', $slide->title)}}"
+                                       name="title"
+                                       placeholder="Nhập tiêu đề">
+                                @if($errors->first('title'))
+                                    <span class="text-danger">{{ $errors->first('title') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="">Vị trí hiển thị tiêu đề</label><span class="text-danger">*</span><br>
+                                <input type="radio"
+                                       name="location_display"
+                                       @if( $slide->location_display == config('contants.location_display_left'))
+                                       checked
+                                       @endif
+                                       value="{{ config('contants.location_display_left') }}"> Bên trái <br>
+                                <input type="radio"
+                                       name="location_display"
+                                       @if( $slide->location_display == config('contants.location_display_right'))
+                                       checked
+                                       @endif
+                                       value="{{ config('contants.location_display_right') }}"> Bên phải <br>
+                                <label id="location_display-error" class="error" for="location_display"></label>
+                                @if($errors->first('location_display'))
+                                    <span class="text-danger">{{ $errors->first('location_display') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả</label>
+                                <textarea name="description"
+                                          cols="30"
+                                          rows="6"
+                                          class="form-control"
+                                          placeholder="Nhập mô tả"
+                                >{{ old('description', $slide->description) }}</textarea>
+                                @if($errors->first('description'))
+                                    <span class="text-danger">{{ $errors->first('description') }}</span>
+                                @endif
+                            </div>
+
                         </div>
                         <!-- /.col -->
                     </div>
@@ -76,7 +114,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('slides.index') }}" class="btn btn-default">
+                    <a href="{{ route('slides.index') }}" class="btn btn-default" >
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về
                     </a>
@@ -106,7 +144,8 @@
             $("#addSlide").validate({
                 rules: {
                     images: {
-                        extension: "jpg|jpeg|png|gif"
+                        extension: "jpg|jpeg|png|gif",
+                        fileSize : 2097152,
                     },
                     url: {
                         url: true
@@ -115,38 +154,32 @@
                         required: true,
                     },
                     title: {
-                        minlength: 10,
-                        maxlength: 25
+                        maxlength: 120
                     },
                     description: {
-                        minlength: 10,
-                        maxlength: 130
+                        maxlength: 200
+                    },
+                    location_display: {
+                        required: true,
                     }
                 },
 
                 messages: {
                     images: {
-                        required: "Mục này không được để trống",
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF"
+                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF",
+                        fileSize: "*Kích thước ảnh không được quá 2MB "
                     },
                     url: {
                         url: "Url không đúng định dạng"
                     },
-                    display_status_id: {
-                        required: "Mục này không được để trống",
-                    },
                     title: {
-                        minlength: "Yêu cầu từ 10-25 ký tự",
-                        maxlength: "Yêu cầu từ 10-25 ký tự",
+                        maxlength: 'Không được vượt quá 120 ký tự',
                     },
                     description: {
-                        minlength: "Yêu cầu từ 10-130 ký tự",
-                        maxlength: "Yêu cầu từ 10-130 ký tự",
+                        maxlength: 'Không được vượt quá 200 ký tự',
                     }
                 }
             });
-
-
         });
     </script>
 @endsection

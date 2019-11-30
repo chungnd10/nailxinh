@@ -12,11 +12,12 @@
     font-weight: normal;
 }
 
- {
-    width: 300px;
+{
+    width: 300px
+;
 }
 
-.img-slide, .img-web_settings, .img-introduction{
+.img-slide, .img-web_settings, .img-introduction {
     width: 300px;
 }
 
@@ -88,15 +89,153 @@ input:checked + .slider:before {
 .morecontent span {
     display: none;
 }
+
 .morelink {
     display: block;
 }
+
 /* end toggle text*/
 
-div.dataTables_wrapper div.dataTables_filter input{
+div.dataTables_wrapper div.dataTables_filter input {
     width: 220px !important;
 }
 
-.dataTables_empty{
+.dataTables_empty {
     color: #dd4b39;
+}
+
+.content-header > .breadcrumb {
+    top: 10px;
+}
+
+.alert-info {
+    color: #0c5460 !important;
+    background-color: #d1ecf1 !important;
+    border-color: #bee5eb !important;
+}
+
+.alert-warning {
+    color: #856404 !important;
+    background-color: #fff3cd !important;
+    border-color: #ffeeba !important;
+}
+
+.alert-danger {
+    color: #721c24 !important;
+    background-color: #f8d7da !important;
+    border-color: #f5c6cb !important;
+}
+
+.alert-success {
+    color: #155724 !important;
+    background-color: #d4edda !important;
+    border-color: #c3e6cb !important;
+}
+
+.register-logo {
+    border-bottom: 1px solid #b2b2b2;
+    padding-bottom: 15px;
+}
+
+.panel-style {
+    padding-top: 100px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background: #3c8dbc;
+    padding: 4px 6px;
+    border: none;
+    color: #fff;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #fff;
+}
+
+.select2-container--default .select2-results__option .select2-results__option:hover {
+    background: #3c8dbc;
+    color: #fff;
+}
+
+.error-page .error-content {
+    padding-top: 20px;
+}
+
+.lead {
+    font-weight: 500;
+}
+
+@media (min-width: 768px) {
+    .lead {
+        font-size: 18px;
+    }
+}
+
+.text-success-lv2 {
+    color: #00a65a;
+}
+
+.text-warning-lv2 {
+    color: #f39c12;
+}
+
+.text-danger-lv2 {
+    color: #f56954;
+}
+
+.text-info-lv2 {
+    color: #00c0ef;
+}
+
+.text-purple-lv2 {
+    color: #605ca8;
+}
+
+.text-primary-lv2 {
+    color: #3c8dbc;
+}
+
+.text-success-lv2,
+.text-warning-lv2,
+.text-danger-lv2,
+.text-info-lv2,
+.text-purple-lv2,
+.text-primary-lv2 {
+    font-size: 18px
+}
+
+.swal2-popup {
+    font-size: 1.6rem !important;
+}
+
+@media only screen and (max-width: 480px) {
+    .swal2-container {
+        width: 100%;
+        padding: 0;
+        left: 0;
+        margin: 0;
+    }
+}
+
+.iCheck-helper{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    background: rgb(255, 255, 255);
+    border: 0px;
+    opacity: 0;
+}
+
+.icheckbox_flat-green{
+    position: relative;
+}
+
+.flat-red{
+    position: absolute;
+    opacity: 0;
 }

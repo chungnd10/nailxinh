@@ -25,29 +25,29 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'full_name' => 'required|min:5|max:40',
-            'phone_number' => [
+            'full_name'         => 'required|min:5|max:40',
+            'phone_number'      => [
                 'required',
                 Rule::unique('users')->ignore($this->id),
-                'regex:/(09|02|03|07|08|05)+([0-9]{8})$/',
+                'regex:/(09|03|07|08|05)+([0-9]{8})$/',
             ],
-            'birthday' => 'required',
-            'address' => 'required|min:5',
+            'birthday'          => 'required',
+            'address'           => 'required|min:5',
         ];
     }
 
     public function messages()
     {
         return [
-            'full_name.required' => 'Mục này không được để trống',
-            'full_name.min' => 'Yêu cầu từ 5-40 ký tự',
-            'full_name.max' => 'Yêu cầu từ 5-40 ký tự',
-            'phone_number.required' => 'Mục này không được để trống',
-            'phone_number.regex' => 'Số điện thoại sai định dạng',
-            'phone_number.unique' => 'Số điện thoại đã được sử dụng',
-            'birthday.required' => 'Mục này không được để trống',
-            'address.required' => 'Mục này không được để trống',
-            'address.min' => 'Yêu cầu tối thiểu 5 ký tự',
+            'full_name.required'        => '*Mục này không được để trống',
+            'full_name.min'             => '*Yêu cầu từ 5-40 ký tự',
+            'full_name.max'             => '*Yêu cầu từ 5-40 ký tự',
+            'phone_number.required'     => '*Mục này không được để trống',
+            'phone_number.regex'        => '*Số điện thoại sai định dạng',
+            'phone_number.unique'       => '*Số điện thoại đã được sử dụng',
+            'birthday.required'         => '*Mục này không được để trống',
+            'address.required'          => '*Mục này không được để trống',
+            'address.min'               => '*Yêu cầu tối thiểu 5 ký tự',
         ];
     }
 }

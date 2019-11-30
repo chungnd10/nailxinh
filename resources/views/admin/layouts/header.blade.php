@@ -80,10 +80,18 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="{{ route('profile', Auth::check() ? Auth::user()->id :'' ) }}" class="btn btn-default btn-flat">Thông tin</a>
+                                <a href="{{ route('profile', Auth::check() ? Hashids::encode(Auth::user()->id) :'' ) }}"
+                                   class="btn btn-default btn-flat">Thông tin</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Đăng xuất</a>
+                                <a href="{{ route('logout') }}"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                   class="btn btn-default btn-flat">Đăng xuất</a>
+                                    <form id="logout-form"
+                                          action="{{ url('/logout') }}"
+                                          method="POST" style="display: none;">
+                                            @csrf
+                                    </form>
                             </div>
                         </li>
                     </ul>

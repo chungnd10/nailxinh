@@ -15,11 +15,13 @@
                         bản</a></li>
                 <li class="" id="li_tab_2"><a href="#tab_2" data-toggle="tab" aria-expanded="false">Đặt lại mật khẩu</a>
                 </li>
-                <li class="" id="li_tab_3"><a href="#tab_3" data-toggle="tab" aria-expanded="false">Kỹ năng</a></li>
+                @if($user->role_id == config('contants.role_technician'))
+                    <li class="" id="li_tab_3"><a href="#tab_3" data-toggle="tab" aria-expanded="false">Kỹ năng</a></li>
+                @endif
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
-                    <form action="{{route('users.update', $user->id)}}"
+                    <form action="{{route('users.update',  Hashids::encode($user->id)) }}"
                           method="POST"
                           enctype="multipart/form-data"
                           id="updateUser"
@@ -28,20 +30,6 @@
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <img class="profile-user-img img-responsive img-circle"
-                                             src="upload/images/users/{{$user->avatar}}"
-                                             alt="User profile picture"
-                                             id="proImg"
-                                        >
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Ảnh đại diện</label><span class="text-danger">*</span>
-                                        <input type="file" class="form-control" name="avatar">
-                                        @if($errors->first('avatar'))
-                                            <span class="text-danger">{{ $errors->first('avatar') }}</span>
-                                        @endif
-                                    </div>
                                     <div class="form-group">
                                         <label>Họ tên</label><span class="text-danger">*</span>
                                         <input type="text"
@@ -55,7 +43,17 @@
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                         @endif
                                     </div>
-
+                                    <!-- /.form-group -->
+                                    <div class="form-group">
+                                        <label>Số điện thoại</label><span class="text-danger">*</span>
+                                        <input type="text"
+                                               class="form-control"
+                                               value="{{ old('phone_number', $user->phone_number)}}"
+                                               name="phone_number">
+                                        @if($errors->first('phone_number'))
+                                            <span class="text-danger">{{ $errors->first('phone_number') }}</span>
+                                        @endif
+                                    </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Ngày sinh</label><span class="text-danger">*</span>
@@ -82,6 +80,28 @@
                                         @endif
                                     </div>
                                     <!-- /.form-group -->
+                                    @if($user->role_id == config('contants.role_technician'))
+                                        <div class="form-group">
+                                            <label>Trạng thái hiển thị</label><span class="text-danger">*</span><br>
+                                            @foreach($display_status as $item)
+                                                <input type="radio"
+                                                       name="display_status_id"
+                                                       value="{{ $item->id }}"
+                                                       @if($item->id == old('display_status_id', $user->display_status_id))
+                                                       checked
+                                                        @endif
+                                                >&nbsp;&nbsp;
+                                                {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            @endforeach
+                                            <br>
+                                            <label id="display_status_id-error" class="error"
+                                                   for="display_status_id"></label>
+                                            @if($errors->first('display_status_id'))
+                                                <span class="text-danger">{{ $errors->first('display_status_id') }}</span>
+                                            @endif
+                                        </div>
+                                        <!-- /.form-group -->
+                                    @endif
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-md-6">
@@ -91,27 +111,21 @@
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
-                                        <label>Số điện thoại</label><span class="text-danger">*</span>
-                                        <input type="text"
-                                               class="form-control"
-                                               value="{{ old('phone_number', $user->phone_number)}}"
-                                               name="phone_number">
-                                        @if($errors->first('phone_number'))
-                                            <span class="text-danger">{{ $errors->first('phone_number') }}</span>
-                                        @endif
-                                    </div>
-                                    <!-- /.form-group -->
-                                    <div class="form-group">
                                         <label>Chi nhánh</label><span class="text-danger">*</span>
-                                        <select name="branch_id" class="form-control">
-                                            @foreach($branchs as $item)
-                                                <option value="{{ $item->id }}"
-                                                        @if($user->branch_id == $item->id)
-                                                        selected
-                                                        @endif
-                                                >{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        @if(Auth::user()->isAdmin())
+                                            <select name="branch_id" id="branch_id" class="form-control">
+                                                <option value="">Chọn chi nhánh</option>
+                                                @foreach($branchs as $item)
+                                                    <option value="{{ $item->id }}"
+                                                            @if($item->id == old('branch_id', $user->branch_id))
+                                                                selected
+                                                            @endif
+                                                    >{{ $item->name.", ".$item->address }}</option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <p>{{ $branchs }}</p>
+                                        @endif
                                         @if($errors->first('branch_id'))
                                             <span class="text-danger">{{ $errors->first('branch_id') }}</span>
                                         @endif
@@ -122,8 +136,8 @@
                                         <select name="role_id" id="" class="form-control">
                                             @foreach($roles as $item)
                                                 <option value="{{ $item->id }}"
-                                                        @if($user->role_id == $item->id)
-                                                        selected
+                                                        @if($item->id == old('role_id', $user->role_id))
+                                                            selected
                                                         @endif
                                                 >{{ $item->name }}</option>
                                             @endforeach
@@ -131,46 +145,54 @@
                                         @if($errors->first('role_id'))
                                             <span class="text-danger">{{ $errors->first('role_id') }}</span>
                                         @endif
-                                    </div>
-                                    <!-- /.form-group -->
+                                    </div><!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Giới tính</label><span class="text-danger">*</span><br>
                                         @foreach($genders as $item)
                                             <input type="radio"
                                                    name="gender_id"
                                                    value="{{ $item->id }}"
-                                                   @if($user->gender_id == $item->id)
-                                                   checked
-                                                    @endif
+                                                   @if($item->id == old('gender_id', $user->gender_id))
+                                                        checked
+                                                   @endif
                                             >&nbsp;&nbsp;
                                             @if($errors->first('gender_id'))
                                                 <span class="text-danger">{{ $errors->first('gender_id') }}</span>
                                             @endif
                                             {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         @endforeach
+                                        <br>
+                                        <label id="gender_id-error" class="error" for="gender_id"></label>
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">
-                                        <label>Trạng thái hoạt dộng</label><span class="text-danger">*</span><br>
-                                        <label class="switch">
-                                            <input type="checkbox"
+                                        <label>Trạng thái hoạt động</label><span class="text-danger">*</span><br>
+                                        @foreach($operation_status as $item)
+                                            <input type="radio"
                                                    name="operation_status_id"
-                                                   class="operation_status_id"
-                                                   data-id="{{ $user->id }}"
-                                                    {{ $user->operation_status_id == config('contants.operation_status_active') ? 'checked' : ''}}
-                                            >
-                                            <span class="slider round"></span>
-                                        </label>
+                                                   value="{{ $item->id }}"
+                                                   @if($item->id == old('operation_status_id', $user->operation_status_id))
+                                                        checked
+                                                   @endif
+                                            >&nbsp;&nbsp;
+                                            {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        @endforeach
+                                        <br>
+                                        <label id="operation_status_id-error" class="error"
+                                               for="operation_status_id"></label>
+                                        @if($errors->first('operation_status_id'))
+                                            <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
+                                        @endif
                                     </div>
-                                    <!-- /.form-group -->
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                            <!-- /.row -->
+
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <a href="{{ route('users.index') }}" class="btn btn-default">
+                            <a href="{{ route('users.index') }}"
+                               class="btn btn-default"
+                            >
                                 <i class="fa fa-arrow-circle-o-left"></i>
                                 Trở về
                             </a>
@@ -185,7 +207,7 @@
                 <div class="tab-pane" id="tab_2">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="{{route('set.password',$user->id )}}"
+                            <form action="{{route('set.password', Hashids::encode($user->id) )}}"
                                   method="post"
                                   class="form-horizontal"
                                   id="setPassword"
@@ -223,7 +245,9 @@
                                 </div>
                                 <!-- /.box-body -->
                                 <div class="box-footer">
-                                    <a href="{{ route('users.index') }}" class="btn btn-default">
+                                    <a href="{{ route('users.index') }}"
+                                       class="btn btn-default"
+                                    >
                                         <i class="fa fa-arrow-circle-o-left"></i>
                                         Trở về
                                     </a>
@@ -237,53 +261,71 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="tab_3">
-                    <form action="{{route('set.services',$user->id )}}"
-                          method="post"
-                          class="form-horizontal"
-                    >
-                        @csrf
-                        <div class="box-body">
-                            @foreach($type_services as $type_service)
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>
-                                            {{ $type_service->name }}
-                                        </label>
-                                        @foreach($type_service->showServices($type_service->id) as $service)
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"
-                                                           @foreach($services_of_user as $services_of_users)
-                                                                @if($services_of_users->service_id == $service->id)
-                                                                    checked
-                                                                @endif
-                                                           @endforeach
-                                                           name="services_id[]"
-                                                           value="{{ $service->id }}"
-                                                    >
-                                                    {{ $service->name }}
-                                                </label>
+                @if($user->role_id == config('contants.role_technician'))
+                    <div class="tab-pane" id="tab_3">
+                        <form action="{{route('set.services', Hashids::encode($user->id) )}}"
+                              method="post"
+                              class="form-horizontal"
+                        >
+                            @csrf
+                            <div class="box-body">
+                                @foreach($type_services as $type_service)
+                                    <div class="col-md-3">
+                                        <div class="list-group">
+                                            <div class="list-group-item active">
+                                                <input type="checkbox"
+                                                       name="type_services_id[]"
+                                                       value="{{ $type_service->id }}"
+                                                       @foreach($type_services_of_user as $item)
+                                                       @if($item->type_of_service_id == $type_service->id)
+                                                       checked
+                                                        @endif
+                                                        @endforeach
+                                                >
+                                                <label>{{ $type_service->name }}</label>
                                             </div>
-                                        @endforeach
+                                            @foreach($type_service->showServices($type_service->id) as $service)
+                                                <div class="checkbox list-group-item">
+                                                    <label>
+                                                        <input type="checkbox"
+                                                               @foreach($services_of_user as $services_of_users)
+                                                               @if($services_of_users->service_id == $service->id)
+                                                               checked
+                                                               @endif
+                                                               @endforeach
+                                                               name="services_id[]"
+                                                               value="{{ $service->id }}"
+                                                        >
+                                                        {{ $service->name }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                            @if($type_service->showServices($type_service->id)->isEmpty())
+                                                <div class="list-group-item">
+                                                    <span class="text-danger">Không có dịch vụ nào</span>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <a href="{{ route('users.index') }}" class="btn btn-default">
-                                <i class="fa fa-arrow-circle-o-left"></i>
-                                Trở về
-                            </a>
-                            <button type="submit" class="btn btn-success">
-                                <i class="fa fa-save"></i>
-                                Lưu
-                            </button>
-                        </div>
-                        <!-- /.box-footer -->
-                    </form>
-                </div>
+                                @endforeach
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <a href="{{ route('users.index') }}"
+                                   class="btn btn-default"
+                                >
+                                    <i class="fa fa-arrow-circle-o-left"></i>
+                                    Trở về
+                                </a>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-save"></i>
+                                    Lưu
+                                </button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </form>
+                    </div>
+                @endif
             </div>
             <!-- /.tab-content -->
         </div>
@@ -292,15 +334,6 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            var inputImage = document.querySelector(`[name="avatar"]`);
-            inputImage.onchange = function () {
-                var file = this.files[0];
-                if (file == undefined) {
-                    document.querySelector('#proImg').src = 'upload/images/users/{{ $user->avatar }}';
-                } else {
-                    getBase64(file, '#proImg');
-                }
-            };
 
             //Date picker
             $('#birthday').datepicker({
@@ -311,13 +344,10 @@
             //validate update user
             $("#updateUser").validate({
                 rules: {
-                    avatar: {
-                        extension: "jpg|jpeg|png"
-                    },
                     full_name: {
                         required: true,
-                        minlength: 5,
-                        maxlength: 40
+                        maxlength: 100,
+                        onlyVietnamese: true
                     },
                     phone_number: {
                         required: true,
@@ -326,34 +356,22 @@
                     birthday: "required",
                     address: {
                         required: true,
-                        minlength: 5,
+                        maxlength: 200
                     },
                     branch_id: "required",
                     role_id: "required",
                     gender_id: "required",
+                    operation_status_id: "required",
                 },
 
                 messages: {
-                    avatar: {
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
-                    },
                     full_name: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 5-40 ký tự",
-                        maxlength: "Yêu cầu từ 5-40 ký tự",
-                        alpha: "Mục này không được để trống"
+                        maxlength: "*Không được vượt quá 100 ký tự",
                     },
-                    phone_number: {
-                        required: "Mục này không được để trống",
-                    },
-                    birthday: "Mục này không được để trống",
+                    phone_number: {},
                     address: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu tối thiểu 5 ký tự",
-                    },
-                    branch_id: "Mục này không được để trống",
-                    role_id: "Mục này không được để trống",
-                    gender_id: "Mục này không được để trống",
+                        maxlength: "*Không được vượt quá 200 ký tự",
+                    }
                 }
             });
 
@@ -371,7 +389,6 @@
                 },
                 messages: {
                     password: {
-                        required: "Mục này không được để trống",
                         minlength: "Yêu cầu từ 6-40 ký tự",
                         maxlength: "Yêu cầu từ 6-40 ký tự",
                     },
@@ -382,23 +399,6 @@
             });
             //end validate
 
-            // change status
-            $('.operation_status_id').change(function () {
-                var operation_status_id = $(this).prop('checked') === true ? "{{ config('contants.operation_status_active') }}" : "{{ config('contants.operation_status_inactive') }}";
-                var id = $(this).data('id');
-
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: "{{ route('users.change-status') }}",
-                    data: {'operation_status_id': operation_status_id, 'id': id},
-                    success: function (data) {
-                        console.log(data.success)
-                    }
-                });
-            })
-            //end change status
-
             //active table
             if (window.location.hash === '#tab_2') {
                 $('#li_tab_1').removeClass('active');//remove active class
@@ -408,21 +408,19 @@
                 $('#li_tab_3').removeClass('active');
                 $('#tab_3').removeClass('active');
             }
-            //active table
-            if (window.location.hash === '#tab_3') {
-                $('#li_tab_1').removeClass('active');//remove active class
-                $('#tab_1').removeClass('active');
-                $('#li_tab_2').removeClass('active');
-                $('#tab_2').removeClass('active');
-                $('#li_tab_3').addClass('active');
-                $('#tab_3').addClass('active');
-            }
 
-            //Flat red color scheme for iCheck
-            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-                checkboxClass: 'icheckbox_flat-green',
-                radioClass: 'iradio_flat-green'
-            })
+            @if($user->role_id == config('contants.role_technician'))
+                //active table
+                if (window.location.hash === '#tab_3') {
+                    $('#li_tab_1').removeClass('active');//remove active class
+                    $('#tab_1').removeClass('active');
+                    $('#li_tab_2').removeClass('active');
+                    $('#tab_2').removeClass('active');
+                    $('#li_tab_3').addClass('active');
+                    $('#tab_3').addClass('active');
+                }
+            @endif
+
         });
     </script>
 @endsection

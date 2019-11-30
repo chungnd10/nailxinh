@@ -10,24 +10,13 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data" id="addUser">
+            <form action="{{ route('users.store') }}"
+                  method="POST"
+                  id="addUser">
                 @csrf
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <img class="profile-user-img img-responsive img-circle"
-                                     src="upload/images/users/avatar-default.png"
-                                     id="proImg"
-                                     alt="User profile picture">
-                            </div>
-                            <div class="form-group">
-                                <label>Ảnh đại diện</label><span class="text-danger">*</span>
-                                <input type="file" class="form-control" name="avatar" id="avatar">
-                                @if($errors->first('avatar'))
-                                    <span class="text-danger">{{ $errors->first('avatar') }}</span>
-                                @endif
-                            </div>
                             <div class="form-group">
                                 <label>Họ tên</label><span class="text-danger">*</span>
                                 <input type="text" class="form-control" value="{{ old('full_name')}}"
@@ -69,20 +58,6 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Mật khẩu</label><span class="text-danger">*</span>
-                                <input type="password" class="form-control" name="password" id="password">
-                                @if($errors->first('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label>Nhập lại mật khẩu</label><span class="text-danger">*</span>
-                                <input type="password" class="form-control" name="cf_password">
-                                @if($errors->first('cf_password'))
-                                    <span class="text-danger">{{ $errors->first('cf_password') }}</span>
-                                @endif
-                            </div>
                             <!-- /.form-group -->
                             <div class="form-group">
                                 <label>Email</label><span class="text-danger">*</span>
@@ -95,16 +70,20 @@
                             <!-- /.form-group -->
                             <div class="form-group">
                                 <label>Chi nhánh</label><span class="text-danger">*</span>
-                                <select name="branch_id" id="branch_id" class="form-control">
-                                    <option value="">Chọn chi nhánh</option>
-                                    @foreach($branchs as $item)
-                                        <option value="{{ $item->id }}"
-                                                @if($item->id == old('branch_id'))
-                                                selected
-                                                @endif
-                                        >{{ $item->name }}</option>
-                                    @endforeach
-                                </select>
+                                @if(Auth::user()->isAdmin())
+                                    <select name="branch_id" id="branch_id" class="form-control">
+                                        <option value="">Chọn chi nhánh</option>
+                                        @foreach($branchs as $item)
+                                            <option value="{{ $item->id }}"
+                                                    @if($item->id == old('branch_id'))
+                                                    selected
+                                                    @endif
+                                            >{{ $item->name.", ".$item->address }}</option>
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <p>{{ $branchs }}</p>
+                                @endif
                                 @if($errors->first('branch_id'))
                                     <span class="text-danger">{{ $errors->first('branch_id') }}</span>
                                 @endif
@@ -121,7 +100,7 @@
                                                 @endif
                                         >{{ $item->name }}</option>
                                     @endforeach
-                                </select>
+                                </select><br>
                                 @if($errors->first('role_id'))
                                     <span class="text-danger">{{ $errors->first('role_id') }}</span>
                                 @endif
@@ -139,6 +118,8 @@
                                     >&nbsp;&nbsp;
                                     {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 @endforeach
+                                <br>
+                                <label id="gender_id-error" class="error" for="gender_id"></label>
                                 @if($errors->first('gender_id'))
                                     <span class="text-danger">{{ $errors->first('gender_id') }}</span>
                                 @endif
@@ -156,6 +137,8 @@
                                     >&nbsp;&nbsp;
                                     {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 @endforeach
+                                <br>
+                                <label id="operation_status_id-error" class="error" for="operation_status_id"></label>
                                 @if($errors->first('operation_status_id'))
                                     <span class="text-danger">{{ $errors->first('operation_status_id') }}</span>
                                 @endif
@@ -184,27 +167,14 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function () {
-            var inputImage = document.querySelector(`[name="avatar"]`);
-            inputImage.onchange = function () {
-                var file = this.files[0];
-                if (file == undefined) {
-                    document.querySelector('#proImg').src = 'upload/images/users/avatar-default.png';
-                } else {
-                    getBase64(file, '#proImg');
-                }
-            }
 
             //validate
             $("#addUser").validate({
                 rules: {
-                    avatar: {
-                        required: true,
-                        extension: "jpg|jpeg|png"
-                    },
                     full_name: {
                         required: true,
-                        minlength: 5,
-                        maxlength: 40
+                        maxlength: 100,
+                        onlyVietnamese: true
                     },
                     phone_number: {
                         required: true,
@@ -213,20 +183,12 @@
                     birthday: "required",
                     address: {
                         required: true,
-                        minlength: 5,
-                    },
-                    password: {
-                        required: true,
-                        minlength: 6,
-                        maxlength: 40,
-                    },
-                    cf_password: {
-                        required: true,
-                        equalTo:password
+                        maxlength: 200
                     },
                     email: {
                         required: true,
-                        email: true
+                        email: true,
+                        maxlength: 200
                     },
                     branch_id: "required",
                     role_id: "required",
@@ -235,45 +197,21 @@
                 },
 
                 messages: {
-                    avatar: {
-                        required: "Mục này không được để trống",
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG"
-                    },
                     full_name: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 5-40 ký tự",
-                        maxlength: "Yêu cầu từ 5-40 ký tự",
-                        alpha: "Mục này không được để trống"
+                        maxlength: "*Không được vượt quá 100 ký tự",
                     },
                     phone_number: {
-                        required: "Mục này không được để trống",
                     },
-                    birthday: "Mục này không được để trống",
+                    birthday: "*Mục này không được để trống",
                     address: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu tối thiểu 5 ký tự",
-                    },
-                    password: {
-                        required: "Mục này không được để trống",
-                        minlength: "Yêu cầu từ 6-40 ký tự",
-                        maxlength: "Yêu cầu từ 6-40 ký tự",
-                    },
-                    cf_password: {
-                        required: "Mục này không được để trống",
-                        equalTo: "Nhập lại mật khẩu không đúng"
+                        maxlength: "*Không được vượt quá 200 ký tự",
                     },
                     email: {
-                        required: "Mục này không được để trống",
-                        email: "Email không đúng định dạng"
+                        email: "*Email không đúng định dạng",
+                        maxlength: "*Không được vượt quá 200 ký tự",
                     },
-                    branch_id: "Mục này không được để trống",
-                    role_id: "Mục này không được để trống",
-                    gender_id: "Mục này không được để trống",
-                    operation_status_id: "Mục này không được để trống",
                 }
             });
-
-
         });
     </script>
 @endsection

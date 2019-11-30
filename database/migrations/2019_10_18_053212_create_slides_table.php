@@ -19,8 +19,10 @@ class CreateSlidesTable extends Migration
             $table->string('description', 300)->nullable();
             $table->string('images', 300)->default('slide-default.png');
             $table->string('url', 300)->nullable();
+            $table->integer('location_display');
 
             $table->unsignedInteger('display_status_id');
+
             $table->foreign('display_status_id')
                 ->references('id')
                 ->on('display_statuses')

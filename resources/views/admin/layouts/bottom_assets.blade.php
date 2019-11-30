@@ -14,6 +14,8 @@
 <script src="admin_assets/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- bootstrap datepicker -->
 <script src="admin_assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- bootstrap datepimepicker -->
+<script src="admin_assets/bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 <!-- AdminLTE App -->
 <script src="admin_assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -23,8 +25,15 @@
 <!-- ChartJS -->
 <script src="admin_assets/bower_components/chart.js/Chart.min.js"></script>
 <script src="admin_assets/bower_components/chart.js/Chart.bundle.min.js"></script>
-
+{{--cropper js--}}
+<script src="admin_assets/plugins/cropperjs/cropper.min.js"></script>
+{{-- jquery cropper js--}}
+<script src="admin_assets/plugins/jquery-cropperjs/jquery-cropper.min.js"></script>
+<!-- Select2 -->
+<script src="admin_assets/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- iCheck 1.0.1 -->
 <script src="admin_assets/plugins/iCheck/icheck.min.js"></script>
+<!-- CK Editor -->
+<script src="admin_assets/bower_components/ckeditor-4.13/ckeditor.js"></script>
 {{--common js--}}
 <script src="admin_assets/js/common.js"></script>

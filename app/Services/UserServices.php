@@ -17,20 +17,27 @@ class UserServices
     //lấy tất cả user
     public function all()
     {
-        $user = User::all();
+        $user = User::orderby('id', 'desc')->get();
+        return $user;
+    }
+
+    public function find($id)
+    {
+        $user = User::findOrFail($id);
         return $user;
     }
 
     // lấy tất cả user trừ admin
-    public function allAndNotAdmin()
+    public function allForAdmin()
     {
         $role_admin = config('contants.role_admin');
-        $user = User::where('role_id','<>', $role_admin)->get();
+        $user = User::where('role_id','<>', $role_admin)->orderby('id', 'desc')->get();
         return $user;
     }
 
+
     //lấy user theo chi nhánh
-    public function getUserWithBranch($branch_id)
+    public function allForManager($branch_id)
     {
         $role_admin = config('contants.role_admin');
 
@@ -40,4 +47,15 @@ class UserServices
         return $user;
     }
 
+    //lấy tất cả kỹ thuật viên có trạng thái là hiển thị
+    public function getTechnician()
+    {
+        $status = config('contants.display_status_display');
+        $role_technician = config('contants.role_technician');
+        $users = User::where('role_id', $role_technician)
+            ->where('display_status_id', $status)
+            ->orderby('id', 'desc')
+            ->get();
+        return $users;
+    }
 }

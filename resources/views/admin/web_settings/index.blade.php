@@ -56,6 +56,18 @@
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
+                            <div class="form-group">
+                                <label>Địa chỉ</label><span class="text-danger">*</span>
+                                <input type="text"
+                                       class="form-control"
+                                       value="{{ old('address', $item->address) }}"
+                                       name="address"
+                                       placeholder="VD: example@gmail.com"
+                                       id="address">
+                                @if($errors->first('address'))
+                                    <span class="text-danger">{{ $errors->first('address') }}</span>
+                                @endif
+                            </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-md-6">
@@ -84,13 +96,23 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label>Đường dẫn trang facebook</label>
+                                <label>Đường dẫn trang facebook</label><span class="text-danger">*</span>
                                 <textarea name="facebook"
                                           cols="30"
                                           rows="7"
-                                          class="form-control">{{ $item->facebook }}</textarea>
+                                          class="form-control">{{ old('facebook', $item->facebook) }}</textarea>
                                 @if($errors->first('facebook'))
                                     <span class="text-danger">{{ $errors->first('facebook') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label>Giới thiệu ngắn</label><span class="text-danger">*</span>
+                                <textarea name="introduction"
+                                          cols="30"
+                                          rows="7"
+                                          class="form-control">{{ old('introduction', $item->introduction) }}</textarea>
+                                @if($errors->first('introduction'))
+                                    <span class="text-danger">{{ $errors->first('introduction') }}</span>
                                 @endif
                             </div>
                         </div>
@@ -130,44 +152,69 @@
             $("#web_settings").validate({
                 rules: {
                     avatar: {
-                        extension: "jpg|jpeg|png|gif"
+                        extension: "jpg|jpeg|png|gif",
+                        fileSize : 2097152,
                     },
                     phone_number: {
                         required: true,
-                        phoneNumberVietNam: true
+                        phoneNumberVietNam: true,
+                        maxlength: 11
                     },
                     email: {
                         required: true,
-                        emailGood: true
+                        emailGood: true,
+                        maxlength: 200
                     },
                     open_time: {
                         required: true,
+                        maxlength: 50
                     },
                     close_time: {
                         required: true,
-                    }
+                        maxlength: 50
+                    },
+                    address: {
+                        required: true,
+                        maxlength: 200
+                    },
+                    facebook: {
+                        required: true,
+                        maxlength: 300
+                    },
+                    introduction: {
+                        required: true,
+                        maxlength: 200
+                    },
                 },
 
                 messages: {
                     avatar: {
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF"
+                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF",
+                        fileSize: "*Kích thước ảnh không được quá 2MB "
                     },
                     phone_number: {
-                        required: "Mục này không được để trống",
+                        maxlength: "Không được vượt quá 11 ký tự"
                     },
                     email: {
-                        required: "Mục này không được để trống",
+                        maxlength: "Không được vượt quá 200 ký tự"
                     },
                     open_time: {
-                        required: "Mục này không được để trống",
+                        maxlength: "Không được vượt quá 50 ký tự"
                     },
                     close_time: {
-                        required: "Mục này không được để trống",
-                    }
+                        maxlength: "Không được vượt quá 50 ký tự"
+                    },
+                    address: {
+                        maxlength: "Không được vượt quá 200 ký tự"
+                    },
+                    facebook: {
+                        maxlength: "Không được vượt quá 300 ký tự"
+                    },
+                    introduction: {
+                        maxlength: "Không được vượt quá 200 ký tự"
+                    },
                 }
             });
-
-
         });
     </script>
 @endsection
