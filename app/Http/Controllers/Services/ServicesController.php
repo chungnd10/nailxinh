@@ -2,29 +2,13 @@
 
 namespace App\Http\Controllers\Services;
 
-use App\Services\ServiceServices;
-use App\Services\TypeServiceServices;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Service;
-use App\TypeOfService;
 use App\Http\Requests\AddServiceRequest;
 use Illuminate\Support\Str;
 
 class ServicesController extends Controller
 {
-    protected $service_services;
-    protected $type_services;
-
-    public function __construct(
-        ServiceServices $service_services,
-        TypeServiceServices $type_services
-    )
-    {
-        $this->service_services = $service_services;
-        $this->type_services = $type_services;
-    }
-
     public function index()
     {
         $services = $this->service_services->all();
@@ -55,9 +39,8 @@ class ServicesController extends Controller
 
         $service->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('services.index')->with($notification);
+        return redirect()->route('services.index')
+            ->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -90,9 +73,8 @@ class ServicesController extends Controller
 
         $service->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('services.index')->with($notification);
+        return redirect()->route('services.index')
+            ->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -106,8 +88,7 @@ class ServicesController extends Controller
         }
         $service->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('services.index')->with($notification);
+        return redirect()->route('services.index')
+            ->with('toast_success', 'Xoá thành công !');
     }
 }

@@ -2,7 +2,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <base href="{{url('')}}">
+
 <title>Nail Xinh</title>
+<link rel="shortcut icon" href="client_assets/img/favicon.png" type="image/x-icon"/>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.7 -->
@@ -24,6 +26,8 @@
 <link rel="stylesheet" href="admin_assets/plugins/iCheck/all.css">
 {{--cropper js--}}
 <link rel="stylesheet" href="admin_assets/plugins/cropperjs/cropper.min.css">
+<!-- Select2 -->
+<link rel="stylesheet" href="admin_assets/bower_components/select2/dist/css/select2.min.css">
 <!-- bootstrap datepicker -->
 <link rel="stylesheet" href="admin_assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 <!-- Google Font -->

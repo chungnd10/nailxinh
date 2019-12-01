@@ -106,11 +106,11 @@
                     </a>
                     <ul class="treeview-menu">
                         @can('view-bills')
-                            <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                            <li><a href="{{ route('bills.index') }}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                         @endcan
-                        @can('add-bills')
-                            <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
-                        @endcan
+{{--                        @can('add-bills')--}}
+{{--                            <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>--}}
+{{--                        @endcan--}}
                     </ul>
                 </li>
             @endcan
@@ -124,10 +124,10 @@
                     </a>
                     <ul class="treeview-menu">
                         @can('view-orders')
-                            <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Danh sách</a></li>
+                            <li><a href="{{ route('orders.index') }}"><i class="fa fa-angle-right"></i>Danh sách</a></li>
                         @endcan
                         @can('add-orders')
-                            <li><a href="javascript:void(0);"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
+                            <li><a href="{{ route('orders.create') }}"><i class="fa fa-angle-right"></i>Thêm mới</a></li>
                         @endcan
                     </ul>
                 </li>
@@ -203,7 +203,7 @@
             @can('view-feedback')
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-envelope"></i> <span>Phản hồi</span>
+                        <i class="fa fa-comments"></i> <span>Phản hồi</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -226,6 +226,51 @@
                     </ul>
                 </li>
             @endcan
+            @can('view-subscribe')
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-envelope"></i> <span>Đăng ký nhận tin </span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @can('view-subscribe')
+                            <li>
+                                <a href="{{ route('subscribe.index') }}">
+                                    <i class="fa fa-angle-right"></i>Danh sách
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
+            @can('photo-library')
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-image"></i> <span>Thư viện ảnh</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @can('view-photo-library')
+                            <li>
+                                <a href="{{ route('photo-library.index') }}">
+                                    <i class="fa fa-angle-right"></i>Danh sách
+                                </a>
+                            </li>
+                        @endcan
+                        @can('add-photo-library')
+                            <li>
+                                <a href="{{ route('photo-library.create') }}">
+                                    <i class="fa fa-angle-right"></i>Thêm mới
+                                </a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcan
             @can('view-web-settings')
                 <li class="treeview">
                     <a href="#">
@@ -237,7 +282,7 @@
                     <ul class="treeview-menu">
                         @can('edit-web-settings')
                             <li>
-                                <a href="{{ route('web-settings.index', 1) }}">
+                                <a href="{{ route('web-settings.index') }}">
                                     <i class="fa fa-angle-right"></i>Thông tin
                                 </a>
                             </li>
@@ -251,7 +296,7 @@
                         @endcan
                         @can('edit-introductions-page')
                             <li>
-                                <a href="{{ route('introductions.index', 1) }}">
+                                <a href="{{ route('introductions.index') }}">
                                     <i class="fa fa-angle-right"></i>Trang giới thiệu
                                 </a>
                             </li>

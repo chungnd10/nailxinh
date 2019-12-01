@@ -44,10 +44,11 @@
                                     <td>{{ $item->countUserWithBranch($item->id) }}</td>
                                     <td>{{ $item->city->name}}</td>
                                     <td>
-                                        <a href="{{ route('branch.show', $item->id) }}" class="btn btn-xs btn-warning">
+                                        <a href="{{ route('branch.show', Hashids::encode($item->id) ) }}"
+                                           class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="{{ route('branch.destroy', $item->id) }}"
+                                        <a href="{{ route('branch.destroy', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                             <i class="fa fa-trash"></i>

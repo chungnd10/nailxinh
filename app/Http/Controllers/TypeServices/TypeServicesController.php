@@ -4,21 +4,11 @@ namespace App\Http\Controllers\TypeServices;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddTypeServiceRequest;
-use App\Services\TypeServiceServices;
 use App\TypeOfService;
 use Illuminate\Support\Str;
 
 class TypeServicesController extends Controller
 {
-    protected $type_services;
-
-    public function __construct(
-        TypeServiceServices $type_services
-    )
-    {
-        $this->type_services = $type_services;
-    }
-
     public function index()
     {
         $type_services = $this->type_services->all();
@@ -35,6 +25,7 @@ class TypeServicesController extends Controller
     {
         $type_of_service = new TypeOfService();
 
+
         if ($request->hasFile('image'))
         {
             $file = $request->file('image');
@@ -46,10 +37,7 @@ class TypeServicesController extends Controller
         $type_of_service->slug = Str::slug($request->name);
 
         $type_of_service->fill($request->all())->save();
-
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('type-services.index')->with($notification);
+        return redirect()->route('type-services.index')->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -77,10 +65,7 @@ class TypeServicesController extends Controller
         }
 
         $type_of_service->fill($request->all())->save();
-
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('type-services.index')->with($notification);
+        return redirect()->route('type-services.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -94,10 +79,7 @@ class TypeServicesController extends Controller
         }
 
         $type_of_service->delete();
-
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('type-services.index')->with($notification);
+        return redirect()->route('type-services.index')->with('toast_success', 'Xoá thành công !');
     }
 
 }

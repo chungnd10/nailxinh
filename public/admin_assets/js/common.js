@@ -60,3 +60,4 @@ function getBase64(file, selector) {
 function confirmmBack() {
     return confirm('Mọi thay đổi sẽ không được lưu!');
 }
+

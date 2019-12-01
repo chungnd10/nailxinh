@@ -91,9 +91,9 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('process-type-services.index') }}"
+                    <a href="{{ url()->previous() }}"
                        class="btn btn-default"
-                       onclick="return confirmmBack()">
+                       >
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về
                     </a>
@@ -164,7 +164,7 @@
                         $("#result").html('');
                         if (data.length == 0) {
                             $(".result-process").append(
-                                "<span class='text-danger'>*Dịch vụ này chưa có quy trình nào!</span>"
+                                "<span class='text-warning'>*Dịch vụ này chưa có quy trình nào!</span>"
                             );
                         } else {
                             $(".result-process").append(

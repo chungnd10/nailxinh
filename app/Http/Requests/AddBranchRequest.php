@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Vinkla\Hashids\Facades\Hashids;
 
 class AddBranchRequest extends FormRequest
 {
@@ -24,7 +25,6 @@ class AddBranchRequest extends FormRequest
      */
     public function rules()
     {
-        //trường hợp sửa
         $validate = [
             'name'              => [
                 'required',
@@ -41,7 +41,6 @@ class AddBranchRequest extends FormRequest
             'address'           => [
                 'required',
                 'max:200',
-                Rule::unique('branches')->ignore($this->id),
             ]
         ];
 

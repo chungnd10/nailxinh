@@ -37,7 +37,8 @@ class WebSettingRequest extends FormRequest
             'open_time'         => 'required|max:50',
             'close_time'        => 'required|max:50',
             'avatar'            => [
-                'mimes:jpg,jpeg,png,gif'
+                'mimes:jpg,jpeg,png,gif',
+                'max:2048'
             ],
             'address'           => 'required|max:200',
             'facebook'          => 'required|max:300',
@@ -54,13 +55,14 @@ class WebSettingRequest extends FormRequest
             'phone_number.unique'       => '*Số điện thoại đã được sử dụng',
             'phone_number.max'          => '*Không được vượt quá 11 ký tự',
             'email.required'            => '*Mục này không được để trống',
-            'email.regex'               => '*Email sai định dạng',
+            'email.regex'               => '*Email không đúng định dạng',
             'email.max'                 => '*Không được vượt quá 200 ký tự',
             'open_time.required'        => '*Mục này không được để trống',
             'open_time.max'             => '*Không được vượt quá 50 ký tự',
             'close_time.required'       => '*Mục này không được để trống',
             'close_time.max'            => '*Không được vượt quá 50 ký tự',
             'avatar.mimes'              => '*Chỉ chấp nhận JPG, JPEG, PNG, GIF',
+            'avatar.max'                => '*Kích thước ảnh không được vượt quá 2MB',
             'facebook.required'         => '*Mục này không được để trống',
             'facebook.max'              => '*Không được vượt quá 300 ký tự',
             'address.required'          => '*Mục này không được để trống',

@@ -72,7 +72,7 @@ class CitiesTableSeeder extends Seeder
             ['name' => 'Tiền Giang'],
             ['name' => 'Trà Vinh'],
             ['name' => 'Tuyên Quang'],
-            ['name' => 'TP Hồ Chí Minh'],
+            ['name' => 'TP HCM'],
             ['name' => 'Vĩnh Long'],
             ['name' => 'Vĩnh Phúc'],
             ['name' => 'Yên Bái']

@@ -3,23 +3,12 @@
 namespace App\Http\Controllers\ProcessTypeServices;
 
 use App\Http\Requests\AddProcessRequest;
-use App\Services\ProcessOfServiceServices;
-use App\Services\ServiceServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProcessOfService;
 
 class ProcessTypeServicesController extends Controller
 {
-    protected $process_of_services;
-    protected $services;
-
-    public function __construct(ProcessOfServiceServices $process_of_services, ServiceServices $services)
-    {
-        $this->process_of_services = $process_of_services;
-        $this->services = $services;
-    }
-
     public function index()
     {
         $processTypeServices = $this->process_of_services->all();
@@ -29,7 +18,7 @@ class ProcessTypeServicesController extends Controller
 
     public function create()
     {
-        $services = $this->services->all();
+        $services = $this->service_services->all();
 
         return view('admin.process_type_services.create', compact('services'));
     }
@@ -40,16 +29,15 @@ class ProcessTypeServicesController extends Controller
 
         $process->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('process-type-services.index')->with($notification);
+        return redirect()->route('process-type-services.index')
+            ->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
     {
         $process = $this->process_of_services->find($id);
 
-        $services = $this->services->all();
+        $services = $this->service_services->all();
 
         return view('admin.process_type_services.show', compact('process', 'services'));
     }
@@ -60,9 +48,8 @@ class ProcessTypeServicesController extends Controller
 
         $process->fill($request->all())->save();
 
-        $notify = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('process-type-services.index')->with($notify);
+        return redirect()->route('process-type-services.index')
+            ->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -71,18 +58,20 @@ class ProcessTypeServicesController extends Controller
 
         $process->delete();
 
-        $notify = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('process-type-services.index')->with($notify);
+        return redirect()->route('process-type-services.index')
+            ->with('toast_success', 'Xoá thành công !');
     }
 
-    //get process with type services
+    /*
+     *  Get process with type services
+     *
+     * @return void
+     */
     public function getProcessWithTypeServices(Request $request)
     {
         if ($request->ajax()) {
             $process = $this->process_of_services->getProcessWithType($request->service_id);
             return response()->json($process);
         }
-
     }
 }

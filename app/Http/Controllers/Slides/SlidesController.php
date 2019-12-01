@@ -2,27 +2,13 @@
 
 namespace App\Http\Controllers\Slides;
 
-use App\DisplayStatus;
 use App\Http\Requests\AddSlideRequest;
-use App\Services\DisplayStatusServices;
-use App\Services\SlideServices;
 use App\Slides;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SlidesController extends Controller
 {
-    protected $slide_services;
-    protected $display_status_services;
-
-    public function  __construct(
-        SlideServices $slide_services,
-        DisplayStatusServices $display_status_services
-    )
-    {
-        $this->slide_services = $slide_services;
-        $this->display_status_services = $display_status_services;
-    }
 
     public function index()
     {
@@ -52,9 +38,7 @@ class SlidesController extends Controller
 
         $slide->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('slides.index')->with($notification);
+        return redirect()->route('slides.index')->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
@@ -86,9 +70,7 @@ class SlidesController extends Controller
 
         $slide->fill($request->all())->save();
 
-        $notification = notification('success', 'Sửa thành công !');
-
-        return redirect()->route('slides.index')->with($notification);
+        return redirect()->route('slides.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -103,15 +85,15 @@ class SlidesController extends Controller
 
         $slide->delete();
 
-        $notification = notification('success', 'Xóa thành công !');
-
-        return redirect()->route('slides.index')->with($notification);
+        return redirect()->route('slides.index')->with('toast_success', 'Xoá thành công !');
     }
 
     //changeStatus AJAX
     public function changeStatus(Request $request)
     {
-        $slide = $this->slide_services->find($request->id);
+        $id = head(\Hashids::decode($request->id));
+
+        $slide = $this->slide_services->find($id);
 
         $slide->display_status_id = $request->display_status_id;
 

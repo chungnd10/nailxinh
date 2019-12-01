@@ -2,19 +2,10 @@
 
 namespace App\Http\Controllers\AccumulatePoints;
 
-use App\AccumulatePoints;
-use App\Services\AccumulatePointServices;
 use App\Http\Controllers\Controller;
 
 class AccumulatePointsController extends Controller
 {
-    protected $accumulate_points_services;
-
-    public function __construct( AccumulatePointServices $accumulate_points_services)
-    {
-        $this->accumulate_points_services = $accumulate_points_services;
-    }
-
     public function index()
     {
         $points = $this->accumulate_points_services->all();
@@ -28,8 +19,7 @@ class AccumulatePointsController extends Controller
 
         $point->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('accumulate-points.index')->with($notification);
+        return redirect()->route('accumulate-points.index')
+            ->with('toast_success', 'Xoá thành công !');
     }
 }

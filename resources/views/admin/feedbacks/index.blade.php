@@ -58,11 +58,11 @@
                                         </label>
                                     </td>
                                     <td>
-                                        <a href="{{ route('feedbacks.show', $item->id) }}"
+                                        <a href="{{ route('feedbacks.show', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="{{ route('feedbacks.destroy', $item->id) }}"
+                                        <a href="{{ route('feedbacks.destroy', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                             <i class="fa fa-trash"></i>

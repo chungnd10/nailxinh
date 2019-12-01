@@ -1,31 +1,25 @@
 
 ## About NailXinh
 
-// cai dat composer
 1: composer install
 
+2: tạo database
 
-2:tao database
+3: tạo file env
 
-3:tao file env
-
-// tao app key
 4: php artisan key:generate
 
-5:cau hinh database
+5:cấu hình database trong file env
 
-//run migrate
-6: php artisan migrate
+6: php artisan migrate --seed
 
-//run seeder
-7: php artisan db:seed
-
-// run project
-8: php artisan serve
+7: php artisan serve
 
 cấu hình thêm file env
+
 APP_NAME=NailXinh
 APP_URL=http://localhost:8000
+APP_DEBUG=false
 
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.gmail.com
@@ -33,3 +27,7 @@ MAIL_PORT=587
 MAIL_USERNAME=nailxinh1@gmail.com
 MAIL_PASSWORD=Matkhau1
 MAIL_ENCRYPTION=tls
+
+SWEET_ALERT_MIDDLEWARE_TOAST_POSITION='top'
+SWEET_ALERT_MIDDLEWARE_TOAST_CLOSE_BUTTON=true
+SWEET_ALERT_MIDDLEWARE_ALERT_AUTO_CLOSE=8000

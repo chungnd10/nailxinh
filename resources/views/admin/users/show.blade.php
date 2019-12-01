@@ -21,7 +21,7 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
-                    <form action="{{route('users.update', $user->id)}}"
+                    <form action="{{route('users.update',  Hashids::encode($user->id)) }}"
                           method="POST"
                           enctype="multipart/form-data"
                           id="updateUser"
@@ -112,15 +112,19 @@
                                     <!-- /.form-group -->
                                     <div class="form-group">
                                         <label>Chi nhánh</label><span class="text-danger">*</span>
-                                        <select name="branch_id" class="form-control">
-                                            @foreach($branchs as $item)
-                                                <option value="{{ $item->id }}"
-                                                        @if($user->branch_id == $item->id)
-                                                        selected
-                                                        @endif
-                                                >{{ $item->name.", ".$item->address }}</option>
-                                            @endforeach
-                                        </select>
+                                        @if(Auth::user()->isAdmin())
+                                            <select name="branch_id" id="branch_id" class="form-control">
+                                                @foreach($branchs as $item)
+                                                    <option value="{{ $item->id }}"
+                                                            @if($item->id == old('branch_id', $user->branch_id))
+                                                                selected
+                                                            @endif
+                                                    >{{ $item->name.", ".$item->address }}</option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <p>{{ $branchs }}</p>
+                                        @endif
                                         @if($errors->first('branch_id'))
                                             <span class="text-danger">{{ $errors->first('branch_id') }}</span>
                                         @endif
@@ -131,8 +135,8 @@
                                         <select name="role_id" id="" class="form-control">
                                             @foreach($roles as $item)
                                                 <option value="{{ $item->id }}"
-                                                        @if($user->role_id == $item->id)
-                                                        selected
+                                                        @if($item->id == old('role_id', $user->role_id))
+                                                            selected
                                                         @endif
                                                 >{{ $item->name }}</option>
                                             @endforeach
@@ -147,9 +151,9 @@
                                             <input type="radio"
                                                    name="gender_id"
                                                    value="{{ $item->id }}"
-                                                   @if($user->gender_id == $item->id)
-                                                   checked
-                                                    @endif
+                                                   @if($item->id == old('gender_id', $user->gender_id))
+                                                        checked
+                                                   @endif
                                             >&nbsp;&nbsp;
                                             @if($errors->first('gender_id'))
                                                 <span class="text-danger">{{ $errors->first('gender_id') }}</span>
@@ -167,8 +171,8 @@
                                                    name="operation_status_id"
                                                    value="{{ $item->id }}"
                                                    @if($item->id == old('operation_status_id', $user->operation_status_id))
-                                                   checked
-                                                    @endif
+                                                        checked
+                                                   @endif
                                             >&nbsp;&nbsp;
                                             {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         @endforeach
@@ -187,7 +191,6 @@
                         <div class="box-footer">
                             <a href="{{ route('users.index') }}"
                                class="btn btn-default"
-                               onclick="return confirmmBack()"
                             >
                                 <i class="fa fa-arrow-circle-o-left"></i>
                                 Trở về
@@ -203,7 +206,7 @@
                 <div class="tab-pane" id="tab_2">
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="{{route('set.password',$user->id )}}"
+                            <form action="{{route('set.password', Hashids::encode($user->id) )}}"
                                   method="post"
                                   class="form-horizontal"
                                   id="setPassword"
@@ -243,7 +246,6 @@
                                 <div class="box-footer">
                                     <a href="{{ route('users.index') }}"
                                        class="btn btn-default"
-                                       onclick="return confirmmBack()"
                                     >
                                         <i class="fa fa-arrow-circle-o-left"></i>
                                         Trở về
@@ -260,7 +262,7 @@
                 </div>
                 @if($user->role_id == config('contants.role_technician'))
                     <div class="tab-pane" id="tab_3">
-                        <form action="{{route('set.services',$user->id )}}"
+                        <form action="{{route('set.services', Hashids::encode($user->id) )}}"
                               method="post"
                               class="form-horizontal"
                         >
@@ -310,7 +312,6 @@
                             <div class="box-footer">
                                 <a href="{{ route('users.index') }}"
                                    class="btn btn-default"
-                                   onclick="return confirmmBack()"
                                 >
                                     <i class="fa fa-arrow-circle-o-left"></i>
                                     Trở về

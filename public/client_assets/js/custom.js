@@ -4,8 +4,15 @@
     jQuery(document).ready(function($) {
 
 
+        //booking page
 
+        let a;
         
+        $('.btn-adress-booking').click(function(){
+            a = $(this).val();
+        });
+
+
         let count_testimonial = $(".testimonial-img img").length;
         
         $(".testimonial-img img").each( function(index){

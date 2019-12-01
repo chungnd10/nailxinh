@@ -163,6 +163,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -228,7 +231,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

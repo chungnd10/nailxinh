@@ -113,7 +113,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('slides.index') }}" class="btn btn-default" onclick="return confirmmBack()">
+                    <a href="{{ url()->previous() }}" class="btn btn-default" >
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về
                     </a>
@@ -144,7 +144,8 @@
                 rules: {
                     images: {
                         required: true,
-                        extension: "jpg|jpeg|png|gif"
+                        extension: "jpg|jpeg|png|gif",
+                        fileSize : 2097152,
                     },
                     url: {
                         url: true
@@ -165,7 +166,8 @@
 
                 messages: {
                     images: {
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF"
+                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF",
+                        fileSize: "*Kích thước ảnh không được quá 2MB "
                     },
                     title: {
                         maxlength: 'Không được vượt quá 120 ký tự',

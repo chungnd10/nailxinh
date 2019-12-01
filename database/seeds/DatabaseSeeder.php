@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
          $this->call(MembershipTypeTableSeeder::class);
          $this->call(WebSettingTableSeeder::class);
          $this->call(FeedbacksTableSeeder::class);
+         $this->call(PhotoLibraryTableSeeder::class);
     }
 }

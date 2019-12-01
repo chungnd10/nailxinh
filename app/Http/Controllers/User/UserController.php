@@ -4,70 +4,25 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
-use App\Services\BranchServices;
-use App\Services\DisplayStatusServices;
-use App\Services\GenderServices;
-use App\Services\OperationStatusServices;
-use App\Services\RoleServices;
-use App\Services\ServiceServices;
-use App\Services\TypeServiceServices;
-use App\Services\UserServices;
-use App\Services\UserServiceServices;
-use App\Services\UserTypeServiceServices;
 use App\User;
-use Intervention\Image\Image;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    protected $user_services;
-    protected $branch_services;
-    protected $gender_services;
-    protected $role_services;
-    protected $operation_status_services;
-    protected $service_services;
-    protected $type_services;
-    protected $user_services_services;
-    protected $user_type_service_services;
-    protected $display_status_services;
-
-    public function __construct(
-        UserServices $user_services,
-        BranchServices $branch_services,
-        GenderServices $gender_services,
-        RoleServices $role_services,
-        OperationStatusServices $operation_status_services,
-        ServiceServices $service_services,
-        TypeServiceServices $type_services,
-        UserServiceServices $user_services_services,
-        UserTypeServiceServices $user_type_service_services,
-        DisplayStatusServices $display_status_services
-    ) {
-        $this->user_services = $user_services;
-        $this->branch_services = $branch_services;
-        $this->gender_services = $gender_services;
-        $this->role_services = $role_services;
-        $this->operation_status_services = $operation_status_services;
-        $this->service_services = $service_services;
-        $this->type_services = $type_services;
-        $this->user_services_services = $user_services_services;
-        $this->user_type_service_services = $user_type_service_services;
-        $this->display_status_services = $display_status_services;
-    }
-
     public function index()
     {
         //nếu là admin thì lấy all
         if (Auth::user()->isAdmin()) {
-            $users = $this->user_services->allAndNotAdmin();
+            $users = $this->user_services->allForAdmin();
         }
-        if (Auth::user()->isManager()) {
+        if (Auth::user()->isManager())
+        {
             // chủ tiệm thì lấy nhân viên của tiệm
-            $users = $this->user_services->getUserWithBranch(Auth::user()->branch_id);
+            $users = $this->user_services->allForManager(Auth::user()->branch_id);
         }
 
         return view('admin.users.index', compact('users'));
@@ -75,9 +30,17 @@ class UserController extends Controller
 
     public function create()
     {
-        $branchs = $this->branch_services->all();
         $genders = $this->gender_services->all();
-        $roles = $this->role_services->allNotAdmin();
+
+        if (Auth::user()->isAdmin()){
+            $roles = $this->role_services->allForAdmin();
+            $branchs = $this->branch_services->all();
+        }
+        if (Auth::user()->isManager()) {
+            $roles = $this->role_services->allForManager();
+            $branchs = Auth::user()->branch->name.', '.Auth::user()->branch->address;
+        }
+
         $operation_status = $this->operation_status_services->all();
 
         return view('admin.users.create', compact(
@@ -93,24 +56,33 @@ class UserController extends Controller
         $user = new User();
 
         $user->display_status_id = config('contants.display_status_hide');
+
         $user->fill($request->all())->save();
 
-        $notification = notification('success', 'Thêm thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Thêm thành công !');
     }
 
     public function show($id)
     {
         $user = $this->user_services->find($id);
-        $branchs = $this->branch_services->all();
+
+        $this->authorize('show',$user);
+
         $genders = $this->gender_services->all();
-        $roles = $this->role_services->allNotAdmin();
         $operation_status = $this->operation_status_services->all();
         $display_status = $this->display_status_services->all();
         $type_services = $this->type_services->all();
         $services_of_user = $this->user_services_services->getServiceWithId($id);
         $type_services_of_user = $this->user_type_service_services->getTypeServicesOfUser($id);
+
+        if (Auth::user()->isAdmin()){
+            $roles = $this->role_services->allForAdmin();
+            $branchs = $this->branch_services->all();
+        }
+        if (Auth::user()->isManager()) {
+            $roles = $this->role_services->allForManager();
+            $branchs = Auth::user()->branch->name.', '.Auth::user()->branch->address;
+        }
 
         return view('admin.users.show', compact('user',
                 'branchs',
@@ -131,9 +103,7 @@ class UserController extends Controller
 
         $user->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function destroy($id)
@@ -148,9 +118,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        $notification = notification('success', 'Xoá thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Xoá thành công !');
     }
 
     public function setPassword(Request $request, $id)
@@ -180,9 +148,8 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        $notification = notification('success', 'Đặt lại mật khẩu thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')
+            ->with('toast_success', 'Đặt lại mật khẩu thành công !');
     }
 
     //set services cho nhan vien
@@ -196,9 +163,7 @@ class UserController extends Controller
         $user->type_services()->sync($type_services_id);
         $user->services()->sync($services_id);
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('users.index')->with($notification);
+        return redirect()->route('users.index')->with('toast_success', 'Cập nhật thành công !');
 
     }
 
@@ -233,9 +198,8 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
-            $notification = notification('success', 'Cập nhật mật khẩu thành công !');
-
-            return redirect()->route('admin.index')->with($notification);
+            return redirect()->route('admin.index')
+                ->with('toast_success', 'Cập nhật mật khẩu thành công !');
         } else {
             return redirect()->route('profile', $id.'#tab_2')
                 ->with('old_password', '*Mật khẩu cũ không đúng');
@@ -256,7 +220,7 @@ class UserController extends Controller
 
         $branchs = $this->branch_services->all();
         $genders = $this->gender_services->all();
-        $roles = $this->role_services->allNotAdmin();
+        $roles = $this->role_services->allForAdmin();
         $operation_status = $this->operation_status_services->all();
 
         return view('admin.users.profile', compact('user',
@@ -299,26 +263,29 @@ class UserController extends Controller
 
         $user->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('admin.index')->with($notification);
+        return redirect()->route('admin.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function updateProfile(UpdateProfileRequest $request, $id)
     {
+        $data = json_decode($request->get('image'), true);
+        $file = $request->file('image');
+
         $user = $this->user_services->find($id);
 
         $user->fill($request->all())->save();
 
-        $notification = notification('success', 'Cập nhật thành công !');
-
-        return redirect()->route('admin.index')->with($notification);
+        return redirect()->route('admin.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
     public function changeStatus(Request $request)
     {
-        $user = $this->user_services->find($request->id);
-        $user->operation_status_id = $request->operation_status_id;
+        $rq = $request->all();
+
+        $user = $this->user_services->find($rq->id);
+
+        $user->operation_status_id = $rq->operation_status_id;
+
         $user->save();
 
         return response()->json(['success' => 'Status change successfully.']);
@@ -326,35 +293,27 @@ class UserController extends Controller
 
     public function changeImageProfile(Request $request, $id)
     {
-        $user = $this->user_services->find($id);
 
-        $data = json_decode($request->get('image'), true);
-        $file = $request->file('image');
+        if ($request->hasFile('avatar'))
+        {
+            $file = $request->file('avatar');
+            $user = $this->user_services->find($id);
 
-        if (!empty($file)) {
-            $filename = time() . '.png';
-            $folderPath = "upload/images/users/";
-            $path = "$folderPath/$filename";
+            $file_name = time().uniqid().$file->getClientOriginalName();
 
-            Image::make($file)->crop(
-                intval($data['height']),
-                intval($data['width']),
-                intval($data['x']),
-                intval($data['y'])
-            )->save($path);
+            if (file_exists('upload/images/users/'.$user->avatar)
+                && $user->avatar != 'avatar-default.png')
+            {
+                unlink('upload/images/users/'.$user->avatar);
+            }
 
-            $user->update([
-                "image" => $path
-            ]);
-
-            return [
-                'state' => 200,
-                'message' => 'success',
-                'result' => "/$path"
-            ];
+            $file->storeAs('images/users', $file_name);
         }
 
-        return response()->json(['status' => true]);
+        $user->avatar = $file_name;
+        $user->save();
+
+        return response('success', 200);
 
     }
 }

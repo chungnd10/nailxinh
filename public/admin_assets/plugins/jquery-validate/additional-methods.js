@@ -1514,10 +1514,17 @@
     }, '*Số điện thoại sai định dạng.');
     $.validator.addMethod('emailGood', function (value) {
         return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
-    }, '*Email sai định dạng.');
+    }, '*Email không đúng định dạng.');
 
     $.validator.addMethod("onlyVietnamese", function (value, element) {
         return this.optional(element) || /^[a-zA-ZAÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶEÉÈẺẼẸÊẾỀỂỄỆIÍÌỈĨỊOÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢUÚÙỦŨỤƯỨỪỬỮỰYÝỲỶỸỴĐaáàảãạâấầẩẫậăắằẳẵặeéèẻẽẹêếềểễệiíìỉĩịoóòỏõọôốồổỗộơớờởỡợuúùủũụưứừửữựyýỳỷỹỵđ\s]+$/i.test(value);
     }, "*Chỉ nhận chữ cái !");
+
+    $.validator.addMethod('fileSize', function (value, element, param) {
+        return this.optional(element) || (element.files[0].size <= param)
+    });
+
     return $;
+
+
 }));

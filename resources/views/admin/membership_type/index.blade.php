@@ -27,7 +27,6 @@
                                 <th>Tên</th>
                                 <th width="100">Mức tiền(VND)</th>
                                 <th width="120">Mức chiết khấu(%)</th>
-
                                 <th>Mô tả</th>
                                 <th width="70">
                                     Hành động
@@ -39,7 +38,7 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ number_format($item->money_level,2,",",".") }}</td>
+                                    <td>{{ number_format($item->money_level,0,",",".") }}</td>
                                     <td>{{ $item->discount_level }}</td>
                                     <td>
                                         @if($item->description != "")
@@ -49,11 +48,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('membership_type.show', $item->id) }}"
+                                        <a href="{{ route('membership_type.show', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-warning">
                                             <i class="fa fa-pencil"></i>
                                         </a>
-                                        <a href="{{ route('membership_type.destroy', $item->id) }}"
+                                        <a href="{{ route('membership_type.destroy', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                             <i class="fa fa-trash"></i>

@@ -2392,11 +2392,11 @@ header {
     margin-right: 10px;
 }
 
-#breadcrumb-area ul li:after {
-    content: '\f105';
+/* #breadcrumb-area ul li:after {
+    content: '\f054';
     font-family: FontAwesome;
     margin-left: 10px;
-}
+} */
 
 #breadcrumb-area ul li:last-child:after {
     display: none;
@@ -3549,14 +3549,28 @@ canvas {
 
 /* booking page */
 
-button.btn.btn-adress-booking,
-.time-frame {
+button.btn.btn-adress-booking
+{
     width: 100%;
     padding: 10px;
     font-size: 14px;    
     background: #fff;
     border: 1px solid #acacac;
     cursor: pointer;
+}
+.time-frame {
+    margin:0 2px;
+    width: calc((100% - 28px)/7);
+    padding: 10px 5px;
+    min-height: 37px;
+    background: #fff;
+    border: 1px solid #b9b9b9;
+    border-radius: 0px;
+    cursor: pointer;
+}
+.time-frame:hover {
+    background: #ec5598;
+    color: #ffff;
 }
 .text-pink{
     color:#ec5598;
@@ -3734,17 +3748,14 @@ section#calltoaction {
 }
 
 .demo-gallery-poster {
-    /* position: absolute; */
     background-color: rgba(0, 0, 0, 0.1);
     bottom: 0;
-    /* left: 0; */
     position: absolute;
-    /* right: 0; */
     top: 0;
     -webkit-transition: background-color 0.15s ease 0s;
     -o-transition: background-color 0.15s ease 0s;
     transition: background-color 0.15s ease 0s;
-    width: 255px;
+    width: 100%;
 }
 
 .demo-gallery-poster>i {
@@ -3794,4 +3805,218 @@ section#calltoaction {
 }
 .adress-sg{
     background-image: url('../../client_assets/img/footer/hcm-1.jpg');
+}
+
+.btn-dl{
+    margin-top: 10px;
+    background: #ec5598;
+    color: #fff !important;
+    border-radius: unset;
+    font-size: 13px;
+    padding: 5px 10px;
+}
+.service-detail-img{
+    position: relative;
+}
+.service-detail-img:after {
+    content: "";
+    border: 3px solid #EFCEC9;
+    width: 90%;
+    height: 100%;
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    z-index: -1;
+}
+.text-brown{
+    color:#b7752b;
+}
+.process-content{
+    background-color:#faefed;
+    min-height: 180px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+#process {
+    padding-bottom: 80px;
+}
+.services-box{
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.38);
+}
+.overlay-service {
+    position: absolute;
+    height: 100%;
+    transform: translate(5);
+    background-color: #00000069;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    padding: 0px 20px;
+    transition: ease-in-out .4s;
+}
+.overlay-service .boxed-btn {
+    border-radius: unset;
+}
+.service-box:hover .overlay-service{
+    opacity: 1;
+}
+.validation {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+}
+input.error{
+    border:1px solid red;
+}
+.error{
+    color:red;
+}
+.text-error,
+.text-error2{
+    display: none;
+    margin-bottom: 10px;
+}
+
+.single_ip {
+    display: flex;
+    align-items: center;
+}
+
+.font-w {
+    font-size: 20px;
+}
+
+#select-day .col-xs-4 {
+    height: auto;
+}
+
+#select-day {
+    cursor: pointer;
+}
+
+.btn-inactive, .select-day-body {
+    background: #FFF;
+}
+
+#select-day .select-day-title {
+    background: #FFF;
+    color: #404859;
+    text-align: center
+}
+
+#select-day .select-day-body .btn {
+    border: 1px #999 solid !important;
+    width: calc(100%/2 - 12px);
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+#select-day .btn-inactive {
+    border: 1px #999 solid;
+    border-color: #e97ed1 !important;
+    border-radius: 3px;
+    width: 100%;
+    float: left;
+}
+
+#select-day .btn-primary {
+    border: 1px #037ada solid;
+    border-color: #ec5598 !important;
+    border-radius: 3px;
+    width: 100%;
+    float: left;
+    background: none;
+}
+
+#select-day .btn-primary .select-day-body .btn{
+    width: calc(100%/2 - 12px);
+    border: 1px #037ada solid !important;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+/* config theme */
+#select-day .btn-primary .select-day-title {
+    background: #ec5598;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.select2-selection--multiple .select2-selection__choice {
+    background-color: #ec5598 !important;
+}
+
+#select-day .btn-primary .select-day-body button, #select-day .btn-inactive .select-day-body button  {
+    margin: 5px;
+}
+
+#select-day  .btn-primary:hover {
+    background: none;
+}
+
+/* config theme */
+#select-day .btn-primary .select-day-body .day-in-week{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff !important;
+}
+
+#select-day .btn-primary .select-day-body .day{
+    font-size: 15px;
+    text-align: center;
+    color: #fff !important;
+}
+
+#select-day .btn-primary .select-day-body {
+    background-color: #ec5598 !important;
+    color: #fff;
+}
+
+#select-day .btn-inactive .select-day-body .day-in-week{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #777
+}
+
+#select-day .btn-inactive .select-day-body .day{
+    font-size: 15px;
+    text-align: center;
+    color: #404859
+}
+.custom-slick-arrow-prev, .custom-slick-arrow-next {
+    color: #ec5598 !important;
+    position: absolute;
+    top: 60px;
+    bottom: -20px;
+    z-index: 100;
+    display: block;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 18px;
+} 
+
+.custom-slick-arrow-prev {
+left: 5px;
+}
+
+.custom-slick-arrow-next {
+right: 5px;
+}
+.slick-dots button:before {
+    color: #ec5598 !important;
+}
+.slick-slide{
+    margin: 0px 5px;
+}
+.icon-circle-left2,
+.icon-circle-right2{
+    cursor: pointer;
+}
+
+#lightgallery .col-md-3 {
+    padding: 0px;
 }

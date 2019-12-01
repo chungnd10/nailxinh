@@ -32,7 +32,7 @@
                                     <td>{{ $item->note }}</td>
                                     <td>{{ $item->created_at->format('H:i d/m/Y') }}</td>
                                     <td>
-                                        <a href="{{ route('restricted-lists.destroy', $item->id) }}"
+                                        <a href="{{ route('restricted-lists.destroy', Hashids::encode($item->id)) }}"
                                            class="btn btn-xs btn-danger"
                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                             <i class="fa fa-trash"></i> Xóa

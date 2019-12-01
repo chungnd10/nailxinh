@@ -10,7 +10,7 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('feedbacks.update', $feedback->id) }}"
+            <form action="{{ route('feedbacks.update', Hashids::encode($feedback->id)) }}"
                   method="POST"
                   enctype="multipart/form-data"
                   id="addFeedbacks">
@@ -66,7 +66,6 @@
                 <div class="box-footer ">
                     <a href="{{ route('feedbacks.index') }}"
                        class="btn btn-default"
-                       onclick="return confirm('Mọi thay đổi sẽ không được lưu!')"
                     >
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về
@@ -97,7 +96,8 @@
             $("#addFeedbacks").validate({
                 rules: {
                     image: {
-                        extension: "jpg|jpeg|png"
+                        extension: "jpg|jpeg|png",
+                        fileSize : 2097152,
                     },
                     full_name: {
                         required: true,
@@ -112,7 +112,8 @@
 
                 messages: {
                     image: {
-                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG"
+                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG",
+                        fileSize: "*Kích thước ảnh không được quá 2MB "
                     },
                     full_name: {
                         maxlength: "*Không được vượt quá 100 ký tự",

@@ -1,3 +1,4 @@
+
 <!-- Start: Type Service
 ============================= -->
 <section id="services" class="section-padding">
@@ -19,7 +20,7 @@
                         <img class="fix-border-radius" src="upload/images/type_services/{{ $type_service->image }}" alt="">
                         <figcaption>
                             <div class="inner-text">
-                                <a href="javascript:;" class="boxed-btn">Chi tiết</a>
+                                <a href="{{ route('type-service', [ $type_service->slug, $type_service->id ] ) }}" class="boxed-btn">Chi tiết</a>
                             </div>
                         </figcaption>
                     </figure>

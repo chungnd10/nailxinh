@@ -10,7 +10,7 @@
     {{--  content  --}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('web-settings.update', 1) }}"
+            <form action="{{ route('web-settings.update') }}"
                   method="POST"
                   enctype="multipart/form-data"
                   id="web_settings">
@@ -152,7 +152,8 @@
             $("#web_settings").validate({
                 rules: {
                     avatar: {
-                        extension: "jpg|jpeg|png|gif"
+                        extension: "jpg|jpeg|png|gif",
+                        fileSize : 2097152,
                     },
                     phone_number: {
                         required: true,
@@ -188,7 +189,8 @@
 
                 messages: {
                     avatar: {
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF"
+                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF",
+                        fileSize: "*Kích thước ảnh không được quá 2MB "
                     },
                     phone_number: {
                         maxlength: "Không được vượt quá 11 ký tự"

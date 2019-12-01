@@ -10,7 +10,7 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('slides.update', $slide->id) }}" method="POST" enctype="multipart/form-data"
+            <form action="{{ route('slides.update', Hashids::encode($slide->id)) }}" method="POST" enctype="multipart/form-data"
                   id="addSlide">
                 @csrf
                 <div class="box-body">
@@ -114,7 +114,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('slides.index') }}" class="btn btn-default" onclick="return confirmmBack()">
+                    <a href="{{ route('slides.index') }}" class="btn btn-default" >
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về
                     </a>
@@ -144,7 +144,8 @@
             $("#addSlide").validate({
                 rules: {
                     images: {
-                        extension: "jpg|jpeg|png|gif"
+                        extension: "jpg|jpeg|png|gif",
+                        fileSize : 2097152,
                     },
                     url: {
                         url: true
@@ -165,24 +166,17 @@
 
                 messages: {
                     images: {
-                        required: "Mục này không được để trống",
-                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF"
+                        extension: "Chỉ chấp nhận ảnh JPG, JPEG, PNG, GIF",
+                        fileSize: "*Kích thước ảnh không được quá 2MB "
                     },
                     url: {
                         url: "Url không đúng định dạng"
                     },
-                    display_status_id: {
-                        required: "Mục này không được để trống",
-                    },
                     title: {
-                        required: "Mục này không được để trống",
                         maxlength: 'Không được vượt quá 120 ký tự',
                     },
                     description: {
                         maxlength: 'Không được vượt quá 200 ký tự',
-                    },
-                    location_display: {
-                        required: "Mục này không được để trống",
                     }
                 }
             });

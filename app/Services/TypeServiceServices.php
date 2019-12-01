@@ -21,7 +21,7 @@ class TypeServiceServices
     }
 
     public function find($id){
-        $type = TypeOfService::find($id);
+        $type = TypeOfService::findOrFail($id);
         return $type;
     }
 }

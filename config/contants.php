@@ -20,5 +20,9 @@ return [
     'order_status_finish'           => 4,
     'location_display_left'         => 1,
     'location_display_right'        => 2,
-    'web_settings'                  => 1
+    'upload_photo_library_path'     => 'upload/images/photo_library/',
+    'img_default_4_3'               => 'img-default.png',
+    'route_update_photo'            => 'admin/photo-library/update/',
+    'route_destroy_photo'           => 'admin/photo-library/destroy/',
+    'take_load_take_photo'          => 12
 ];
