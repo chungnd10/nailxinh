@@ -43,19 +43,8 @@
                                        placeholder="Số điện thoại"
                                        id="phone_number">
                             </div>
-<<<<<<< HEAD
-                            <div class="form-group col-md-4">
-                                <select class="form-control form-border" id="sir">
-                                    <option value="Mrs/Miss">Mrs/Miss</option>
-                                    <option value="Mrs">Mrs</option>
-                                    <option value="Miss">Miss</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-8">
-=======
                             <div class="form-group col-md-6">
                                 <span class="text-danger validation">*</span>
->>>>>>> 4b640da10ed2a21722704c5e0e9bf1b9bb6798f2
                                 <input type="text"
                                        id="full_name"
                                        name="full_name"
@@ -94,11 +83,7 @@
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="mb-2">Dịch vụ <span class="text-danger">*</span></div>
-<<<<<<< HEAD
-                                <select class="services form-control form-border" id="service_id" name="service_id">
-=======
                                 <select class="services form-control form-border" name="service_id" id="service_id">
->>>>>>> 4b640da10ed2a21722704c5e0e9bf1b9bb6798f2
                                     <option value="">Chọn dịch vụ</option>
                                     @foreach($type_services as $type_service)
                                         <optgroup label="{{ $type_service->name }}">
@@ -112,11 +97,7 @@
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
-<<<<<<< HEAD
-                                <select class="staff form-control form-border" id="user_id" name="user_id">
-=======
                                 <select class="staff form-control form-border" name="user_id" id="user_id">
->>>>>>> 4b640da10ed2a21722704c5e0e9bf1b9bb6798f2
                                     <option value="">Chọn nhân viên</option>
                                     @foreach($users as $user)
                                         <option data-image="{{ $user->avatar }}"
@@ -451,71 +432,4 @@
 
     });
 </script>
-    <script type="text/javascript">
-
-<<<<<<< HEAD
-        $(document).ready(function () {
-
-            $("#btn-booking").click(function () {
-                var phone_number = $("#phone_number").val();
-                var sir = $("#sir").val();
-                var full_name = $("#full_name").val();
-
-                var service_id = $("#service_id").val();
-                var user_id = $("#user_id").val();
-                var date = $("#date").val();
-                var note = $("#note").val();
-                var url = "{{ route('booking') }}";
-
-                $.post({
-                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                    url: url,
-                    data: {
-                        phone_number: phone_number,
-                        sir:          sir,
-                        full_name:    full_name,
-                        branch_id:    branch_id,
-                        service_id:   service_id,
-                        user_id:      user_id,
-                        date:         date,
-                        time:         time,
-                        note:         note
-                    }
-                })
-            });
-=======
-            {{--$("#btn-booking").click(function () {--}}
-            {{--    var phone_number = $("#phone_number").val();--}}
-            {{--    var sir = $("#sir").val();--}}
-            {{--    var full_name = $("#full_name").val();--}}
-            {{--    var branch_id = $("#branch_id").val();--}}
-            {{--    var service_id = $("#service_id").val();--}}
-            {{--    var user_id = $("#user_id").val();--}}
-            {{--    var date = $("#date").val();--}}
-            {{--    var time = $("#time").val();--}}
-            {{--    var note = $("#note").val();--}}
-
-            {{--    var url = "{{ route('booking') }}";--}}
-
-            {{--    $.post({--}}
-            {{--        headers: {--}}
-            {{--            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-            {{--        },--}}
-            {{--        url: url,--}}
-            {{--        data: phone_number,--}}
-            {{--        sir,--}}
-            {{--        full_name,--}}
-            {{--        branch_id,--}}
-            {{--        service_id,--}}
-            {{--        user_id,--}}
-            {{--        date,--}}
-            {{--        time,--}}
-            {{--        note--}}
-            {{--    })--}}
-            {{--});--}}
-
-            
->>>>>>> 4b640da10ed2a21722704c5e0e9bf1b9bb6798f2
-        });
-    </script>
 @endsection
