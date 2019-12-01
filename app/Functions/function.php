@@ -61,3 +61,27 @@ function tagColorStatus($status)
             break;
     }
 }
+
+
+//remove image
+function checkExistsAndDeleteImage($path, $file, $img_default)
+{
+    if (file_exists($path . $file)
+        && $file != $img_default) {
+        unlink($path . $file);
+    }
+}
+
+function handleImageBase64($image)
+{
+    $image_replace = str_replace('data:image/png;base64,', '', $image);
+    $image_replace = str_replace(' ', '+', $image_replace);
+    $image_replace = base64_decode($image_replace);
+    return $image_replace;
+}
+
+function getNameImageUnique($length)
+{
+    $imageName = uniqid($length) . '.' . 'png';
+    return $imageName;
+}

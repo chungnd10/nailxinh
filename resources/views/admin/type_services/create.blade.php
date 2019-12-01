@@ -57,7 +57,7 @@
 			</div>
 			<!-- /.box-body -->
 			<div class="box-footer ">
-				<a href="{{ route('type-services.index') }}" class="btn btn-default" >
+				<a href="{{ url()->previous() }}" class="btn btn-default" >
 					<i class="fa fa-arrow-circle-o-left"></i>
 					Trở về
 				</a>

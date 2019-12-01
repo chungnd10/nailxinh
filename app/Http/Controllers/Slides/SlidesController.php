@@ -91,7 +91,9 @@ class SlidesController extends Controller
     //changeStatus AJAX
     public function changeStatus(Request $request)
     {
-        $slide = $this->slide_services->find($request->id);
+        $id = head(\Hashids::decode($request->id));
+
+        $slide = $this->slide_services->find($id);
 
         $slide->display_status_id = $request->display_status_id;
 

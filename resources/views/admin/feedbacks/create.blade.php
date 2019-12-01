@@ -61,7 +61,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('feedbacks.index') }}"
+                    <a href="{{ url()->previous() }}"
                        class="btn btn-default"
                     >
                         <i class="fa fa-arrow-circle-o-left"></i>

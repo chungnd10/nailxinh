@@ -114,7 +114,6 @@
                                         <label>Chi nhánh</label><span class="text-danger">*</span>
                                         @if(Auth::user()->isAdmin())
                                             <select name="branch_id" id="branch_id" class="form-control">
-                                                <option value="">Chọn chi nhánh</option>
                                                 @foreach($branchs as $item)
                                                     <option value="{{ $item->id }}"
                                                             @if($item->id == old('branch_id', $user->branch_id))

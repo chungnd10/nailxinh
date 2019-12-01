@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\ServiceServices;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -74,5 +75,16 @@ class TypeOfService extends Model
             ->orderby('id', 'desc')
             ->get();
         return $services;
+    }
+
+    // lấy image theo danh mục
+    public function getPhotoLibraryWithType($type_services_id)
+    {
+        $display_status = config('contants.display_status_display');
+        $images = PhotoLibrary::where('type_of_service_id', $type_services_id)
+            ->where('display_status_id', $display_status)
+            ->orderby('id', 'desc')
+            ->take(9)->get();
+        return $images;
     }
 }

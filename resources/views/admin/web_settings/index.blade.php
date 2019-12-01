@@ -10,7 +10,7 @@
     {{--  content  --}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('web-settings.update', 1) }}"
+            <form action="{{ route('web-settings.update') }}"
                   method="POST"
                   enctype="multipart/form-data"
                   id="web_settings">
