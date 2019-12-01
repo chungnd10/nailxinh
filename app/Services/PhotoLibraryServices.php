@@ -12,6 +12,14 @@ class PhotoLibraryServices
         return $photo;
     }
 
+    public function take($orderby, $take)
+    {
+        $photo = PhotoLibrary::orderby('id', $orderby)
+            ->take($take)
+            ->get();
+        return $photo;
+    }
+
     public function photoWitdTypeServices($type_services_id, $orderby)
     {
         $photo = PhotoLibrary::where('type_of_service_id', $type_services_id)

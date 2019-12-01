@@ -16,7 +16,7 @@ class PhotoLibraryController extends Controller
      */
     public function index()
     {
-        $images = $this->photo_library_services->all('desc');
+        $images = $this->photo_library_services->take('desc', 12);
         return view('admin.photo_library.index', compact('images'));
     }
 
