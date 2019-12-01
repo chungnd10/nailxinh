@@ -65,50 +65,50 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-5" id="lightgallery">
-                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+            <div class="row mt-5 mb-5" id="lightgallery">
+                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
                     <img src="client_assets/img/gallery/gallery10.jpg" />
                     <div class="demo-gallery-poster">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
                     <img src="client_assets/img/gallery/gallery10.jpg" />
                     <div class="demo-gallery-poster">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
                     <img src="client_assets/img/gallery/gallery10.jpg" />
                     <div class="demo-gallery-poster">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
                     <img src="client_assets/img/gallery/gallery10.jpg" />
                     <div class="demo-gallery-poster">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
                     <img src="client_assets/img/gallery/gallery10.jpg" />
                     <div class="demo-gallery-poster">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
                     <img src="client_assets/img/gallery/gallery10.jpg" />
                     <div class="demo-gallery-poster">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
                     <img src="client_assets/img/gallery/gallery10.jpg" />
                     <div class="demo-gallery-poster">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </a>
-                <a class="col-md-3 mb-2 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
+                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
                     <img src="client_assets/img/gallery/gallery10.jpg" />
                     <div class="demo-gallery-poster">
                         <i class="fas fa-search-plus"></i>
