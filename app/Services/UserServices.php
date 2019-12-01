@@ -36,13 +36,15 @@ class UserServices
     }
 
 
-    //lấy user theo chi nhánh
+    //lấy user theo chi nhánh va trừ admin quan ly chi nhanh
     public function allForManager($branch_id)
     {
         $role_admin = config('contants.role_admin');
+        $role_manager = config('contants.role_manager');
 
         $user = User::where('branch_id',$branch_id)
                 ->where('role_id','<>', $role_admin)
+                ->where('role_id','<>', $role_manager)
                 ->get();
         return $user;
     }

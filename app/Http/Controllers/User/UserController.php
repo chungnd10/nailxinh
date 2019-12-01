@@ -8,7 +8,6 @@ use App\User;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Intervention\Image\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -84,8 +83,6 @@ class UserController extends Controller
             $roles = $this->role_services->allForManager();
             $branchs = Auth::user()->branch->name.', '.Auth::user()->branch->address;
         }
-
-//        dd($branchs);
 
         return view('admin.users.show', compact('user',
                 'branchs',
@@ -271,12 +268,8 @@ class UserController extends Controller
 
     public function updateProfile(UpdateProfileRequest $request, $id)
     {
-//        dd($request->all());
-
         $data = json_decode($request->get('image'), true);
         $file = $request->file('image');
-
-        dd($data, $file);
 
         $user = $this->user_services->find($id);
 

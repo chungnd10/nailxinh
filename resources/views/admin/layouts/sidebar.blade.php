@@ -261,6 +261,13 @@
                                 </a>
                             </li>
                         @endcan
+                        @can('add-photo-library')
+                            <li>
+                                <a href="{{ route('photo-library.create') }}">
+                                    <i class="fa fa-angle-right"></i>Thêm mới
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </li>
             @endcan

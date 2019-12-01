@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\PhotoLibrary;
 
+use App\Http\Requests\PhotoLibraryRequest;
 use App\PhotoLibrary;
 use File;
 use Illuminate\Http\Request;
@@ -10,87 +11,200 @@ use App\Http\Controllers\Controller;
 class PhotoLibraryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Hiển thị danh sách thư viện ảnh
      *
      */
     public function index()
     {
-        $images = PhotoLibrary::all();
+        $images = $this->photo_library_services->all('desc');
         return view('admin.photo_library.index', compact('images'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Hiển thị giao diện thêm ảnh
      *
      */
     public function create()
     {
-        $type_of_services = $this->type_services->all();
-        return view('admin.photo_library.create', compact('type_of_services'));
+        $display_status = $this->display_status_services->all();
+        return view('admin.photo_library.create', compact('display_status'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Lưu ảnh
      *
-     * @param  \Illuminate\Http\Request  $request
      */
-    public function store(Request $request)
+    public function store(PhotoLibraryRequest $request)
     {
         $photo = new PhotoLibrary();
+        $path = config('contants.upload_photo_library_path');
 
-        $image = $request->avatar_hidden;  // your base64 encoded
-        $image = str_replace('data:image/png;base64,', '', $image);
-        $image = str_replace(' ', '+', $image);
-        $imageName = uniqid(12).'.'.'png';
+        $image = $request->avatar_hidden;
+        $image = handleImageBase64($image);
+        $imageName = getNameImageUnique(12);
 
         $photo->image = $imageName;
-        $photo->display_status_id = config('contants.display_status_hide');
         $photo->fill($request->all());
         $photo->save();
-        File::put('upload/images/photo_library/'.$imageName, base64_decode($image));
+
+        File::put($path . $imageName, $image);
 
         return redirect()->route('photo-library.index')->with('toast_success', 'Thêm thành công !');
     }
 
-
-    /**
-     * Display the specified resource.
+    /*
+     * Hiển thị để sửa
      *
-     * @param  int  $id
      */
     public function show($id)
     {
-        //
+        $photo = PhotoLibrary::findOrFail($id);
+        $display_status = $this->display_status_services->all();
+
+        return view('admin.photo_library.show', compact('display_status', 'photo'));
     }
 
-    /**
-     * Update the specified resource in storage.
+    /*
+     * Cập nhật
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      */
-    public function update(Request $request, $id)
+    public function update(PhotoLibraryRequest $request, $id)
     {
-        //
+        $photo = PhotoLibrary::findOrFail($id);
+        $path = config('contants.upload_photo_library_path');
+        $img_default = config('contants.img_default_4_3');
+
+        if ($request->avatar_hidden) {
+            $image = handleImageBase64($request->avatar_hidden);
+            $imageName = getNameImageUnique(12);
+
+            checkExistsAndDeleteImage($path, $photo->image, $img_default);
+
+            File::put($path . $imageName, $image);
+
+            $photo->image = $imageName;
+        }
+
+        $photo->fill($request->all());
+        $photo->save();
+
+        return redirect()->route('photo-library.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Xóa 1 ảnh
      *
-     * @param  int  $id
      */
     public function destroy($id)
     {
         $photo = PhotoLibrary::findOrFail($id);
+        $path = config('contants.upload_photo_library_path');
+        $img_default = config('contants.img_default_4_3');
 
-        if (file_exists('upload/images/photo_library/'.$photo->image)
-            && $photo->image != 'img-default.png')
-        {
-            unlink('upload/images/photo_library/'.$photo->image);
-        }
+        checkExistsAndDeleteImage($path, $photo->image, $img_default);
 
         $photo->delete();
 
         return redirect()->route('photo-library.index')->with('toast_success', 'Xoá thành công !');
+    }
+
+    /*
+     * Thay đổi trạng thái hiển thị
+     *
+     */
+    public function changeStatus(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->id;
+            $photo = PhotoLibrary::findOrFail($id);
+            $photo->display_status_id = $request->display_status_id;
+            $photo->save();
+
+            return response()->json(['success' => 'Status change successfully.']);
+        }
+        return response()->json(['fail' => 'Status change fail.']);
+    }
+
+    /*
+     * Xóa nhiều ảnh
+     *
+     */
+
+    public function deleteMany(Request $request)
+    {
+        $id = $request->input('deleteMany');
+        $path = config('contants.upload_photo_library_path');
+        $img_default = config('contants.img_default_4_3');
+
+        foreach ($id as $key => $item) {
+            $id_decode[] = head(\Hashids::decode($item));
+        }
+
+        $photos = PhotoLibrary::findOrFail($id_decode);
+
+        $this->photo_library_services->deleteMany($id_decode);
+
+        foreach ($photos as $photo) {
+            checkExistsAndDeleteImage($path, $photo->image, $img_default );
+        }
+
+        return redirect()->route('photo-library.index')->with('toast_success', 'Xoá thành công !');
+    }
+
+    /*
+     * Tra ve hinh anh theo loai dich vu
+     *
+     */
+    public function changeTypeServices(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = head(\Hashids::decode($request->id));
+
+            if ($id == null) {
+                $photo = $this->photo_library_services->all('desc');
+            } else {
+                $photo = $this->photo_library_services->photoWitdTypeServices($id, 'desc');
+            }
+            return response()->json($photo);
+        }
+        return response('changed fail !', 201);
+    }
+
+    /*
+     * Load diff
+     *
+     */
+    public function loadDiff(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->id;
+            $take = config('contants.take_load_take_photo');
+            $photo = $this->photo_library_services->loadDiff($id, $take);
+            return response()->json($photo);
+        }
+        return response('load diff fail !', 201);
+    }
+
+    /*
+     * Ajax delele
+     *
+     */
+    public function deleteAjax(Request $request)
+    {
+        if ($request->ajax()){
+            $id = $request->id;
+            $path = config('contants.upload_photo_library_path');
+            $img_default = config('contants.img_default_4_3');
+
+            $photo = PhotoLibrary::find($id);
+            if ($photo->first()){
+                checkExistsAndDeleteImage($path, $photo->image, $img_default);
+                $photo->delete();
+                return response('delete succcess !', 200);
+            }
+            return response('delete fail !', 201);
+        }
+        return response('delete fail !', 201);
     }
 }

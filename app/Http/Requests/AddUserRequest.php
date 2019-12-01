@@ -34,7 +34,6 @@ class AddUserRequest extends FormRequest
             ],
             'birthday'              => 'required',
             'address'               => 'required|max:200',
-            'branch_id'             => 'required',
             'role_id'               => 'required',
             'gender_id'             => 'required',
             'operation_status_id'   => 'required'

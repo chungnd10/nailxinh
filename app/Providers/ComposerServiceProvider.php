@@ -33,7 +33,10 @@ class ComposerServiceProvider extends ServiceProvider
                 'client.gallery',
                 'client.introduction',
                 'client.services',
-                'client.service-detail'
+                'client.service-detail',
+                'admin.photo_library.index',
+                'admin.photo_library.create',
+                'admin.photo_library.show'
 
             ], 'App\Http\ViewComposers\CommonComposer'
         );

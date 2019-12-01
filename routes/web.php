@@ -68,8 +68,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('update-image-profile/{id}', 'User\UserController@updateImageProfile')
         ->name('update-image-profile');
 
-    Route::post('changePassword/{id}', 'User\UserController@changePassword')
-        ->name('changePassword');
+    Route::post('change-password/{id}', 'User\UserController@changePassword')
+        ->name('change-password');
     //user
     Route::prefix('users')->group(function () {
 
@@ -460,13 +460,42 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:add-photo-library')
             ->name('photo-library.create');
 
-        Route::get('destroy/{id}', 'PhotoLibrary\PhotoLibraryController@destroy')
+        Route::get('update/{photo}', 'PhotoLibrary\PhotoLibraryController@show')
+            ->middleware('can:edit-photo-library')
+            ->name('photo-library.show');
+
+        Route::post('update/{photo}', 'PhotoLibrary\PhotoLibraryController@update')
+            ->middleware('can:edit-photo-library')
+            ->name('photo-library.update');
+
+        Route::get('destroy/{photo}', 'PhotoLibrary\PhotoLibraryController@destroy')
             ->middleware('can:remove-photo-library')
             ->name('photo-library.destroy');
+
+        Route::get('change-status', 'PhotoLibrary\PhotoLibraryController@changeStatus')
+            ->middleware('can:edit-photo-library')
+            ->name('photo-library.change-status');
+
+        Route::post('delete-many', 'PhotoLibrary\PhotoLibraryController@deleteMany')
+            ->middleware('can:remove-photo-library')
+            ->name('photo-library.delete-many');
+
+        Route::get('change-type-services', 'PhotoLibrary\PhotoLibraryController@changeTypeServices')
+            ->middleware('can:view-photo-library')
+            ->name('photo-library.change-type-services');
+
+        Route::get('load-diff', 'PhotoLibrary\PhotoLibraryController@loadDiff')
+            ->middleware('can:view-photo-library')
+            ->name('photo-library.load-diff');
+
+        //ajax
+        Route::get('delete', 'PhotoLibrary\PhotoLibraryController@deleteAjax')
+            ->middleware('can:remove-photo-library')
+            ->name('photo-library.delete');
     });
 });
 
 Route::bind('id', function ($id) {
-    return Hashids::decode($id)[0] ?? $id;
+    return $id =  Hashids::decode($id)[0] ?? "";
 });
 
