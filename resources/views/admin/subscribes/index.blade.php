@@ -78,9 +78,11 @@
                                 >
                                     <i class="fa fa-trash"></i>&nbsp;Xoá mục đã chọn
                                 </button>
-                                <a href="{{ route('download-excel') }}" class="btn btn-sm btn-default">
-                                    <i class="fa fa-file-excel-o "></i>&nbsp;&nbsp;Excel
-                                </a>
+                                @if($subscribes->first())
+                                    <a href="{{ route('download-excel') }}" class="btn btn-sm btn-default">
+                                        <i class="fa fa-file-excel-o "></i>&nbsp;&nbsp;Excel
+                                    </a>
+                                @endif
                             </div>
                         </form>
                     </div>

@@ -191,7 +191,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <a href="{{ route('admin.index') }}"
+                                        <a href="{{ url()->previous() }}"
                                            class="btn btn-default"
                                         >
                                             <i class="fa fa-arrow-circle-o-left"></i>
@@ -210,7 +210,7 @@
                             <div class="row">
                                 <div class="col-md-12 ">
                                     <form class="form-horizontal"
-                                          action="{{route('changePassword',$user->id )}}"
+                                          action="{{route('change-password',$user->id )}}"
                                           method="post"
                                           id="changePassword"
                                     >
@@ -264,7 +264,7 @@
                                         </div>
                                         <!-- /.box-body -->
                                         <div class="box-footer">
-                                            <a href="{{ route('admin.index') }}"
+                                            <a href="{{ url()->previous() }}"
                                                class="btn btn-default"
                                             >
                                                 <i class="fa fa-arrow-circle-o-left"></i>
@@ -380,7 +380,8 @@
                 $('#tab_1').removeClass('active');
                 $('#li_tab_2').addClass('active');
                 $('#tab_2').addClass('active');
-            };
+            }
+            ;
             // end remove active class
 
         });
@@ -432,13 +433,11 @@
                     autoCrop: true,
                     autoCropArea: 1,
                     responsive: true,
-                    background: false,
+                    background: true,
                     zoomOnTouch: true,
                     viewMode: 2,
                     dragMode: 'move',
                     aspectRatio: 1 / 1,
-                    minContainerWidth: 320,
-                    maxContainerHeight: 180,
                     built: function () {
                         $toCrop.cropper("setCropBoxData", {width: "200", height: "200"});
                     }
@@ -469,8 +468,14 @@
                     $alert.removeClass('alert-success alert-warning');
                     canvas.toBlob(function (blob) {
                         let formData = new FormData();
-                        console.log(formData);
-                        formData.append('avatar', blob, '.jpg');
+                        formData.append('avatar', blob, '.jpg')
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top',
+                            showConfirmButton: false,
+                            timer: 5000,
+                            showCloseButton: true
+                        });
 
                         $.ajax("{{ route('users.change-image-profile', Hashids::encode($user->id) )}}", {
                             headers: {
@@ -497,15 +502,6 @@
                                 return xhr;
                             },
                             success: function () {
-                                const Toast = Swal.mixin({
-                                    //when firing the toast, the first window closes automatically
-                                    toast: true,
-                                    position: 'top',
-                                    showConfirmButton: false,
-                                    timer: 5000,
-                                    showCloseButton: true
-                                });
-
                                 Toast.fire({
                                     type: 'success',
                                     title: 'Thay đổi ảnh thành công'

@@ -96,9 +96,7 @@
                         <div class="progress">
                             <div class="progress-bar" style="width: 50%"></div>
                         </div>
-                        <span class="progress-description">
-                    50% Increase in 30 Days
-                  </span>
+                        <span class="progress-description"></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -113,29 +111,39 @@
                         <div class="progress">
                             <div class="progress-bar" style="width: 20%"></div>
                         </div>
-                        <span class="progress-description">
-                    20% Increase in 30 Days
-                  </span>
+                        <span class="progress-description"></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
                 <!-- /.info-box -->
                 <div class="info-box bg-aqua">
-                    <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
+                    <span class="info-box-icon"><i class="fa fa-image"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Direct Messages</span>
-                        <span class="info-box-number">163,921</span>
+                        <span class="info-box-text">Thư viện ảnh</span>
+                        <span class="info-box-number">{{ $count_photo. ' ảnh' }}</span>
 
                         <div class="progress">
                             <div class="progress-bar" style="width: 40%"></div>
                         </div>
-                        <span class="progress-description">
-                    40% Increase in 30 Days
-                  </span>
+                        <span class="progress-description"></span>
                     </div>
-                    <!-- /.info-box-content -->
                 </div>
+
+                <div class="info-box bg-red">
+                    <span class="info-box-icon"><i class="fa fa-envelope"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Đăng ký nhận tin</span>
+                        <span class="info-box-number">{{ $count_subscribe. ' email' }}</span>
+
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 40%"></div>
+                        </div>
+                        <span class="progress-description"></span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>

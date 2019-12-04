@@ -17,21 +17,17 @@
                     <h4 class="widget-title"><img src="client_assets/img/section-icon.png" alt="">Chi nhánh</h4>
                     
                     <div class="widget-adress">
-                        <div class="adress-hn">
-                            <a href="#">
-                                Hà Nội
-                            </a>
-                        </div>
-                        <div class="adress-dn">
-                            <a href="#">
-                                Đà Nẵng
-                            </a>
-                        </div>
-                        <div class="adress-sg">
-                            <a href="#">
-                                Hồ chí minh
-                            </a>
-                        </div>
+                        <ul>
+                            <li>
+                                <a href="#">Hà Nội</a>
+                            </li>
+                            <li>
+                                <a href="#">Đà Nẵng</a>
+                            </li>
+                            <li>
+                                <a href="#">Hồ Chí Minh</a>
+                            </li>
+                        </ul>
                     </div>
                 </aside>
             </div>
