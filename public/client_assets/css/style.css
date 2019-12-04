@@ -3897,6 +3897,7 @@ input.error{
 
 .btn-inactive, .select-day-body {
     background: #FFF;
+    padding:2px;
 }
 
 #select-day .select-day-title {
@@ -4019,4 +4020,15 @@ right: 5px;
 
 #lightgallery .col-md-3 {
     padding: 0px;
+}
+.form-border {
+    border: 1px solid #acacac;
+}
+
+/* hidden and show on mobile */
+.show-mobile{
+    display:none;
+}
+.hidden-mobile{
+    display:flex;
 }

@@ -278,6 +278,7 @@
 @section('script')
 <script type="text/javascript">
     $(document).ready(function () {
+        // format time
         let time_format_pttrn = "HH:mm";
         time_format_pttrn = time_format_pttrn ? time_format_pttrn : "HH:mm";
         // time render
@@ -302,27 +303,27 @@
             "17:30",
             "18:00",
             "18:30",
-            "19:00",
-            "19:30",
-            "20:00"
+            "19:00"
         ];
         // init setting
         let setting;
         // init day in week
         let weekday = new Array(7);
-            weekday[1] = "Monday";
-            weekday[2] = "Tuesday";
-            weekday[3] = "Wednesday";
-            weekday[4] = "Thursday";
-            weekday[5] = "Friday";
-            weekday[6] = "Saturday";
-            weekday[0] = "Sunday";
-
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bẩy";
+            weekday[0] = "Chủ Nhật";
+        // render date array
         let dateRenderArray = [];
+        // create total day in week
         let days = 7;
+        // create booking before mins
         let booking_before_min = 30;
         let i = 0, renderDateObj;
-        
+
         function renderTimeSlot() {
             var dayOfDay = $("#selectTime [class*='btn-primary']").attr('value');
              // get selected date
@@ -333,7 +334,6 @@
             $("#timeFrame").empty();
             var tempMoment;
             var thisTime = moment();
-            thisTime.add(booking_before_min, 'minutes');
             // if (setting && setting.booking_before_min) {
             //     thisTime.add(setting.booking_before_min, 'minutes');
             // }
@@ -362,15 +362,18 @@
             // render html check slot time
             for(let k = 0; k < checkSlotTime.length; k++){
                 tempMoment = checkSlotTime[k];
+                let times = moment(checkSlotTime[k].time);
+                console.log(times);
                 let btn = $('<button type="button"></button>');
                 btn.text(tempMoment);
                 btn.attr('time-frame', tempMoment);
                 btn.addClass('btn btn-default time-frame mb-2');
-                if( currentTime > checkSlotTime[k] ){
+                if( times.isBefore(thisTime) ){
                     btn.addClass('disable-click');
                     btn.html("<div class='time'>" + tempMoment + '</div><div class="slot"> </div>');
                     btn.addClass('disable-click btn-time-danger');
                 } else{
+                    // console.log(tempMoment);
                     btn.html("<div class='time theme-text'>" + tempMoment + '</div><div class="slot"> </div>');
                     btn.addClass('theme-button');
                 };
@@ -386,6 +389,7 @@
                 day_of_week: weekday[moment(Object.assign({}, renderDateObj)).day()],
             });
         }
+
         // change date when click change date
         $(document).on("click", '.btn-select', function(e){
             $('.btn-select').removeClass('btn-primary').addClass('btn-inactive');
@@ -397,6 +401,7 @@
             // setDefaultDayOfDay(defaultMorning);
             // getBookingSlotsFromServer(startTime);
         });
+
         // render date picker
         function renderBookingDate(){
             var i, renderArray = [];
@@ -418,6 +423,7 @@
             $('#select-day').html(renderArray.join(""));
             $('#select-day .btn-select').first().addClass('btn-primary');
         }
+        // run function
         renderBookingDate();
         renderTimeSlot();
         // slick render date select
