@@ -3561,16 +3561,23 @@ button.btn.btn-adress-booking
 .time-frame {
     margin:0 2px;
     width: calc((100% - 28px)/7);
-    padding: 10px 5px;
-    min-height: 37px;
+    padding: 3px 5px;
+    min-height: 45px;
     background: #fff;
     border: 1px solid #b9b9b9;
-    border-radius: 0px;
+    border-radius: 3px;
     cursor: pointer;
 }
 .time-frame:hover {
     background: #ec5598;
     color: #ffff;
+}
+#time_frame .time{
+    font-weight: 600;
+}
+#time_frame .slot{
+    font-size: 12px;
+    margin-top: -5px;
 }
 .text-pink{
     color:#ec5598;
@@ -3613,11 +3620,13 @@ span.select2.select2-container.select2-container--default {
     cursor: default;
 }
 
-.disable-click .time {
+.disable-click .time,
+.disable-click .slot {
     color: #b9b9b9;
 }
 img.img-flag {
     width: 50px;
+    border-radius: 50%; 
 }
 
 .custom_img {

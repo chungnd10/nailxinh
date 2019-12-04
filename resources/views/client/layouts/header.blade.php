@@ -23,7 +23,7 @@
                 </p>
             </div>
             <div class="col-lg-6 col-md-6 text-center text-md-right header-top-right">
-                <ul class="d-flex ">
+                <ul class="">
                     <li class="mr-2"><i class="fas fa-envelope"></i>{{ $info->email }}</li>
                     <li><i class="fas fa-phone"></i>{{ $info->phone_number }}</li>
                 </ul>

@@ -257,7 +257,7 @@
                                           name="note"
                                 ></textarea>
                             </div>
-                            <div class="col-md-6 offset-md-3 mt-5 mb-5">
+                            <div class="col-md-6 offset-md-3 mb-5">
                                 <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
                                     <i class="far fa-calendar-alt"></i>
                                     ĐẶT LỊCH NGAY
@@ -283,27 +283,90 @@
         time_format_pttrn = time_format_pttrn ? time_format_pttrn : "HH:mm";
         // time render
         let checkSlotTime = [
-            "9:00",
-            "9:30",
-            "10:00",
-            "10:30",
-            "11:00",
-            "11:30",
-            "12:00",
-            "12:30",
-            "13:00",
-            "13:30",
-            "14:00",
-            "14:30",
-            "15:00",
-            "15:30",
-            "16:00",
-            "16:30",
-            "17:00",
-            "17:30",
-            "18:00",
-            "18:30",
-            "19:00"
+            {
+                "name": "9:00",
+                'status': true
+            },
+            {
+                "name": "9:30",
+                'status': true
+            },
+            {
+                "name": "10:00",
+                'status': true
+            },
+            {
+                "name": "10:30",
+                'status': true
+            },
+            {
+                "name": "11:00",
+                'status': true
+            },
+            {
+                "name": "11:30",
+                'status': true
+            },
+            {
+                "name": "12:00",
+                'status': true
+            },
+            {
+                "name": "12:30",
+                'status': true
+            },
+            {
+                "name": "13:00",
+                'status': false
+            },
+            {
+                "name": "13:30",
+                'status': false
+            },
+            {
+                "name": "14:00",
+                'status': false
+            },
+            {
+                "name": "14:30",
+                'status': false
+            },
+            {
+                "name": "15:00",
+                'status': false
+            },
+            {
+                "name": "15:30",
+                'status': true
+            },
+            {
+                "name": "16:00",
+                'status': true
+            },
+            {
+                "name": "16:30",
+                'status': true
+            },
+            {
+                "name": "17:00",
+                'status': true
+            },
+            {
+                "name": "17:30",
+                'status': true
+            },
+            {
+                "name": "18:00",
+                'status': true
+            },
+            {
+                "name": "18:30",
+                'status': true
+            },
+            {
+                "name": "19:00",
+                'status': true
+            }
         ];
         // init setting
         let setting;
@@ -361,16 +424,19 @@
             // }
             // render html check slot time
             for(let k = 0; k < checkSlotTime.length; k++){
-                tempMoment = checkSlotTime[k];
+                tempMoment = checkSlotTime[k].name;
+                status = checkSlotTime[k].status;
+                console.log(status);
                 let times = moment(checkSlotTime[k].time);
-                console.log(times);
+                // console.log(tempMoment);
                 let btn = $('<button type="button"></button>');
                 btn.text(tempMoment);
                 btn.attr('time-frame', tempMoment);
                 btn.addClass('btn btn-default time-frame mb-2');
-                if( times.isBefore(thisTime) ){
+                if( status == 'false'){
+                    console.log('abc');
                     btn.addClass('disable-click');
-                    btn.html("<div class='time'>" + tempMoment + '</div><div class="slot"> </div>');
+                    btn.html("<div class='time'>" + tempMoment + '</div><div class="slot">Hết chỗ</div>');
                     btn.addClass('disable-click btn-time-danger');
                 } else{
                     // console.log(tempMoment);
@@ -433,9 +499,35 @@
             slidesToShow: 4,
             slidesToScroll: 3,
             prevArrow: '<button type="button" class="custom-slick-arrow-prev icon-circle-left2"><i class="fas fa-chevron-circle-left"></i></button>',
-            nextArrow: '<button type="button" class="custom-slick-arrow-next icon-circle-right2"><i class="fas fa-chevron-circle-right"></i></button>'
+            nextArrow: '<button type="button" class="custom-slick-arrow-next icon-circle-right2"><i class="fas fa-chevron-circle-right"></i></button>',
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2   
+                    }
+                }
+            ]
         });
 
     });
 </script>
+  
 @endsection

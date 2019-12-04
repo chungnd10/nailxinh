@@ -200,7 +200,7 @@
         // testimonial Carousel
         $(".testimonial-carousel").owlCarousel({
             loop: true,
-            dots: true,
+            dots: false,
             nav: true,
             navText: ['<i class="fa fa-long-arrow-alt-left"></i>', '<i class="fa fa-long-arrow-alt-right"></i>'],
             margin: 30,
