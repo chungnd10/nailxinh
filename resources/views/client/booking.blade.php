@@ -42,6 +42,7 @@
                                        value="{{ old('phone_number') }}"
                                        placeholder="Số điện thoại"
                                        id="phone_number">
+                                <label id="phone_number-error" class="error mt-2" for="phone_number"></label>
                             </div>
                             <div class="form-group col-md-6">
                                 <span class="text-danger validation">*</span>
@@ -52,6 +53,7 @@
                                        value="{{ old('full_name') }}"
                                        placeholder="Họ và tên"
                                        id="full_name">
+                                <label id="full_name-error" class="error mt-2" for="full_name"></label>
                             </div>
                             <div class="adress col-md-12">
                                 <div class="mb-3">
@@ -63,8 +65,8 @@
                                         $(this).addClass('branch-data');
                                     }
                                 </script>
-                                <div class="row">
-                                    <div class=" col-md-12 text-error text-danger">Vui lòng chọn địa chỉ</div>
+                                <div class="row" id="locationBtn" >
+                                    <div class="col-md-12 text-error text-danger">Vui lòng chọn địa chỉ</div>
                                     @foreach($branchs as $branch)
                                         <div class="col-md-6 mb-3">
                                             <button type="button"
@@ -94,6 +96,7 @@
                                         </optgroup>
                                     @endforeach
                                 </select>
+                                <label id="service_id-error" class="error" for="service_id"></label>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
@@ -104,149 +107,18 @@
                                                 value="{{ $user->id }}">{{ $user->full_name }}</option>
                                     @endforeach
                                 </select>
+                                <label id="user_id-error" class="error" for="user_id"></label>
                             </div>
                             <div class="col-md-12 mb-4">
-                                <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div>
+                                <div class="mb-3">
+                                    Chọn ngày: <span class="theme-text booking_time pull-right text-bold" style="font-size: 14px;"></span>
+                                </div>
+                                <!-- <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div> -->
                                 <div class="" id="select-day"></div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
                                 <div class=" col-md-12 text-error2 text-danger">Vui lòng chọn thời gian</div>
-                                <div id="timeFrame" class="row">
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="09:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                09:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="10:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                10:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="11:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                11:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="12:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                12:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="13:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                13:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="14:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                14:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="15:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                15:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="16:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                16:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="17:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                17:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="18:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                18:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="19:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                19:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="20:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                onclick="addTime('08:00')"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                20:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
                                 <div id="time_frame"></div>
                             </div>
                             <div class="col-md-12 mb-4">
@@ -386,6 +258,9 @@
         // create booking before mins
         let booking_before_min = 30;
         let i = 0, renderDateObj;
+        let startTime;
+        let date_format_pttrn = "dd/MM/yyyy";
+        date_format_pttrn = date_format_pttrn ? date_format_pttrn.toUpperCase() : "DD/MM/YYYY";
 
         function renderTimeSlot() {
             var dayOfDay = $("#selectTime [class*='btn-primary']").attr('value');
@@ -426,20 +301,16 @@
             for(let k = 0; k < checkSlotTime.length; k++){
                 tempMoment = checkSlotTime[k].name;
                 status = checkSlotTime[k].status;
-                console.log(status);
                 let times = moment(checkSlotTime[k].time);
-                // console.log(tempMoment);
                 let btn = $('<button type="button"></button>');
                 btn.text(tempMoment);
                 btn.attr('time-frame', tempMoment);
                 btn.addClass('btn btn-default time-frame mb-2');
                 if( status == 'false'){
-                    console.log('abc');
                     btn.addClass('disable-click');
                     btn.html("<div class='time'>" + tempMoment + '</div><div class="slot">Hết chỗ</div>');
                     btn.addClass('disable-click btn-time-danger');
                 } else{
-                    // console.log(tempMoment);
                     btn.html("<div class='time theme-text'>" + tempMoment + '</div><div class="slot"> </div>');
                     btn.addClass('theme-button');
                 };
@@ -458,19 +329,51 @@
 
         // change date when click change date
         $(document).on("click", '.btn-select', function(e){
-            $('.btn-select').removeClass('btn-primary').addClass('btn-inactive');
-            $(this).addClass('btn-primary');
+            $('.btn-select').removeClass('btn_primary').addClass('btn-inactive');
+            $(this).addClass('btn_primary');
 
             startTime = moment($(this).attr('data-date')).toISOString();
             // mặc định buổi cho ngày, nếu ngày hôm nay thì kiểm tra buổi phù hợp nếu không chuyển hết về buối sáng
             var defaultMorning = !moment($(this).data('date')).isSame(moment().format('YYYY-MM-DD'));
             // setDefaultDayOfDay(defaultMorning);
             // getBookingSlotsFromServer(startTime);
+            // renderBookingDate();
         });
+
+        // when user click on 
+        $("#time_frame").on('click', 'button', function(e){
+
+            currentTime = $(this).attr('time-frame');
+
+            $("#time_frame > button").removeClass('btn_primary').addClass('btn-default');
+            //$("#time_frame > button .time").addClass('theme-text');
+            $(this).removeClass('btn-default').addClass('btn_primary');
+            $('#time_frame .time').removeClass('text-white');
+            $(this).find('.time').addClass('text-white');
+            showBookingDateTime(currentTime, startTime);
+
+            // remove error
+            $('.general-message').hide();
+            $('#time-select').css({'color': ''});
+        });
+
+         // get current time
+        function showBookingDateTime(currentTime, date_selected){
+            let dateObj = moment(date_selected);
+            let currentDay = weekday[dateObj.day()];
+
+            $('.booking_time').html(currentDay + ", " + dateObj.format(date_format_pttrn) + " " + currentTime);
+        };
+        // set default day
+        function setDefaultDayOfDay(){
+            let currentTime = new Date();
+            $('#selectTime button').removeClass("btn-primary").addClass("btn-default");
+        }
+
 
         // render date picker
         function renderBookingDate(){
-            var i, renderArray = [];
+            let i, renderArray = [];
             for(i in  dateRenderArray) {
 
                 renderArray.push('<div class="col-xs-4">');
@@ -488,7 +391,7 @@
 
             $('#select-day').html(renderArray.join(""));
             $('#select-day .btn-select').first().addClass('btn-primary');
-        }
+        };
         // run function
         renderBookingDate();
         renderTimeSlot();
@@ -526,7 +429,159 @@
                 }
             ]
         });
+        
+        // get slot from server
+        function getBookingSlotsFromServer(startTime){  
+            let location_id = parseInt($("#locationBtn button[class*='btn-adress-booking']").attr("data-branch-id"));
+            if(!location_id) location_id = defaultLocation;
+            
+            let timeData = {
+                merchant_id : merchant_id,
+                location_id : location_id,
+                date : startTime,
+            };
+            var operator_id = $('#operator option:selected').val(); // operatorId
+            if(operator_id) timeData.operator_id = operator_id;
 
+            // Send data
+            $.post({
+                url: "",
+                data: timeData,
+                success: function(data) {
+                if (data) {
+                    checkSlotArray = data.timeFrame.timeFrame;  
+                    workingHours = data.timeFrame.workingHours;
+
+                    if(workingHours) {
+                        if (workingHours.start_time) {
+                        defaultStartTime = convert_HHMMSSString_to_object(workingHours.start_time); 
+                        if (defaultStartTime == null) defaultStartTime = {hour: 8, min: 0};
+                        }
+                        if (workingHours.end_time) {
+                        defaultEndTime = convert_HHMMSSString_to_object(workingHours.end_time); 
+
+                        if (defaultEndTime == null) defaultEndTime = {hour: 22, min: 0};
+                        }
+
+                        var startTime_moment = moment().hours(defaultStartTime.hour).minutes(defaultStartTime.min).seconds(0);
+                        var endTime_moment = moment().hours(defaultEndTime.hour).minutes(defaultEndTime.min).seconds(0);
+
+                        $('#working_start_time').text(startTime_moment.format(time_format_pttrn));
+                        $('#working_end_time').text(endTime_moment.format(time_format_pttrn));
+                    }
+                    renderTimeSlot();
+                }
+                },
+            });
+        };
+
+        // get data from server when click change service
+
+        $('#service_id') .on('change', function(){
+            let service_id = $('#service_id').find(":selected").val();
+            let adress = $('.btn-adress-booking.active').data('branch-id');
+            getStaffFromLocation(adress,service_id);
+        });
+
+        // get operator from chose location 
+        
+        function getOperatorFromLocation(adress,service_id){
+            let data_post = {
+                adress: adress,
+                service_id: service_id
+            };
+            // Send data with ajax
+
+            $.ajax({
+                type: 'POST',
+                url: "/",
+                data: data_post,
+                success : function(resultData){
+                    console.log(resultData);
+                }
+
+            })
+        }
+
+        // render show operator when choose service
+
+        function renderOperatorFromService(){
+
+        }
+
+        // build Operator dropdown
+        let operatorArray = [];
+
+        //  Featch data to operator dropdown 
+        function getOperatorByLocation(){
+        if(setting && setting.showOperatorInfo == 1){
+            // store all operators to build select2
+            let operatorList = {};
+
+            let defaultType = "Operators";
+
+            let operatorOpt = "<option value=''> Select " + defaultType + "</option>";
+            let locationChange = parseInt($("#locationBtn button[class*='btn-primary']").attr("location-id"));
+            if(!locationChange) locationChange = defaultLocation;
+
+
+            for(let i = 0; i < operator.length;i++){
+            if ((operator[i].location_id == locationChange) || (operator[i].location_id_1 == locationChange) || (operator[i].location_id_2 == locationChange) || (operator[i].location_id_3 == locationChange) || (operator[i].location_id_4 == locationChange) || (operator[i].location_id_5 == locationChange))
+            {
+                if(!operator[i].avatar_url){
+                    operator[i].avatar_url = "/images/placeholder_avatar_sqr.jpg";
+                }
+
+                if(!operator[i].name){
+                    operator[i].name = "Chưa có tên";
+                }
+
+                if(!operator[i].title){
+                    operator[i].title = "Chức danh khác";
+                }
+
+                if(operator[i].name){
+                    operator[i].title = operator[i].title.toUpperCase();
+                }
+
+                if(typeof operatorList[operator[i].title]  == 'undefined') operatorList[operator[i].title] = [];
+                operatorList[operator[i].title].push(operator[i]);
+
+            }
+
+            }
+
+            var optionHmtl = [operatorOpt];
+            for(var j in operatorList) {
+            optionHmtl.push("<optgroup label='" + j + "'>");
+            for(var k in operatorList[j]) {
+                optionHmtl.push("<option value='" + operatorList[j][k].id + "' data-avatar='" + operatorList[j][k].avatar_url + "' >" + operatorList[j][k].name + "</option>");
+            }
+            optionHmtl.push("</optgroup>");
+            }
+
+            $("#operator").html(optionHmtl.join(''));
+
+            // destroy select2 if existed
+            try { 
+            if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
+            } catch(e){
+            // console.log(e);
+            }
+
+            setTimeout(function(){
+            $("#operator").select2({
+                templateResult: formatSelect2Data,
+                templateSelection: formatSelect2Data,
+                containerCssClass: 'select2-fix-padding',
+                dropdownParent: $('#operatorSetting')
+            });
+            }, 200); // add timeout to make sure html is ready before build select2
+
+        } else{
+            $("#operatorSetting").hide();
+        }
+        }
     });
 </script>
   
