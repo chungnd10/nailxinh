@@ -3558,19 +3558,29 @@ button.btn.btn-adress-booking
     border: 1px solid #acacac;
     cursor: pointer;
 }
+.btn.btn-adress-booking:hover {
+    color: #ddd;
+}
 .time-frame {
     margin:0 2px;
     width: calc((100% - 28px)/7);
-    padding: 10px 5px;
-    min-height: 37px;
+    padding: 3px 5px;
+    min-height: 45px;
     background: #fff;
     border: 1px solid #b9b9b9;
-    border-radius: 0px;
+    border-radius: 3px;
     cursor: pointer;
 }
-.time-frame:hover {
-    background: #ec5598;
-    color: #ffff;
+.time-frame:hover .time.theme-text {
+    transition: .2s ease-in-out;
+    color: #ddd;
+}
+#time_frame .time{
+    font-weight: 600;
+}
+#time_frame .slot{
+    font-size: 12px;
+    margin-top: -5px;
 }
 .text-pink{
     color:#ec5598;
@@ -3613,11 +3623,13 @@ span.select2.select2-container.select2-container--default {
     cursor: default;
 }
 
-.disable-click .time {
+.disable-click .time,
+.disable-click .slot {
     color: #b9b9b9;
 }
 img.img-flag {
     width: 50px;
+    border-radius: 50%; 
 }
 
 .custom_img {
@@ -3866,11 +3878,8 @@ section#calltoaction {
     right: 25px;
     top: 10px;
 }
-input.error{
-    border:1px solid red;
-}
 .error{
-    color:red;
+    color:#dc3545;
 }
 .text-error,
 .text-error2{
@@ -3897,6 +3906,7 @@ input.error{
 
 .btn-inactive, .select-day-body {
     background: #FFF;
+    padding:2px;
 }
 
 #select-day .select-day-title {
@@ -3920,7 +3930,7 @@ input.error{
     float: left;
 }
 
-#select-day .btn-primary {
+#select-day .btn_primary {
     border: 1px #037ada solid;
     border-color: #ec5598 !important;
     border-radius: 3px;
@@ -3929,7 +3939,7 @@ input.error{
     background: none;
 }
 
-#select-day .btn-primary .select-day-body .btn{
+#select-day .btn_primary .select-day-body .btn{
     width: calc(100%/2 - 12px);
     border: 1px #037ada solid !important;
     padding-left: 2px;
@@ -3937,7 +3947,7 @@ input.error{
 }
 
 /* config theme */
-#select-day .btn-primary .select-day-title {
+#select-day .btn_primary .select-day-title {
     background: #ec5598;
     color: #FFFFFF;
     text-align: center;
@@ -3947,29 +3957,29 @@ input.error{
     background-color: #ec5598 !important;
 }
 
-#select-day .btn-primary .select-day-body button, #select-day .btn-inactive .select-day-body button  {
+#select-day .btn_primary .select-day-body button, #select-day .btn-inactive .select-day-body button  {
     margin: 5px;
 }
 
-#select-day  .btn-primary:hover {
+#select-day  .btn_primary:hover {
     background: none;
 }
 
 /* config theme */
-#select-day .btn-primary .select-day-body .day-in-week{
+#select-day .btn_primary .select-day-body .day-in-week{
     font-size: 20px;
     font-weight: bold;
     text-align: center;
     color: #fff !important;
 }
 
-#select-day .btn-primary .select-day-body .day{
+#select-day .btn_primary .select-day-body .day{
     font-size: 15px;
     text-align: center;
     color: #fff !important;
 }
 
-#select-day .btn-primary .select-day-body {
+#select-day .btn_primary .select-day-body {
     background-color: #ec5598 !important;
     color: #fff;
 }
@@ -4019,4 +4029,33 @@ right: 5px;
 
 #lightgallery .col-md-3 {
     padding: 0px;
+}
+.form-border {
+    border: 1px solid #acacac;
+}
+
+/* hidden and show on mobile */
+.show-mobile{
+    display:none;
+}
+.hidden-mobile{
+    display:flex;
+}
+.btn_primary {
+    background: #ec5598 ;
+    border-color: #ec5598 !important;
+}
+
+.btn_primary:hover, .btn-primary:focus, .btn-primary.focus {
+    background: #ec5598 ;
+    border-color: #ec5598 !important;
+}
+.pull-right{
+    float: right;
+}
+.theme-text {
+    color: #ec5598;
+}
+.text-bold{
+    font-weight: bold;
 }

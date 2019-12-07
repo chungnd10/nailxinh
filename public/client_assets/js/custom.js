@@ -158,11 +158,49 @@
         }
         $('.search-form button').on('click', expand);
 
+        // Carousel show on mobile
+
+        $(".our_service_mobile").owlCarousel({
+            loop: true,
+            dots: true,
+            nav: true,
+            navText: ['<i class="fa fa-long-arrow-alt-left"></i>', '<i class="fa fa-long-arrow-alt-right"></i>'],
+            margin: 30,
+            center: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                700: {
+                    items: 1,
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        });
+
+        // // check resize window 
+        // $(window).on("resize", function(event){
+        //     console.log( $(this).width() );
+        //     if( $(this).width() <= 480 ){
+        //         console.log(true);
+        //         $('#our_service_desk').addClass('hidden-on-mobile');
+        //         $('#our_service_mobi').addClass('show-on-mobile');
+        //     } else{
+
+        //         $('#our_service_desk').removelass('hidden-on-mobile');
+        //         $('#our_service_mobi').removeClass('show-on-mobile');
+        //     }
+        // });
+
 
         // testimonial Carousel
         $(".testimonial-carousel").owlCarousel({
             loop: true,
-            dots: true,
+            dots: false,
             nav: true,
             navText: ['<i class="fa fa-long-arrow-alt-left"></i>', '<i class="fa fa-long-arrow-alt-right"></i>'],
             margin: 30,
