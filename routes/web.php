@@ -26,10 +26,10 @@ Route::get('/contact', 'Client\ClientController@contact')
 
 Route::get('/services', 'Client\ClientController@services')
     ->name('services');
-Route::get('/services-detail/{slug}/{id}', 'Client\ClientController@servicesDetail')
+Route::get('/services-detail/{slug}/{service}', 'Client\ClientController@servicesDetail')
     ->name('service-detail');
 
-Route::get('/type-services/{slug}/{id}', 'Client\ClientController@typeServices')
+Route::get('/type-services/{slug}/{service}', 'Client\ClientController@typeServices')
     ->name('type-service');
 
 Route::get('/booking', 'Client\ClientController@booking')
@@ -111,6 +111,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
         Route::post('change-image-profile/{id}', 'User\UserController@changeImageProfile')
             ->name('users.change-image-profile');
+
+        Route::get('get-users-with-branch', 'User\UserController@getUsersWithBranch')
+            ->name('get-users-with-branch');
     });
 
     //type of services
@@ -218,11 +221,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->name('bills.print');
 
         Route::get('update/{id}', 'Bill\BillController@showUpdate')
-            ->middleware('can:update-bill-status')
+            ->middleware('can:update-bills')
             ->name('bills.update');
 
         Route::post('update/{id}', 'Bill\BillController@update')
-            ->middleware('can:update-bill-status')
+            ->middleware('can:update-bills')
             ->name('bills.update');
     });
 
@@ -249,6 +252,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:update-orders')
             ->name('orders.update');
 
+        Route::get('export-bill/{id}', 'Order\OrderController@exportBill')
+            ->middleware('can:update-orders')
+            ->name('orders.export-bill');
     });
 
     //branch
@@ -323,6 +329,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('', 'RestrictedLists\RestrictedListsController@index')
             ->middleware('can:view-restricted-lists')
             ->name('restricted-lists.index');
+
+        Route::get('add/{phone_number}', 'RestrictedLists\RestrictedListsController@add')
+            ->middleware('can:add-restricted-lists')
+            ->name('restricted-lists.add');
 
         Route::get('destroy/{id}', 'RestrictedLists\RestrictedListsController@destroy')
             ->middleware('can:remove-restricted-lists')

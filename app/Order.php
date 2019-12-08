@@ -59,7 +59,8 @@ class Order extends Model
         'time',
         'note',
         'branch_id',
-        'order_status_id'
+        'order_status_id',
+        'user_id'
     ];
 
     public function user()
@@ -67,9 +68,9 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function service()
+    public function services()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsToMany(Service::class, 'order_services');
     }
 
     public function orderStatus()
@@ -91,6 +92,7 @@ class Order extends Model
     public function getNameServices($services_id)
     {
         $services_id = explode(',', $services_id);
+
         $services = Service::whereIn('id', $services_id)->get();
 
         $services = $services->pluck('name');

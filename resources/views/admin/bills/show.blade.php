@@ -66,8 +66,6 @@
         </div>
         <div class="row">
             <div class="col-xs-6">
-                <i>*Thời gian thực hiện từ: {{ date('H:i d-m-Y', strtotime($bill->time)) }}</i>
-                <br><br>
                 <h4>Ghi chú:</h4>
                 @if($bill->note != "")
                     <i>{{'- '.$bill->note }}</i>

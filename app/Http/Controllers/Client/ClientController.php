@@ -114,10 +114,10 @@ class ClientController extends Controller
     {
         $order = new Order();
 
-        $order->order_status_id = config('contants.order_status_unconfimred');
+        $order->order_status_id = config('contants.order_status_unconfirmed');
         $order->full_name = $request->sir . ' ' . $request->full_name;
         $order->service_id = implode(',', $request->service_id);
-        $order->order_status_id = config('contants.order_status_unconfimred');
+        $order->order_status_id = config('contants.order_status_unconfirmed');
 
         $order->fill($request->all())->save();
 

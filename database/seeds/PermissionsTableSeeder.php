@@ -162,8 +162,8 @@ class PermissionsTableSeeder extends Seeder
                 'name'  => 'view-bills'
             ],
             [
-                'title' => 'Cập nhật trạng thái hóa đơn',
-                'name'  => 'update-bill-status'
+                'title' => 'Cập nhật hóa đơn',
+                'name'  => 'update-bills'
             ],
             [
                 'title' => 'In hóa đơn',

@@ -26,7 +26,7 @@
                                 <th width="100">Ảnh</th>
                                 <th>Tiêu đề</th>
                                 <th width=100>Trạng thái</th>
-                                <th width="120">URL</th>
+                                <th width="100">URL</th>
                                 <th width="70">
                                     Hành động
                                 </th>
