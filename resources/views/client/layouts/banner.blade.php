@@ -11,7 +11,7 @@
                             <figcaption>
                                 <div class="content">
                                     <div class="container inner-content {{ $slide->location_display == config('contants.location_display_left') ? 'text-left' : 'text-right'}}">
-                                        <h3>Chào mừng bạn đến với Nail Xinh</h3>
+                                        <h3 class="uppercase">Chào mừng bạn đến với Nail Xinh</h3>
                                         <h1>{{ $slide->title }}</h1>
                                         <p>{{ limit($slide->description, 100, '...') }}</p>
                                         @if($slide->url != '')

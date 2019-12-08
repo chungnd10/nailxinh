@@ -7,7 +7,7 @@
     </section>
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('bills.update', Hashids::encode($bill->id, '123456789')) }}"
+            <form action="{{ route('bills.update', \Hashids::encode($bill->id)) }}"
                   method="POST"
                   id="updateBill">
                 @csrf
@@ -35,7 +35,6 @@
                                 >{{ $bill->note }}</textarea>
                             </div>
                         </div>
-                    </div>
                     <!-- /.row -->
                 </div>
                 <!-- /.box-body -->
@@ -54,5 +53,4 @@
             </form>
         </div>
     </section>
-
 @endsection

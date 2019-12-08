@@ -18,7 +18,7 @@ class AccumulatePointServices
     }
 
     //lấy tiền tích điểm của khách
-    public function getPointsOfServices($phone_number)
+    public function getPointsOfGuest($phone_number)
     {
         $accumulate = AccumulatePoints::where('phone_number', $phone_number)->get();
         if ($accumulate->first()){
