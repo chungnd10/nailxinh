@@ -7,6 +7,7 @@ use App\Introduction;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\Subscribe;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -165,6 +166,20 @@ class ClientController extends Controller
                 'success',
                 'Chúc mừng bạn đã đăng ký thành công !'
             );
+        }
+    }
+
+    public function getEmployees(Request $request)
+    {
+        if ($request->ajax()){
+            $branch_id = $request->branch_id;
+            $service_id = $request->service_id;
+
+            $users = User::where('branch_id', $branch_id)
+                ->where('service_id', $service_id)
+                ->get();
+
+            return response()->json($users);
         }
     }
 }

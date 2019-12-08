@@ -9,7 +9,37 @@ class OrderServices
 {
     public function all()
     {
-        $orders = Order::orderby('id', 'desc')->get();
+        $orders = Order::join('order_services', 'order_services.order_id', '=', 'orders.id')
+            ->select(
+                'orders.id',
+                'full_name',
+                'phone_number',
+                'time',
+                'note',
+                'created_by',
+                'updated_by',
+                'branch_id',
+                'user_id',
+                'order_status_id',
+                'orders.created_at',
+                'orders.updated_at',
+                DB::raw('group_concat(order_services.service_id) as service_id'))
+            ->groupBy(
+                'orders.id',
+                'full_name',
+                'phone_number',
+                'time',
+                'note',
+                'created_by',
+                'updated_by',
+                'branch_id',
+                'user_id',
+                'order_status_id',
+                'orders.created_at',
+                'orders.updated_at'
+                )
+            ->orderby('orders.id', 'desc')
+            ->get();
 
         return $orders;
     }

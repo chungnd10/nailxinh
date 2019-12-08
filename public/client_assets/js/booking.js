@@ -7,8 +7,7 @@ jQuery(document).ready(function($) {
         rules: {
             phone_number: {
                 required: true,
-                minlength:10, 
-                maxlength:11
+                phoneNumberVietNam: true
             },
             full_name:{
                 required:true                
