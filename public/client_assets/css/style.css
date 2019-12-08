@@ -1512,13 +1512,23 @@ header {
 */
 
 #feature {
-    background: url(../img/bg/feature-bg.jpg) no-repeat;
+    background: url(../img/bg/1.jpg) no-repeat;
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
     color: #fff;
+    position: relative;
 }
-
+#feature:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 49, 69, 0.7);
+    display: block;
+}
 #feature .section-title h2,
 #feature h4 {
     color: #fff;
@@ -2373,14 +2383,40 @@ header {
 
 #breadcrumb-area {
     position: relative;
-    background: url(../img/bg/breadcrumb-bg.jpg);
     background-size: cover;
     background-position: center;
     z-index: 2;
     padding: 100px 0 100px;
     color: #fff;
 }
-
+.breadcrumb-introduction{
+    background: url(../img/bg/2.jpg);
+}
+.breadcrumb-services{
+    background: url(../img/bg/4.jpg);
+}
+.breadcrumb-service-detail{
+    background: url(../img/bg/3.jpg);
+}
+.breadcrumb-gallery{
+    background: url(../img/bg/7.jpg);
+}
+.breadcrumb-contact{
+    background: url(../img/bg/8.jpg);
+}
+.breadcrumb-booking{
+    background: url(../img/bg/9.jpg);
+}
+#breadcrumb-area:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(44, 49, 69, 0.7);
+    display: block;
+}
 #breadcrumb-area h2 {
     color: #fff;
     margin-bottom: 10px;
