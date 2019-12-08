@@ -1,14 +1,16 @@
 <!-- Start: Preloader
 ============================= -->
-{{--<div class="preloader">--}}
-{{--    <div class="wrapper">--}}
-{{--        <div class="circle circle-1"></div>--}}
-{{--        <div class="circle circle-1a"></div>--}}
-{{--        <div class="circle circle-2"></div>--}}
-{{--        <div class="circle circle-3"></div>--}}
-{{--    </div>--}}
-{{--    <h1>Loading&hellip;</h1>--}}
-{{--</div>--}}
+@if(!session()->has('success'))
+    <div class="preloader">
+        <div class="wrapper">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-1a"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+        </div>
+        <h1>Loading&hellip;</h1>
+    </div>
+@endif
 <!-- End: Preloader
 ============================= -->
 <!-- Start: Header Top

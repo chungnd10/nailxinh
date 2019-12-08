@@ -6,7 +6,6 @@ use App\AccumulatePoints;
 use App\Bill;
 use App\BillStatus;
 use App\Http\Controllers\Controller;
-use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
