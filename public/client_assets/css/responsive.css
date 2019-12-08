@@ -10,12 +10,14 @@
 }
 
 @media only screen and (max-width:1270px) and (min-width:991px) {
-
     .contact-wrapper {
         margin-top: 0;
         box-shadow: none
     }
-
+    .section-title h2 {
+        font-size: 36px;
+        line-height: 1.5em;
+    }   
     .single-contact {
         padding: 30px 0 20px 0;
     }
@@ -65,6 +67,10 @@
         width: 27%;
     }
 
+    .service-box figure{
+        width: 100%;
+        height: auto;
+    }
     #product {
         padding-bottom: 160px;
     }
@@ -94,8 +100,7 @@
     .portfolio-tab-sorting li a {
         margin-right: 10px;
         border: 1px solid #eee;
-    }
-
+    }   
 
 }
 
@@ -107,7 +112,6 @@
         width: 700px;
         background: #f7f7f7;
     }
-
 
 }
 
@@ -524,12 +528,7 @@
 }
 
 @media only screen and (max-width:480px) {
-    .show-mobile{
-        display:block;
-    }
-    .hidden-mobile{
-        display:none;
-    }
+    
     .nav-tabs{
         justify-content: center;
     }
@@ -546,7 +545,7 @@
     }
     .section-title h2,
     #breadcrumb-area h2 {
-        font-size: 26px;
+        font-size: 24px;
         line-height: 1.5em;
     }
     .header-slider p {
@@ -578,7 +577,9 @@
         margin-left: 0;
         display: block;
     }
-
+    .feature-box{
+        padding:20px 0px;
+    }
     #page-404 {
         overflow: hidden;
     }

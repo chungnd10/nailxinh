@@ -156,11 +156,11 @@
         // time render
         let checkSlotTime = [
             {
-                "name": "9:00",
+                "name": "09:00",
                 'status': true
             },
             {
-                "name": "9:30",
+                "name": "09:30",
                 'status': true
             },
             {
@@ -266,7 +266,8 @@
             var dayOfDay = $("#selectTime [class*='btn-primary']").attr('value');
              // get selected date
             let bookingDate = $('#select-day .btn-primary').attr('data-date');
-            let currentTime = moment(bookingDate.time).format('HH:mm');
+            let currentTime = moment().format('HH:mm');
+            console.log(currentTime);
             let currentDate;
             // remove html before render
             $("#timeFrame").empty();
@@ -300,13 +301,14 @@
             // render html check slot time
             for(let k = 0; k < checkSlotTime.length; k++){
                 tempMoment = checkSlotTime[k].name;
+                console.log(tempMoment);    
                 status = checkSlotTime[k].status;
                 let times = moment(checkSlotTime[k].time);
                 let btn = $('<button type="button"></button>');
                 btn.text(tempMoment);
                 btn.attr('time-frame', tempMoment);
                 btn.addClass('btn btn-default time-frame mb-2');
-                if( status == 'false'){
+                if( status == 'false' || tempMoment < currentTime){
                     btn.addClass('disable-click');
                     btn.html("<div class='time'>" + tempMoment + '</div><div class="slot">Hết chỗ</div>');
                     btn.addClass('disable-click btn-time-danger');
@@ -479,15 +481,15 @@
 
         $('#service_id') .on('change', function(){
             let service_id = $('#service_id').find(":selected").val();
-            let adress = $('.btn-adress-booking.active').data('branch-id');
-            getStaffFromLocation(adress,service_id);
+            let branch_id = $('.btn-adress-booking.active').data('branch-id');
+            getStaffFromLocation(branch_id,service_id);
         });
 
         // get operator from chose location 
         
-        function getOperatorFromLocation(adress,service_id){
+        function getOperatorFromLocation(branch_id,service_id){
             let data_post = {
-                adress: adress,
+                branch_id: branch_id,
                 service_id: service_id
             };
             // Send data with ajax
