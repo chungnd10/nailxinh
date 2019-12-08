@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Order;
 
-use App\AccumulatePoints;
 use App\Bill;
 use App\Http\Controllers\Controller;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Vinkla\Hashids\Facades\Hashids;
 
 class OrderController extends Controller
 {
+
     public function index()
     {
         $admin = config('contants.role_admin');
@@ -19,15 +18,17 @@ class OrderController extends Controller
         $technician = config('contants.role_technician');
         $cashier = config('contants.role_cashier');
         $receptionist = config('contants.role_receptionist');
-
         $status_completed = config('contants.order_status_finish');
+        $order_status_confirmed = config('contants.order_status_confirmed');
 
 
         if (Auth::check()) {
+            $user_id =  Auth::user()->id;
+            $role_id = Auth::user()->role_id;
+            $branch_id = Auth::user()->branch_id;
+            $all_order_with_branch = $this->order_services->allWithBranch($branch_id);
 
-            $all_order_with_branch = $this->order_services->allWithBranch(Auth::user()->branch_id);
-
-            switch (Auth::user()->role_id) {
+            switch ($role_id) {
                 case $admin :
                     $orders = $this->order_services->all();
                     break;
@@ -35,13 +36,13 @@ class OrderController extends Controller
                     $orders = $all_order_with_branch;
                     break;
                 case $cashier :
-                    $orders = $this->order_services->allWhereStatus(Auth::user()->branch_id, $status_completed);
+                    $orders = $this->order_services->allWhereStatus($branch_id, $status_completed);
                     break;
                 case $receptionist :
                     $orders = $all_order_with_branch;
                     break;
                 case $technician :
-                    $orders = $this->order_services->allOfTechnician(Auth::user()->branch_id, Auth::user()->id);
+                    $orders = $this->order_services->allOfTechnician($branch_id, $user_id, $order_status_confirmed);
                     break;
             }
         }
@@ -52,104 +53,159 @@ class OrderController extends Controller
     public function create()
     {
         $type_services = $this->type_services->all();
-
         return view('admin.orders.create', compact('type_services'));
     }
 
     public function store(Request $request)
     {
         $order = new Order();
-
-        if (Auth::check())
-        {
+        if (Auth::check()){
             $order->user_id = Auth::user()->id;
             $order->branch_id = Auth::user()->branch_id;
             $order->created_by = Auth::user()->full_name;
         }
 
-        $order->service_id = implode(',',$request->service_id);
-        $order->order_status_id = config('contants.order_status_unconfimred');
-
+        $order->order_status_id = config('contants.order_status_unconfirmed');
         $order->fill($request->all());
         $order->save();
 
+        $service_id = $request->input('service_id');
+        $order->services()->sync($service_id);
+
         $notification = notification('success', 'Thêm thành công');
-
         return redirect()->route('orders.index')->with($notification);
-
     }
 
     public function show($id)
     {
-        $order_id =head( Hashids::decode($id));
+        $order = $this->order_services->find($id);
 
-        if($order_id === false){
-            return view('admin.errors.404');
-        }
-
-        $order = $this->order_services->find($order_id);
+        $admin = config('contants.role_admin');
+        $manager = config('contants.role_manager');
+        $technician = config('contants.role_technician');
+        $receptionist = config('contants.role_receptionist');
 
         $type_services = $this->type_services->all();
-        $orders_status = $this->order_status_services->all();
+        $branches = $this->branch_services->all();
+        $users = $this->user_services->getUsersWithBranch($order->branch_id);
 
-        return view('admin.orders.show', compact('order', 'type_services', 'orders_status'));
+        if (Auth::check()){
+            $user_role = Auth::user()->role_id;
+
+            switch ($user_role){
+                case $admin:
+                    $orders_status = $this->order_status_services->all();
+                    break;
+                case $manager:
+                    $orders_status = $this->order_status_services->all();
+                    break;
+                case $technician:
+                    $orders_status = $this->order_status_services->forTechnician();
+                    break;
+                case $receptionist:
+                    $orders_status = $this->order_status_services->forReceptionist();
+                    break;
+
+            }
+        }
+
+
+        return view('admin.orders.show', compact(
+                'order',
+                'type_services',
+                'orders_status',
+                'branches',
+                'users'
+            )
+        );
     }
 
     public function update(Request $request, $order_id)
     {
-        $order_id =head( Hashids::decode($order_id));
         $status_completed = config('contants.order_status_finish');
 
-        if ( $request->order_status_id == $status_completed )
-        {
-            $bill_flag = $this->bill_services->getOneWithOrderId($order_id);
+        if ($request->order_status_id == $status_completed) {
+
             // kiểm tra xem lịch đặt đã có hóa đơn chưa
-            if ($bill_flag->first() ? $bill = $bill_flag->first() : $bill = new Bill())
-            // lấy giá của tất cả dịch vụ đã sử dụng
-            $bill->total_price = $this->service_services->getPriceWithServices($request->service_id);
+            $bill_flag = $this->bill_services->getOneWithOrderId($order_id);
+//            dd($bill_flag);
+
+            if ($bill_flag->first() ? $bill = $bill_flag->first() : $bill = new Bill()) {
+                // lấy giá của tất cả dịch vụ đã sử dụng
+                $bill->total_price = $this->service_services->getPriceWithServices($request->service_id);
+            }
             // lấy tiền tích điểm của khách
-            $accumulate = $this->accumulate_points_services->getPointsOfServices($request->phone_number);
+            $accumulate = $this->accumulate_points_services->getPointsOfGuest($request->phone_number);
+            //lấy danh sách loại thành viên
+            $membership_type = $this->membership_type->orderBy('asc');
 
             // nếu có rồi thì lấy ra tích điểm của khách
             if ($accumulate != null) {
                 $accumulate_of_guest = $accumulate;
-            }else{
-                // nếu chưa có thì tạo mới
-                $accumulate_points = new AccumulatePoints();
-                $accumulate_points->phone_number = $request->phone_number;
-                $accumulate_points->total_money = $bill->total_price;
-                $accumulate_points->save();
-
+            } else {
                 $accumulate_of_guest = 0;
             }
 
-            //lấy danh sách loại thành viên
-            $membership_type = $this->membership_type->all();
-
             // kiểm tra xem khách hàng thuộc lại thành viên nào và lấy % giảm giá
-            foreach ($membership_type as $membershipType){
-                if ($accumulate_of_guest <= $membershipType->money_level){
+            foreach ($membership_type as $membershipType) {
+                if ($accumulate_of_guest <= $membershipType->money_level) {
                     $bill->discount = $membershipType->discount_level;
                 }
             }
 
-            $bill->note = '';
             $bill->order_id = $order_id;
             $bill->bill_status_id = config('contants.bill_status_unpaid');
-            $bill->total_payment = $bill->total_price * ( 100 - $bill->discount )/100;
+            $bill->total_payment = $bill->total_price * (100 - $bill->discount) / 100;
             $bill->save();
         }
 
         $order = $this->order_services->find($order_id);
-        $order->service_id = implode(',',$request->service_id);
-        if (Auth::check() ? $order->updated_by = Auth::user()->full_name : '')
 
-        $order->fill($request->all());
+        if (Auth::check() ? $order->updated_by = Auth::user()->full_name : '') {
+            $order->fill($request->all());
+        }
         $order->save();
+        $service_id = $request->input('service_id');
+        $order->services()->sync($service_id);
 
-        $notification = notification('success', 'Cập nhật thành công');
+        return redirect()->route('orders.index')->with('toast_success', 'Cập nhật thành công !');
 
-        return redirect()->route('orders.index')->with($notification);
+    }
 
+    public function exportBill($order_id)
+    {
+        $bill_flag = $this->bill_services->getOneWithOrderId($order_id);
+        $order = $this->order_services->find($order_id);
+
+        // kiểm tra xem lịch đặt đã có hóa đơn chưa
+        if ($bill_flag->first() ? $bill = $bill_flag->first() : $bill = new Bill()) {
+            // lấy giá của tất cả dịch vụ đã sử dụng
+            $bill->total_price = $this->service_services->getPriceWithServices($order->service_id);
+        }
+        // lấy tiền tích điểm của khách
+        $accumulate = $this->accumulate_points_services->getPointsOfGuest($order->phone_number);
+        //lấy danh sách loại thành viên
+        $membership_type = $this->membership_type->orderBy('asc');
+
+        // nếu có rồi thì lấy ra tích điểm của khách
+        if ($accumulate != null) {
+            $accumulate_of_guest = $accumulate;
+        } else {
+            $accumulate_of_guest = 0;
+        }
+
+        // kiểm tra xem khách hàng thuộc lại thành viên nào và lấy % giảm giá
+        foreach ($membership_type as $membershipType) {
+            if ($accumulate_of_guest <= $membershipType->money_level) {
+                $bill->discount = $membershipType->discount_level;
+            }
+        }
+
+        $bill->order_id = $order_id;
+        $bill->bill_status_id = config('contants.bill_status_unpaid');
+        $bill->total_payment = $bill->total_price * (100 - $bill->discount) / 100;
+        $bill->save();
+
+        return redirect()->route('orders.index')->with('toast_success', 'Xuất hóa đơn thành công !');
     }
 }

@@ -19,6 +19,7 @@
                             <tr>
                                 <th width="40">STT</th>
                                 <th>Số điện thoại</th>
+                                <th>Họ và tên</th>
                                 <th>Tổng tiển</th>
                                 <th>Loại thành viên</th>
                                 <th width="80">Hành động</th>
@@ -29,6 +30,7 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ '0'.$item->phone_number }}</td>
+                                    <td>{{ $item->full_name }}</td>
                                     <td>{{ number_format($item->total_money,0,",",".") }}</td>
                                     <td>{{ $item->membershipType($item->total_money) }}</td>
                                     <td>
@@ -91,7 +93,7 @@
                 "columnDefs": [
                     {
                         "orderable": false,
-                        "targets": [3, 4]
+                        "targets": [0, 5]
                     }
                 ],
 

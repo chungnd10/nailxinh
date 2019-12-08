@@ -2,7 +2,7 @@
 @section('content')
     <section class="content">
         <div class="error-page">
-            <h2 class="headline text-yellow"> 404</h2>
+            <h2 class="headline text-yellow"> 403</h2>
 
             <div class="error-content">
                 <h3><i class="fa fa-warning text-danger"></i>Cấm truy cập.</h3>
