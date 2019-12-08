@@ -12,10 +12,11 @@
 <script src="admin_assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="admin_assets/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="admin_assets/bower_components/moment/min/moment.min.js"></script>
 <!-- bootstrap datepicker -->
 <script src="admin_assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- bootstrap datepimepicker -->
-<script src="admin_assets/bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="admin_assets/bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <!-- AdminLTE App -->
 <script src="admin_assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->

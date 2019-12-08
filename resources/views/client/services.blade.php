@@ -3,13 +3,14 @@
     <!-- Start: Breadcrumb Area
     ============================= -->
 
-    <section id="breadcrumb-area">
+    <section id="breadcrumb-area" class="breadcrumb-services">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
                     <h2>NailXinh</h2>
                     <ul class="breadcrumb-nav list-inline">
                         <li><a href="/">NailXinh</a></li>
+                        <i class="fas fa-chevron-right"></i>
                         <li>Dịch vụ</li>
                     </ul>
                 </div>

@@ -18,7 +18,7 @@ class WebSettingTableSeeder extends Seeder
                 'phone_number' => '0987654321',
                 'address' => '199 Quang Trung, Q.Hà Đông, TP HN',
                 'introduction' => 'NAILXINH là một trong số những hệ thống tiệm nail cao cấp ở Hà Nội, được đầu tư hệ thống trang thiết bị hiện đại',
-                'email' => 'nailxinh@gmail.com',
+                'email' => 'nailxinh1@gmail.com',
                 'logo' => 'logo.png',
                 'facebook' => 'https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FNail-Xinh-111390913633637%2F&tabs&width=255&height=196&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=399404564065453'
 

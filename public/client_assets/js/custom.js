@@ -38,7 +38,7 @@
             loop: true,
             dots: true,
             nav: true,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            navText: ['<i class="fa fa-long-arrow-alt-left"></i>', '<i class="fa fa-long-arrow-alt-right"></i>'],
             autoplay: true,
             autoplayTimeout: 5000,
             animateIn: 'fadeInUp',
@@ -49,12 +49,13 @@
         $(".feature-carousel").owlCarousel({
             items: 4,
             loop: true,
+            nav: true,
             margin:30,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            navText: ['<i class="fa fa-long-arrow-alt-left"></i>', '<i class="fa fa-long-arrow-alt-right"></i>'],
             autoplay: true,
             autoplayTimeout: 3000,
             animateIn: 'fadeInLeft',
-            animateOut: 'fadeInLeft',
+            animateOut: 'fadeInRight',
             smartSpeed: 250,
             responsive:{
                 0:{
@@ -77,7 +78,7 @@
             dots: true,
             nav: true,
             margin:30,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            navText:  ['<i class="fa fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
             autoplay: true,
             autoplayTimeout: 5000,
             animateIn: 'fadeInUp',
@@ -125,7 +126,7 @@
             loop: true,
             dots: false,
             nav: true,
-            navText: ['<i class="fa fa-long-arrow-alt-left"></i>', '<i class="fa fa-long-arrow-alt-right"></i>'],
+            navText:  ['<i class="fa fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
             margin: 30,
             autoplay: true,
             autoplayTimeout: 3000,
@@ -158,11 +159,48 @@
         }
         $('.search-form button').on('click', expand);
 
+        // Carousel show on mobile
+
+        $(".our_service_mobile").owlCarousel({
+            loop: true,
+            dots: true,
+            nav: true,
+            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
+            margin: 30,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                700: {
+                    items: 3,
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
+
+        // // check resize window 
+        // $(window).on("resize", function(event){
+        //     console.log( $(this).width() );
+        //     if( $(this).width() <= 480 ){
+        //         console.log(true);
+        //         $('#our_service_desk').addClass('hidden-on-mobile');
+        //         $('#our_service_mobi').addClass('show-on-mobile');
+        //     } else{
+
+        //         $('#our_service_desk').removelass('hidden-on-mobile');
+        //         $('#our_service_mobi').removeClass('show-on-mobile');
+        //     }
+        // });
+
 
         // testimonial Carousel
         $(".testimonial-carousel").owlCarousel({
             loop: true,
-            dots: true,
+            dots: false,
             nav: true,
             navText: ['<i class="fa fa-long-arrow-alt-left"></i>', '<i class="fa fa-long-arrow-alt-right"></i>'],
             margin: 30,

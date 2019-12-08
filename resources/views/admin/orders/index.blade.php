@@ -7,7 +7,7 @@
             <small>lịch đặt</small>
         </h1>
         <ol class="breadcrumb">
-            @can('update-orders')
+            @can('add-orders')
                 <a href="{{ route('orders.create') }}"
                    class="btn btn-sm btn-success">
                     <i class="fa fa-plus"></i> Thêm
@@ -94,7 +94,16 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Số điện thoại</th>
-                                                    <td>{{ $order->phone_number }}</td>
+                                                    <td>
+                                                        {{ $order->phone_number }}&nbsp;&nbsp;&nbsp;
+                                                        @can('add-restricted-lists')
+                                                            <a href="{{ route('restricted-lists.add', $order->phone_number) }}"
+                                                               class="btn btn-xs btn-danger"
+                                                               onclick="return confirm('Bạn có chắc chắn muốn thêm số điện thoại này vào danh sách hạn chế ?')">
+                                                                <i class="fa fa-exclamation-triangle"></i>
+                                                            </a>
+                                                        @endcan
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <th>Thời gian:</th>
@@ -136,7 +145,7 @@
                                                     <td>
                                                         @if($order->updated_by != '')
                                                             {{ $order->updated_by }}
-                                                            <i>- ( {{ date('H:i d-m-Y', strtotime($order->created_at)) }}) </i>
+                                                            <i>- ( {{ date('H:i d-m-Y', strtotime($order->updated_at)) }} ) </i>
                                                         @else
                                                             Không có
                                                         @endif
@@ -159,6 +168,13 @@
                                             </table>
                                         </div>
                                         <div class="modal-footer">
+                                            @can('print-bills')
+                                                <a href="{{ route('orders.export-bill', Hashids::encode($order->id)) }}"
+                                                   class="btn btn-success pull-left">
+                                                    <i class="fa fa-external-link"></i>
+                                                    Xuất hóa đơn
+                                                </a>
+                                            @endcan
                                             <button type="button" class="btn btn-default pull-right"
                                                     data-dismiss="modal">
                                                 Đóng

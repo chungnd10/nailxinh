@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Session\TokenMismatchException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
@@ -51,10 +52,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // this will be on a 403 exception
-//        if ($exception->getStatusCode() == 403) {
-//            return redirect()->route('login');
-//        }
         return parent::render($request, $exception);
     }
 

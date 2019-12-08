@@ -8,7 +8,6 @@ use App\User;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Intervention\Image\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -85,8 +84,6 @@ class UserController extends Controller
             $branchs = Auth::user()->branch->name.', '.Auth::user()->branch->address;
         }
 
-//        dd($branchs);
-
         return view('admin.users.show', compact('user',
                 'branchs',
                 'genders',
@@ -103,6 +100,8 @@ class UserController extends Controller
     public function update(AddUserRequest $request, $id)
     {
         $user = $this->user_services->find($id);
+
+        $this->authorize('show',$user);
 
         $user->fill($request->all())->save();
 
@@ -271,12 +270,8 @@ class UserController extends Controller
 
     public function updateProfile(UpdateProfileRequest $request, $id)
     {
-//        dd($request->all());
-
         $data = json_decode($request->get('image'), true);
         $file = $request->file('image');
-
-        dd($data, $file);
 
         $user = $this->user_services->find($id);
 
@@ -322,5 +317,17 @@ class UserController extends Controller
 
         return response('success', 200);
 
+    }
+
+    public function getUsersWithBranch(Request $request)
+    {
+        if ($request->ajax()) {
+            $branch_id = $request->branch_id;
+
+            $users =  $this->user_services->getUsersWithBranch($branch_id);
+
+            return response()->json($users);
+        }
+        return response('load diff fail !', 201);
     }
 }

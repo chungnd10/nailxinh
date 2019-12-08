@@ -46,7 +46,7 @@
 
     {{--START: statistic
     =======================--}}
-    @if($branch && $user && $service && $orders)
+    @if($branch || $user || $service || $orders)
         @include('client.layouts.statistic')
     @endif
     {{--END:  statistic

@@ -15,8 +15,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-         'App\Model' => 'App\Policies\ModelPolicy',
-          \App\User::class => \App\Policies\UserPolicy::class,
+        'App\Model' => 'App\Policies\ModelPolicy',
+        \App\User::class => \App\Policies\UserPolicy::class,
+        \App\Bill::class => \App\Policies\BillPolicy::class,
     ];
 
     /**
@@ -28,18 +29,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-
-        Gate::before(function ($user){
-
+        Gate::before(function ($user) {
             $role_admin = config('contants.role_admin');
-            if ($user->role_id == $role_admin ){
+            if ($user->role_id == $role_admin) {
                 return true;
             }
         });
 
-        if (!$this->app->runningInConsole()){
-            foreach (Permission::all() as $permission){
-                Gate::define($permission->name, function ($user) use ($permission){
+        if (!$this->app->runningInConsole()) {
+            foreach (Permission::all() as $permission) {
+                Gate::define($permission->name, function ($user) use ($permission) {
                     return $user->hasPermission($permission);
                 });
             }

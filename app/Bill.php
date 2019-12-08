@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Bill whereTotalPayment($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Bill whereTotalPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Bill whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Bill firstOrFail($value)
  * @mixin \Eloquent
  */
 class Bill extends Model
@@ -47,6 +48,11 @@ class Bill extends Model
       'bill_status_id'
     ];
 
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
     public function order()
     {
         return $this->belongsTo(Order::class);
@@ -63,6 +69,16 @@ class Bill extends Model
         $user = User::where('id', $user_id)->select('full_name')->get();
 
         return $user->first()->full_name;
+    }
+
+    // lấy danh sách dịch vụ cho hóa đơn
+    public function getServices($services_id)
+    {
+        $services_id = explode(',', $services_id);
+        $services = Service::whereIn('id', $services_id)->get();
+
+        return $services;
+
     }
 
 

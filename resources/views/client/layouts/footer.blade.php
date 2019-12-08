@@ -1,7 +1,7 @@
 <footer id="footer-widgets">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-4">
+            <div class="col-lg-4 col-md-6 col-sm-6 mb-lg-0 mb-4">
                 <aside class="widget widget_about">
                     <div class="footer-logo"><img src="client_assets/img/logo.png" alt=""></div>
                     <p>{{ $info->introduction }}</p>
@@ -12,30 +12,8 @@
                     </ul>
                 </aside>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-md-0 mb-4">
-                <aside class="widget widget_recent widget_links">
-                    <h4 class="widget-title"><img src="client_assets/img/section-icon.png" alt="">Chi nhánh</h4>
-                    
-                    <div class="widget-adress">
-                        <div class="adress-hn">
-                            <a href="#">
-                                Hà Nội
-                            </a>
-                        </div>
-                        <div class="adress-dn">
-                            <a href="#">
-                                Đà Nẵng
-                            </a>
-                        </div>
-                        <div class="adress-sg">
-                            <a href="#">
-                                Hồ chí minh
-                            </a>
-                        </div>
-                    </div>
-                </aside>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-4">
+            
+            <div class="col-lg-2 col-md-6 col-sm-6 mb-lg-0 mb-4">
                 <aside class="widget widget_links">
                     <h4 class="widget-title">
                         <img src="client_assets/img/section-icon.png" alt="">Menu
@@ -61,10 +39,18 @@
                                 <a href="{{ route('booking') }}">ĐẶT LỊCH</a>
                             </li>
                         </ul>
+                    </div>
+                </aside>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-6 mb-lg-0 mb-md-0 mb-4">
+                <aside class="widget widget_recent widget_links">
+                    <h4 class="widget-title"><img src="client_assets/img/section-icon.png" alt="">Loại dịch vụ</h4>
+                    
+                    <div class="widget-adress">
                         <ul>
                             @foreach($type_services as $type_service)
                                 <li>
-                                    <a href="{{ route('type-service', [$type_service->slug, $type_service->id ]) }}">{{ $type_service->name }}
+                                    <a class="text-uppercase" href="{{ route('type-service', [$type_service->slug, $type_service->id ]) }}">{{ $type_service->name }}
                                     </a>
                                 </li>
                             @endforeach
@@ -72,14 +58,14 @@
                     </div>
                 </aside>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-4 col-md-6 col-sm-6">
                 <aside class="widget widdget-instagram">
                     <h4 class="widget-title">
                         <img src="client_assets/img/section-icon.png" alt="">Theo dõi chúng tôi
                     </h4>
                     <div class="facebook-widget">
                         <iframe src="{{ $info->facebook }}"
-                                width="255" height="196"
+                                width="340" height="200"
                                 style="border:none;overflow:hidden"
                                 allowTransparency="true"
                                 allow="encrypted-media">
