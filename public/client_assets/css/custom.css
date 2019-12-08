@@ -7,7 +7,7 @@
 }
 
 #subscribe-form .error{
-    color: #fff !important;
+    color: var(--main-color-white) !important;
     margin-left: 15px;
 }
 .swal2-popup, .swal2-title {
@@ -15,5 +15,5 @@
         "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
 }
 .swal2-styled.swal2-confirm{
-    background: #ec5598 !important;
+    background: var(--main-color) !important;
 }

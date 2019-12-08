@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row hidden-mobile">
-            <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-lg-0">
+            <div class="col-lg-3 col-md-3 col-6 mb-5 mb-lg-0">
                 <div class="feature-box text-center">
                     <div class="feature-icon">
                         <img src="client_assets/img/feature-icon/feature-icon05.png" alt="">
@@ -19,7 +19,7 @@
                     <p>Đặt lịch online trên website</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-lg-0">
+            <div class="col-lg-3 col-md-3 col-6 mb-5 mb-lg-0">
                 <div class="feature-box text-center">
                     <div class="feature-icon">
                         <img src="client_assets/img/feature-icon/feature-icon06.png" alt="">
@@ -28,7 +28,7 @@
                     <p>Nhân viên gọi điện xác nhận</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 mb-5 mb-sm-0">
+            <div class="col-lg-3 col-md-3 col-6 mb-5 mb-sm-0">
                 <div class="feature-box text-center">
                     <div class="feature-icon">
                         <img src="client_assets/img/feature-icon/feature-icon03.png" alt="">
@@ -37,7 +37,7 @@
                     <p>Đến tiệm để làm dịch vụ</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-3 col-md-3 col-6">
                 <div class="feature-box text-center">
                     <div class="feature-icon">
                         <img src="client_assets/img/feature-icon/feature-icon07.png" alt="">
