@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBillsTable extends Migration
+class CreateOrderServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateBillsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bills', function (Blueprint $table) {
+        Schema::create('order_services', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('total_price', 15, 2);
-            $table->double('total_payment', 15, 2);
-            $table->integer('discount');
-            $table->string('note', 200)->nullable();
+            $table->timestamps();
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')
@@ -26,12 +23,12 @@ class CreateBillsTable extends Migration
                 ->on('orders')
                 ->onDelete('CASCADE');
 
-            $table->unsignedInteger('bill_status_id');
-            $table->foreign('bill_status_id')
+            $table->unsignedInteger('service_id');
+            $table->foreign('service_id')
                 ->references('id')
-                ->on('bill_statuses')
+                ->on('services')
                 ->onDelete('CASCADE');
-            $table->timestamps();
+
         });
     }
 
@@ -42,6 +39,6 @@ class CreateBillsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bills');
+        Schema::dropIfExists('order_services');
     }
 }

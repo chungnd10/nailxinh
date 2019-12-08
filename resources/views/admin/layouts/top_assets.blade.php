@@ -30,6 +30,8 @@
 <link rel="stylesheet" href="admin_assets/bower_components/select2/dist/css/select2.min.css">
 <!-- bootstrap datepicker -->
 <link rel="stylesheet" href="admin_assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<!-- bootstrap datepicker -->
+<link rel="stylesheet" href="admin_assets/bower_components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 <!-- Google Font -->
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">

@@ -115,6 +115,7 @@
             $('#time').datetimepicker({
                 format: 'yyyy-mm-dd hh:00',
                 minView: 1,
+                autoclose: true
             });
 
             //validate

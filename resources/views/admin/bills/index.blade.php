@@ -7,12 +7,12 @@
             <small>hoá đơn</small>
         </h1>
         <ol class="breadcrumb">
-            @can('update-orders')
-                <a href="{{ route('orders.create') }}"
-                   class="btn btn-sm btn-success">
-                    <i class="fa fa-plus"></i> Thêm
-                </a>
-            @endcan
+{{--            @can('update-orders')--}}
+{{--                <a href="{{ route('bills.create') }}"--}}
+{{--                   class="btn btn-sm btn-success">--}}
+{{--                    <i class="fa fa-plus"></i> Thêm--}}
+{{--                </a>--}}
+{{--            @endcan--}}
         </ol>
     </section>
     {{--Main content--}}
@@ -28,7 +28,6 @@
                                 <th width="40">STT</th>
                                 <th width="100">Khách hàng</th>
                                 <th>Tổng tiền(VNĐ )</th>
-                                <th>Kỹ thuật viên</th>
                                 <th>Ngày tạo</th>
                                 <th width="100">Trạng thái</th>
                                 <th width="80">
@@ -42,19 +41,18 @@
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $bill->full_name }}</td>
                                         <td>{{ number_format($bill->total_payment, 0, ',', '.') }}</td>
-                                        <td>{{ $bill->getNameUser($bill->user_id) }}</td>
                                         <td>{{ date('H:i d-m-Y', strtotime($bill->created_at)) }}</td>
                                         <td>
                                             <i class="fa fa-tag {{ tagColorStatus($bill->billStatus->name) }}" ></i>
                                             {{ $bill->billStatus->name }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('bills.show', Hashids::encode($bill->order_id, '123456789')) }}"
+                                            <a href="{{ route('bills.show', Hashids::encode($bill->id)) }}"
                                                class="btn btn-xs btn-primary">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             @if($bill->bill_status_id == config('contants.bill_status_unpaid'))
-                                                <a href="{{ route('bills.update', Hashids::encode($bill->id, '123456789')) }}"
+                                                <a href="{{ route('bills.update', Hashids::encode($bill->id)) }}"
                                                    class="btn btn-xs btn-warning">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
@@ -113,7 +111,7 @@
                 "columnDefs": [
                     {
                         "orderable": false,
-                        "targets": [6]
+                        "targets": [5]
                     }
                 ],
 

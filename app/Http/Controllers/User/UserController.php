@@ -101,6 +101,8 @@ class UserController extends Controller
     {
         $user = $this->user_services->find($id);
 
+        $this->authorize('show',$user);
+
         $user->fill($request->all())->save();
 
         return redirect()->route('users.index')->with('toast_success', 'Cập nhật thành công !');
@@ -315,5 +317,17 @@ class UserController extends Controller
 
         return response('success', 200);
 
+    }
+
+    public function getUsersWithBranch(Request $request)
+    {
+        if ($request->ajax()) {
+            $branch_id = $request->branch_id;
+
+            $users =  $this->user_services->getUsersWithBranch($branch_id);
+
+            return response()->json($users);
+        }
+        return response('load diff fail !', 201);
     }
 }

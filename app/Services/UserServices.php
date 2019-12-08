@@ -60,4 +60,14 @@ class UserServices
             ->get();
         return $users;
     }
+
+    public function getUsersWithBranch($branch_id)
+    {
+        $role_technician = config('contants.role_technician');
+        $users = User::where('role_id', $role_technician)
+            ->where('branch_id', $branch_id)
+            ->orderby('id', 'desc')
+            ->get();
+        return $users;
+    }
 }
