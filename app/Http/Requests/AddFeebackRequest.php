@@ -25,15 +25,13 @@ class AddFeebackRequest extends FormRequest
     {
         //trường hợp sửa
         $validate = [
-            'image'         => 'nullable|mimes:png,jpg,jpeg|max:2048',
             'content'       => 'required|max:300',
             'full_name'     => 'required|max:100',
         ];
 
         //trường hợp thêm
-
-        if (!$this->id) {
-            $validate['image'] = 'required|mimes:png,jpg,jpeg|max:2048';
+        if (!$this->id){
+            $validate['avatar_hidden']        = 'required';
         }
         return $validate;
     }
@@ -41,13 +39,11 @@ class AddFeebackRequest extends FormRequest
     public function messages()
     {
         return [
-            'image.required'        => '*Mục này không được để trống',
-            'image.mimes'           => '*Chỉ chấp nhận ảnh PNG, JPG, JPEG',
-            'image.max'             => '*Kích thước ảnh không được vượt quá 2MB',
-            'full_name.required'    => '*Mục này không được để trống',
-            'full_name.max'         => '*Không được vượt quá 100 ký tự',
-            'content.required'      => '*Mục này không được để trống',
-            'content.max'           => '*Không được vượt quá 300 ký tự',
+            'avatar_hidden.required'            => '*Mục này không được để trống',
+            'full_name.required'                => '*Mục này không được để trống',
+            'full_name.max'                     => '*Không được vượt quá 100 ký tự',
+            'content.required'                  => '*Mục này không được để trống',
+            'content.max'                       => '*Không được vượt quá 300 ký tự',
         ];
     }
 }

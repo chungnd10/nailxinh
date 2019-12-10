@@ -22,54 +22,64 @@
                     <div class="box-body">
                         <table class="table table-bordered table-hover" id="feedbacks_table">
                             <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th width="100">Ảnh</th>
-                                <th width="150">Họ tên</th>
-                                <th>Nội dung</th>
-                                <th width="70">Trạng thái</th>
-                                <th width="70">Hành động</th>
-                            </tr>
+                                <tr>
+                                    <th width="40" >STT</th>
+                                    <th width="100" class="nosort">Ảnh</th>
+                                    <th width="100">Họ tên</th>
+                                    <th width="150" class="nosort">Nội dung</th>
+                                    <th width="120">Ngày tạo</th>
+                                    <th width="120">Người tạo</th>
+                                    @can('edit-feedback')
+                                        <th width="70" class="nosort">Trạng thái</th>
+                                        <th width="70" class="nosort">Hành động</th>
+                                    @endcan
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach($feedbacks as $key => $item)
-                                <tr>
-                                    <td>{{ $key+1 }}</td>
-                                    <td>
-                                        <img width="80" style="border-radius: 50%"
-                                             src="upload/images/feedbacks/{{ $item->image }}">
-                                    </td>
-                                    <td>{{ $item->full_name }}</td>
-                                    <td>
-                                        <span class="more">
-                                            {{ $item->content }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="hidden">{{ $item->display_status_id }}</span>
-                                        <label class="switch">
-                                            <input type="checkbox"
-                                                   name="display_status_id"
-                                                   class="display_status_id"
-                                                   data-id="{{ $item->id }}"
-                                                    {{ $item->display_status_id == config('contants.display_status_display') ? 'checked' : ''}}
-                                            >
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('feedbacks.show', Hashids::encode($item->id)) }}"
-                                           class="btn btn-xs btn-warning">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a href="{{ route('feedbacks.destroy', Hashids::encode($item->id)) }}"
-                                           class="btn btn-xs btn-danger"
-                                           onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach($feedbacks as $key => $item)
+                                    <tr>
+                                        <td>{{ $key+1 }}</td>
+                                        <td>
+                                            <img width="80" style="border-radius: 50%"
+                                                 src="upload/images/feedbacks/{{ $item->image }}">
+                                        </td>
+                                        <td>{{ $item->full_name }}</td>
+                                        <td><span class="more">{{ $item->content }}</span></td>
+                                        <td>{{ date('H:i d-m-Y', strtotime($item->created_at)) }}</td>
+                                        <td>{{ $item->user->full_name }}</td>
+                                        @can('edit-feedback')
+                                            <td>
+                                                <span class="hidden">{{ $item->display_status_id }}</span>
+                                                <label class="switch">
+                                                    <input type="checkbox"
+                                                           name="display_status_id"
+                                                           class="display_status_id"
+                                                           data-id="{{ $item->id }}"
+                                                            {{ $item->display_status_id == config('contants.display_status_display') ? 'checked' : ''}}
+                                                    >
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </td>
+                                        @endcan
+                                        @can('edit-feedback')
+                                            <td>
+                                                @can('edit-feedback')
+                                                    <a href="{{ route('feedbacks.show', Hashids::encode($item->id)) }}"
+                                                       class="btn btn-xs btn-warning">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                @endcan
+                                                @can('remove-feedback')
+                                                    <a href="{{ route('feedbacks.destroy', Hashids::encode($item->id)) }}"
+                                                       class="btn btn-xs btn-danger"
+                                                       onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                @endcan
+                                            </td>
+                                        @endcan
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -115,15 +125,10 @@
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
-                'ordering': true,
                 'autoWidth': true,
+                'ordering': true,
                 "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [1, 3, 5]
-                    }
-                ]
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });
 
             // hide content
@@ -132,17 +137,35 @@
 
             // change status
             $('.display_status_id').change(function () {
-                var display_status_id = $(this).prop('checked') === true ? "{{ config('contants.display_status_display') }}" : "{{ config('contants.display_status_hide') }}";
-                var id = $(this).data('id');
+                let display_status_id = $(this).prop('checked') === true ? "{{ config('contants.display_status_display') }}" : "{{ config('contants.display_status_hide') }}";
+                let id = $(this).data('id');
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    showCloseButton: true
+                });
 
                 $.ajax({
                     type: "GET",
                     dataType: "json",
                     url: "{{ route('feedbacks.change-status') }}",
                     data: {'display_status_id': display_status_id, 'id': id},
-                    success: function (data) {
-                        console.log(data.success)
-                    }
+                    success: function () {
+                        Toast.fire({
+                            type: 'success',
+                            title: 'Thay đổi thành công'
+                        })
+                    },
+                    error: function () {
+                        Toast.fire({
+                            type: 'error',
+                            title: 'Thay đổi thất bại'
+                        })
+                    },
+
                 });
             })
             //end change status

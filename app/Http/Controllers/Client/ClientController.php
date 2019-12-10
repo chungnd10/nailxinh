@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Client;
 use App\Introduction;
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\Service;
 use App\Subscribe;
 use App\User;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class ClientController extends Controller
         $service = $this->service_services->count();
         $orders = $this->order_services->count();
         $feedbacks = $this->feedback_services->allWithDisplayStatus($display_status_id);
-        $slides = $this->slide_services->allDisplay();
+        $slides = $this->slide_services->allDisplay('asc');
         $technicians = $this->user_services->getTechnician();
         $index_active = true;
 
@@ -73,11 +74,13 @@ class ClientController extends Controller
         return view('client.services', compact('feedbacks', 'services_active'));
     }
 
-    public function servicesDetail($slug, $id)
+    public function servicesDetail($slug)
     {
-        $service = $this->service_services->find($id);
-
-        $process = $this->process_of_services->getProcessWithType($id);
+        $service = $this->service_services->findBySlug($slug);
+        if ($service == null){
+            return view('client.errors.404');
+        }
+        $process = $this->process_of_services->getProcessWithType($service->id);
 
         return view('client.service-detail', compact('service', 'process'));
     }
@@ -91,7 +94,7 @@ class ClientController extends Controller
     {
         $booking_active = true;
         $branchs = $this->branch_services->all();
-        $type_services = $this->type_services->all();
+        $type_services = $this->type_services->all('asc');
         $users = $this->user_services->getTechnician();
 
         return view('client.booking', compact('branchs', 'type_services', 'users', 'booking_active'));
@@ -169,13 +172,18 @@ class ClientController extends Controller
         }
     }
 
+    /*
+     * Ajax get employees
+     *
+     */
     public function getEmployees(Request $request)
     {
         if ($request->ajax()){
             $branch_id = $request->branch_id;
             $service_id = $request->service_id;
 
-            $users = User::where('branch_id', $branch_id)
+            $users = User::join('user_services', 'user_services.user_id', '=','user.id')
+                ->where('branch_id', $branch_id)
                 ->where('service_id', $service_id)
                 ->get();
 

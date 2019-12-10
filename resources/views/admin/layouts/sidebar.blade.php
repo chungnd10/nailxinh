@@ -283,7 +283,7 @@
                         @can('edit-web-settings')
                             <li>
                                 <a href="{{ route('web-settings.index') }}">
-                                    <i class="fa fa-angle-right"></i>Thông tin
+                                    <i class="fa fa-angle-right"></i>Cài đặt webstite
                                 </a>
                             </li>
                         @endcan
