@@ -12,6 +12,6 @@ class CommonComposer extends Controller
     {
         $view->with( 'info', $this->web_setting_services->first() );
 
-        $view->with( 'type_services', $this->type_services->all() );
+        $view->with( 'type_services', $this->type_services->all('asc') );
     }
 }

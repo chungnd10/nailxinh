@@ -18,8 +18,17 @@
                             @foreach($type_services as $type_service)
                                 @if($type_service->getServices($type_service->id)->isNotEmpty())
                                     <li class="nav-item">
-                                        <a class="nav-link {{ $loop->first ? 'active' : '' }}" data-toggle="tab"
-                                           href="#{{ $type_service->slug }}">{{ $type_service->name }}</a>
+                                        <a class="nav-link
+                                            @if(request()->route('slug') && request()->route('slug') == $type_service->slug)
+                                                active
+                                            @else
+                                                 {{ !request()->route('slug') && $loop->first ? 'active' : '' }}
+                                            @endif
+                                            "
+                                           data-toggle="tab"
+                                           href="#{{ $type_service->slug }}"
+                                        >
+                                            {{ $type_service->name }}</a>
                                     </li>
                                 @endif
                             @endforeach
@@ -28,14 +37,20 @@
                     <div class="tab-content">
                         @foreach($type_services as $type_service)
                             <div id="{{ $type_service->slug }}"
-                                 class="tab-pane {{ $loop->first ? 'fade-in active' : '' }}"
-                            >
+                                 class="tab-pane
+                                 @if(request()->route('slug') && request()->route('slug') == $type_service->slug)
+                                     active
+                                 @else
+                                     {{ !request()->route('slug') && $loop->first ? 'active' : '' }}
+                                 @endif
+                            ">
                                 @foreach($type_service->getServices($type_service->id) as $service)
                                     @if($service)
                                         <ul>
                                             <li>
-                                                <a href="{{ route('service-detail', [ $service->slug, $service->id ] ) }}">
-                                                    <img width="80" class="fix-border-radius"
+                                                <a href="{{ route('service-detail', $service->slug ) }}">
+                                                    <img width="80"
+                                                         class="fix-border-radius"
                                                          src="upload/images/service/{{ $service->image }}"
                                                          alt="services">
                                                     <h4>{{ limit($service->name, 19, '...') }}

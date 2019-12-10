@@ -2,9 +2,7 @@
 
 namespace App;
 
-use App\Services\TypeServiceServices;
 use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\Service
  *
@@ -52,6 +50,7 @@ class Service extends Model
     	'completion_time',
     	'type_of_services_id',
     ];
+
     
     public function typeService(){
     	return $this->belongsTo(TypeOfService::class,'type_of_services_id');

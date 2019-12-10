@@ -44,7 +44,7 @@
                                         <img width="50" src="upload/images/service/{{ $item->image }}" alt="image">
                                     </td>
                                     <td width="100">{{ $item->typeService->name }}</td>
-                                   	<td>{{ number_format($item->price,2,",",".")}}</td>
+                                   	<td>{{ number_format($item->price,0,",",".")}}</td>
                                    	<td width="80">{{ $item->completion_time}}</td>
                                     <td>
                                         @if($item->description != "")

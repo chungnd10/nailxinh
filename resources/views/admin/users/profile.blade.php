@@ -10,40 +10,55 @@
     {{--Main content--}}
     <section class="content">
         <div class="row">
+            <form class="form-horizontal"
+                                  action="{{ route('profile', Hashids::encode($user->id)) }}"
+                                  method="POST"
+                                  enctype="multipart/form-data"
+                                  id="updateInfoProfile"
+            >
+            @csrf
             <div class="col-md-3">
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
                         <ul class="list-group list-group-unbordered list-group-border-top">
-                            <label class="label" data-toggle="tooltip" title="Thay đổi ảnh">
-                                <img class="rounded profile-user-img img-responsive img-circle" id="avatar"
-                                     src="upload/images/users/{{ $user->avatar }}" alt="avatar">
-                                <input type="file" class="sr-only" id="input" name="image" accept="image/*">
-                            </label>
-                            <div class="modal fade" id="modal" tabindex="-1" role="dialog"
-                                 aria-labelledby="modalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalLabel">Cắt ảnh</h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="img-container">
-                                                <img id="image"
-                                                     src="upload/images/users/{{ $user->avatar }}"
-                                                     height="300"
-                                                     width="100%">
+                            <div class="form-group">
+                                <label class="label" data-toggle="tooltip" title="Thay đổi ảnh">
+                                    <img style="width: 50%;" class="rounded profile-user-img img-responsive img-circle"
+                                         id="avatar"
+                                         src="upload/images/users/{{ $user->avatar }}" alt="avatar">
+                                    <input type="file" class="sr-only" id="input" name="image" accept="image/*">
+                                </label>
+                                <span class="alert"></span>
+                                <input type="hidden" class="form-control" name="avatar_hidden" id="avatar_hidden">
+                                @if($errors->first('avatar_hidden'))
+                                    <span class="text-danger">{{ $errors->first('avatar_hidden') }}</span>
+                                @endif
+                                <div class="modal fade" id="modal" tabindex="-1" role="dialog"
+                                     aria-labelledby="modalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalLabel">Cắt ảnh</h5>
                                             </div>
-                                            <div class="preview"></div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">
-                                                Hủy
-                                            </button>
-                                            <button type="button" class="btn btn-primary" id="crop">Cắt
-                                            </button>
+                                            <div class="modal-body">
+                                                <div class="img-container">
+                                                    <img id="image"
+                                                         src="upload/images/users/{{ $user->avatar }}"
+                                                         height="300"
+                                                         width="100%">
+                                                </div>
+                                                <div class="preview"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                    Hủy
+                                                </button>
+                                                <button type="button" class="btn btn-primary" id="crop">Cắt
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -70,147 +85,140 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
-                            <form class="form-horizontal"
-                                  action="{{ route('profile', $user->id) }}"
-                                  method="POST"
-                                  enctype="multipart/form-data"
-                                  id="updateInfoProfile"
-                            >
-                                @csrf
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Họ tên<span
-                                                class="text-danger">*</span></label>
-                                    <div class="col-sm-4">
-                                        <input type="text"
-                                               class="form-control"
-                                               value="{{ old('full_name', $user->full_name)}}"
-                                               name="full_name">
-                                        @if($errors->first('full_name'))
-                                            <span class="text-danger">{{ $errors->first('full_name') }}</span>
-                                        @endif
-                                    </div>
-                                    <label class="col-sm-2 control-label">Email <span
-                                                class="text-danger">*</span></label>
-                                    <div class="col-sm-4">
-                                        <p>{{ $user->email }}</p>
-                                    </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Họ tên<span
+                                            class="text-danger">*</span></label>
+                                <div class="col-sm-4">
+                                    <input type="text"
+                                           class="form-control"
+                                           value="{{ old('full_name', $user->full_name)}}"
+                                           name="full_name">
+                                    @if($errors->first('full_name'))
+                                        <span class="text-danger">{{ $errors->first('full_name') }}</span>
+                                    @endif
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Ngày sinh<span
-                                                class="text-danger">*</span></label>
-                                    <div class="col-sm-4">
-                                        <input type="text"
-                                               class="form-control"
-                                               value="{{ old('birthday', $user->birthday)}}"
-                                               name="birthday"
-                                               data-date-format='yyyy-mm-dd'
-                                               id="birthday">
-                                        @if($errors->first('birthday'))
-                                            <span class="text-danger">{{ $errors->first('birthday') }}</span>
-                                        @endif
-                                    </div>
+                                <label class="col-sm-2 control-label">Email <span
+                                            class="text-danger">*</span></label>
+                                <div class="col-sm-4">
+                                    <p>{{ $user->email }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Ngày sinh<span
+                                            class="text-danger">*</span></label>
+                                <div class="col-sm-4">
+                                    <input type="text"
+                                           class="form-control"
+                                           value="{{ old('birthday', $user->birthday)}}"
+                                           name="birthday"
+                                           data-date-format='yyyy-mm-dd'
+                                           id="birthday">
+                                    @if($errors->first('birthday'))
+                                        <span class="text-danger">{{ $errors->first('birthday') }}</span>
+                                    @endif
+                                </div>
 
-                                    <label class="col-sm-2 control-label">Chi nhánh<span
-                                                class="text-danger">*</span></label>
-                                    <div class="col-sm-4">
-                                        @if(Auth::check())
-                                            @if(Auth::user()->isAdmin())
-                                                <select name="branch_id" class="form-control">
-                                                    @foreach($branchs as $item)
-                                                        <option value="{{ $item->id }}"
-                                                                @if($user->branch_id == $item->id)
-                                                                selected
-                                                                @endif
-                                                        >{{ $item->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            @else
-                                                <p>{{ $user->branch->name. ', '.$user->branch->address }}</p>
-                                            @endif
+                                <label class="col-sm-2 control-label">Chi nhánh<span
+                                            class="text-danger">*</span></label>
+                                <div class="col-sm-4">
+                                    @if(Auth::check())
+                                        @if(Auth::user()->isAdmin())
+                                            <select name="branch_id" class="form-control">
+                                                @foreach($branchs as $item)
+                                                    <option value="{{ $item->id }}"
+                                                            @if($user->branch_id == $item->id)
+                                                            selected
+                                                            @endif
+                                                    >{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <p>{{ $user->branch->name. ', '.$user->branch->address }}</p>
                                         @endif
+                                    @endif
 
-                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">SĐT<span class="text-danger">*</span></label>
-                                    <div class="col-sm-4">
-                                        <input type="text"
-                                               class="form-control"
-                                               value="{{ old('phone_number', $user->phone_number)}}"
-                                               name="phone_number">
-                                        @if($errors->first('phone_number'))
-                                            <span class="text-danger">{{ $errors->first('phone_number') }}</span>
-                                        @endif
-                                    </div>
-                                    <label class="col-sm-2 control-label">Quyền<span
-                                                class="text-danger">*</span></label>
-                                    <div class="col-sm-4">
-                                        @if(Auth::check())
-                                            <p>{{ $user->role->name }}</p>
-                                        @endif
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">SĐT<span class="text-danger">*</span></label>
+                                <div class="col-sm-4">
+                                    <input type="text"
+                                           class="form-control"
+                                           value="{{ old('phone_number', $user->phone_number)}}"
+                                           name="phone_number">
+                                    @if($errors->first('phone_number'))
+                                        <span class="text-danger">{{ $errors->first('phone_number') }}</span>
+                                    @endif
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Giới tính<span
-                                                class="text-danger">*</span></label>
-                                    <div class="col-sm-4">
-                                        @foreach($genders as $item)
-                                            <input type="radio"
-                                                   name="gender_id"
-                                                   value="{{ $item->id }}"
-                                                   @if($user->gender_id == $item->id)
-                                                   checked
-                                                    @endif
-                                            >&nbsp;&nbsp;
-                                            {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        @endforeach
-                                    </div>
-                                    <label class="col-sm-2 control-label">Trạng thái<span
-                                                class="text-danger">*</span></label>
-                                    <div class="col-sm-4">
-                                        <p>{{ $user->operationStatus->name }}</p>
-                                    </div>
+                                <label class="col-sm-2 control-label">Quyền<span
+                                            class="text-danger">*</span></label>
+                                <div class="col-sm-4">
+                                    @if(Auth::check())
+                                        <p>{{ $user->role->name }}</p>
+                                    @endif
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Địa chỉ<span
-                                                class="text-danger">*</span></label>
-                                    <div class="col-sm-10">
-                                        <input type="text"
-                                               class="form-control"
-                                               value="{{ old('address', $user->address)}}"
-                                               name="address">
-                                        @if($errors->first('address'))
-                                            <span class="text-danger">{{ $errors->first('address') }}</span>
-                                        @endif
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Giới tính<span
+                                            class="text-danger">*</span></label>
+                                <div class="col-sm-4">
+                                    @foreach($genders as $item)
+                                        <input type="radio"
+                                               name="gender_id"
+                                               value="{{ $item->id }}"
+                                               @if($user->gender_id == $item->id)
+                                               checked
+                                                @endif
+                                        >&nbsp;&nbsp;
+                                        {{ $item->name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    @endforeach
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label"></label>
-                                    <div class="col-sm-10">
-                                    </div>
+                                <label class="col-sm-2 control-label">Trạng thái<span
+                                            class="text-danger">*</span></label>
+                                <div class="col-sm-4">
+                                    <p>{{ $user->operationStatus->name }}</p>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <a href="{{ url()->previous() }}"
-                                           class="btn btn-default"
-                                        >
-                                            <i class="fa fa-arrow-circle-o-left"></i>
-                                            Trở về
-                                        </a>
-                                        <button type="submit" class="btn btn-success">
-                                            <i class="fa fa-save"></i>
-                                            Cập nhật
-                                        </button>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Địa chỉ<span
+                                            class="text-danger">*</span></label>
+                                <div class="col-sm-10">
+                                    <input type="text"
+                                           class="form-control"
+                                           value="{{ old('address', $user->address)}}"
+                                           name="address">
+                                    @if($errors->first('address'))
+                                        <span class="text-danger">{{ $errors->first('address') }}</span>
+                                    @endif
                                 </div>
-                            </form>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <a href="{{ url()->previous() }}"
+                                       class="btn btn-default"
+                                    >
+                                        <i class="fa fa-arrow-circle-o-left"></i>
+                                        Trở về
+                                    </a>
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-save"></i>
+                                        Cập nhật
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+                        </form>
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="tab_2">
                             <div class="row">
                                 <div class="col-md-12 ">
                                     <form class="form-horizontal"
-                                          action="{{route('change-password',$user->id )}}"
+                                          action="{{route('change-password',Hashids::encode($user->id) )}}"
                                           method="post"
                                           id="changePassword"
                                     >
@@ -288,7 +296,6 @@
             <!-- /.col -->
         </div>
         <!-- /.row -->
-
     </section>
 @endsection
 @section('script')
@@ -386,14 +393,11 @@
 
         });
     </script>
-
-    <script>
+    <script type="text/javascript">
         window.addEventListener('DOMContentLoaded', function () {
             let avatar = document.getElementById('avatar');
             let image = document.getElementById('image');
             let input = document.getElementById('input');
-            let $progress = $('.progress');
-            let $progressBar = $('.progressBar');
             let $alert = $('.alert');
             let $modal = $('#modal');
             let cropper;
@@ -410,7 +414,6 @@
                 };
                 let reader;
                 let file;
-                let url;
 
                 if (files && files.length > 0) {
                     file = files[0];
@@ -439,7 +442,7 @@
                     dragMode: 'move',
                     aspectRatio: 1 / 1,
                     built: function () {
-                        $toCrop.cropper("setCropBoxData", {width: "200", height: "200"});
+                        $toCrop.cropper("setCropBoxData", {width: "320", height: "320"});
                     }
                 });
             }).on('hidden.bs.modal', function () {
@@ -448,82 +451,22 @@
             });
 
             document.getElementById('crop').addEventListener('click', function () {
-                let initialAvatarURL;
                 let canvas;
-
                 $modal.modal('hide');
 
                 if (cropper) {
                     canvas = cropper.getCroppedCanvas({
-                        width: 300,
-                        height: 300,
-                        minWidth: 300,
-                        minHeight: 300,
-                        maxWidth: 600,
-                        maxHeight: 600,
+                        width: 320,
+                        height: 320,
                     });
-                    initialAvatarURL = avatar.src;
-                    avatar.src = canvas.toDataURL();
-                    $progress.show();
+
+                    avatar.src = canvas.toDataURL('image/jpeg');
                     $alert.removeClass('alert-success alert-warning');
-                    canvas.toBlob(function (blob) {
-                        let formData = new FormData();
-                        formData.append('avatar', blob, '.jpg')
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top',
-                            showConfirmButton: false,
-                            timer: 5000,
-                            showCloseButton: true
-                        });
 
-                        $.ajax("{{ route('users.change-image-profile', Hashids::encode($user->id) )}}", {
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            method: "POST",
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-
-                            xhr: function () {
-                                let xhr = new XMLHttpRequest();
-
-                                xhr.upload.onprogress = function (e) {
-                                    let percent = '0';
-                                    let percentage = '0%';
-
-                                    if (e.lengthComputable) {
-                                        percent = Math.round((e.loaded / e.total) * 100);
-                                        percentage = percent + '%';
-                                        $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
-                                    }
-                                };
-                                return xhr;
-                            },
-                            success: function () {
-                                Toast.fire({
-                                    type: 'success',
-                                    title: 'Thay đổi ảnh thành công'
-                                })
-                            },
-
-                            error: function () {
-                                avatar.src = initialAvatarURL;
-                                Toast.fire({
-                                    type: 'error',
-                                    title: 'Thay đổi ảnh thất bại'
-                                })
-                            },
-                            complete: function () {
-                                $progress.hide();
-                            },
-                        });
-                    });
+                    $("#avatar_hidden").val(avatar.src);
+                    $("#avatar_hidden-error").hide();
                 }
             });
-
         });
     </script>
-
 @endsection

@@ -16,13 +16,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <img class="profile-user-img img-responsive img-slide"
+                                <img class="profile-user-img img-responsive" style="width: 90%"
                                      src="upload/images/slides/slide-default.png"
                                      id="proImg"
                                      alt="Slide picture">
                             </div>
                             <div class="form-group">
                                 <label>Ảnh</label><span class="text-danger">*</span>
+                                <span class="text-warning">( Kích thước ảnh khuyến nghị: 1920*845px)</span>
                                 <input type="file"
                                        class="form-control"
                                        name="images"
