@@ -26,10 +26,11 @@ Route::get('/contact', 'Client\ClientController@contact')
 
 Route::get('/services', 'Client\ClientController@services')
     ->name('services');
-Route::get('/services-detail/{slug}/{service}', 'Client\ClientController@servicesDetail')
+
+Route::get('/services/{slug}', 'Client\ClientController@servicesDetail')
     ->name('service-detail');
 
-Route::get('/type-services/{slug}/{service}', 'Client\ClientController@typeServices')
+Route::get('/type-services/{slug}', 'Client\ClientController@typeServices')
     ->name('type-service');
 
 Route::get('/booking', 'Client\ClientController@booking')
@@ -48,6 +49,9 @@ Route::post('/subscribe','Client\ClientController@subscribe')
 
 Route::get('/download-excel','Subscribe\SubscribeController@downloadExcel')
     ->name('download-excel');
+
+Route::get('/ajax/get-employees', 'Client\ClientController@getEmployees')
+    ->name('ajax.get-employees');
 
 // end client
 

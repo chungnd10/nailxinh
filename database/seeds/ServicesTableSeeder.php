@@ -20,7 +20,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 150000,
                 'completion_time' => '1 giờ',
                 'type_of_services_id' => 1,
-                'image' => '1573045031service04.png'
+                'image' => '125def69b9e2d09.jpg'
             ],
             [
                 'name' => 'Chà gót chân',
@@ -29,7 +29,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 80000,
                 'completion_time' => '30 phút',
                 'type_of_services_id' => 1,
-                'image' => '1573045047service06.png'
+                'image' => '125def6985b3c46.jpg'
             ],
             [
                 'name' => 'Nối mi',
@@ -38,7 +38,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 200000,
                 'completion_time' => '1 giờ',
                 'type_of_services_id' => 2,
-                'image' => '1573045057service07.png'
+                'image' => '125def69182d4d5.jpg'
             ],
             [
                 'name' => 'Uốn mi',
@@ -47,7 +47,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 200000,
                 'completion_time' => '40 phút',
                 'type_of_services_id' => 2,
-                'image' => '1573045065service08.png'
+                'image' => '125def68b0e042e.jpg'
             ],
             [
                 'name' => 'Combo uốn mi + wax mày',
@@ -56,7 +56,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 350000,
                 'completion_time' => '1 giờ',
                 'type_of_services_id' => 2,
-                'image' => '1573045075service05.png'
+                'image' => '125def68a21e9dd.jpg'
             ],
             [
                 'name' => 'Dặm lại mi ',
@@ -65,7 +65,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 150000,
                 'completion_time' => '30 phút',
                 'type_of_services_id' => 2,
-                'image' => '1573045092service02.png'
+                'image' => '125def67b1057be.jpg'
             ],
             [
                 'name' => 'Nhuộm mi',
@@ -74,7 +74,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 200000,
                 'completion_time' => '30 phút',
                 'type_of_services_id' => 2,
-                'image' => '1573045100service01.png'
+                'image' => '125def6781d849e.jpg'
             ],
             [
                 'name' => 'Tháo mi',
@@ -83,7 +83,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 50000,
                 'completion_time' => '30 phút',
                 'type_of_services_id' => 2,
-                'image' => '1573045137portfolio07.png'
+                'image' => '125def674561f29.jpg'
             ],
             [
                 'name' => 'Wax lông mày',
@@ -92,7 +92,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 200000,
                 'completion_time' => '30 phút',
                 'type_of_services_id' => 3,
-                'image' => '1573045151portfolio06.png'
+                'image' => '125def6709c3ff7.jpg'
             ],
             [
                 'name' => 'Điêu khắc lông mày ',
@@ -101,7 +101,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 2000000,
                 'completion_time' => '1 giờ 30 phút',
                 'type_of_services_id' => 3,
-                'image' => '1573045160portfolio08.png'
+                'image' => '125def66c287926.jpg'
             ],
             [
                 'name' => 'Phun lông mày ',
@@ -110,7 +110,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 2150000,
                 'completion_time' => '1 giờ',
                 'type_of_services_id' => 3,
-                'image' => '1573045215instagram02.jpg'
+                'image' => '125def669724656.jpg'
             ],
             [
                 'name' => 'Phun mí - Eyeliner spray',
@@ -119,7 +119,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 150000,
                 'completion_time' => '1 giờ',
                 'type_of_services_id' => 3,
-                'image' => '1573045198instagram03.jpg'
+                'image' => '125def6684bae84.jpg'
             ],
             [
                 'name' => 'Phun môi 3D',
@@ -128,7 +128,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 500000,
                 'completion_time' => '2 giờ',
                 'type_of_services_id' => 4,
-                'image' => '1573291957moi4.jpg'
+                'image' => '125def65f400701.jpg'
             ],
             [
                 'name' => 'Phun môi Pha lê',
@@ -137,7 +137,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 1200000,
                 'completion_time' => '2 giờ',
                 'type_of_services_id' => 4,
-                'image' => '1573292012moi3.jpg'
+                'image' => '125def65e46edd8.jpg'
             ],
             [
                 'name' => 'Phun môi Collagen',
@@ -146,7 +146,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 1500000.,
                 'completion_time' => '2 giờ',
                 'type_of_services_id' => 4,
-                'image' => '1573292045moi1.jpg'
+                'image' => '125def65d63f0ee.jpg'
             ],
             [
                 'name' => 'Phun môi thế bào gốc',
@@ -155,7 +155,7 @@ class ServicesTableSeeder extends Seeder
                 'price' => 2000000,
                 'completion_time' => '1 giờ',
                 'type_of_services_id' => 4,
-                'image' => '1573292104moi2.jpeg'
+                'image' => '125def65c476cf0.jpg'
             ]
 
         ];

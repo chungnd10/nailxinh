@@ -19,22 +19,45 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <img style="width: 130px;" class="profile-user-img img-responsive img-circle"
-                                     src="upload/images/feedbacks/{{ $feedback->image }}"
-                                     alt="User profile picture"
-                                     id="proImg"
-                                >
-                            </div>
-                            <div class="form-group">
-                                <label>Ảnh</label><span class="text-danger">*</span>
-                                <input type="file"
-                                       class="form-control"
-                                       name="image"
-                                       id="image"
-                                >
-                                @if($errors->first('image'))
-                                    <span class="text-danger">{{ $errors->first('image') }}</span>
+                                <label class="label" data-toggle="tooltip" title="Thay đổi ảnh">
+                                    <img style="width: 200px;" class="rounded profile-user-img img-responsive"
+                                         id="avatar"
+                                         src="upload/images/feedbacks/{{ $feedback->image }}" alt="avatar">
+                                    <input type="file" class="sr-only" id="input" name="image" accept="image/*">
+                                </label>
+                                <span class="alert"></span>
+                                <input type="hidden" class="form-control" name="avatar_hidden" id="avatar_hidden">
+                                @if($errors->first('avatar_hidden'))
+                                    <span class="text-danger">{{ $errors->first('avatar_hidden') }}</span>
                                 @endif
+                                <div class="modal fade" id="modal" tabindex="-1" role="dialog"
+                                     aria-labelledby="modalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modalLabel">Cắt ảnh</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="img-container">
+                                                    <img id="image"
+                                                         src="upload/images/feedbacks/{{ $feedback->image }}"
+                                                         height="300"
+                                                         width="100%">
+                                                </div>
+                                                <div class="preview"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                    Hủy
+                                                </button>
+                                                <button type="button" class="btn btn-primary" id="crop">Cắt
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- /.col -->
@@ -55,6 +78,9 @@
                                 <label>Nội dung</label><span class="text-danger">*</span>
                                 <textarea name="content" id="" class="form-control"
                                           rows="9">{{old('content', $feedback->content)}}</textarea>
+                                @if($errors->first('content'))
+                                    <span class="text-danger">{{ $errors->first('content') }}</span>
+                                @endif
                             </div>
                             <!-- /.form-group -->
                         </div>
@@ -81,48 +107,104 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        $(document).ready(function () {
-            var inputImage = document.querySelector(`[name="image"]`);
-            inputImage.onchange = function () {
-                var file = this.files[0];
-                if (file == undefined) {
-                    document.querySelector('#proImg').src = 'upload/images/feedbacks/feedback-default.png';
-                } else {
-                    getBase64(file, '#proImg');
-                }
-            }
+        window.addEventListener('DOMContentLoaded', function () {
+            let avatar = document.getElementById('avatar');
+            let image = document.getElementById('image');
+            let input = document.getElementById('input');
+            let $alert = $('.alert');
+            let $modal = $('#modal');
+            let cropper;
 
-            //validate
-            $("#addFeedbacks").validate({
-                rules: {
-                    image: {
-                        extension: "jpg|jpeg|png",
-                        fileSize : 2097152,
-                    },
-                    full_name: {
-                        required: true,
-                        onlyVietnamese: true,
-                        maxlength: 100
-                    },
-                    content: {
-                        required: true,
-                        maxlength: 300
-                    }
-                },
+            $('[data-toggle="tooltip"]').tooltip();
 
-                messages: {
-                    image: {
-                        extension: "*Chỉ chấp nhận ảnh JPG, JPEG, PNG",
-                        fileSize: "*Kích thước ảnh không được quá 2MB "
-                    },
-                    full_name: {
-                        maxlength: "*Không được vượt quá 100 ký tự",
-                    },
-                    content: {
-                        maxlength: "*Không được vượt quá 300 ký tự",
+            input.addEventListener('change', function (e) {
+                let files = e.target.files;
+                let done = function (url) {
+                    input.value = '';
+                    image.src = url;
+                    $alert.hide();
+                    $modal.modal('show');
+                };
+                let reader;
+                let file;
+
+                if (files && files.length > 0) {
+                    file = files[0];
+
+                    if (URL) {
+                        done(URL.createObjectURL(file));
+                    } else if (FileReader) {
+                        reader = new FileReader();
+                        reader.onload = function (e) {
+                            done(reader.result);
+                        };
+                        reader.readAsDataURL(file);
                     }
                 }
             });
+
+            $modal.on('shown.bs.modal', function () {
+                cropper = new Cropper(image, {
+                    modal: true,
+                    autoCrop: true,
+                    autoCropArea: 1,
+                    responsive: true,
+                    background: true,
+                    zoomOnTouch: true,
+                    viewMode: 2,
+                    dragMode: 'move',
+                    aspectRatio: 1 / 1,
+                    built: function () {
+                        $toCrop.cropper("setCropBoxData", {width: "300", height: "300"});
+                    }
+                });
+            }).on('hidden.bs.modal', function () {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            document.getElementById('crop').addEventListener('click', function () {
+                let canvas;
+                $modal.modal('hide');
+
+                if (cropper) {
+                    canvas = cropper.getCroppedCanvas({
+                        width: 300,
+                        height: 300,
+                    });
+
+                    avatar.src = canvas.toDataURL('image/jpeg');
+                    $alert.removeClass('alert-success alert-warning');
+
+                    $("#avatar_hidden").val(avatar.src);
+                    $("#avatar_hidden-error").hide();
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        validate
+        $("#addFeedbacks").validate({
+            rules: {
+                full_name: {
+                    required: true,
+                    onlyVietnamese: true,
+                    maxlength: 100
+                },
+                content: {
+                    required: true,
+                    maxlength: 300
+                }
+            },
+
+            messages: {
+                full_name: {
+                    maxlength: "*Không được vượt quá 100 ký tự",
+                },
+                content: {
+                    maxlength: "*Không được vượt quá 300 ký tự",
+                }
+            }
         });
     </script>
 @endsection

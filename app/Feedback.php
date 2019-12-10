@@ -46,4 +46,9 @@ class Feedback extends Model
     {
         return $this->belongsTo(DisplayStatus::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

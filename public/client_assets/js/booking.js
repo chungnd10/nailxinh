@@ -7,13 +7,15 @@ jQuery(document).ready(function($) {
         rules: {
             phone_number: {
                 required: true,
-                minlength:10, 
-                maxlength:11
+                phoneNumberVietNam: true
             },
             full_name:{
                 required:true                
             },
             service_id:{
+                required:true
+            },
+            user_id:{
                 required:true
             },
             date:{
@@ -31,6 +33,9 @@ jQuery(document).ready(function($) {
             },
             service_id:{
                 required:"Mời bạn chọn dịch vụ"
+            },
+            user_id:{
+                required:"Mời bạn chọn nhân viên"
             },
             date:{
                 required:"Mời bạn chọn ngày"

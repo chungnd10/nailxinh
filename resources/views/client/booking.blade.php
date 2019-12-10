@@ -3,7 +3,7 @@
     <!-- Start: Breadcrumb Area
     ============================= -->
 
-    <section id="breadcrumb-area">
+    <section id="breadcrumb-area" class="breadcrumb-booking">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
@@ -27,8 +27,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form id="booking-form">
+                    <form id="booking-form" class="form-horizontal">
                         @csrf
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <span class="text-pink">Thông tin của bạn</span>
@@ -40,8 +41,11 @@
                                        class="form-control form-border form-require"
                                        name="phone_number"
                                        value="{{ old('phone_number') }}"
+                                       pa
                                        placeholder="Số điện thoại"
                                        id="phone_number">
+                                <label id="phone_number-error" class="error mt-2" for="phone_number"></label>
+                                <span class="general-message"></span>
                             </div>
                             <div class="form-group col-md-6">
                                 <span class="text-danger validation">*</span>
@@ -52,6 +56,7 @@
                                        value="{{ old('full_name') }}"
                                        placeholder="Họ và tên"
                                        id="full_name">
+                                <label id="full_name-error" class="error mt-2" for="full_name"></label>
                             </div>
                             <div class="adress col-md-12">
                                 <div class="mb-3">
@@ -63,8 +68,8 @@
                                         $(this).addClass('branch-data');
                                     }
                                 </script>
-                                <div class="row">
-                                    <div class=" col-md-12 text-error text-danger">Vui lòng chọn địa chỉ</div>
+                                <div class="row" id="locationBtn" >
+                                    <div class="col-md-12 text-error text-danger">Vui lòng chọn địa chỉ</div>
                                     @foreach($branchs as $branch)
                                         <div class="col-md-6 mb-3">
                                             <button type="button"
@@ -94,159 +99,29 @@
                                         </optgroup>
                                     @endforeach
                                 </select>
+                                <label id="service_id-error" class="error" for="service_id"></label>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
                                 <select class="staff form-control form-border" name="user_id" id="user_id">
                                     <option value="">Chọn nhân viên</option>
-                                    @foreach($users as $user)
+                                    <!-- @foreach($users as $user)
                                         <option data-image="{{ $user->avatar }}"
                                                 value="{{ $user->id }}">{{ $user->full_name }}</option>
-                                    @endforeach
+                                    @endforeach -->
                                 </select>
+                                <label id="user_id-error" class="error" for="user_id"></label>
                             </div>
                             <div class="col-md-12 mb-4">
-                                <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div>
+                                <div class="mb-3">
+                                    Chọn ngày: <span class="theme-text booking_time pull-right text-bold" style="font-size: 14px;"></span>
+                                </div>
+                                <!-- <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div> -->
                                 <div class="" id="select-day"></div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
                                 <div class=" col-md-12 text-error2 text-danger">Vui lòng chọn thời gian</div>
-                                <div id="timeFrame" class="row">
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="09:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                09:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="10:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                10:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="11:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                11:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="12:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                12:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="13:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 disable-click btn-time-danger">
-                                            <div class="time">
-                                                13:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="14:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                14:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="15:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                15:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="16:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                16:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="17:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                17:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="18:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                18:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="19:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                19:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2 col-6">
-                                        <button type="button"
-                                                time-frame="20:00"
-                                                name="time[]"
-                                                value="08:00"
-                                                onclick="addTime('08:00')"
-                                                class="time btn btn-default btn-block time-frame mb-2 btn-time-danger">
-                                            <div class="time">
-                                                20:00
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
                                 <div id="time_frame"></div>
                             </div>
                             <div class="col-md-12 mb-4">
@@ -257,7 +132,7 @@
                                           name="note"
                                 ></textarea>
                             </div>
-                            <div class="col-md-6 offset-md-3 mt-5 mb-5">
+                            <div class="col-md-6 offset-md-3 mb-5">
                                 <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
                                     <i class="far fa-calendar-alt"></i>
                                     ĐẶT LỊCH NGAY
@@ -278,62 +153,129 @@
 @section('script')
 <script type="text/javascript">
     $(document).ready(function () {
+        // format time
         let time_format_pttrn = "HH:mm";
         time_format_pttrn = time_format_pttrn ? time_format_pttrn : "HH:mm";
         // time render
         let checkSlotTime = [
-            "9:00",
-            "9:30",
-            "10:00",
-            "10:30",
-            "11:00",
-            "11:30",
-            "12:00",
-            "12:30",
-            "13:00",
-            "13:30",
-            "14:00",
-            "14:30",
-            "15:00",
-            "15:30",
-            "16:00",
-            "16:30",
-            "17:00",
-            "17:30",
-            "18:00",
-            "18:30",
-            "19:00",
-            "19:30",
-            "20:00"
+            {
+                "name": "09:00",
+                'status': true
+            },
+            {
+                "name": "09:30",
+                'status': true
+            },
+            {
+                "name": "10:00",
+                'status': true
+            },
+            {
+                "name": "10:30",
+                'status': true
+            },
+            {
+                "name": "11:00",
+                'status': true
+            },
+            {
+                "name": "11:30",
+                'status': true
+            },
+            {
+                "name": "12:00",
+                'status': true
+            },
+            {
+                "name": "12:30",
+                'status': true
+            },
+            {
+                "name": "13:00",
+                'status': false
+            },
+            {
+                "name": "13:30",
+                'status': false
+            },
+            {
+                "name": "14:00",
+                'status': false
+            },
+            {
+                "name": "14:30",
+                'status': false
+            },
+            {
+                "name": "15:00",
+                'status': false
+            },
+            {
+                "name": "15:30",
+                'status': true
+            },
+            {
+                "name": "16:00",
+                'status': true
+            },
+            {
+                "name": "16:30",
+                'status': true
+            },
+            {
+                "name": "17:00",
+                'status': true
+            },
+            {
+                "name": "17:30",
+                'status': true
+            },
+            {
+                "name": "18:00",
+                'status': true
+            },
+            {
+                "name": "18:30",
+                'status': true
+            },
+            {
+                "name": "19:00",
+                'status': true
+            }
         ];
         // init setting
         let setting;
         // init day in week
         let weekday = new Array(7);
-            weekday[1] = "Monday";
-            weekday[2] = "Tuesday";
-            weekday[3] = "Wednesday";
-            weekday[4] = "Thursday";
-            weekday[5] = "Friday";
-            weekday[6] = "Saturday";
-            weekday[0] = "Sunday";
-
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bẩy";
+            weekday[0] = "Chủ Nhật";
+        // render date array
         let dateRenderArray = [];
+        // create total day in week
         let days = 7;
+        // create booking before mins
         let booking_before_min = 30;
         let i = 0, renderDateObj;
-        
+        let startTime;
+        let date_format_pttrn = "dd/MM/yyyy";
+        date_format_pttrn = date_format_pttrn ? date_format_pttrn.toUpperCase() : "DD/MM/YYYY";
+
         function renderTimeSlot() {
             var dayOfDay = $("#selectTime [class*='btn-primary']").attr('value');
              // get selected date
             let bookingDate = $('#select-day .btn-primary').attr('data-date');
-            let currentTime = moment(bookingDate.time).format('HH:mm');
+            let currentTime = moment().format('HH:mm');
+            console.log(currentTime);
             let currentDate;
             // remove html before render
             $("#timeFrame").empty();
             var tempMoment;
             var thisTime = moment();
-            thisTime.add(booking_before_min, 'minutes');
             // if (setting && setting.booking_before_min) {
             //     thisTime.add(setting.booking_before_min, 'minutes');
             // }
@@ -361,14 +303,17 @@
             // }
             // render html check slot time
             for(let k = 0; k < checkSlotTime.length; k++){
-                tempMoment = checkSlotTime[k];
+                tempMoment = checkSlotTime[k].name;
+                console.log(tempMoment);    
+                status = checkSlotTime[k].status;
+                let times = moment(checkSlotTime[k].time);
                 let btn = $('<button type="button"></button>');
                 btn.text(tempMoment);
                 btn.attr('time-frame', tempMoment);
                 btn.addClass('btn btn-default time-frame mb-2');
-                if( currentTime > checkSlotTime[k] ){
+                if( status == 'false' || tempMoment < currentTime){
                     btn.addClass('disable-click');
-                    btn.html("<div class='time'>" + tempMoment + '</div><div class="slot"> </div>');
+                    btn.html("<div class='time'>" + tempMoment + '</div><div class="slot">Hết chỗ</div>');
                     btn.addClass('disable-click btn-time-danger');
                 } else{
                     btn.html("<div class='time theme-text'>" + tempMoment + '</div><div class="slot"> </div>');
@@ -386,20 +331,54 @@
                 day_of_week: weekday[moment(Object.assign({}, renderDateObj)).day()],
             });
         }
+
         // change date when click change date
         $(document).on("click", '.btn-select', function(e){
-            $('.btn-select').removeClass('btn-primary').addClass('btn-inactive');
-            $(this).addClass('btn-primary');
+            $('.btn-select').removeClass('btn_primary').addClass('btn-inactive');
+            $(this).addClass('btn_primary');
 
             startTime = moment($(this).attr('data-date')).toISOString();
             // mặc định buổi cho ngày, nếu ngày hôm nay thì kiểm tra buổi phù hợp nếu không chuyển hết về buối sáng
             var defaultMorning = !moment($(this).data('date')).isSame(moment().format('YYYY-MM-DD'));
             // setDefaultDayOfDay(defaultMorning);
             // getBookingSlotsFromServer(startTime);
+            // renderBookingDate();
         });
+
+        // when user click on 
+        $("#time_frame").on('click', 'button', function(e){
+
+            currentTime = $(this).attr('time-frame');
+
+            $("#time_frame > button").removeClass('btn_primary').addClass('btn-default');
+            //$("#time_frame > button .time").addClass('theme-text');
+            $(this).removeClass('btn-default').addClass('btn_primary');
+            $('#time_frame .time').removeClass('text-white');
+            $(this).find('.time').addClass('text-white');
+            showBookingDateTime(currentTime, startTime);
+
+            // remove error
+            $('.general-message').hide();
+            $('#time-select').css({'color': ''});
+        });
+
+         // get current time
+        function showBookingDateTime(currentTime, date_selected){
+            let dateObj = moment(date_selected);
+            let currentDay = weekday[dateObj.day()];
+
+            $('.booking_time').html(currentDay + ", " + dateObj.format(date_format_pttrn) + " " + currentTime);
+        };
+        // set default day
+        function setDefaultDayOfDay(){
+            let currentTime = new Date();
+            $('#selectTime button').removeClass("btn-primary").addClass("btn-default");
+        }
+
+
         // render date picker
         function renderBookingDate(){
-            var i, renderArray = [];
+            let i, renderArray = [];
             for(i in  dateRenderArray) {
 
                 renderArray.push('<div class="col-xs-4">');
@@ -417,7 +396,8 @@
 
             $('#select-day').html(renderArray.join(""));
             $('#select-day .btn-select').first().addClass('btn-primary');
-        }
+        };
+        // run function
         renderBookingDate();
         renderTimeSlot();
         // slick render date select
@@ -427,9 +407,293 @@
             slidesToShow: 4,
             slidesToScroll: 3,
             prevArrow: '<button type="button" class="custom-slick-arrow-prev icon-circle-left2"><i class="fas fa-chevron-circle-left"></i></button>',
-            nextArrow: '<button type="button" class="custom-slick-arrow-next icon-circle-right2"><i class="fas fa-chevron-circle-right"></i></button>'
+            nextArrow: '<button type="button" class="custom-slick-arrow-next icon-circle-right2"><i class="fas fa-chevron-circle-right"></i></button>',
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2   
+                    }
+                }
+            ]
         });
+        
+        // get slot from server
+        function getBookingSlotsFromServer(startTime){  
+            let location_id = parseInt($("#locationBtn button[class*='btn-adress-booking']").attr("data-branch-id"));
+            if(!location_id) location_id = defaultLocation;
+            
+            let timeData = {
+                merchant_id : merchant_id,
+                location_id : location_id,
+                date : startTime,
+            };
+            var operator_id = $('#operator option:selected').val(); // operatorId
+            if(operator_id) timeData.operator_id = operator_id;
+
+            // Send data
+            $.post({
+                url: "",
+                data: timeData,
+                success: function(data) {
+                if (data) {
+                    checkSlotArray = data.timeFrame.timeFrame;  
+                    workingHours = data.timeFrame.workingHours;
+
+                    if(workingHours) {
+                        if (workingHours.start_time) {
+                        defaultStartTime = convert_HHMMSSString_to_object(workingHours.start_time); 
+                        if (defaultStartTime == null) defaultStartTime = {hour: 8, min: 0};
+                        }
+                        if (workingHours.end_time) {
+                        defaultEndTime = convert_HHMMSSString_to_object(workingHours.end_time); 
+
+                        if (defaultEndTime == null) defaultEndTime = {hour: 22, min: 0};
+                        }
+
+                        var startTime_moment = moment().hours(defaultStartTime.hour).minutes(defaultStartTime.min).seconds(0);
+                        var endTime_moment = moment().hours(defaultEndTime.hour).minutes(defaultEndTime.min).seconds(0);
+
+                        $('#working_start_time').text(startTime_moment.format(time_format_pttrn));
+                        $('#working_end_time').text(endTime_moment.format(time_format_pttrn));
+                    }
+                    renderTimeSlot();
+                }
+                },
+            });
+        };
+
+        // get data from server when click change service
+
+        $('#service_id') .on('change', function(){
+            let service_id = $('#service_id').find(":selected").val();
+            let branch_id = $('.btn-adress-booking.active').data('branch-id');
+            getOperatorFromLocation(branch_id,service_id);
+        });
+
+        // get operator from chose location 
+        
+        function getOperatorFromLocation(branch_id,service_id){
+            let data_post = {
+                branch_id: branch_id,
+                service_id: service_id,
+                _token : $('meta[name="csrf-token"]').attr('content')
+            };
+            // Send data with ajax
+
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/ajax/getEmployees",
+                data: data_post,
+                success : function(resultData){
+                    console.log(resultData);
+                    renderOperatorFromService(resultData);
+
+                },
+                error: function(xhr, status, error){
+                    console.log(error);
+                }
+
+            })
+        }
+
+        // render show operator when choose service
+
+        function renderOperatorFromService(resultData){
+            let optionHtml = [];
+            let operatorOpt = "<option value=''>Vui lòng chọn nhân viên</option>";
+            if(resultData.length > 0){
+                for (i =0;  i<resultData.length; i++) {
+                    optionHtml.push(`<option data-image="${resultData[i].avatar}" value="${resultData[i].id}">${resultData[i].full_name}</option> `);
+                    console.log(optionHtml);
+                }
+                // render html option operator
+                $("#user_id").html(optionHtml.join(''));
+
+            } else{
+                optionHtml.push(operatorOpt);
+                $("#user_id").html(optionHtml.join(''));
+            }
+        };
+
+        // build Operator dropdown
+        let operatorArray = [];
+
+        //  Featch data to operator dropdown 
+         function getOperatorByLocation(){
+        //     if(setting && setting.showOperatorInfo == 1){
+        //         // store all operators to build select2
+        //         let operatorList = {};
+
+        //         let defaultType = "Operators";
+
+        //         let operatorOpt = "<option value=''> Select " + defaultType + "</option>";
+        //         let locationChange = parseInt($("#locationBtn button[class*='btn-primary']").attr("location-id"));
+        //         if(!locationChange) locationChange = defaultLocation;
+
+
+        //         for(let i = 0; i < operator.length;i++){
+        //         if ((operator[i].location_id == locationChange) || (operator[i].location_id_1 == locationChange) || (operator[i].location_id_2 == locationChange) || (operator[i].location_id_3 == locationChange) || (operator[i].location_id_4 == locationChange) || (operator[i].location_id_5 == locationChange))
+        //         {
+        //             if(!operator[i].avatar_url){
+        //                 operator[i].avatar_url = "/images/placeholder_avatar_sqr.jpg";
+        //             }
+
+        //             if(!operator[i].name){
+        //                 operator[i].name = "Chưa có tên";
+        //             }
+
+        //             if(!operator[i].title){
+        //                 operator[i].title = "Chức danh khác";
+        //             }
+
+        //             if(operator[i].name){
+        //                 operator[i].title = operator[i].title.toUpperCase();
+        //             }
+
+        //             if(typeof operatorList[operator[i].title]  == 'undefined') operatorList[operator[i].title] = [];
+        //             operatorList[operator[i].title].push(operator[i]);
+
+        //         }
+
+        //         }
+
+        //         var optionHmtl = [operatorOpt];
+        //         for(var j in operatorList) {
+        //         optionHmtl.push("<optgroup label='" + j + "'>");
+        //         for(var k in operatorList[j]) {
+        //             optionHmtl.push("<option value='" + operatorList[j][k].id + "' data-avatar='" + operatorList[j][k].avatar_url + "' >" + operatorList[j][k].name + "</option>");
+        //         }
+        //         optionHmtl.push("</optgroup>");
+        //         }
+
+        //         $("#operator").html(optionHmtl.join(''));
+
+        //         // destroy select2 if existed
+        //         try { 
+        //     try { 
+        //         try { 
+        //         if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
+        //     if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
+        //         if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
+        //         } catch(e){
+        //         // console.log(e);
+        //         }
+
+        //         setTimeout(function(){
+        //         $("#operator").select2({
+        //             templateResult: formatSelect2Data,
+        //             templateSelection: formatSelect2Data,
+        //             containerCssClass: 'select2-fix-padding',
+        //             dropdownParent: $('#operatorSetting')
+        //         });
+        //         }, 200); // add timeout to make sure html is ready before build select2
+
+        //     } else{
+        //         $("#operatorSetting").hide();
+        //     }
+        };
+
+        // Validation form
+        function ValidationInput(){
+            if( $(this).attr('name') === 'phone_number' ){
+                if (!validateMobileInput()) {
+                    $(this).parent().addClass('has-error').removeClass('valid-data');
+                    $('.general-message').show();
+                } else {
+                    $(this).parent().removeClass('has-error').addClass('valid-data');
+                    $('.general-message').hide();
+                }
+            }
+        };
+
+        // Validate  phone number
+        function validateMobileInput() {
+            //get value from input #phone_number
+            let mobileNumber = $('#phone_number').val().toString().replace(/\s|\-|_/g,"");
+            // create variable min and max length phone number
+            let phone_length_min = 10;
+            let phone_length_max = 11;
+            // create variable check status
+            var is_valid = true;
+
+            if(mobileNumber.length < phone_length_min || mobileNumber.length > phone_length_max ){
+                is_valid = false ;
+            } else{
+                is_valid = true;
+            }
+            return is_valid;
+        };
+
+        // Validation with Jquery validation
+        $('#booking-form').validate({
+            ignore: 'input[type="hidden"]',
+            rules: {
+                phone_number: {
+                    required: true,
+                    minlength:10,
+                    maxlength:11,
+                    pattern: '/^0[0-9]{8}$/'
+                },
+                full_name:{
+                    required:true                
+                },
+                service_id:{
+                    required:true
+                },
+                user_id:{
+                    required:true
+                },
+                date:{
+                    required:true
+                }
+            },
+            messages: {
+                phone_number:{
+                    required: "Mời bạn nhập vào số điện thoại",
+                    minlength:"Bạn cần nhập ít nhất 10 số",
+                    maxlength:"Bạn được nhập tối đa là 11 số",
+                    pattern:'Vui lòng nhập đúng số điện thoại'
+
+                },
+                full_name:{
+                    required:"Mời bạn nhập vào họ và tên"
+                },
+                service_id:{
+                    required:"Mời bạn chọn dịch vụ"
+                },
+                user_id:{
+                    required:"Mời bạn chọn nhân viên"
+                },
+                date:{
+                    required:"Mời bạn chọn ngày"
+                }
+            }
+        });
+        
+
 
     });
 </script>
+  
 @endsection

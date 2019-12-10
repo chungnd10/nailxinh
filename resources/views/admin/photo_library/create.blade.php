@@ -180,7 +180,7 @@
                         height: 240,
                     });
 
-                    avatar.src = canvas.toDataURL();
+                    avatar.src = canvas.toDataURL('image/jpeg');
                     $alert.removeClass('alert-success alert-warning');
 
                     $("#avatar_hidden").val(avatar.src);

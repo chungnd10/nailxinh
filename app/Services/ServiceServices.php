@@ -27,6 +27,16 @@ class ServiceServices
         return $service;
     }
 
+    /*
+     * Find by slug
+     *
+     */
+    public function findBySlug($slug)
+    {
+        $service = Service::where('slug', $slug)->first();
+        return $service;
+    }
+
     // lấy ra những dịch vụ mà ktv đó có thể làm
     public function getSkillOfTechnician($user_id)
     {

@@ -1,14 +1,16 @@
 <!-- Start: Preloader
 ============================= -->
-{{--<div class="preloader">--}}
-{{--    <div class="wrapper">--}}
-{{--        <div class="circle circle-1"></div>--}}
-{{--        <div class="circle circle-1a"></div>--}}
-{{--        <div class="circle circle-2"></div>--}}
-{{--        <div class="circle circle-3"></div>--}}
-{{--    </div>--}}
-{{--    <h1>Loading&hellip;</h1>--}}
-{{--</div>--}}
+@if(!session()->has('success'))
+    <div class="preloader">
+        <div class="wrapper">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-1a"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+        </div>
+        <h1>Loading&hellip;</h1>
+    </div>
+@endif
 <!-- End: Preloader
 ============================= -->
 <!-- Start: Header Top
@@ -17,14 +19,14 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-lg-6 col-md-6 text-center text-md-left">
+            <div class="col-lg-6 col-md-6 text-left text-md-center">
                 <p>
                     <i class="fas fa-clock"></i>Giờ mở cửa: {{ $info->open_time." - ".$info->close_time}}
                 </p>
             </div>
             <div class="col-lg-6 col-md-6 text-center text-md-right header-top-right">
-                <ul>
-                    <li><i class="fas fa-envelope"></i>{{ $info->email }}</li>
+                <ul class="">
+                    <li class="mr-2"><i class="fas fa-envelope"></i>{{ $info->email }}</li>
                     <li><i class="fas fa-phone"></i>{{ $info->phone_number }}</li>
                 </ul>
             </div>
