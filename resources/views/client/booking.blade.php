@@ -27,8 +27,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form id="booking-form">
+                    <form id="booking-form" class="form-horizontal">
                         @csrf
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
                         <div class="row">
                             <div class="col-md-12 mb-3">
                                 <span class="text-pink">Thông tin của bạn</span>
@@ -40,9 +41,11 @@
                                        class="form-control form-border form-require"
                                        name="phone_number"
                                        value="{{ old('phone_number') }}"
+                                       pa
                                        placeholder="Số điện thoại"
                                        id="phone_number">
                                 <label id="phone_number-error" class="error mt-2" for="phone_number"></label>
+                                <span class="general-message"></span>
                             </div>
                             <div class="form-group col-md-6">
                                 <span class="text-danger validation">*</span>
@@ -102,10 +105,10 @@
                                 <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
                                 <select class="staff form-control form-border" name="user_id" id="user_id">
                                     <option value="">Chọn nhân viên</option>
-                                    @foreach($users as $user)
+                                    <!-- @foreach($users as $user)
                                         <option data-image="{{ $user->avatar }}"
                                                 value="{{ $user->id }}">{{ $user->full_name }}</option>
-                                    @endforeach
+                                    @endforeach -->
                                 </select>
                                 <label id="user_id-error" class="error" for="user_id"></label>
                             </div>
@@ -482,7 +485,7 @@
         $('#service_id') .on('change', function(){
             let service_id = $('#service_id').find(":selected").val();
             let branch_id = $('.btn-adress-booking.active').data('branch-id');
-            getStaffFromLocation(branch_id,service_id);
+            getOperatorFromLocation(branch_id,service_id);
         });
 
         // get operator from chose location 
@@ -490,16 +493,25 @@
         function getOperatorFromLocation(branch_id,service_id){
             let data_post = {
                 branch_id: branch_id,
-                service_id: service_id
+                service_id: service_id,
+                _token : $('meta[name="csrf-token"]').attr('content')
             };
             // Send data with ajax
 
             $.ajax({
                 type: 'POST',
-                url: "/",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/ajax/getEmployees",
                 data: data_post,
                 success : function(resultData){
                     console.log(resultData);
+                    renderOperatorFromService(resultData);
+
+                },
+                error: function(xhr, status, error){
+                    console.log(error);
                 }
 
             })
@@ -507,83 +519,180 @@
 
         // render show operator when choose service
 
-        function renderOperatorFromService(){
+        function renderOperatorFromService(resultData){
+            let optionHtml = [];
+            let operatorOpt = "<option value=''>Vui lòng chọn nhân viên</option>";
+            if(resultData.length > 0){
+                for (i =0;  i<resultData.length; i++) {
+                    optionHtml.push(`<option data-image="${resultData[i].avatar}" value="${resultData[i].id}">${resultData[i].full_name}</option> `);
+                    console.log(optionHtml);
+                }
+                // render html option operator
+                $("#user_id").html(optionHtml.join(''));
 
-        }
+            } else{
+                optionHtml.push(operatorOpt);
+                $("#user_id").html(optionHtml.join(''));
+            }
+        };
 
         // build Operator dropdown
         let operatorArray = [];
 
         //  Featch data to operator dropdown 
-        function getOperatorByLocation(){
-        if(setting && setting.showOperatorInfo == 1){
-            // store all operators to build select2
-            let operatorList = {};
+         function getOperatorByLocation(){
+        //     if(setting && setting.showOperatorInfo == 1){
+        //         // store all operators to build select2
+        //         let operatorList = {};
 
-            let defaultType = "Operators";
+        //         let defaultType = "Operators";
 
-            let operatorOpt = "<option value=''> Select " + defaultType + "</option>";
-            let locationChange = parseInt($("#locationBtn button[class*='btn-primary']").attr("location-id"));
-            if(!locationChange) locationChange = defaultLocation;
+        //         let operatorOpt = "<option value=''> Select " + defaultType + "</option>";
+        //         let locationChange = parseInt($("#locationBtn button[class*='btn-primary']").attr("location-id"));
+        //         if(!locationChange) locationChange = defaultLocation;
 
 
-            for(let i = 0; i < operator.length;i++){
-            if ((operator[i].location_id == locationChange) || (operator[i].location_id_1 == locationChange) || (operator[i].location_id_2 == locationChange) || (operator[i].location_id_3 == locationChange) || (operator[i].location_id_4 == locationChange) || (operator[i].location_id_5 == locationChange))
-            {
-                if(!operator[i].avatar_url){
-                    operator[i].avatar_url = "/images/placeholder_avatar_sqr.jpg";
+        //         for(let i = 0; i < operator.length;i++){
+        //         if ((operator[i].location_id == locationChange) || (operator[i].location_id_1 == locationChange) || (operator[i].location_id_2 == locationChange) || (operator[i].location_id_3 == locationChange) || (operator[i].location_id_4 == locationChange) || (operator[i].location_id_5 == locationChange))
+        //         {
+        //             if(!operator[i].avatar_url){
+        //                 operator[i].avatar_url = "/images/placeholder_avatar_sqr.jpg";
+        //             }
+
+        //             if(!operator[i].name){
+        //                 operator[i].name = "Chưa có tên";
+        //             }
+
+        //             if(!operator[i].title){
+        //                 operator[i].title = "Chức danh khác";
+        //             }
+
+        //             if(operator[i].name){
+        //                 operator[i].title = operator[i].title.toUpperCase();
+        //             }
+
+        //             if(typeof operatorList[operator[i].title]  == 'undefined') operatorList[operator[i].title] = [];
+        //             operatorList[operator[i].title].push(operator[i]);
+
+        //         }
+
+        //         }
+
+        //         var optionHmtl = [operatorOpt];
+        //         for(var j in operatorList) {
+        //         optionHmtl.push("<optgroup label='" + j + "'>");
+        //         for(var k in operatorList[j]) {
+        //             optionHmtl.push("<option value='" + operatorList[j][k].id + "' data-avatar='" + operatorList[j][k].avatar_url + "' >" + operatorList[j][k].name + "</option>");
+        //         }
+        //         optionHmtl.push("</optgroup>");
+        //         }
+
+        //         $("#operator").html(optionHmtl.join(''));
+
+        //         // destroy select2 if existed
+        //         try { 
+        //     try { 
+        //         try { 
+        //         if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
+        //     if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
+        //         if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
+        //         } catch(e){
+        //         // console.log(e);
+        //         }
+
+        //         setTimeout(function(){
+        //         $("#operator").select2({
+        //             templateResult: formatSelect2Data,
+        //             templateSelection: formatSelect2Data,
+        //             containerCssClass: 'select2-fix-padding',
+        //             dropdownParent: $('#operatorSetting')
+        //         });
+        //         }, 200); // add timeout to make sure html is ready before build select2
+
+        //     } else{
+        //         $("#operatorSetting").hide();
+        //     }
+        };
+
+        // Validation form
+        function ValidationInput(){
+            if( $(this).attr('name') === 'phone_number' ){
+                if (!validateMobileInput()) {
+                    $(this).parent().addClass('has-error').removeClass('valid-data');
+                    $('.general-message').show();
+                } else {
+                    $(this).parent().removeClass('has-error').addClass('valid-data');
+                    $('.general-message').hide();
                 }
+            }
+        };
 
-                if(!operator[i].name){
-                    operator[i].name = "Chưa có tên";
+        // Validate  phone number
+        function validateMobileInput() {
+            //get value from input #phone_number
+            let mobileNumber = $('#phone_number').val().toString().replace(/\s|\-|_/g,"");
+            // create variable min and max length phone number
+            let phone_length_min = 10;
+            let phone_length_max = 11;
+            // create variable check status
+            var is_valid = true;
+
+            if(mobileNumber.length < phone_length_min || mobileNumber.length > phone_length_max ){
+                is_valid = false ;
+            } else{
+                is_valid = true;
+            }
+            return is_valid;
+        };
+
+        // Validation with Jquery validation
+        $('#booking-form').validate({
+            ignore: 'input[type="hidden"]',
+            rules: {
+                phone_number: {
+                    required: true,
+                    minlength:10,
+                    maxlength:11,
+                    pattern: '/^0[0-9]{8}$/'
+                },
+                full_name:{
+                    required:true                
+                },
+                service_id:{
+                    required:true
+                },
+                user_id:{
+                    required:true
+                },
+                date:{
+                    required:true
                 }
+            },
+            messages: {
+                phone_number:{
+                    required: "Mời bạn nhập vào số điện thoại",
+                    minlength:"Bạn cần nhập ít nhất 10 số",
+                    maxlength:"Bạn được nhập tối đa là 11 số",
+                    pattern:'Vui lòng nhập đúng số điện thoại'
 
-                if(!operator[i].title){
-                    operator[i].title = "Chức danh khác";
+                },
+                full_name:{
+                    required:"Mời bạn nhập vào họ và tên"
+                },
+                service_id:{
+                    required:"Mời bạn chọn dịch vụ"
+                },
+                user_id:{
+                    required:"Mời bạn chọn nhân viên"
+                },
+                date:{
+                    required:"Mời bạn chọn ngày"
                 }
-
-                if(operator[i].name){
-                    operator[i].title = operator[i].title.toUpperCase();
-                }
-
-                if(typeof operatorList[operator[i].title]  == 'undefined') operatorList[operator[i].title] = [];
-                operatorList[operator[i].title].push(operator[i]);
-
             }
+        });
+        
 
-            }
 
-            var optionHmtl = [operatorOpt];
-            for(var j in operatorList) {
-            optionHmtl.push("<optgroup label='" + j + "'>");
-            for(var k in operatorList[j]) {
-                optionHmtl.push("<option value='" + operatorList[j][k].id + "' data-avatar='" + operatorList[j][k].avatar_url + "' >" + operatorList[j][k].name + "</option>");
-            }
-            optionHmtl.push("</optgroup>");
-            }
-
-            $("#operator").html(optionHmtl.join(''));
-
-            // destroy select2 if existed
-            try { 
-            if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
-            } catch(e){
-            // console.log(e);
-            }
-
-            setTimeout(function(){
-            $("#operator").select2({
-                templateResult: formatSelect2Data,
-                templateSelection: formatSelect2Data,
-                containerCssClass: 'select2-fix-padding',
-                dropdownParent: $('#operatorSetting')
-            });
-            }, 200); // add timeout to make sure html is ready before build select2
-
-        } else{
-            $("#operatorSetting").hide();
-        }
-        }
     });
 </script>
   
