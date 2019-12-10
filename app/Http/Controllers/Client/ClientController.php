@@ -185,6 +185,7 @@ class ClientController extends Controller
             $users = User::join('user_services', 'user_services.user_id', '=','user.id')
                 ->where('branch_id', $branch_id)
                 ->where('service_id', $service_id)
+                ->select('users.id', 'users.full_name', 'users.avatar')
                 ->get();
 
             return response()->json($users);
