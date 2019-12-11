@@ -11,14 +11,11 @@
                     @csrf
                     <input type="email"
                            name="email"
-                           id="subscribe"
+                           id="email"
                            placeholder="Nhập email..."
                            value="{{ old('email') }}"
-                            >
-                    @if($errors->first('email'))
-                        <label id="error-email" class="error" >{{ $errors->first('email') }}</label>
-                    @endif
-                    <button type="submit">ĐĂNG KÝ</button>
+                    >
+                    <button type="submit" id="submit">ĐĂNG KÝ</button>
                 </form>
             </div>
         </div>
@@ -29,13 +26,48 @@
         $(document).ready(function () {
             //validate
             $("#subscribe-form").validate({
-            	rules: {
-            		email: {
-            			required: true,
-						emailGood: true
-            		},
+                rules: {
+                    email: {
+                        required: true,
+                        emailGood: true
+                    },
+                },
+            });
+        });
 
-            	},
+        // validate swal
+        $('#submit').click(function (e) {
+            e.preventDefault();
+            jQuery.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            let email = $('#email').val();
+
+            jQuery.ajax({
+                url: "{{ route('subscribe') }}",
+                method: 'post',
+                data: {
+                    email: email
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        Swal.fire({
+                            type: 'error',
+                            title: data.errors
+                        });
+                    }else{
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Chúc mừng bạn đã đăng ký thành công !'
+                        });
+                        $('#email').val('');
+                    }
+
+
+                }
+
             });
         });
     </script>

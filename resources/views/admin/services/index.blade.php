@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             Danh sách
-            <small>loại dịch vụ</small>
+            <small>dịch vụ</small>
         </h1>
         <ol class="breadcrumb">
             <a href="{{ route('services.create') }}"
@@ -111,7 +111,8 @@
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'autoWidth': true,
+                'autoWidth': false,
+                "scrollX": true,
                 "responsive": true,
                 "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });

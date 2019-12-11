@@ -23,15 +23,15 @@
                         <table class="table table-bordered table-hover" id="feedbacks_table">
                             <thead>
                                 <tr>
-                                    <th width="40" >STT</th>
-                                    <th width="100" class="nosort">Ảnh</th>
-                                    <th width="100">Họ tên</th>
-                                    <th width="150" class="nosort">Nội dung</th>
-                                    <th width="120">Ngày tạo</th>
-                                    <th width="120">Người tạo</th>
+                                    <th >STT</th>
+                                    <th class="nosort">Ảnh</th>
+                                    <th >Họ tên</th>
+                                    <th class="nosort">Nội dung</th>
+                                    <th >Ngày tạo</th>
+                                    <th >Người tạo</th>
                                     @can('edit-feedback')
-                                        <th width="70" class="nosort">Trạng thái</th>
-                                        <th width="70" class="nosort">Hành động</th>
+                                        <th class="nosort">Trạng thái</th>
+                                        <th class="nosort">Hành động</th>
                                     @endcan
                                 </tr>
                             </thead>
@@ -44,7 +44,7 @@
                                                  src="upload/images/feedbacks/{{ $item->image }}">
                                         </td>
                                         <td>{{ $item->full_name }}</td>
-                                        <td><span class="more">{{ $item->content }}</span></td>
+                                        <td><span class="more normal">{{ $item->content }}</span></td>
                                         <td>{{ date('H:i d-m-Y', strtotime($item->created_at)) }}</td>
                                         <td>{{ $item->user->full_name }}</td>
                                         @can('edit-feedback')
@@ -125,14 +125,15 @@
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
-                'autoWidth': true,
+                'autoWidth': false,
+                "scrollX": true,
                 'ordering': true,
                 "responsive": true,
                 "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });
 
             // hide content
-            moreText(100);
+            moreText(50);
             //end hide content
 
             // change status

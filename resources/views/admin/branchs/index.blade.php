@@ -98,9 +98,10 @@
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
-                'autoWidth': true,
+                'autoWidth': false,
                 'ordering': true,
                 "responsive": true,
+                "scrollX": true,
                 "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });
         });

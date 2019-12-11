@@ -31,7 +31,6 @@
             </div>
         </div>
     </div>
-    <a href="{{route('ajax.check-limit-order')}}">abc</a>
 </section>
 <!-- End: Header Top
 ============================= -->
