@@ -17,12 +17,14 @@
                         <table class="table table-bordered table-hover" id="accumulate_points_table">
                             <thead>
                             <tr>
-                                <th width="40">STT</th>
+                                <th class="nosort" width="40">STT</th>
                                 <th>Số điện thoại</th>
                                 <th>Họ và tên</th>
                                 <th>Tổng tiển</th>
                                 <th>Loại thành viên</th>
-                                <th width="80">Hành động</th>
+                                @can('remove-accumulate-points')
+                                    <th class="nosort" width="80">Hành động</th>
+                                @endcan
                             </tr>
                             </thead>
                             <tbody>
@@ -33,13 +35,15 @@
                                     <td>{{ $item->full_name }}</td>
                                     <td>{{ number_format($item->total_money,0,",",".") }}</td>
                                     <td>{{ $item->membershipType($item->total_money) }}</td>
-                                    <td>
-                                        <a href="{{ route('accumulate-points.destroy', $item->phone_number) }}"
-                                           class="btn btn-xs btn-danger"
-                                           onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                            <i class="fa fa-trash"></i> Xóa
-                                        </a>
-                                    </td>
+                                    @can('remove-accumulate-points')
+                                        <td>
+                                            <a href="{{ route('accumulate-points.destroy', $item->phone_number) }}"
+                                               class="btn btn-xs btn-danger"
+                                               onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                                <i class="fa fa-trash"></i> Xóa
+                                            </a>
+                                        </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                             </tbody>
@@ -90,12 +94,7 @@
                 'ordering': true,
                 'autoWidth': true,
                 "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [0, 5]
-                    }
-                ],
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
 
             });
         });

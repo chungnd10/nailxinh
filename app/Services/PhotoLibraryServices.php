@@ -47,4 +47,10 @@ class PhotoLibraryServices
         $photo = PhotoLibrary::count();
         return $photo;
     }
+
+    public function random($limit)
+    {
+        $photo = PhotoLibrary::all()->random($limit);
+        return $photo;
+    }
 }

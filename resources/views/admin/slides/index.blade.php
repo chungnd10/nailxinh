@@ -23,11 +23,11 @@
                             <thead>
                             <tr>
                                 <th width="40">STT</th>
-                                <th width="100">Ảnh</th>
+                                <th class="nosort" width="100">Ảnh</th>
                                 <th>Tiêu đề</th>
                                 <th width=100>Trạng thái</th>
-                                <th width="100">URL</th>
-                                <th width="70">
+                                <th class="nosort" width="100">URL</th>
+                                <th class="nosort" width="70">
                                     Hành động
                                 </th>
                             </tr>
@@ -115,9 +115,7 @@
                 'ordering': true,
                 'autoWidth': true,
                 "responsive": true,
-                "columnDefs": [
-                    {"orderable": false, "targets": [1, 4, 5]}
-                ]
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });
 
             // change status

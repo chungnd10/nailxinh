@@ -19,7 +19,7 @@
                             <table class="table table-bordered table-hover" id="restricted_lists_table">
                                 <thead>
                                 <tr>
-                                    <th width="30">
+                                    <th class="nosort" width="30">
                                         <label class="">
                                             <div class="icheckbox_flat-green "
                                                  aria-checked="true"
@@ -33,7 +33,7 @@
                                     <th width="40">STT</th>
                                     <th>Email</th>
                                     <th>Ngày đăng ký</th>
-                                    <th width="80">Hành động</th>
+                                    <th class="nosort" width="80">Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -168,12 +168,7 @@
                 'ordering': true,
                 'autoWidth': true,
                 "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [0, 4]
-                    }
-                ]
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });
 
         });

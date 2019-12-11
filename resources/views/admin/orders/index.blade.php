@@ -30,7 +30,7 @@
                                 <th>Dịch vụ</th>
                                 <th width="100">Thời gian</th>
                                 <th width="100">Trạng thái</th>
-                                <th width="80">
+                                <th class="nosort" width="80">
                                     Hành động
                                 </th>
                             </tr>
@@ -50,19 +50,19 @@
                                             <a href="#"
                                                class="btn btn-xs btn-primary"
                                                data-toggle="modal"
-                                               data-target="#modal-{{ Hashids::encode($order->id,'123456789') }}">
+                                               data-target="#modal-{{ Hashids::encode($order->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             @can('update-orders')
                                                 @if($order->order_status_id == config('contants.order_status_finish'))
                                                     @if($order->checkPaid($order->id) == false)
-                                                        <a href="{{ route('orders.show', Hashids::encode($order->id,'123456789')) }}"
+                                                        <a href="{{ route('orders.show', Hashids::encode($order->id)) }}"
                                                            class="btn btn-xs btn-warning">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
                                                     @endif
                                                 @else
-                                                    <a href="{{ route('orders.show', Hashids::encode($order->id,'123456789')) }}"
+                                                    <a href="{{ route('orders.show', Hashids::encode($order->id)) }}"
                                                        class="btn btn-xs btn-warning">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
@@ -74,7 +74,7 @@
                             </tbody>
                         </table>
                         @foreach($orders as $key => $order)
-                            <div class="modal fade" id="modal-{{ Hashids::encode($order->id,'123456789') }}" style="display: none;">
+                            <div class="modal fade" id="modal-{{ Hashids::encode($order->id) }}" style="display: none;">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -232,12 +232,7 @@
                 'ordering': true,
                 'autoWidth': true,
                 "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [5]
-                    }
-                ],
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
 
             });
         });
