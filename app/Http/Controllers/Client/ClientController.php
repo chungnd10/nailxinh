@@ -55,9 +55,9 @@ class ClientController extends Controller
         $photo_gallery = $this->photo_library_services->random(8);
 
         return view('client.introduction', compact(
-            'introduction_active',
-            'introduction',
-               'photo_gallery'
+                'introduction_active',
+                'introduction',
+                'photo_gallery'
             )
         );
     }
@@ -107,7 +107,7 @@ class ClientController extends Controller
     public function servicesDetail($slug)
     {
         $service = $this->service_services->findBySlug($slug);
-        if ($service == null){
+        if ($service == null) {
             return view('client.errors.404');
         }
         $process = $this->process_of_services->getProcessWithType($service->id);
@@ -185,21 +185,17 @@ class ClientController extends Controller
                 'email' => 'required|max:300|unique:subscribes',
             ],
             [
-                'email.required'    => '*Mục này không được để trống',
-                'email.max'         => '*Không được vượt quá 300 ký tự',
-                'email.unique'      => '*Email này đã được đăng ký trước đây',
+                'email.required' => '*Mục này không được để trống',
+                'email.max' => '*Không được vượt quá 300 ký tự',
+                'email.unique' => '*Email này đã được đăng ký trước đây',
             ]
         );
 
         if ($validator->fails()) {
-            return redirect('/#error-email')->withErrors($validator)->withInput();
-        }else {
-            $subscribe->fill($request->all())->save();
-            return redirect()->route('index')->with(
-                'success',
-                'Chúc mừng bạn đã đăng ký thành công !'
-            );
+            return response()->json(['errors' => $validator->errors()->first()]);
         }
+        $subscribe->fill($request->all())->save();
+        return response()->json(['success' => 'subscribes successfully !']);
     }
 
     /*
@@ -208,11 +204,11 @@ class ClientController extends Controller
      */
     public function getEmployees(Request $request)
     {
-        if ($request->ajax()){
+        if ($request->ajax()) {
             $branch_id = $request->branch_id;
             $service_id = $request->service_id;
 
-            $users = User::join('user_services', 'user_services.user_id', '=','user.id')
+            $users = User::join('user_services', 'user_services.user_id', '=', 'user.id')
                 ->where('branch_id', $branch_id)
                 ->where('service_id', $service_id)
                 ->select('users.id', 'users.full_name', 'users.avatar')
@@ -229,7 +225,7 @@ class ClientController extends Controller
      */
     public function checkLimitOrder(Request $request)
     {
-        if ($request->ajax()){
+        if ($request->ajax()) {
             $phone_number = $request->phone_number;
             $date = $request->date;
 
@@ -248,15 +244,16 @@ class ClientController extends Controller
      */
     public function checkTimeUser(Request $request)
     {
-        $times = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
-            "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"
+        $times = [
+            "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00",
+            "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"
         ];
-        if ($request->ajax()){
+        if ($request->ajax()) {
             $user_id = $request->user_id;
             $date = $request->date;
 
             foreach ($times as $key => $item) {
-                $datetime = $date .' '. $item;
+                $datetime = $date . ' ' . $item;
                 $date_time[] = date('Y-m-d H:i', strtotime($datetime));
             }
 
@@ -265,7 +262,7 @@ class ClientController extends Controller
                 ->select('time')
                 ->get();
 
-            foreach ($result as $item){
+            foreach ($result as $item) {
                 $result[] = $item->time;
             }
             return response()->json($result);

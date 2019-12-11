@@ -86,7 +86,8 @@
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'autoWidth': true,
+                'autoWidth': false,
+                "scrollX": true,
                 "responsive": true,
                 "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });

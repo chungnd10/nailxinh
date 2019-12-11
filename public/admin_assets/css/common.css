@@ -302,4 +302,11 @@ div.dataTables_wrapper div.dataTables_filter input {
     right: 10px;
 }
 
+.dataTable th, td {
+    white-space: nowrap;
+}
+
+.dataTable th, td.normal{
+    white-space: normal;
+}
 
