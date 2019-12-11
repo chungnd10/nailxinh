@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Client;
 use App\Introduction;
 use App\Http\Controllers\Controller;
 use App\Order;
-use App\Service;
 use App\Subscribe;
 use App\User;
 use Illuminate\Http\Request;
@@ -14,6 +13,10 @@ use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
+    /*
+     * Show page index
+     *
+     */
     public function index()
     {
         $display_status_id = config('contants.display_status_display');
@@ -40,14 +43,29 @@ class ClientController extends Controller
         );
     }
 
+
+    /*
+     * Show page introduction
+     *
+     */
     public function introduction()
     {
         $introduction_active = true;
         $introduction = Introduction::first();
+        $photo_gallery = $this->photo_library_services->random(8);
 
-        return view('client.introduction', compact('introduction_active', 'introduction'));
+        return view('client.introduction', compact(
+            'introduction_active',
+            'introduction',
+               'photo_gallery'
+            )
+        );
     }
 
+    /*
+     * Show page contact
+     *
+     */
     public function contact()
     {
         $contact_active = true;
@@ -57,6 +75,10 @@ class ClientController extends Controller
         return view('client.contact', compact('contact_active', 'cities'));
     }
 
+    /*
+     * Show page type service
+     *
+     */
     public function typeServices()
     {
         $display_status_id = config('contants.display_status_display');
@@ -64,6 +86,10 @@ class ClientController extends Controller
         return view('client.services', compact('feedbacks', 'services_active'));
     }
 
+    /*
+     * Show page services
+     *
+     */
     public function services()
     {
         $services_active = true;
@@ -74,6 +100,10 @@ class ClientController extends Controller
         return view('client.services', compact('feedbacks', 'services_active'));
     }
 
+    /*
+     * Show page services detail
+     *
+     */
     public function servicesDetail($slug)
     {
         $service = $this->service_services->findBySlug($slug);
@@ -104,7 +134,7 @@ class ClientController extends Controller
     {
         $booking_active = true;
         $branchs = $this->branch_services->all();
-        $type_services = $this->type_services->all();
+        $type_services = $this->type_services->all('desc');
         $users = $this->user_services->getTechnician();
 
         return view('client.booking-test', compact('branchs', 'type_services', 'users', 'booking_active'));
@@ -192,4 +222,56 @@ class ClientController extends Controller
             return response()->json($users);
         }
     }
+
+    /*
+     * Check limit order
+     * @param string  date y-m-d
+     * @param int     phone_number
+     */
+    public function checkLimitOrder(Request $request)
+    {
+        if ($request->ajax()){
+            $phone_number = $request->phone_number;
+            $date = $request->date;
+
+            $orders = Order::where('phone_number', $phone_number)
+                ->whereDate('time', $date)
+                ->count();
+
+            return response()->json($orders);
+        }
+        return response('fail', 201);
+    }
+
+    /*
+     * check Time User
+     *
+     */
+    public function checkTimeUser(Request $request)
+    {
+        $times = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
+            "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"
+        ];
+        if ($request->ajax()){
+            $user_id = $request->user_id;
+            $date = $request->date;
+
+            foreach ($times as $key => $item) {
+                $datetime = $date .' '. $item;
+                $date_time[] = date('Y-m-d H:i', strtotime($datetime));
+            }
+
+            $result = Order::where('user_id', $user_id)
+                ->whereIn('time', $date_time)
+                ->select('time')
+                ->get();
+
+            foreach ($result as $item){
+                $result[] = $item->time;
+            }
+            return response()->json($result);
+        }
+        return response('fail', 201);
+    }
+
 }

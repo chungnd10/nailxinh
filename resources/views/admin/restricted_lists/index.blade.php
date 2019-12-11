@@ -19,9 +19,9 @@
                             <tr>
                                 <th width="40" >STT</th>
                                 <th width="100">Số điện thoại</th>
-                                <th>Lý do</th>
+                                <th class="nosort" >Lý do</th>
                                 <th>Ngày thêm</th>
-                                <th width="80">Hành động</th>
+                                <th class="nosort"  width="80">Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -88,12 +88,7 @@
                 'ordering': true,
                 'autoWidth': true,
                 "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [ 2,3]
-                    }
-                ]
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });
 
         });
