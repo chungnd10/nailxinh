@@ -4198,3 +4198,28 @@ right: 5px;
     display: block;
     margin:auto;
 }
+
+/* booking fixed */
+.booking-fixed a {
+    box-shadow: 0 0 5px rgba(123,123,123,.75);
+    background: #EFCEC9;
+    color: #955f23;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: fixed;
+    z-index: 999;
+    top: 20%;
+    right: 0;
+    text-align: center;
+    padding: 15px 10px;
+}
+
+.booking-fixed svg {
+    font-size: 30px;
+    margin-bottom: 10px;
+    height: 1em;
+    width: .875em;
+    vertical-align: -.125em;
+    display: inline-block;
+}

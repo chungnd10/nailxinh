@@ -536,6 +536,34 @@
             }
         };
 
+
+        // get Time button from select Operator
+        function getTimeFromOperator(){
+            let data_post = {
+                branch_id: branch_id,
+                service_id: service_id,
+                _token : $('meta[name="csrf-token"]').attr('content')
+            };
+            // Send data with ajax
+
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "/ajax/getEmployees",
+                data: data_post,
+                success : function(resultData){
+                    console.log(resultData);
+                    renderOperatorFromService(resultData);
+
+                },
+                error: function(xhr, status, error){
+                    console.log(error);
+                }
+
+            })
+        }
         // build Operator dropdown
         let operatorArray = [];
 
