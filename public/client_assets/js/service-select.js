@@ -28,11 +28,13 @@ $(document).ready(function () {
 
     $(".services").select2({
         templateResult: formatState,
-        maximumSelectionLength: 5
+        maximumSelectionLength: 5,
+        minimumResultsForSearch: -1
     });
 
     $(".staff").select2({
-        templateResult: formatStateUser
+        templateResult: formatStateUser,
+        minimumResultsForSearch: -1
     });
     $('.datepicker').datepicker();
 });

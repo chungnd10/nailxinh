@@ -172,6 +172,7 @@ class ClientController extends Controller
         }
     }
 
+
     /*
      * Ajax get employees
      *
@@ -182,7 +183,7 @@ class ClientController extends Controller
             $branch_id = $request->branch_id;
             $service_id = $request->service_id;
 
-            $users = User::join('user_services', 'user_services.user_id', '=','user.id')
+            $users = User::join('user_services', 'user_services.user_id', '=','users.id')
                 ->where('branch_id', $branch_id)
                 ->where('service_id', $service_id)
                 ->select('users.id', 'users.full_name', 'users.avatar')

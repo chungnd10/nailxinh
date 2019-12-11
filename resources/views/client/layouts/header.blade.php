@@ -19,13 +19,13 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-lg-6 col-md-6 text-left text-md-center">
+            <div class="col-lg-6 col-md-6 text-left text-xs-center">
                 <p>
                     <i class="fas fa-clock"></i>Giờ mở cửa: {{ $info->open_time." - ".$info->close_time}}
                 </p>
             </div>
-            <div class="col-lg-6 col-md-6 text-center text-md-right header-top-right">
-                <ul class="">
+            <div class="col-lg-6 col-md-6 text-right header-top-right">
+                <ul class="d-flex-md">
                     <li class="mr-2"><i class="fas fa-envelope"></i>{{ $info->email }}</li>
                     <li><i class="fas fa-phone"></i>{{ $info->phone_number }}</li>
                 </ul>

@@ -50,7 +50,7 @@ Route::post('/subscribe','Client\ClientController@subscribe')
 Route::get('/download-excel','Subscribe\SubscribeController@downloadExcel')
     ->name('download-excel');
 
-Route::get('/ajax/get-employees', 'Client\ClientController@getEmployees')
+Route::post('/ajax/get-employees', 'Client\ClientController@getEmployees')
     ->name('ajax.get-employees');
 
 // end client
