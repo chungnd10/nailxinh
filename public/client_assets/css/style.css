@@ -123,7 +123,7 @@ img {
 /* Helper class*/
 
 .section-padding {
-    padding: 80px 0;
+    padding: 60px 0;
 }
 
 .section-padding-top {
@@ -1486,6 +1486,7 @@ header {
 .tab-content ul li img {
     float: left;
     margin-right: 20px;
+    height: 80px;
 }
 
 .tab-content ul li h4 {
@@ -1915,6 +1916,9 @@ header {
 
 #testimonial {
     background: url(../img/bg/testimonial-bg.jpg) no-repeat center / 100% 100%;
+    /* background-attachment: fixed; */
+    /* background-position-y:100px; */
+
 }
 
 .single-testimonial p {
@@ -1922,43 +1926,6 @@ header {
     margin: 0 auto;
     margin-bottom: 20px;
 }
-
-.testimonial-carousel .owl-dots {
-    width: 300px;
-    margin: 20px auto 0;
-}
-
-.testimonial-carousel .owl-dots div {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 15px;
-    opacity: .5;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    cursor: pointer;
-    -webkit-transition: .3s all;
-    transition: .3s all;
-}
-
-.testimonial-carousel .owl-dots .owl-dot.active {
-    opacity: 1 !important;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-}
-
-/* .testimonial-carousel .owl-dots div:nth-child(1) {
-    background: url(../img/testimonial/testimonial01.png) no-repeat center / cover;
-}
-
-
-.testimonial-carousel .owl-dots div:nth-child(2) {
-    background: url(../img/testimonial/testimonial02.png) no-repeat center / cover;
-}
-
-
-.testimonial-carousel .owl-dots div:nth-child(3) {
-    background: url(../img/testimonial/testimonial03.png) no-repeat center / cover;
-} */
 
 .testimonial-carousel .owl-nav {
     display: block;
@@ -1969,7 +1936,7 @@ header {
     color: #9598a2;
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    top: 70%;
     -webkit-transition: .7s;
     transition: .7s;
 }
@@ -4222,4 +4189,17 @@ right: 5px;
     width: .875em;
     vertical-align: -.125em;
     display: inline-block;
+}
+
+.show_desk{
+    display: flex;
+}
+.hidden_desk{
+    display: none;
+}
+.contact-section .owl-nav {
+    display: none;
+}
+.owl-carousel {
+    touch-action: manipulation; 
 }
