@@ -364,7 +364,7 @@
     }
 
     .testimonial-carousel .owl-next, .testimonial-carousel .owl-prev {
-        top: 100%;
+        top: 95%;
     }
 
     .testimonial-carousel .owl-next {
@@ -461,6 +461,21 @@
         width: calc((100% - 20px)/4);
     }       
 
+    .our_service_mobile:hover .owl-next, .beauticians-slider:hover .owl-next{
+        right: 0px;
+    }
+    .our_service_mobile:hover .owl-prev, .beauticians-slider:hover .owl-prev{
+        left: 0px;
+    }
+    .our_service_mobile .owl-dots,
+    .beauticians-slider .owl-dots{
+        display: flex;
+        justify-content: center;
+    }
+
+    .booking-fixed {
+        display: none;
+    }
  
 }
 
