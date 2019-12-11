@@ -196,7 +196,28 @@
         //     }
         // });
 
-
+        // contact section Carousel
+        $('.contact-section').owlCarousel({
+            loop: true,
+            dots: false,
+            nav: false,
+            navText: ['<i class="fa fa-long-arrow-alt-left"></i>', '<i class="fa fa-long-arrow-alt-right"></i>'],
+            margin: 30,
+            center: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                700: {
+                    items: 1,
+                },
+                1000: {
+                    items: 1
+                }
+            }
+        });
         // testimonial Carousel
         $(".testimonial-carousel").owlCarousel({
             loop: true,

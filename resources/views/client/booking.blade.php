@@ -157,91 +157,31 @@
         let time_format_pttrn = "HH:mm";
         time_format_pttrn = time_format_pttrn ? time_format_pttrn : "HH:mm";
         // time render
+        let test = [
+            "09:00","12:30","17:00"
+        ]
         let checkSlotTime = [
-            {
-                "name": "09:00",
-                'status': true
-            },
-            {
-                "name": "09:30",
-                'status': true
-            },
-            {
-                "name": "10:00",
-                'status': true
-            },
-            {
-                "name": "10:30",
-                'status': true
-            },
-            {
-                "name": "11:00",
-                'status': true
-            },
-            {
-                "name": "11:30",
-                'status': true
-            },
-            {
-                "name": "12:00",
-                'status': true
-            },
-            {
-                "name": "12:30",
-                'status': true
-            },
-            {
-                "name": "13:00",
-                'status': false
-            },
-            {
-                "name": "13:30",
-                'status': false
-            },
-            {
-                "name": "14:00",
-                'status': false
-            },
-            {
-                "name": "14:30",
-                'status': false
-            },
-            {
-                "name": "15:00",
-                'status': false
-            },
-            {
-                "name": "15:30",
-                'status': true
-            },
-            {
-                "name": "16:00",
-                'status': true
-            },
-            {
-                "name": "16:30",
-                'status': true
-            },
-            {
-                "name": "17:00",
-                'status': true
-            },
-            {
-                "name": "17:30",
-                'status': true
-            },
-            {
-                "name": "18:00",
-                'status': true
-            },
-            {
-                "name": "18:30",
-                'status': true
-            },
-            {
-                "name": "19:00",
-                'status': true
-            }
+            "09:00", 
+            "09:30", 
+            "10:00", 
+            "10:30", 
+            "11:00", 
+            "11:30", 
+            "12:00", 
+            "12:30", 
+            "13:00", 
+            "13:30",
+            "14:00", 
+            "14:30", 
+            "15:00", 
+            "15:30", 
+            "16:00", 
+            "16:30", 
+            "17:00", 
+            "17:30", 
+            "18:00", 
+            "18:30", 
+            "19:00"
         ];
         // init setting
         let setting;
@@ -264,7 +204,7 @@
         let startTime;
         let date_format_pttrn = "dd/MM/yyyy";
         date_format_pttrn = date_format_pttrn ? date_format_pttrn.toUpperCase() : "DD/MM/YYYY";
-
+        // show html time slot
         function renderTimeSlot() {
             var dayOfDay = $("#selectTime [class*='btn-primary']").attr('value');
              // get selected date
@@ -303,22 +243,23 @@
             // }
             // render html check slot time
             for(let k = 0; k < checkSlotTime.length; k++){
-                tempMoment = checkSlotTime[k].name;
-                console.log(tempMoment);    
-                status = checkSlotTime[k].status;
-                let times = moment(checkSlotTime[k].time);
+                tempMoment = checkSlotTime[k];
+                console.log(tempMoment); 
                 let btn = $('<button type="button"></button>');
                 btn.text(tempMoment);
                 btn.attr('time-frame', tempMoment);
                 btn.addClass('btn btn-default time-frame mb-2');
-                if( status == 'false' || tempMoment < currentTime){
-                    btn.addClass('disable-click');
-                    btn.html("<div class='time'>" + tempMoment + '</div><div class="slot">Hết chỗ</div>');
-                    btn.addClass('disable-click btn-time-danger');
-                } else{
-                    btn.html("<div class='time theme-text'>" + tempMoment + '</div><div class="slot"> </div>');
-                    btn.addClass('theme-button');
-                };
+                test.forEach(function(item){
+                    if(tempMoment == item || tempMoment < currentTime){
+                        console.log('success');
+                        btn.addClass('disable-click');
+                        btn.html("<div class='time'>" + tempMoment + '</div><div class="slot">Hết chỗ</div>');
+                        btn.addClass('disable-click btn-time-danger');
+                    } else{
+                        btn.html("<div class='time theme-text'>" + tempMoment + '</div><div class="slot"> </div>');
+
+                    }
+                });
                 $("#time_frame").append(btn);
             };
         };
@@ -326,7 +267,7 @@
         for(i; i < days; i++ ) {
             renderDateObj = moment().add(i, 'days');
             dateRenderArray.push({
-                data_date: moment(Object.assign({}, renderDateObj)).format("YYYY-MM-DD"),
+                data_date: moment(Object.assign({}, renderDateObj)).format("DD/MM/YYYY"),
                 date_title: moment(Object.assign({}, renderDateObj)).format("DD/MM"),
                 day_of_week: weekday[moment(Object.assign({}, renderDateObj)).day()],
             });
@@ -488,7 +429,7 @@
             getOperatorFromLocation(branch_id,service_id);
         });
 
-        // get operator from chose location 
+        // get operator from chose location
         
         function getOperatorFromLocation(branch_id,service_id){
             let data_post = {
@@ -497,13 +438,14 @@
                 _token : $('meta[name="csrf-token"]').attr('content')
             };
             // Send data with ajax
-
+            let url = "{{ route('ajax.get-employees') }}";
             $.ajax({
+        
                 type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: "/ajax/getEmployees",
+                url: url,
                 data: data_post,
                 success : function(resultData){
                     console.log(resultData);
