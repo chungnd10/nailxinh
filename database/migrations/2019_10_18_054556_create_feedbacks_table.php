@@ -25,6 +25,12 @@ class CreateFeedbacksTable extends Migration
                 ->on('display_statuses')
                 ->onDelete('CASCADE');
 
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('CASCADE');
+
             $table->timestamps();
         });
     }

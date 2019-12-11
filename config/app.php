@@ -166,7 +166,7 @@ return [
         Vinkla\Hashids\HashidsServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
         /*
          * Package Service Providers...
          */

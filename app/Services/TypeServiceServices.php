@@ -14,9 +14,10 @@ class TypeServiceServices
     }
 
     // lấy tất cả loại dịch vụ
-    public function all()
+    public function all($order_by)
     {
-        $type = TypeOfService::orderby('id', 'desc')->get();
+        $type = TypeOfService::orderby('id', $order_by)
+            ->get();
         return $type;
     }
 

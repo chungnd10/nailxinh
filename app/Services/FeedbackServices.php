@@ -19,6 +19,14 @@ class FeedbackServices
         return $feedbacks;
     }
 
+    public function allWithUser($user_id)
+    {
+        $feedbacks = Feedback::where('user_id', $user_id)
+            ->orderby('id', 'desc')->get();
+        return $feedbacks;
+    }
+
+
      // lấy tất cả feedback theo trạng thái hiển thị
     public function allWithDisplayStatus($display_status_id)
     {

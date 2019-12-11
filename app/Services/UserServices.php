@@ -7,37 +7,54 @@ use Config;
 
 class UserServices
 {
-    // đếm số user
+    /*
+     * Count all user
+     *
+     */
     public function count()
     {
         $user = User::count();
         return $user;
     }
 
-    //lấy tất cả user
-    public function all()
+    /*
+     * Get all user
+     *
+     */
+    public function all($order_by)
     {
-        $user = User::orderby('id', 'desc')->get();
+        $user = User::orderby('id', $order_by)
+            ->get();
         return $user;
     }
 
+    /*
+     * Find user
+     *
+     */
     public function find($id)
     {
         $user = User::findOrFail($id);
         return $user;
     }
 
-    // lấy tất cả user trừ admin
-    public function allForAdmin()
+    /*
+     * Get all except admin
+     *
+     */
+    public function allForAdmin($order_by)
     {
         $role_admin = config('contants.role_admin');
-        $user = User::where('role_id','<>', $role_admin)->orderby('id', 'desc')->get();
+
+        $user = User::where('role_id','<>', $role_admin)
+            ->orderby('id', $order_by)
+            ->get();
         return $user;
     }
 
 
     //lấy user theo chi nhánh va trừ admin quan ly chi nhanh
-    public function allForManager($branch_id)
+    public function allForManager($branch_id, $order_by)
     {
         $role_admin = config('contants.role_admin');
         $role_manager = config('contants.role_manager');
@@ -45,6 +62,7 @@ class UserServices
         $user = User::where('branch_id',$branch_id)
                 ->where('role_id','<>', $role_admin)
                 ->where('role_id','<>', $role_manager)
+                ->orderby('id', $order_by)
                 ->get();
         return $user;
     }

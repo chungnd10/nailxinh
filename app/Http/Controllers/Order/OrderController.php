@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-
+    /*
+     * Show page index
+     *
+     */
     public function index()
     {
         $admin = config('contants.role_admin');
@@ -50,12 +53,20 @@ class OrderController extends Controller
         return view('admin.orders.index', compact('orders'));
     }
 
+    /*
+     * Show page create
+     *
+     */
     public function create()
     {
-        $type_services = $this->type_services->all();
+        $type_services = $this->type_services->all('asc');
         return view('admin.orders.create', compact('type_services'));
     }
 
+    /*
+     * Store new order
+     *
+     */
     public function store(Request $request)
     {
         $order = new Order();
@@ -72,10 +83,13 @@ class OrderController extends Controller
         $service_id = $request->input('service_id');
         $order->services()->sync($service_id);
 
-        $notification = notification('success', 'Thêm thành công');
-        return redirect()->route('orders.index')->with($notification);
+        return redirect()->route('orders.index')->with('toast_success', 'Thêm thành công !');
     }
 
+    /*
+     * Show for editing
+     *
+     */
     public function show($id)
     {
         $order = $this->order_services->find($id);
@@ -85,7 +99,7 @@ class OrderController extends Controller
         $technician = config('contants.role_technician');
         $receptionist = config('contants.role_receptionist');
 
-        $type_services = $this->type_services->all();
+        $type_services = $this->type_services->all('asc');
         $branches = $this->branch_services->all();
         $users = $this->user_services->getUsersWithBranch($order->branch_id);
 
@@ -109,7 +123,6 @@ class OrderController extends Controller
             }
         }
 
-
         return view('admin.orders.show', compact(
                 'order',
                 'type_services',
@@ -120,6 +133,10 @@ class OrderController extends Controller
         );
     }
 
+    /*
+     * Update order
+     *
+     */
     public function update(Request $request, $order_id)
     {
         $status_completed = config('contants.order_status_finish');
@@ -128,7 +145,6 @@ class OrderController extends Controller
 
             // kiểm tra xem lịch đặt đã có hóa đơn chưa
             $bill_flag = $this->bill_services->getOneWithOrderId($order_id);
-//            dd($bill_flag);
 
             if ($bill_flag->first() ? $bill = $bill_flag->first() : $bill = new Bill()) {
                 // lấy giá của tất cả dịch vụ đã sử dụng
@@ -172,6 +188,10 @@ class OrderController extends Controller
 
     }
 
+    /*
+     * Export bill
+     *
+     */
     public function exportBill($order_id)
     {
         $bill_flag = $this->bill_services->getOneWithOrderId($order_id);

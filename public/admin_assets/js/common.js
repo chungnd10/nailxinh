@@ -6,10 +6,6 @@ $(document).ready(function () {
         dateFormat: 'yyyy-mm-dd'
     });
 
-    // hide content
-
-    // end hide content
-
 });
 
 //more text

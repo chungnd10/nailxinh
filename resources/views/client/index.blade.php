@@ -57,7 +57,5 @@
     @include('client.layouts.subscribe')
     {{--END:  subscribe
     ==============================================--}}
-@endsection
-@section('script')
-    {{-- example--}}
+
 @endsection
