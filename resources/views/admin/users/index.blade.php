@@ -24,11 +24,11 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Họ tên</th>
-                                <th width="60">Ảnh</th>
+                                <th class="nosort" width="60">Ảnh</th>
                                 <th>Số điện thoại</th>
                                 <th>Quyền</th>
                                 <th>Chi nhánh</th>
-                                <th width="70">
+                                <th class="nosort" width="70">
                                     Hành động
                                 </th>
                             </tr>
@@ -105,12 +105,7 @@
             'ordering': true,
             'autoWidth': true,
             "responsive": true,
-            "columnDefs": [
-                {
-                    "orderable": false,
-                    "targets": [2, 6]
-                }
-            ]
+            "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
         });
 
     </script>

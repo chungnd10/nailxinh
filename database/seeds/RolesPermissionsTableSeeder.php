@@ -18,6 +18,10 @@ class RolesPermissionsTableSeeder extends Seeder
             ],
             [
                 'role_id' => config('contants.role_manager'),
+                'permission_id' => 7
+            ],
+            [
+                'role_id' => config('contants.role_manager'),
                 'permission_id' => 18
             ],
             [

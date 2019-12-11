@@ -17,7 +17,6 @@
 ============================= -->
 <section id="header-top">
     <div class="container">
-
         <div class="row">
             <div class="col-lg-6 col-md-6 text-left text-md-center">
                 <p>
@@ -32,6 +31,7 @@
             </div>
         </div>
     </div>
+    <a href="{{route('ajax.check-limit-order')}}">abc</a>
 </section>
 <!-- End: Header Top
 ============================= -->

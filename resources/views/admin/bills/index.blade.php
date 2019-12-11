@@ -30,7 +30,7 @@
                                 <th>Tổng tiền(VNĐ )</th>
                                 <th>Ngày tạo</th>
                                 <th width="100">Trạng thái</th>
-                                <th width="80">
+                                <th class="nosort" width="80">
                                     Hành động
                                 </th>
                             </tr>
@@ -108,12 +108,7 @@
                 'ordering': true,
                 'autoWidth': true,
                 "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [5]
-                    }
-                ],
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
 
             });
         });
