@@ -37,7 +37,7 @@
                                     <td>{{ $item->membershipType($item->total_money) }}</td>
                                     @can('remove-accumulate-points')
                                         <td>
-                                            <a href="{{ route('accumulate-points.destroy', $item->phone_number) }}"
+                                            <a href="{{ route('accumulate-points.destroy', Hashids::encode($item->id)) }}"
                                                class="btn btn-xs btn-danger"
                                                onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                                 <i class="fa fa-trash"></i> Xóa

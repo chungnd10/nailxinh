@@ -130,36 +130,56 @@ class ClientController extends Controller
         return view('client.booking', compact('branchs', 'type_services', 'users', 'booking_active'));
     }
 
-    public function bookingTest()
-    {
-        $booking_active = true;
-        $branchs = $this->branch_services->all();
-        $type_services = $this->type_services->all('desc');
-        $users = $this->user_services->getTechnician();
-
-        return view('client.booking-test', compact('branchs', 'type_services', 'users', 'booking_active'));
-    }
-
     /*
-     * Store booking
+     * Lưu lịch đặt của người dùng
      *
      */
-    public function bookingTestStore(Request $request)
+    public function store(Request $request)
     {
-        $order = new Order();
+        if($request->ajax()) {
+            $order = new Order();
+            $phone_number = $request->phone_number;
+            $full_name = $request->full_name;
+            $branch_id = $request->branch_id;
+            $service_id = $request->service_id;
+            $user_id = $request->user_id;
+            $date = $request->date;
+            $hours = $request->hours;
+            $note = $request->note;
 
-        $order->order_status_id = config('contants.order_status_unconfirmed');
-        $order->full_name = $request->sir . ' ' . $request->full_name;
-        $order->service_id = implode(',', $request->service_id);
-        $order->order_status_id = config('contants.order_status_unconfirmed');
+            $validator = Validator::make($request->all(),
+                [
+                    'phone_number'  => 'required',
+                    'full_name'     => 'required',
+                    'branch_id'     => 'required',
+                    'service_id'    => 'required',
+                    'user_id'       => 'required',
+                    'date'          => 'required',
+                    'hours'         => 'required',
+                    'note'          => 'nullable|max:300'
+                ],
+                [
+                    'phone_number.required'  => '*Mục này không được để trống',
+                    'full_name.required'     => '*Mục này không được để trống',
+                    'branch_id.required'     => '*Mục này không được để trống',
+                    'service_id.required'    => '*Mục này không được để trống',
+                    'user_id.required'       => '*Mục này không được để trống',
+                    'date.required'          => '*Mục này không được để trống',
+                    'hours.required'         => '*Mục này không được để trống',
+                    'note.max'               => '*Mục này không được để trống'
+                ]
+            );
 
-        $order->fill($request->all())->save();
+            if ($validator->fails()) {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
 
-        $notification = notification('success',
-            'Đặt lịch thành công, chúng tôi sẽ liên hệ để xác nhận với bạn trong thời gian sớm nhất');
-        return redirect(route('index'))->with($notification);
-
+            $order->save();
+            return response()->json(['success'=>'Store Successfully']);
+        }
+        return response('store faild !'. 201);
     }
+
 
     /*
      * Display gallery
@@ -168,7 +188,6 @@ class ClientController extends Controller
     public function gallery()
     {
         $gallery_active = true;
-
         return view('client.gallery', compact('gallery_active'));
     }
 
@@ -182,12 +201,13 @@ class ClientController extends Controller
 
         $validator = Validator::make($request->all(),
             [
-                'email' => 'required|max:300|unique:subscribes',
+                'email' => 'required|max:300|unique:subscribes|email',
             ],
             [
-                'email.required' => '*Mục này không được để trống',
-                'email.max' => '*Không được vượt quá 300 ký tự',
-                'email.unique' => '*Email này đã được đăng ký trước đây',
+                'email.required'    => '*Vui lòng nhập email !',
+                'email.max'         => '*Không được vượt quá 300 ký tự !',
+                'email.unique'      => '*Email này đã được đăng ký trước đây !',
+                'email.email'       => '*Email không đúng định dạng !'
             ]
         );
 

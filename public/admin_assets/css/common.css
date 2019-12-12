@@ -310,3 +310,6 @@ div.dataTables_wrapper div.dataTables_filter input {
     white-space: normal;
 }
 
+.padding-bottom-input{
+    padding-bottom: 10px;
+}
