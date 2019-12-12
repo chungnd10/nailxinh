@@ -3554,7 +3554,7 @@ canvas {
 
 /* booking page */
 
-button.btn.btn-adress-booking
+button.btn.btn-address-booking
 {
     width: 100%;
     padding: 10px;
@@ -3563,7 +3563,7 @@ button.btn.btn-adress-booking
     border: 1px solid #acacac;
     cursor: pointer;
 }
-.btn.btn-adress-booking:hover {
+.btn.btn-address-booking:hover {
     color: #ddd;
 }
 .time-frame {
@@ -3609,7 +3609,7 @@ span.select2.select2-container.select2-container--default {
     padding:0px 6px;
 }
 .time-frame.active,
-.btn-adress-booking.active{
+.btn-address-booking.active{
     background-color: var(--main-color) !important;
     transition: ease-out .4s;
     color: var(--main-color-white);
@@ -3645,7 +3645,7 @@ img.img-flag {
     font-size: 12px;
     font-weight: 400;
 }
-.btn-adress-booking{
+.btn-address-booking{
     font-weight: 700;
 }
 .disable-click {

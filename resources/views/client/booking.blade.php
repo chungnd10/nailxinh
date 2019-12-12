@@ -37,7 +37,6 @@
                             <div class="form-group col-md-6">
                                 <span class="text-danger validation">*</span>
                                 <input type="text"
-                                       id="phone_number"
                                        class="form-control form-border form-require"
                                        name="phone_number"
                                        value="{{ old('phone_number') }}"
@@ -63,11 +62,11 @@
                                     Địa điểm
                                     <span class="text-danger">*</span>
                                 </div>
-                                <script>
+                                <!-- <script>
                                     function addClassData() {
                                         $(this).addClass('branch-data');
                                     }
-                                </script>
+                                </script> -->
                                 <div class="row" id="locationBtn" >
                                     <div class="col-md-12 text-error text-danger">Vui lòng chọn địa chỉ</div>
                                     @foreach($branchs as $branch)
@@ -75,8 +74,8 @@
                                             <button type="button"
                                                     name="branch_id"
                                                     data-branch-id="{{ $branch->id }}"
-                                                    onclick="addClassData()"
-                                                    class="btn btn-adress-booking">
+                                                    
+                                                    class="btn btn-address-booking">
                                                 {{ $branch->name }}
                                                 <br>
                                                 <div class="font-11">{{ $branch->address }}</div>
@@ -285,7 +284,11 @@
             // getBookingSlotsFromServer(startTime);
             // renderBookingDate();
         });
-
+        // click add and remove class in location
+        $('.btn-address-booking').on('click', function(){
+            $('.btn-address-booking').removeClass('active');
+            $(this).addClass('active');
+        })
         // when user click on 
         $("#time_frame").on('click', 'button', function(e){
 
@@ -303,6 +306,9 @@
             $('#time-select').css({'color': ''});
         });
 
+        // click select option staff
+
+
          // get current time
         function showBookingDateTime(currentTime, date_selected){
             let dateObj = moment(date_selected);
@@ -319,11 +325,14 @@
 
         // render date picker
         function renderBookingDate(){
+            let currentDate = moment().format('DD/MM/YYYY');
+            console.log(currentDate);
             let i, renderArray = [];
             for(i in  dateRenderArray) {
-
+                let classDate = currentDate == dateRenderArray[i].data_date ? "btn_primary" : "";
+                console.log(classDate);
                 renderArray.push('<div class="col-xs-4">');
-                renderArray.push('<div class="btn-select btn-inactive" data-date="' + dateRenderArray[i].data_date + '">');
+                renderArray.push(`<div class="btn-select btn-inactive btn-primary ${classDate}" data-date=${dateRenderArray[i].data_date}>`);
                 renderArray.push('<div class="select-day-title">');
 
                 renderArray.push('</div>');
@@ -341,6 +350,7 @@
         // run function
         renderBookingDate();
         renderTimeSlot();
+
         // slick render date select
         $('#select-day').slick({
             dots: true,
@@ -378,7 +388,7 @@
         
         // get slot from server
         function getBookingSlotsFromServer(startTime){  
-            let location_id = parseInt($("#locationBtn button[class*='btn-adress-booking']").attr("data-branch-id"));
+            let location_id = parseInt($("#locationBtn button[class*='btn-address-booking']").attr("data-branch-id"));
             if(!location_id) location_id = defaultLocation;
             
             let timeData = {
@@ -425,10 +435,47 @@
 
         $('#service_id') .on('change', function(){
             let service_id = $('#service_id').find(":selected").val();
-            let branch_id = $('.btn-adress-booking.active').data('branch-id');
+            let branch_id = $('.btn-address-booking.active').data('branch-id');
             getOperatorFromLocation(branch_id,service_id);
         });
+        // on blur input phone number check limit booking day
+        $('#phone_number').blur(function(){
+            const phone_number = $('#phone_number').val();
+            // const date = 
+            // Send data with ajax
+            let url = "{{ route('ajax.check-limit-order') }}";
+            let data = {
+                phone_number: phone_number,
+                _token : $('meta[name="csrf-token"]').attr('content')
+            };
 
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: url,
+                data: data,
+                success : function(resultData){
+                    checkPhoneLimitBooking(resultData);
+
+                },
+                error: function(xhr, status, error){
+                    console.log(error);
+                }
+            });
+            console.log(phone_number);
+        });
+        // check phone number limit booking day
+        function checkPhoneLimitBooking(numbers){
+            if(numbers > 2){
+                console.log('da qua luot dat lich trong ngay');
+            } else{
+                console.log("success");
+            }
+        };
+
+        // render operator when click choose service a
         // get operator from chose location
         
         function getOperatorFromLocation(branch_id,service_id){
@@ -448,7 +495,6 @@
                 url: url,
                 data: data_post,
                 success : function(resultData){
-                    console.log(resultData);
                     renderOperatorFromService(resultData);
 
                 },
@@ -509,81 +555,6 @@
         // build Operator dropdown
         let operatorArray = [];
 
-        //  Featch data to operator dropdown 
-         function getOperatorByLocation(){
-        //     if(setting && setting.showOperatorInfo == 1){
-        //         // store all operators to build select2
-        //         let operatorList = {};
-
-        //         let defaultType = "Operators";
-
-        //         let operatorOpt = "<option value=''> Select " + defaultType + "</option>";
-        //         let locationChange = parseInt($("#locationBtn button[class*='btn-primary']").attr("location-id"));
-        //         if(!locationChange) locationChange = defaultLocation;
-
-
-        //         for(let i = 0; i < operator.length;i++){
-        //         if ((operator[i].location_id == locationChange) || (operator[i].location_id_1 == locationChange) || (operator[i].location_id_2 == locationChange) || (operator[i].location_id_3 == locationChange) || (operator[i].location_id_4 == locationChange) || (operator[i].location_id_5 == locationChange))
-        //         {
-        //             if(!operator[i].avatar_url){
-        //                 operator[i].avatar_url = "/images/placeholder_avatar_sqr.jpg";
-        //             }
-
-        //             if(!operator[i].name){
-        //                 operator[i].name = "Chưa có tên";
-        //             }
-
-        //             if(!operator[i].title){
-        //                 operator[i].title = "Chức danh khác";
-        //             }
-
-        //             if(operator[i].name){
-        //                 operator[i].title = operator[i].title.toUpperCase();
-        //             }
-
-        //             if(typeof operatorList[operator[i].title]  == 'undefined') operatorList[operator[i].title] = [];
-        //             operatorList[operator[i].title].push(operator[i]);
-
-        //         }
-
-        //         }
-
-        //         var optionHmtl = [operatorOpt];
-        //         for(var j in operatorList) {
-        //         optionHmtl.push("<optgroup label='" + j + "'>");
-        //         for(var k in operatorList[j]) {
-        //             optionHmtl.push("<option value='" + operatorList[j][k].id + "' data-avatar='" + operatorList[j][k].avatar_url + "' >" + operatorList[j][k].name + "</option>");
-        //         }
-        //         optionHmtl.push("</optgroup>");
-        //         }
-
-        //         $("#operator").html(optionHmtl.join(''));
-
-        //         // destroy select2 if existed
-        //         try { 
-        //     try { 
-        //         try { 
-        //         if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
-        //     if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
-        //         if($("#operator").data('select2')) $("#operator").data('select2').destroy(); 
-        //         } catch(e){
-        //         // console.log(e);
-        //         }
-
-        //         setTimeout(function(){
-        //         $("#operator").select2({
-        //             templateResult: formatSelect2Data,
-        //             templateSelection: formatSelect2Data,
-        //             containerCssClass: 'select2-fix-padding',
-        //             dropdownParent: $('#operatorSetting')
-        //         });
-        //         }, 200); // add timeout to make sure html is ready before build select2
-
-        //     } else{
-        //         $("#operatorSetting").hide();
-        //     }
-        };
-
         // Validation form
         function ValidationInput(){
             if( $(this).attr('name') === 'phone_number' ){
@@ -621,9 +592,15 @@
             rules: {
                 phone_number: {
                     required: true,
-                    minlength:10,
-                    maxlength:11,
-                    pattern: '/^0[0-9]{8}$/'
+                    phoneNumberVietNam: true,
+                    // remote: {
+                    //     url: "{{ route('ajax.check-limit-order') }}",
+                    //     type: "POST",
+                    //     data :{
+                    //         phone_number: $('#phone_number').val(),
+                    //         date: $()
+                    //     }
+                    // }
                 },
                 full_name:{
                     required:true                
@@ -640,27 +617,58 @@
             },
             messages: {
                 phone_number:{
-                    required: "Mời bạn nhập vào số điện thoại",
-                    minlength:"Bạn cần nhập ít nhất 10 số",
-                    maxlength:"Bạn được nhập tối đa là 11 số",
-                    pattern:'Vui lòng nhập đúng số điện thoại'
+                    required: "*Mời bạn nhập vào số điện thoại",
+                    remote: "*Ban da dat 2 luot trong ngay"
 
                 },
                 full_name:{
-                    required:"Mời bạn nhập vào họ và tên"
+                    required:"*Mời bạn nhập vào họ và tên"
                 },
                 service_id:{
-                    required:"Mời bạn chọn dịch vụ"
+                    required:"*Mời bạn chọn dịch vụ"
                 },
                 user_id:{
-                    required:"Mời bạn chọn nhân viên"
+                    required:"*Mời bạn chọn nhân viên"
                 },
                 date:{
-                    required:"Mời bạn chọn ngày"
+                    required:"*Mời bạn chọn ngày"
                 }
             }
         });
-        
+
+        // submit form send ajax 
+
+        $('#btn-booking').click(function(e){
+            e.preventDefault();
+            let data = {
+                branch_id: $('.btn-address-booking.active').attr('data-branch-id'),
+                phone_number: $('#phone_number').val(),
+                full_name: $('#full_name').val(),
+                service_id: $('#service_id').find(":selected").val(),
+                user_id: $('#user_id').find(":selected").val(),
+                date: moment($('#select-day .btn_primary').attr('data-date')).format('YYYY-MM-DD'),
+                hours: $('.time-frame.btn_primary').attr('time-frame'),
+                note: $('#note').val(),
+                _token : $('meta[name="csrf-token"]').attr('content')
+            };
+            let url;
+            console.log(data)
+            // $.ajax({
+            //     type: 'POST',
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     },
+            //     url: url,
+            //     data: data,
+            //     success : function(resultData){
+            //         console.log(resultData);
+
+            //     },
+            //     error: function(xhr, status, error){
+            //         console.log(error);
+            //     }
+            // });
+        }) ;      
 
 
     });
