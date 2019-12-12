@@ -778,24 +778,42 @@
                 date: moment($('#select-day .btn_primary').attr('data-date')).format(date_format_pttrn),
                 hours: $('.time-frame.btn_primary').attr('time-frame'),
                 note: $('#note').val(),
-                _token : $('meta[name="csrf-token"]').attr('content')
             };
-            let url;
-            // $.ajax({
-            //     type: 'POST',
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     url: url,
-            //     data: data,
-            //     success : function(resultData){
-            //         console.log(resultData);
+            let url = "{{ route('booking') }}";
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: url,
+                data: data,
+                success : function(data){
+                    if (data.success){
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Bạn đã đặt lịch thành công !, chúng tôi sẽ liên hệ với bạn sớm nhất có thể.'
+                        });
+                        $('.btn-address-booking.active').attr('data-branch-id'),
+                            $('#phone_number').val(''),
+                            $('#full_name').val(''),
+                            $('#service_id').find(":selected").val(),
+                            $('#user_id').find(":selected").val(),
+                            $('#select-day .btn_primary').attr('data-date')
+                        $('.time-frame.btn_primary').attr('time-frame'),
+                            $('#note').val('')
+                    }
 
-            //     },
-            //     error: function(xhr, status, error){
-            //         console.log(error);
-            //     }
-            // });
+                    if (data.fail){
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Đặt lịch thất bại !.'
+                        });
+                    }
+                },
+                error: function(xhr, status, error){
+                    console.log(error);
+                }
+            });
         }) ;      
 
 

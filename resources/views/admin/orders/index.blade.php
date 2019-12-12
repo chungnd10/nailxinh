@@ -20,57 +20,99 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
+                    <div class="box-body">
+                        <form method="get" action="">
+                            <div class="row">
+                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
+                                    <select name="branch_id" class="form-control">
+                                        <option value="">Tất cả chi nhánh</option>
+                                    </select>
+                                </div>
+                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
+                                    <select name="user_id" class="form-control">
+                                        <option value="">Tất cả nhân viên</option>
+                                    </select>
+                                </div>
+                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
+                                    <div class="input-group date input-date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text"
+                                               class="form-control pull-right"
+                                               id="start_date"
+                                               name="start_date"
+                                               placeholder="Ngày bắt đầu">
+                                    </div>
+                                </div>
+                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
+                                    <div class="input-group date input-date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text"
+                                               class="form-control pull-right"
+                                               id="end_date"
+                                               name="end_date"
+                                               placeholder="Ngày kết thúc">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table class="table table-bordered table-hover" id="datatable">
                             <thead>
                             <tr>
-                                <th width="40">STT</th>
-                                <th width="100">Người đặt</th>
-                                <th>Dịch vụ</th>
-                                <th width="100">Thời gian</th>
-                                <th width="100">Trạng thái</th>
-                                <th class="nosort" width="80">
+                                <th>STT</th>
+                                <th>Người đặt</th>
+                                <th >Dịch vụ</th>
+                                <th>Thời gian</th>
+                                <th>Trạng thái</th>
+                                <th class="nosort">
                                     Hành động
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($orders as $key => $order)
-                                    <tr>
-                                        <td>{{ $key+1 }}</td>
-                                        <td>{{ $order->full_name }}</td>
-                                        <td>{{ $order->getNameServices($order->service_id) }}</td>
-                                        <td>{{ date('H:i d-m-Y', strtotime($order->time)) }}</td>
-                                        <td >
-                                            <i class="fa fa-tag {{ tagColorStatus($order->orderStatus->name) }}" ></i>
-                                            {{ $order->orderStatus->name }}
-                                        </td>
-                                        <td>
-                                            <a href="#"
-                                               class="btn btn-xs btn-primary"
-                                               data-toggle="modal"
-                                               data-target="#modal-{{ Hashids::encode($order->id) }}">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            @can('update-orders')
-                                                @if($order->order_status_id == config('contants.order_status_finish'))
-                                                    @if($order->checkPaid($order->id) == false)
-                                                        <a href="{{ route('orders.show', Hashids::encode($order->id)) }}"
-                                                           class="btn btn-xs btn-warning">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                    @endif
-                                                @else
+                            @foreach($orders as $key => $order)
+                                <tr>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ $order->full_name }}</td>
+                                    <td>{{ $order->getNameServices($order->service_id) }}</td>
+                                    <td>{{ date('H:i d-m-Y', strtotime($order->time)) }}</td>
+                                    <td>
+                                        <i class="fa fa-tag {{ tagColorStatus($order->orderStatus->name) }}"></i>
+                                        {{ $order->orderStatus->name }}
+                                    </td>
+                                    <td>
+                                        <a href="#"
+                                           class="btn btn-xs btn-primary"
+                                           data-toggle="modal"
+                                           data-target="#modal-{{ Hashids::encode($order->id) }}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        @can('update-orders')
+                                            @if($order->order_status_id == config('contants.order_status_finish'))
+                                                @if($order->checkPaid($order->id) == false)
                                                     <a href="{{ route('orders.show', Hashids::encode($order->id)) }}"
                                                        class="btn btn-xs btn-warning">
                                                         <i class="fa fa-pencil"></i>
                                                     </a>
                                                 @endif
-                                            @endcan
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            @else
+                                                <a href="{{ route('orders.show', Hashids::encode($order->id)) }}"
+                                                   class="btn btn-xs btn-warning">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            @endif
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                         @foreach($orders as $key => $order)
@@ -126,7 +168,7 @@
                                                 <tr>
                                                     <th>Trạng thái:</th>
                                                     <td>
-                                                        <i class="fa fa-tag {{ tagColorStatus($order->orderStatus->name) }}" ></i>
+                                                        <i class="fa fa-tag {{ tagColorStatus($order->orderStatus->name) }}"></i>
                                                         {{ $order->orderStatus->name }}
                                                     </td>
                                                 </tr>
@@ -145,7 +187,9 @@
                                                     <td>
                                                         @if($order->updated_by != '')
                                                             {{ $order->updated_by }}
-                                                            <i>- ( {{ date('H:i d-m-Y', strtotime($order->updated_at)) }} ) </i>
+                                                            <i>-
+                                                                ( {{ date('H:i d-m-Y', strtotime($order->updated_at)) }}
+                                                                ) </i>
                                                         @else
                                                             Không có
                                                         @endif
@@ -200,6 +244,20 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            //date start
+            $('#start_date').datetimepicker({
+                format: 'yyyy-mm-dd hh:00',
+                minView: 1,
+                autoclose: true
+            });
+
+            //date end
+            $('#end_date').datetimepicker({
+                format: 'yyyy-mm-dd hh:00',
+                minView: 1,
+                autoclose: true
+            });
+
             //data table
             $('#datatable').DataTable({
                 "language": {
@@ -233,7 +291,7 @@
                 'autoWidth': false,
                 "scrollX": true,
                 "responsive": true,
-                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
+                "columnDefs": [{"orderable": false, "targets": 'nosort'}]
 
             });
         });

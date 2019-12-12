@@ -33,43 +33,44 @@
                     },
                 },
             });
-        });
 
-        // validate swal
-        $('#submit').click(function (e) {
-            e.preventDefault();
-            jQuery.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            // validate swal
+            $('#submit').click(function (e) {
+                e.preventDefault();
+                let form = $('#subscribe-form');
+                if (form.valid()) {
+                    jQuery.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    let email = $('#email').val();
+                    jQuery.ajax({
+                        url: "{{ route('subscribe') }}",
+                        method: 'post',
+                        data: {
+                            email: email
+                        },
+                        success: function (data) {
+                            if (data.errors) {
+                                Swal.fire({
+                                    type: 'error',
+                                    title: data.errors
+                                });
+                            } else {
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Chúc mừng bạn đã đăng ký thành công !'
+                                });
+                                $('#email').val('');
+                            }
+                        }
+                    });
                 }
             });
-            let email = $('#email').val();
-
-            jQuery.ajax({
-                url: "{{ route('subscribe') }}",
-                method: 'post',
-                data: {
-                    email: email
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        Swal.fire({
-                            type: 'error',
-                            title: data.errors
-                        });
-                    }else{
-                        Swal.fire({
-                            type: 'success',
-                            title: 'Chúc mừng bạn đã đăng ký thành công !'
-                        });
-                        $('#email').val('');
-                    }
-
-
-                }
-
-            });
         });
+
+
     </script>
 @endsection
 

@@ -12,9 +12,15 @@
 */
 
 
+// auth
 Auth::routes(['register' => false]);
-//client
 
+// hashids
+Route::bind('id', function ($id) {
+    return $id =  Hashids::decode($id)[0] ?? "";
+});
+
+//client
 Route::get('/', 'Client\ClientController@index')
     ->name('index');
 
@@ -35,11 +41,9 @@ Route::get('/type-services/{slug}', 'Client\ClientController@typeServices')
 
 Route::get('/booking', 'Client\ClientController@booking')
     ->name('booking');
-Route::post('/booking', 'Client\ClientController@store');
 
-Route::get('/booking-test', 'Client\ClientController@bookingTest')
-    ->name('booking-test');
-Route::post('/booking-test', 'Client\ClientController@bookingTestStore');
+Route::post('/booking', 'Client\ClientController@store')
+    ->name('booking');
 
 Route::get('/gallery', 'Client\ClientController@gallery')
     ->name('gallery');
@@ -58,8 +62,6 @@ Route::post('/ajax/check-limit-order', 'Client\ClientController@checkLimitOrder'
 
 Route::post('/ajax/check-time-user', 'Client\ClientController@checkTimeUser')
     ->name('ajax.check-time-user');
-
-
 
 // end client
 
@@ -517,7 +519,4 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     });
 });
 
-Route::bind('id', function ($id) {
-    return $id =  Hashids::decode($id)[0] ?? "";
-});
 
