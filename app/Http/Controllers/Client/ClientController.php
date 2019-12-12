@@ -137,16 +137,6 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         if($request->ajax()) {
-            $order = new Order();
-            $phone_number = $request->phone_number;
-            $full_name = $request->full_name;
-            $branch_id = $request->branch_id;
-            $service_id = $request->service_id;
-            $user_id = $request->user_id;
-            $date = $request->date;
-            $hours = $request->hours;
-            $note = $request->note;
-
             $validator = Validator::make($request->all(),
                 [
                     'phone_number'  => 'required',
@@ -171,13 +161,35 @@ class ClientController extends Controller
             );
 
             if ($validator->fails()) {
-                return response()->json(['errors'=>$validator->errors()->all()]);
+                return response()->json(
+                    [
+                        'errors'=>[
+                            'phone_number' => $validator->errors()->first('phone_number'),
+                            'full_name' => $validator->errors()->first('full_name'),
+                            'branch_id' => $validator->errors()->first('branch_id'),
+                            'service_id' => $validator->errors()->first('service_id'),
+                            'user_id' => $validator->errors()->first('user_id'),
+                            'time' => $validator->errors()->first('time'),
+                            'note' => $validator->errors()->first('note'),
+                        ]
+                    ]
+                );
             }
 
+            $order = new Order();
+            $order->phone_number = $request->phone_number;
+            $order->full_name = $request->full_name;
+            $order->branch_id = $request->branch_id;
+            $order->user_id = $request->user_id;
+            $order->time = $request->date .' '. $request->hours;
+            $order->note = $request->note;
+            $order->order_status_id = config('contants.order_status_unconfirmed');
             $order->save();
+            $order->services()->sync($order->id, $request->service_id);
+
             return response()->json(['success'=>'Store Successfully']);
         }
-        return response('store faild !'. 201);
+        return response()->json(['fail' => 'Store fail']);
     }
 
 

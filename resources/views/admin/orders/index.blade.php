@@ -67,12 +67,12 @@
                         <table class="table table-bordered table-hover" id="datatable">
                             <thead>
                             <tr>
-                                <th width="40">STT</th>
-                                <th width="100">Người đặt</th>
-                                <th>Dịch vụ</th>
-                                <th width="100">Thời gian</th>
-                                <th width="100">Trạng thái</th>
-                                <th class="nosort" width="80">
+                                <th>STT</th>
+                                <th>Người đặt</th>
+                                <th >Dịch vụ</th>
+                                <th>Thời gian</th>
+                                <th>Trạng thái</th>
+                                <th class="nosort">
                                     Hành động
                                 </th>
                             </tr>
