@@ -56,7 +56,7 @@ Route::post('/ajax/get-employees', 'Client\ClientController@getEmployees')
 Route::post('/ajax/check-limit-order', 'Client\ClientController@checkLimitOrder')
     ->name('ajax.check-limit-order');
 
-Route::get('/ajax/check-time-user', 'Client\ClientController@checkTimeUser')
+Route::post('/ajax/check-time-user', 'Client\ClientController@checkTimeUser')
     ->name('ajax.check-time-user');
 
 

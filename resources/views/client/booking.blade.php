@@ -62,11 +62,6 @@
                                     Địa điểm
                                     <span class="text-danger">*</span>
                                 </div>
-                                <!-- <script>
-                                    function addClassData() {
-                                        $(this).addClass('branch-data');
-                                    }
-                                </script> -->
                                 <div class="row" id="locationBtn" >
                                     <div class="col-md-12 text-error text-danger">Vui lòng chọn địa chỉ</div>
                                     @foreach($branchs as $branch)
@@ -74,7 +69,6 @@
                                             <button type="button"
                                                     name="branch_id"
                                                     data-branch-id="{{ $branch->id }}"
-                                                    
                                                     class="btn btn-address-booking">
                                                 {{ $branch->name }}
                                                 <br>
@@ -154,11 +148,8 @@
     $(document).ready(function () {
         // format time
         let time_format_pttrn = "HH:mm";
-        time_format_pttrn = time_format_pttrn ? time_format_pttrn : "HH:mm";
-        // time render
-        let test = [
-            "09:00","12:30","17:00"
-        ]
+
+        /* array slotTime */
         let checkSlotTime = [
             "09:00", 
             "09:30", 
@@ -180,110 +171,187 @@
             "17:30", 
             "18:00", 
             "18:30", 
-            "19:00"
+            "19:00",
+            "19:30",
+            "20:00",
+            "20:30",
+            "21:00",
+            "21:30"
         ];
-        // init setting
-        let setting;
-        // init day in week
+        /* init day in week */
         let weekday = new Array(7);
             weekday[1] = "Thứ Hai";
             weekday[2] = "Thứ Ba";
             weekday[3] = "Thứ Tư";
             weekday[4] = "Thứ Năm";
             weekday[5] = "Thứ Sáu";
-            weekday[6] = "Thứ Bẩy";
+            weekday[6] = "Thứ Bảy";
             weekday[0] = "Chủ Nhật";
-        // render date array
+        /*  render date array */
         let dateRenderArray = [];
-        // create total day in week
+        /* create total day in week */
         let days = 7;
-        // create booking before mins
+        /* create booking before mins */
         let booking_before_min = 30;
         let i = 0, renderDateObj;
         let startTime;
-        let date_format_pttrn = "dd/MM/yyyy";
-        date_format_pttrn = date_format_pttrn ? date_format_pttrn.toUpperCase() : "DD/MM/YYYY";
-        // show html time slot
-        function renderTimeSlot() {
-            var dayOfDay = $("#selectTime [class*='btn-primary']").attr('value');
-             // get selected date
-            let bookingDate = $('#select-day .btn-primary').attr('data-date');
-            let currentTime = moment().format('HH:mm');
-            console.log(currentTime);
-            let currentDate;
+        /* format default date */
+        let date_format_pttrn = 'YYYY-MM-DD';
+        let currentDate = moment().format(date_format_pttrn);
+        /* create variable save data */
+        let save_data;
+        /* ============= render HTML time slot ============= */
+        function renderTimeSlot(data, next_date) {
+            // var dayOfDay = $("#selectTime [class*='btn-primary']").attr('value');
+            // // get selected date
+            // let bookingDate = $('#select-day .btn-primary').attr('data-date');
+            let currentTime = moment().format(time_format_pttrn);
+            let currentDateTime = moment().format('YYYY-MM-DD HH:MM');
+            let currentDate,tempMoment;
             // remove html before render
-            $("#timeFrame").empty();
-            var tempMoment;
-            var thisTime = moment();
-            // if (setting && setting.booking_before_min) {
-            //     thisTime.add(setting.booking_before_min, 'minutes');
-            // }
-            //console.log('setting.booking_before_min', setting.booking_before_min, thisTime);
-
-            // var startSlotTime = moment(startTime).utcOffset(merchant_timezone).hours(defaultStartTime.hour).minutes(defaultStartTime.min);
-            // var endSlotTime = moment(startTime).utcOffset(merchant_timezone).hours(defaultEndTime.hour).minutes(defaultEndTime.min);
-
-            // var noon_12 = moment(startTime).utcOffset(merchant_timezone).hours(12).minutes(0);
-            // var evening_18h = moment(startTime).utcOffset(merchant_timezone).hours(18).minutes(0);
-
-            // switch(dayOfDay){
-            // case "morning":
-            //     startSlotTime = startSlotTime.isSameOrBefore(noon_12) ? startSlotTime : noon_12; 
-            //     endSlotTime = endSlotTime.isSameOrBefore(noon_12) ? endSlotTime : noon_12;
-            //     break;
-            // case "afternoon":
-            //     startSlotTime = startSlotTime.isSameOrAfter(noon_12) ? (startSlotTime.isSameOrBefore(evening_18h) ? startSlotTime : evening_18h) : noon_12; 
-            //     endSlotTime = endSlotTime.isSameOrAfter(noon_12) ? (endSlotTime.isSameOrBefore(evening_18h) ? endSlotTime : evening_18h) : noon_12;
-            //     break;
-            // case "evening":
-            //     startSlotTime = startSlotTime.isSameOrAfter(evening_18h) ? startSlotTime : evening_18h; 
-            //     endSlotTime = endSlotTime.isSameOrAfter(evening_18h) ? endSlotTime : evening_18h;
-            //     break;
-            // }
-            // render html check slot time
+            // render html TimeSlot
             for(let k = 0; k < checkSlotTime.length; k++){
                 tempMoment = checkSlotTime[k];
-                console.log(tempMoment); 
                 let btn = $('<button type="button"></button>');
+
                 btn.text(tempMoment);
                 btn.attr('time-frame', tempMoment);
                 btn.addClass('btn btn-default time-frame mb-2');
-                test.forEach(function(item){
-                    if(tempMoment == item || tempMoment < currentTime){
-                        console.log('success');
-                        btn.addClass('disable-click');
-                        btn.html("<div class='time'>" + tempMoment + '</div><div class="slot">Hết chỗ</div>');
-                        btn.addClass('disable-click btn-time-danger');
-                    } else{
-                        btn.html("<div class='time theme-text'>" + tempMoment + '</div><div class="slot"> </div>');
 
+                if(data){
+                    console.log('chui');
+                    
+                    if(next_date){
+                        data.forEach(function(item){
+                            item = moment(item).format(time_format_pttrn);
+                            if(tempMoment === item ){
+                                //btn hết chỗ
+                                btn.addClass('disable-click btn-time-danger');
+                                btn.html("<div class='time'>" + tempMoment + "</div><div class='slot'>Hết chỗ</div>");
+                                
+                            } else{
+                                // btn còn chỗ
+                                btn.html("<div class='time theme-text'>" + tempMoment + "</div><div class='slot'> </div>");
+                            }
+                        });
+                    } else{
+                        console.log('chui chui');
+                        data.forEach(function(item){
+                            item = moment(item).format(time_format_pttrn);
+                            if(tempMoment == item || tempMoment < currentTime){
+                                //btn hết chỗ
+                                btn.addClass('disable-click btn-time-danger');
+                                btn.html("<div class='time'>" + tempMoment + "</div><div class='slot'>Hết chỗ</div>");
+                            } else{
+                                // btn còn chỗ
+                                btn.html("<div class='time theme-text'>" + tempMoment + "</div><div class='slot'> </div>");
+                            }
+                        });
+                    } 
+                } else if(next_date){
+                    console.log('ra vao');
+                    showBookingDateTime(currentTime,next_date);
+                    let array_date_time = [];
+                    let date_time = next_date +" "+ checkSlotTime[k];
+                    array_date_time.push(date_time);
+                    
+                    array_date_time.forEach(function(item){
+                        if(item < currentDateTime){
+                            //btn hết chỗ
+                            btn.addClass('disable-click btn-time-danger');
+                            btn.html("<div class='time'>" + tempMoment + "</div><div class='slot'>Hết chỗ</div>");
+                            
+                        } else{
+                                // btn còn chỗ
+                                btn.html("<div class='time theme-text'>" + tempMoment + "</div><div class='slot'> </div>");
+                        }  
+                    }); 
+                    // console.log(array_date_time)
+                }
+                else{
+                    console.log('chui ra');
+                    // $("#time_frame").html('');
+                    if(tempMoment < currentTime){
+                            //btn hết chỗ
+                            btn.addClass('disable-click btn-time-danger');
+                            btn.html("<div class='time'>" + tempMoment + "</div><div class='slot'>Hết chỗ</div>");
+                            
+                    } else{
+                            // btn còn chỗ
+                            btn.html("<div class='time theme-text'>" + tempMoment + "</div><div class='slot'> </div>");
                     }
-                });
+                }
                 $("#time_frame").append(btn);
             };
         };
 
+        
+
         for(i; i < days; i++ ) {
             renderDateObj = moment().add(i, 'days');
             dateRenderArray.push({
-                data_date: moment(Object.assign({}, renderDateObj)).format("DD/MM/YYYY"),
-                date_title: moment(Object.assign({}, renderDateObj)).format("DD/MM"),
+                data_date: moment(Object.assign({}, renderDateObj)).format(date_format_pttrn),
+                date_title: moment(Object.assign({}, renderDateObj)).format("DD-MM"),
                 day_of_week: weekday[moment(Object.assign({}, renderDateObj)).day()],
             });
         }
 
         // change date when click change date
         $(document).on("click", '.btn-select', function(e){
+            let url = "{{ route('ajax.check-time-user') }}";
+            let user_id = $('#user_id').find(":selected").val();
             $('.btn-select').removeClass('btn_primary').addClass('btn-inactive');
             $(this).addClass('btn_primary');
+            let next_date = $(this).attr('data-date');
+            console.log('next-date',next_date);
+            $("#time_frame").empty();
+            if(moment(next_date).isAfter(currentDate)){
+                console.log('true');
+                if(user_id){
+                    let data = {
+                        user_id: user_id,
+                        date: next_date,
+                        _token : $('meta[name="csrf-token"]').attr('content')
+                    };
+                    // Send data with ajax
+                    $.ajax({
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: url,
+                        data: data,
+                        success : function(resultData){
+                            $("#time_frame").empty();
+                            renderTimeSlot(resultData,next_date);
+                            return save_data = resultData;
 
-            startTime = moment($(this).attr('data-date')).toISOString();
-            // mặc định buổi cho ngày, nếu ngày hôm nay thì kiểm tra buổi phù hợp nếu không chuyển hết về buối sáng
-            var defaultMorning = !moment($(this).data('date')).isSame(moment().format('YYYY-MM-DD'));
+                        },
+                        error: function(xhr, status, error){
+                            console.log(error);
+                        }
+                    });
+                } else{
+                    renderTimeSlot(null, next_date);
+                }
+                
+            } else if( moment(currentDate).isBefore(next_date) || user_id){
+                console.log("test");
+                getAjaxSlotFromServer(user_id,currentDate);
+            }
+            else{
+                console.log('a');
+                renderTimeSlot();
+                
+            }
+            
+
+
             // setDefaultDayOfDay(defaultMorning);
             // getBookingSlotsFromServer(startTime);
             // renderBookingDate();
         });
+
         // click add and remove class in location
         $('.btn-address-booking').on('click', function(){
             $('.btn-address-booking').removeClass('active');
@@ -293,13 +361,13 @@
         $("#time_frame").on('click', 'button', function(e){
 
             currentTime = $(this).attr('time-frame');
-
+            let next_day = moment($('#select-day .btn_primary').attr('data-date')).format(date_format_pttrn);
             $("#time_frame > button").removeClass('btn_primary').addClass('btn-default');
             //$("#time_frame > button .time").addClass('theme-text');
             $(this).removeClass('btn-default').addClass('btn_primary');
             $('#time_frame .time').removeClass('text-white');
             $(this).find('.time').addClass('text-white');
-            showBookingDateTime(currentTime, startTime);
+            showBookingDateTime(currentTime,next_day);
 
             // remove error
             $('.general-message').hide();
@@ -325,12 +393,10 @@
 
         // render date picker
         function renderBookingDate(){
-            let currentDate = moment().format('DD/MM/YYYY');
-            console.log(currentDate);
             let i, renderArray = [];
             for(i in  dateRenderArray) {
-                let classDate = currentDate == dateRenderArray[i].data_date ? "btn_primary" : "";
-                console.log(classDate);
+                let classDate = currentDate === dateRenderArray[i].data_date ? "btn_primary" : "";
+            
                 renderArray.push('<div class="col-xs-4">');
                 renderArray.push(`<div class="btn-select btn-inactive btn-primary ${classDate}" data-date=${dateRenderArray[i].data_date}>`);
                 renderArray.push('<div class="select-day-title">');
@@ -438,6 +504,70 @@
             let branch_id = $('.btn-address-booking.active').data('branch-id');
             getOperatorFromLocation(branch_id,service_id);
         });
+
+        /* get data from server when select user_id */
+        $('#user_id').on('change', function(){
+            let user_id = $('#user_id').find(":selected").val();
+            let date = moment().format(date_format_pttrn);
+            getAjaxSlotFromServer(user_id,date);
+            // let data = {
+            //     user_id: user_id,
+            //     date: date,
+            //     _token : $('meta[name="csrf-token"]').attr('content')
+            // };
+            // // Send data with ajax
+            // $.ajax({
+            //     type: 'POST',
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     },
+            //     url: url,
+            //     data: data,
+            //     success : function(resultData){
+            //         $("#time_frame").empty();
+
+            //         renderTimeSlot(resultData);
+            //         return save_data = resultData;
+
+            //     },
+            //     error: function(xhr, status, error){
+            //         console.log(error);
+            //     }
+            // });
+            // console.log(user_id,date);
+
+        })
+         function getAjaxSlotFromServer(user_id,date){
+            let url = "{{ route('ajax.check-time-user') }}";
+            
+            let input_data = {
+                user_id: user_id,
+                date: date,
+                _token : $('meta[name="csrf-token"]').attr('content')
+            };
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: url,
+                data: input_data,
+                success : function(resultData){
+                    
+                    console.log('from user id', resultData);
+                    $("#time_frame").empty();
+                    renderTimeSlot(resultData);
+                    return save_data = resultData;
+
+                },
+                error: function(xhr, status, error){
+                    console.log(error);
+                }
+            });
+         }
+
+        /* ====================================================  */
+
         // on blur input phone number check limit booking day
         $('#phone_number').blur(function(){
             const phone_number = $('#phone_number').val();
@@ -464,8 +594,8 @@
                     console.log(error);
                 }
             });
-            console.log(phone_number);
         });
+
         // check phone number limit booking day
         function checkPhoneLimitBooking(numbers){
             if(numbers > 2){
@@ -487,7 +617,6 @@
             // Send data with ajax
             let url = "{{ route('ajax.get-employees') }}";
             $.ajax({
-        
                 type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -512,8 +641,7 @@
             let operatorOpt = "<option value=''>Vui lòng chọn nhân viên</option>";
             if(resultData.length > 0){
                 for (i =0;  i<resultData.length; i++) {
-                    optionHtml.push(`<option data-image="${resultData[i].avatar}" value="${resultData[i].id}">${resultData[i].full_name}</option> `);
-                    console.log(optionHtml);
+                    optionHtml.push(`<option data-image="" value="">Vui lòng chọn nhân viên</option><option data-image="${resultData[i].avatar}" value="${resultData[i].id}">${resultData[i].full_name}</option> `);
                 }
                 // render html option operator
                 $("#user_id").html(optionHtml.join(''));
@@ -640,19 +768,19 @@
 
         $('#btn-booking').click(function(e){
             e.preventDefault();
+            console.log('get date',moment($('#select-day .btn_primary').attr('data-date')).format(date_format_pttrn))
             let data = {
                 branch_id: $('.btn-address-booking.active').attr('data-branch-id'),
                 phone_number: $('#phone_number').val(),
                 full_name: $('#full_name').val(),
                 service_id: $('#service_id').find(":selected").val(),
                 user_id: $('#user_id').find(":selected").val(),
-                date: moment($('#select-day .btn_primary').attr('data-date')).format('YYYY-MM-DD'),
+                date: moment($('#select-day .btn_primary').attr('data-date')).format(date_format_pttrn),
                 hours: $('.time-frame.btn_primary').attr('time-frame'),
                 note: $('#note').val(),
                 _token : $('meta[name="csrf-token"]').attr('content')
             };
             let url;
-            console.log(data)
             // $.ajax({
             //     type: 'POST',
             //     headers: {
