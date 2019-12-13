@@ -34,17 +34,17 @@
 <section id="contact">
     <div class="container contact-wrapper text-center text-xl-left">
         <div class="row show_desk">
-            <div class="col-xl-4 col-lg-4 col-md-4 single-contact">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 single-contact">
                 <img src="client_assets/img/icons/icon01.png" alt="">
                 <h4>Mở cửa</h4>
                 <p>{{ $info->open_time." - ".$info->close_time}}</p>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 single-contact">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 single-contact">
                 <img src="client_assets/img/icons/icon02.png" alt="">
                 <h4>Địa chỉ</h4>
                 <p>{{ $info->address }}</p>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 single-contact">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 single-contact">
                 <img src="client_assets/img/icons/icon03.png" alt="">
                 <h4>Số điện thoại</h4>
                 <p>{{ $info->phone_number }}</p>
