@@ -3,6 +3,10 @@
 {{--jquery validate--}}
 <script src="admin_assets/plugins/jquery-validate/jquery.validate.min.js"></script>
 <script src="admin_assets/plugins/jquery-validate/additional-methods.js"></script>
+{{--<script src="admin_assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>--}}
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="admin_assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->

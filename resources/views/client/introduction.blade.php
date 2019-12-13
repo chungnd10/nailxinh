@@ -1,6 +1,6 @@
 @extends('client.layouts.index')
 @section('content')
-        <!-- Start: Breadcrumb Area
+    <!-- Start: Breadcrumb Area
     ============================= -->
 
     <section id="breadcrumb-area" class="breadcrumb-introduction">
@@ -29,7 +29,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="nail-img">
-                        <img src="upload/images/introductions/{{ $introduction->image }}" alt="{{ $introduction->title }}">
+                        <img src="upload/images/introductions/{{ $introduction->image }}"
+                             alt="{{ $introduction->title }}">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -48,79 +49,41 @@
 
     <!-- Start: Gallery 
     ============================= -->
-    <section id="gallery">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-12 text-center">
-                    <div class="section-title">
-                        <h2>KHÁM PHÁ ALBUM ẢNH</h2>
-                        <hr>
-                        <p>Bạn có thể tham khảo những hình ảnh dưới đây để rõ hơn về NAILXINH</p>
-                    </div>
-                    <div class="section-desc">
-                        Ngoài những chất lượng về dịch vụ, NAIL XINH còn tự hào là chuỗi làm đẹp có không gian được yêu thích nhất. Với 
-                        concept các tone màu sang chảnh, nền nã, NAIL XINH luôn làm hài lòng khách yêu mỗi khi đặt chân đến. Bên cạnh 
-                        ó, NAIL XINH tự hào sở hữu kho sơn khổng lồ, đa dạng để khách yêu có thể thỏa thích lựa chọn. Đến với chúng 
-                        mình để được nhận những điều tuyệt vời nhất nhé!!!
+    @if($photo_gallery->first())
+        <section id="gallery">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-12 text-center">
+                        <div class="section-title">
+                            <h2>KHÁM PHÁ ALBUM ẢNH</h2>
+                            <hr>
+                        </div>
+                        <div class="section-desc">
+                            Ngoài những chất lượng về dịch vụ, NAIL XINH còn tự hào là chuỗi làm đẹp có không gian được
+                            yêu thích nhất. Với
+                            concept các tone màu sang chảnh, nền nã, NAIL XINH luôn làm hài lòng khách yêu mỗi khi đặt
+                            chân đến. Đến với chúng
+                            mình để được nhận những điều tuyệt vời nhất nhé!!!
+                        </div>
                     </div>
                 </div>
+                <div class="row mt-5 mb-5" id="lightgallery">
+                    @foreach($photo_gallery as $item)
+                        <a class="col-md-3 jg-entry" href="{{ asset('upload/images/photo_library/'. $item->image) }}">
+                            <img src="{{ asset('upload/images/photo_library/'. $item->image) }}"/>
+                            <div class="demo-gallery-poster">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
             </div>
-            <div class="row mt-5 mb-5" id="lightgallery">
-                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
-                    <img src="client_assets/img/gallery/gallery10.jpg" />
-                    <div class="demo-gallery-poster">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
-                    <img src="client_assets/img/gallery/gallery10.jpg" />
-                    <div class="demo-gallery-poster">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
-                    <img src="client_assets/img/gallery/gallery10.jpg" />
-                    <div class="demo-gallery-poster">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
-                    <img src="client_assets/img/gallery/gallery10.jpg" />
-                    <div class="demo-gallery-poster">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
-                    <img src="client_assets/img/gallery/gallery10.jpg" />
-                    <div class="demo-gallery-poster">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
-                    <img src="client_assets/img/gallery/gallery10.jpg" />
-                    <div class="demo-gallery-poster">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
-                    <img src="client_assets/img/gallery/gallery10.jpg" />
-                    <div class="demo-gallery-poster">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-                <a class="col-md-3 jg-entry" href="client_assets/img/gallery/gallery10.jpg">
-                    <img src="client_assets/img/gallery/gallery10.jpg" />
-                    <div class="demo-gallery-poster">
-                        <i class="fas fa-search-plus"></i>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    
+        </section>
+    @endif
+
     <!-- Start: End 
     ============================= -->
-        
+
 
     {{--START: subscribe
     =======================--}}

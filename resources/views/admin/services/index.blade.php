@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             Danh sách
-            <small>loại dịch vụ</small>
+            <small>dịch vụ</small>
         </h1>
         <ol class="breadcrumb">
             <a href="{{ route('services.create') }}"
@@ -25,12 +25,12 @@
                             <tr>
                                 <th>STT</th>
                                 <th width="100">Tên dịch vụ</th>
-                                <th>Ảnh</th>
+                                <th class="nosort">Ảnh</th>
                                 <th>Loại dịch vụ</th>
                                 <th>Giá(VND)</th>
                                 <th>Thời gian</th>
-                                <th>Mô tả</th>
-                                <th width="70">
+                                <th class="nosort">Mô tả</th>
+                                <th class="nosort" width="70">
                                     Hành động
                                 </th>
                             </tr>
@@ -111,14 +111,10 @@
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'autoWidth': true,
+                'autoWidth': false,
+                "scrollX": true,
                 "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [2, 6, 7]
-                    }
-                ]
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });
 
             // hide content

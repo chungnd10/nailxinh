@@ -123,7 +123,7 @@ img {
 /* Helper class*/
 
 .section-padding {
-    padding: 80px 0;
+    padding: 60px 0;
 }
 
 .section-padding-top {
@@ -1486,6 +1486,7 @@ header {
 .tab-content ul li img {
     float: left;
     margin-right: 20px;
+    height: 80px;
 }
 
 .tab-content ul li h4 {
@@ -1915,6 +1916,9 @@ header {
 
 #testimonial {
     background: url(../img/bg/testimonial-bg.jpg) no-repeat center / 100% 100%;
+    /* background-attachment: fixed; */
+    /* background-position-y:100px; */
+
 }
 
 .single-testimonial p {
@@ -1922,43 +1926,6 @@ header {
     margin: 0 auto;
     margin-bottom: 20px;
 }
-
-.testimonial-carousel .owl-dots {
-    width: 300px;
-    margin: 20px auto 0;
-}
-
-.testimonial-carousel .owl-dots div {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 15px;
-    opacity: .5;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-    cursor: pointer;
-    -webkit-transition: .3s all;
-    transition: .3s all;
-}
-
-.testimonial-carousel .owl-dots .owl-dot.active {
-    opacity: 1 !important;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-}
-
-/* .testimonial-carousel .owl-dots div:nth-child(1) {
-    background: url(../img/testimonial/testimonial01.png) no-repeat center / cover;
-}
-
-
-.testimonial-carousel .owl-dots div:nth-child(2) {
-    background: url(../img/testimonial/testimonial02.png) no-repeat center / cover;
-}
-
-
-.testimonial-carousel .owl-dots div:nth-child(3) {
-    background: url(../img/testimonial/testimonial03.png) no-repeat center / cover;
-} */
 
 .testimonial-carousel .owl-nav {
     display: block;
@@ -1969,7 +1936,7 @@ header {
     color: #9598a2;
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    top: 70%;
     -webkit-transition: .7s;
     transition: .7s;
 }
@@ -3587,7 +3554,7 @@ canvas {
 
 /* booking page */
 
-button.btn.btn-adress-booking
+button.btn.btn-address-booking
 {
     width: 100%;
     padding: 10px;
@@ -3596,7 +3563,7 @@ button.btn.btn-adress-booking
     border: 1px solid #acacac;
     cursor: pointer;
 }
-.btn.btn-adress-booking:hover {
+.btn.btn-address-booking:hover {
     color: #ddd;
 }
 .time-frame {
@@ -3642,7 +3609,7 @@ span.select2.select2-container.select2-container--default {
     padding:0px 6px;
 }
 .time-frame.active,
-.btn-adress-booking.active{
+.btn-address-booking.active{
     background-color: var(--main-color) !important;
     transition: ease-out .4s;
     color: var(--main-color-white);
@@ -3678,7 +3645,7 @@ img.img-flag {
     font-size: 12px;
     font-weight: 400;
 }
-.btn-adress-booking{
+.btn-address-booking{
     font-weight: 700;
 }
 .disable-click {
@@ -4197,4 +4164,42 @@ right: 5px;
     height: 30px;
     display: block;
     margin:auto;
+}
+
+/* booking fixed */
+.booking-fixed a {
+    box-shadow: 0 0 5px rgba(123,123,123,.75);
+    background: #EFCEC9;
+    color: #955f23;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: fixed;
+    z-index: 999;
+    top: 20%;
+    right: 0;
+    text-align: center;
+    padding: 15px 10px;
+}
+
+.booking-fixed svg {
+    font-size: 30px;
+    margin-bottom: 10px;
+    height: 1em;
+    width: .875em;
+    vertical-align: -.125em;
+    display: inline-block;
+}
+
+.show_desk{
+    display: flex;
+}
+.hidden_desk{
+    display: none;
+}
+.contact-section .owl-nav {
+    display: none;
+}
+.owl-carousel {
+    touch-action: manipulation; 
 }

@@ -94,6 +94,8 @@ class OrderController extends Controller
     {
         $order = $this->order_services->find($id);
 
+        $this->authorize('update', $order );
+
         $admin = config('contants.role_admin');
         $manager = config('contants.role_manager');
         $technician = config('contants.role_technician');

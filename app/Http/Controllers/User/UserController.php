@@ -66,7 +66,10 @@ class UserController extends Controller
     public function store(AddUserRequest $request)
     {
         $user = new User();
+        $branch_id = Auth::user()->branch_id;
         $user->display_status_id = config('contants.display_status_hide');
+        $user->password = Hash::make(uniqid(16));
+        $user->branch_id = $branch_id;
         $user->fill($request->all())->save();
 
         return redirect()->route('users.index')->with('toast_success', 'Thêm thành công !');

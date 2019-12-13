@@ -68,6 +68,6 @@ jQuery(document).ready(function($) {
             $('.text-error2').css('display','none');
             return true;
         }
-        console.log(adress,phone,gender,service_id,user_id,date,time_frame,note);
+        // console.log(adress,phone,gender,service_id,user_id,date,time_frame,note);
     });
 });

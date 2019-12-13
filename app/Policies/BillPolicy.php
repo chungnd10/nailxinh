@@ -11,7 +11,7 @@ class BillPolicy
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
+     * Chỉ được chỉnh sửa hóa đơn khi có quyền và chưa thanh toán
      * @param \App\User $user
      * @return mixed
      */
