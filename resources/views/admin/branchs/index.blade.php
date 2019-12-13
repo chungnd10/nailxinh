@@ -20,19 +20,17 @@
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-bordered table-hover" id="branchs_table">
+                        <table class="table table-bordered table-hover dataTable" id="branchs_table">
                             <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Tên chi nhánh</th>
-                                <th>Số điện thoại</th>
-                                <th>Địa chỉ</th>
-                                <th>Nhân sự</th>
-                                <th>Thành phố</th>
-                                <th width="70">
-                                    Hành động
-                                </th>
-                            </tr>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên chi nhánh</th>
+                                    <th>Số điện thoại</th>
+                                    <th class="nosort">Địa chỉ</th>
+                                    <th>Nhân sự</th>
+                                    <th>Thành phố</th>
+                                    <th class="nosort"> Hành động</th>
+                                </tr>
                             </thead>
                             <tbody>
                             @foreach($branchs as $key => $item)
@@ -100,15 +98,11 @@
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
+                'autoWidth': false,
                 'ordering': true,
-                'autoWidth': true,
                 "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [3, 6]
-                    }
-                ]
+                "scrollX": true,
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });
         });
     </script>

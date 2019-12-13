@@ -25,10 +25,10 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Tên loại dịch vụ</th>
-                                <th>Ảnh</th>
-                                <th>Slug</th>
-                                <th>Số dịch vụ</th>
-                                <th width="70">
+                                <th class="nosort">Ảnh</th>
+                                <th class="nosort">Slug</th>
+                                <th >Số dịch vụ</th>
+                                <th class="nosort" width="70">
                                     Hành động
                                 </th>
                             </tr>
@@ -101,14 +101,10 @@
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'autoWidth': true,
+                'autoWidth': false,
+                "scrollX": true,
                 "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [2, 3, 4, 5]
-                    }
-                ]
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });
         });
     </script>

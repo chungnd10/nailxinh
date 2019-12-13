@@ -1,3 +1,11 @@
+
+/* create variable default color main  */
+:root {
+    --main-color: #ec5598;
+    --main-color-white: #fff; 
+}
+
+
 .section-title hr:after,
 .section-title hr:before,
 .boxed-btn,
@@ -35,12 +43,12 @@ li.page-item.active .page-link,
 .widget-tag li a:hover,
 .weekdays,
 .days li .active {
-    background: #ec5598;
+    background: var(--main-color);
 }
 
 
 .recomended .boxed-btn {
-    background: #ec5598 !important;
+    background: var(--main-color) !important;
 }
 
 
@@ -92,21 +100,21 @@ li.latest-news h6:hover,
 .widget-search input[type=button]:hover,
 .widget-acrhives li a:hover,
 .recent-post h6:hover {
-    color: #ec5598;
+    color: var(--main-color);
 }
 
 .input__field--hantus:focus+.input__label--hantus .graphic--hantus,
 .input--filled .graphic--hantus {
-    stroke: #ec5598;
+    stroke: var(--main-color);
 }
 
 .pricing-box .boxed-btn {
-    color: #ec5598;
+    color: var(--main-color);
 }
 
 .beautician-footer-text h5,
 .boxed-btn:hover {
-    color: #ec5598 !important;
+    color: var(--main-color) !important;
 }
 
 .feature-box:hover .feature-icon,
@@ -117,5 +125,5 @@ li.latest-news h6:hover,
 li.page-item .page-link:hover,
 li.page-item.active .page-link,
 .portfolio-tab-sorting li a:hover {
-    border-color: #ec5598 !important;
+    border-color: var(--main-color) !important;
 }

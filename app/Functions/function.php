@@ -66,15 +66,14 @@ function tagColorStatus($status)
 //remove image
 function checkExistsAndDeleteImage($path, $file, $img_default)
 {
-    if (file_exists($path . $file)
-        && $file != $img_default) {
-        unlink($path . $file);
+    if (File::exists($path.$file) && $file != $img_default) {
+        File::delete($path.$file);
     }
 }
 
 function handleImageBase64($image)
 {
-    $image_replace = str_replace('data:image/png;base64,', '', $image);
+    $image_replace = str_replace('data:image/jpeg;base64,', '', $image);
     $image_replace = str_replace(' ', '+', $image_replace);
     $image_replace = base64_decode($image_replace);
     return $image_replace;
@@ -82,6 +81,6 @@ function handleImageBase64($image)
 
 function getNameImageUnique($length)
 {
-    $imageName = uniqid($length) . '.' . 'png';
+    $imageName = uniqid($length) . '.' . 'jpg';
     return $imageName;
 }

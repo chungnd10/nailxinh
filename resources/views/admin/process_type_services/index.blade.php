@@ -27,8 +27,8 @@
                                 <th width="160">Tên quy trình</th>
                                 <th width="100">Dịch vụ</th>
                                 <th>Bước</th>
-                                <th>Mô tả</th>
-                                <th width="70">
+                                <th class="nosort">Mô tả</th>
+                                <th class="nosort" width="70">
                                     Hành động
                                 </th>
                             </tr>
@@ -104,15 +104,14 @@
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'autoWidth': true,
+                'autoWidth': false,
+                "scrollX": true,
                 "responsive": true,
-                "columnDefs": [
-                    {orderable: false, "targets": [4, 5]}
-                ]
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
             });
 
             // hide content
-            moreText(80);
+            moreText(50);
             //end hide content
         });
     </script>

@@ -28,9 +28,11 @@
                                 <th width="100">Mức tiền(VND)</th>
                                 <th width="120">Mức chiết khấu(%)</th>
                                 <th>Mô tả</th>
-                                <th width="70">
-                                    Hành động
-                                </th>
+                                @if(Auth::user()->can('edit-membership-type') || Auth::user()->can('remove-membership-type'))
+                                    <th class="nosort" width="70">
+                                        Hành động
+                                    </th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -45,19 +47,27 @@
                                             <span class="more">
                                                 {{ $item->description }}
                                             </span>
+                                        @else
+                                            <p>Không có mô tả</p>
                                         @endif
                                     </td>
-                                    <td>
-                                        <a href="{{ route('membership_type.show', Hashids::encode($item->id)) }}"
-                                           class="btn btn-xs btn-warning">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a href="{{ route('membership_type.destroy', Hashids::encode($item->id)) }}"
-                                           class="btn btn-xs btn-danger"
-                                           onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </td>
+                                    @if(Auth::user()->can('edit-membership-type') || Auth::user()->can('remove-membership-type'))
+                                        <td>
+                                            @can('edit-membership-type')
+                                                <a href="{{ route('membership_type.show', Hashids::encode($item->id)) }}"
+                                                   class="btn btn-xs btn-warning">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                            @endcan
+                                            @can('remove-membership-type')
+                                                <a href="{{ route('membership_type.destroy', Hashids::encode($item->id)) }}"
+                                                   class="btn btn-xs btn-danger"
+                                                   onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            @endcan
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>
@@ -106,14 +116,10 @@
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'autoWidth': true,
+                'autoWidth': false,
+                "scrollX": true,
                 "responsive": true,
-                "columnDefs": [
-                    {
-                        "orderable": false,
-                        "targets": [2, 5]
-                    }
-                ],
+                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
 
             });
 

@@ -10,7 +10,7 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('orders.store') }}" method="POST" id="orders">
+            <form action="{{ route('orders.store') }}" method="POST" id="addOrder">
                 @csrf
                 <div class="box-body">
                     <div class="row">
@@ -119,37 +119,38 @@
             });
 
             //validate
-            $("#addBranch").validate({
+            $("#addOrder").validate({
                 rules: {
-                    name: {
+                    full_name: {
                         required: true,
                         maxlength: 100
                     },
-                    city_id: {
+                    time: {
                         required: true,
+                    },
+                    service_id: {
+                        required: true,
+                    },
+                    note: {
+                        maxlength: 300
                     },
                     phone_number: {
                         required: true,
                         phoneNumberVietNam: true,
                         maxlength: 11
-                    },
-                    address: {
-                        required: true,
-                        maxlength: 200
                     }
-
                 },
 
                 messages: {
-                    name: {
+                    full_name: {
                         maxlength: "*Không được vượt quá 100 ký tự"
                     },
+                    note: {
+                        maxlength: "*Không được vượt quá 300 ký tự"
+                    },
                     phone_number: {
-                        maxlength: "*Không được vượt quá 11 ký tự"
-                    },
-                    address: {
-                        maxlength: "*Không được vượt quá 200 ký tự"
-                    },
+                        phoneNumberVietNam: true,
+                    }
                 }
             });
 

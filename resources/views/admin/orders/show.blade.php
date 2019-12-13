@@ -159,12 +159,13 @@
             $('.select2').select2();
             $('#select2').val([<?= $order->service_id ?>]).change();
 
-            var minDate = "{{ $order->time }}";
+            {{--var minDate = "{{ $order->time }}";--}}
 
             $('#time').datetimepicker({
                 format: 'yyyy-mm-dd hh:ii',
                 autoclose: true,
-                minDate: minDate,
+                minView: 1
+                // minDate: minDate,
             });
 
             //validate

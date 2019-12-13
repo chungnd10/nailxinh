@@ -23,9 +23,8 @@ class IntroductionRequest extends FormRequest
      */
     public function rules()
     {
-        //trường hợp sửa slide
+        //trường hợp sửa
         $validate = [
-            'image'         => 'nullable|mimes:jpg,jpeg,png,gif|max:2048',
             'title'         => 'required|max:300',
             'content'       => 'required|max:3000',
         ];
@@ -36,9 +35,6 @@ class IntroductionRequest extends FormRequest
     public function messages()
     {
         return [
-            'image.required'        => "*Mục này không được để trống",
-            'image.mimes'           => '*Chỉ chấp nhận JPG, JPEG, PNG, GIF',
-            'image.max'             => '*Kích thước ảnh không được vượt quá 2MB',
             'title.required'        => "*Mục này không được để trống",
             'title.max'             => '*Không được vượt quá 300 ký tự',
             'content.required'      => "*Mục này không được để trống",
