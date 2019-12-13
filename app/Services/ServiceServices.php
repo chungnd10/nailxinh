@@ -51,4 +51,17 @@ class ServiceServices
         return array_sum($service_price->pluck('price')->toArray());
     }
 
+    /*
+    * Lấy dịch vụ khác
+    *
+    */
+    public function getOrtherServices($service_id, $type_services)
+    {
+        $services = Service::where('id', '<>', $service_id)
+            ->where('type_of_services_id', '=', $type_services)
+            ->get();
+        return $services;
+    }
+
+
 }

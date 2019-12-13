@@ -111,8 +111,9 @@ class ClientController extends Controller
             return view('client.errors.404');
         }
         $process = $this->process_of_services->getProcessWithType($service->id);
+        $orther_services = $this->service_services->getOrtherServices($service->id, $service->type_of_services_id);
 
-        return view('client.service-detail', compact('service', 'process'));
+        return view('client.service-detail', compact('service', 'process', 'orther_services'));
     }
 
     /*

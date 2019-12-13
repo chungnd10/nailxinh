@@ -180,18 +180,18 @@
             "21:30"
         ];
         /* init day in week */
-        let weekday = new Array(6);
+        let weekday = new Array(7);
             weekday[1] = "Thứ Hai";
             weekday[2] = "Thứ Ba";
             weekday[3] = "Thứ Tư";
             weekday[4] = "Thứ Năm";
             weekday[5] = "Thứ Sáu";
-            weekday[0] = "Thứ Bảy";
-            // weekday[0] = "Chủ Nhật";
+            weekday[6] = "Thứ Bảy";
+            weekday[0] = "Chủ Nhật";
         /*  date array */
         let date_render_array = [];
         /* create total day in week */
-        let days = 6;
+        let days = 7;
         /* create booking before mins */
         let booking_before_min = 30;
         let i = 0, render_date_obj;
@@ -281,6 +281,7 @@
                 date_title: moment(Object.assign({}, render_date_obj)).format("DD/MM"),
                 day_of_week: weekday[moment(Object.assign({}, render_date_obj)).day()],
             });
+
             console.log(date_render_array);
         };
 
@@ -375,7 +376,7 @@
 
         function renderBookingDate(){
             let i, render_array = [];
-
+            
             for(i in  date_render_array) {
                 let class_active = current_date === date_render_array[i].data_date ? "btn_primary" : "";
                 render_array.push('<div class="col-xs-4">');

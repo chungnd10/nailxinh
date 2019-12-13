@@ -137,6 +137,12 @@ img {
 .section-title h2 {
     margin-bottom: 10px;
     display: inline-block;
+    line-height: 60px;
+}
+
+.section-title-intro h2 {
+    font-size: 32px;
+    margin-bottom: 0px;
 }
 
 .section-title hr {
@@ -1305,6 +1311,16 @@ header {
     transition: .3s;
 }
 
+.service-box-detail figure {
+    width: 240px !important;
+    height: 180px !important;
+}
+
+.service-box-detail figure,
+.service-box-detail figure .fix-border-radius {
+    border-radius: 0px !important;
+}
+
 .service-box:hover figure {
     box-shadow: -3.758px 26.737px 43px 0px rgba(42, 57, 63, 0.15);
 }
@@ -1361,6 +1377,10 @@ header {
     transition: all 0.2s ease-in-out;
     -webkit-transform: scale(0);
     transform: scale(0);
+}
+
+.service-box-detail figure:after {
+    border-radius: 0px !important;
 }
 
 .service-box:hover figure:after {
@@ -3796,11 +3816,15 @@ img.img-flag {
 }
 
 .nail-content {
-    padding: 50px 50px 50px 0px;
+    padding: 0px 0px 0px 30px;
 }
 
 .nail-content p {
     margin-bottom: 10px;
+}
+
+.nail-content p span {
+    line-height: 30px;
 }
 
 section#calltoaction {
@@ -4167,7 +4191,7 @@ section#calltoaction {
 .beauticians-slider .owl-nav .owl-prev,
 .beauticians-slider .owl-nav .owl-next {
     position: absolute;
-    top: 50%;
+    top: 35%;
     transform: translateY(-50%);
     width: 100%;
     display: flex;
@@ -4239,14 +4263,14 @@ section#calltoaction {
 
 .our_service_mobile:hover .owl-prev,
 .beauticians-slider:hover .owl-prev {
-    left: -30px;
+    left: -50px;
     visibility: visible;
     opacity: 1;
 }
 
 .our_service_mobile:hover .owl-next,
 .beauticians-slider:hover .owl-next {
-    right: -30px;
+    right: -50px;
     visibility: visible;
     opacity: 1;
 }
