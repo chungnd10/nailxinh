@@ -224,7 +224,8 @@
                     if(next_date){
                         data.forEach(function(item){
                             item = moment(item).format(time_format_pttrn);
-                            if(tempMoment === item ){
+
+                            if(item === tempMoment ){
                                 //btn hết chỗ
                                 btn.addClass('disable-click btn-time-danger');
                                 btn.html("<div class='time'>" + tempMoment + "</div><div class='slot'>Hết chỗ</div>");
@@ -238,7 +239,8 @@
                         console.log('chui chui');
                         data.forEach(function(item){
                             item = moment(item).format(time_format_pttrn);
-                            if(tempMoment == item || tempMoment < currentTime){
+                             
+                            if(tempMoment === item || tempMoment < currentTime){
                                 //btn hết chỗ
                                 btn.addClass('disable-click btn-time-danger');
                                 btn.html("<div class='time'>" + tempMoment + "</div><div class='slot'>Hết chỗ</div>");
