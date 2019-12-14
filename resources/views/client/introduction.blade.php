@@ -73,7 +73,7 @@
                 </div>
                 <div class="row mt-5 mb-5" id="lightgallery">
                     @foreach($photo_gallery as $item)
-                    <a class="col-md-3 jg-entry" href="{{ asset('upload/images/photo_library/'. $item->image) }}">
+                    <a class="col-md-3 col-6 jg-entry" href="{{ asset('upload/images/photo_library/'. $item->image) }}">
                         <img src="{{ asset('upload/images/photo_library/'. $item->image) }}"/>
                         <div class="demo-gallery-poster">
                             <i class="fas fa-search-plus"></i>

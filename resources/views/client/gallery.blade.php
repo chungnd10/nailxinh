@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <h2>Gallery</h2>
-                        <ul class="breadcrumb-nav list-inline">
+                        <ul class="breadcrumb-nav list-inline" id="filter">
                             <li><a href="/">Home</a></li>
                             <li><i class="fa fa-angle-right"></i></li>
                             <li>Gallery</li>
@@ -28,13 +28,18 @@
                 <div class="row gallery-tab">
                     <div class="col-md-12 text-center">
                         <ul class="gallery-tab-sorting sorting-btn" id="filter">
+                            <li>
+                                <a href="#" class="active" >
+                                    Tất cả  
+                                </a>
+                            </li>
                             @if($type_services->first())
                             @foreach($type_services as $type_service)
                             @if($type_service->getPhotoLibraryWithType($type_service->id)->first())
                             <li>
                                 <a href="#"
                                 data-group="{{ Hashids::encode($type_service->id) }}"
-                                class="{{ $loop->first ? 'active' : '' }}"
+                                class=""
                                 >
                                 {{ $type_service->name }}
                             </a>
