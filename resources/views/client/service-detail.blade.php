@@ -28,16 +28,17 @@
     <section id="nailit" class="pt-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-lg-1"></div>
+                <div class=" col-lg-5 col-md-6">
                     <div class="service-detail-img">
                         <img src="upload/images/service/{{ $service->image }}" alt="">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class=" col-lg-5 col-md-6">
                     <div class="service-detaill-content p-4">
-                        <h2 class="text-upercase">{{ $service->name }}</h2>
-                        <h4>Giá: {{ number_format($service->price, 0, ',', '.') }}</h4>
-                        <h4>Thời gian hoàn thành: {{ $service->completion_time }}</h4>
+                        <h2 class="text-upercase mb-3">{{ $service->name }}</h2>
+                        <h4 class="mb-2">Giá: {{ number_format($service->price, 0, ',', '.') }}</h4>
+                        <h4 class="mb-2">Thời gian hoàn thành: {{ $service->completion_time }}</h4>
                         <p>{{ $service->description }}</p>
                         <a class="btn btn-dl text-uppercase" href="{{ route('booking') }}">Đặt lịch</a>
                     </div>

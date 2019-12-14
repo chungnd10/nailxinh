@@ -7,27 +7,27 @@
         //booking page
 
         let a;
-        
-        $('.btn-adress-booking').click(function(){
+
+        $('.btn-adress-booking').click(function() {
             a = $(this).val();
         });
 
 
         let count_testimonial = $(".testimonial-img img").length;
-        
-        $(".testimonial-img img").each( function(index){
+
+        $(".testimonial-img img").each(function(index) {
             let img_testimonial = $(this).attr('src');
             $('.testimonial-carousel .owl-dots .owl-dot');
-            
-            $(this).css('background-image',img_testimonial);
-        });
-         // Time frame
 
-         $(".time-frame").on('click', function(){
+            $(this).css('background-image', img_testimonial);
+        });
+        // Time frame
+
+        $(".time-frame").on('click', function() {
             $('.time-frame').removeClass('active');
             $(this).addClass('active');
         });
-        $(".btn-adress-booking").on('click', function(){
+        $(".btn-adress-booking").on('click', function() {
             $('.btn-adress-booking').removeClass('active');
             $(this).addClass('active');
         });
@@ -50,22 +50,22 @@
             items: 4,
             loop: true,
             nav: true,
-            margin:30,
+            margin: 30,
             navText: ['<i class="fa fa-long-arrow-alt-left"></i>', '<i class="fa fa-long-arrow-alt-right"></i>'],
             autoplay: true,
             autoplayTimeout: 3000,
             animateIn: 'fadeInLeft',
             animateOut: 'fadeInRight',
             smartSpeed: 250,
-            responsive:{
-                0:{
-                    items:1
+            responsive: {
+                0: {
+                    items: 1
                 },
-                600:{
-                    items:3
+                600: {
+                    items: 3
                 },
-                1000:{
-                    items:4
+                1000: {
+                    items: 4
                 }
             }
         });
@@ -74,22 +74,22 @@
             items: 4,
             loop: true,
             nav: true,
-            margin:30,
+            margin: 30,
             navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
             autoplay: true,
             autoplayTimeout: 3000,
             animateIn: 'fadeInLeft',
-            animateOut: 'fadeInRight',
+            animateOut: 'fadeInLeft',
             smartSpeed: 250,
-            responsive:{
-                0:{
-                    items:1
+            responsive: {
+                0: {
+                    items: 1
                 },
-                600:{
-                    items:3
+                767: {
+                    items: 2
                 },
-                1000:{
-                    items:4
+                1000: {
+                    items: 4
                 }
             }
         });
@@ -100,32 +100,32 @@
             loop: true,
             dots: true,
             nav: true,
-            margin:30,
-            navText:  ['<i class="fa fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
+            margin: 30,
+            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
             autoplay: true,
             autoplayTimeout: 5000,
-            animateIn: 'fadeInUp',
-            animateOut: 'fadeInDown',
+            animateIn: 'fadeInLeft',
+            animateOut: 'fadeInLeft',
             smartSpeed: 250,
-            responsive:{
-                0:{
-                    items:1
+            responsive: {
+                0: {
+                    items: 1
                 },
-                767:{
-                    items:3
+                767: {
+                    items: 3
                 },
-                1000:{
-                    items:4,
-                    dots:true
+                1000: {
+                    items: 4,
+                    dots: true
                 }
             }
         });
         // Introduction section
         $("#lightgallery").lightGallery({
-            thumbnail:true,
+            thumbnail: true,
             animateThumb: false,
             showThumbByDefault: false
-        }); 
+        });
 
         // Header Slide items with animate.css
         var owl = $('.header-slider');
@@ -149,7 +149,7 @@
             loop: true,
             dots: false,
             nav: true,
-            navText:  ['<i class="fa fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
+            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
             margin: 30,
             autoplay: true,
             autoplayTimeout: 3000,
@@ -184,26 +184,26 @@
 
         // Carousel show on mobile
 
-        $(".our_service_mobile").owlCarousel({
-            loop: true,
-            dots: true,
-            nav: true,
-            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
-            margin: 30,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                767: {
-                    items: 3,
-                },
-                1000: {
-                    items: 4
-                }
-            }
-        });
+        // $(".our_service_mobile").owlCarousel({
+        //     loop: true,
+        //     dots: true,
+        //     nav: true,
+        //     navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
+        //     margin: 30,
+        //     autoplay: true,
+        //     autoplayTimeout: 5000,
+        //     responsive: {
+        //         0: {
+        //             items: 1
+        //         },
+        //         767: {
+        //             items: 2,
+        //         },
+        //         1000: {
+        //             items: 4
+        //         }
+        //     }
+        // });
 
         // // check resize window 
         // $(window).on("resize", function(event){
