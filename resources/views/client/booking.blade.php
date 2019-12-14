@@ -44,7 +44,8 @@
                                        placeholder="Số điện thoại"
                                        id="phone_number">
                                 <label id="phone_number-error" class="error mt-2" for="phone_number"></label>
-                                <label id="phone_number-error2" class="mt-2" style="color:red"></label>
+                                <label id="phone_number-error2" class="mt-2" style="color:#dc3545"></label>
+                                <label id="phone_number-error3" class="mt-2" style="color:#dc3545"></label>
                                 <span class="general-message"></span>
                             </div>
                             <div class="form-group col-md-6">
@@ -479,30 +480,10 @@
         /* ====================================================  */
 
         /* check phone number limit booking in day */
-        $('#phone_number').blur(function(){
-            // console.log(phone_number);
-            // let url = "{{ route('ajax.check-limit-order') }}";
-            // let data = {
-            //     phone_number: phone_number,
-            //     _token : $('meta[name="csrf-token"]').attr('content')
-            // };
-            // $.ajax({
-            //     type: 'POST',
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     url: url,
-            //     data: data,
-            //     success : function(result_data){
-            //         console.log("limit", result_data);
-            //         checkPhoneLimitBooking(result_data);
-            //     },
-            //     error: function(xhr, status, error){
-            //         console.log(error);
-            //     }
-            // });
+        $('#phone_number').bind('propertychange change blur',function(){
             let phone_number = $('#phone_number').val();
             checkPhoneLimitBooking(phone_number);
+            checkLimitList(phone_number);
         });
         function checkPhoneLimitBooking(numbers,date){
             let url = "{{ route('ajax.check-limit-order') }}";
@@ -528,14 +509,13 @@
                 url: url,
                 data: data,
                 success : function(result_data){
-                    console.log("limited",result_data);
                     if(result_data > 2){
-                        $('#phone_number-error2').show();
-                        $('#phone_number-error2').text("Số điện thoại đã quá lần đặt trong ngày");
+                        $('#phone_number-error').show();
+                        $('#phone_number-error').text("*Số điện thoại đã quá lần đặt trong ngày");
                         $('#phone_number').focus();
                         return false;
                     } else{
-                        $('#phone_number-error2').hide();
+                        checkLimitList(numbers);
                         return true;
                     }
                 },
@@ -545,6 +525,36 @@
             });
             
         };
+
+        function checkLimitList(phone_number){
+            let url = "{{ route('ajax.check-limited-list') }}";
+            let data = {
+                phone_number: phone_number,
+                _token : $('meta[name="csrf-token"]').attr('content')
+            };
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: url,
+                data: data,
+                success : function(result_data){
+                    console.log("limited",result_data);
+                    if(result_data > 0){
+                        $('#phone_number-error').show();
+                        $('#phone_number-error').text("*Số điện thoại nằm trong danh sách hạn chế");
+                        $('#phone_number').focus();
+                        return false;
+                    } else{
+                        return true;
+                    }
+                },
+                error: function(xhr, status, error){
+                    console.log(error);
+                }
+            });
+        }
 
         /* Operator */
         function getOperatorFromLocation(branch_id,service_id){

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     function formatState(state) {
         if (!state.id) {
@@ -8,7 +8,7 @@ $(document).ready(function () {
 
         var $state = $(
             "<div class=custom_img><img src=" + baseUrl + "/" + state.element.getAttribute('data-image') +
-            " class=img-flag /> " + "<span class=ml-5 >" + state.text + "</span>" + "</div>"
+            " class=img-flag /> " + "<span class=ml-3 >" + state.text + "</span>" + "</div>"
         );
         return $state;
     }
@@ -21,7 +21,7 @@ $(document).ready(function () {
 
         var $state = $(
             "<div class=custom_img><img src=" + baseUrl + "/" + state.element.getAttribute('data-image') +
-            " class=img-flag /> " + "<span class=ml-5 >" + state.text + "</span>" + "</div>"
+            " class=img-flag /> " + "<span class=ml-3 >" + state.text + "</span>" + "</div>"
         );
         return $state;
     }
