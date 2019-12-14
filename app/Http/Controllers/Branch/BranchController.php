@@ -16,7 +16,7 @@ class BranchController extends Controller
      */
     public function index()
     {
-    	$branchs = $this->branch_services->all();
+    	$branchs = $this->branch_services->all('asc');
 
     	return view('admin.branchs.index', compact('branchs'));
     }

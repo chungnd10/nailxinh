@@ -12,7 +12,7 @@
             <div class="col-xs-12">
                 <h2 class="page-header">
                     <img src="client_assets/img/favicon.png" width="30"> NailXinh
-                    <small class="pull-right">{{ date(' H:i d-m-Y') }}</small>
+                    <small class="pull-right">{{ date('H:i d-m-Y', strtotime($bill->created_at)) }}</small>
                 </h2>
             </div>
             <!-- /.col -->
@@ -74,7 +74,7 @@
                 @endif
             </div>
             <div class="col-xs-6 ">
-                <p class="lead">Ngày thanh toán {{ date( 'd-m-Y') }}</p>
+                <p class="lead">Ngày thanh toán {{ date( 'd-m-Y', strtotime($bill->created_at)) }}</p>
 
                 <div class="table-responsive">
                     <table class="table">

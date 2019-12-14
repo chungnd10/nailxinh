@@ -15,20 +15,23 @@ class RoleServices
     }
 
     //lấy tất cả role trừ admin
-    public function allForAdmin()
+    public function allForAdmin($order_by)
     {
         $role_admin = config('contants.role_admin');
-        $role = Role::where('id', '<>', $role_admin)->get();
+        $role = Role::where('id', '<>', $role_admin)
+            ->orderBy('id', $order_by)
+            ->get();
         return $role;
     }
 
-    public function allForManager()
+    public function allForManager($order_by)
     {
         $role_admin = config('contants.role_admin');
         $role_manager = config('contants.role_manager');
 
         $role = Role::where('id', '<>', $role_admin)
             ->where('id', '<>', $role_manager)
+            ->orderBy('id', $order_by)
             ->get();
         return $role;
     }

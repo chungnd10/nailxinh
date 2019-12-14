@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PhotoLibrary;
 
 use App\Http\Requests\PhotoLibraryRequest;
 use App\PhotoLibrary;
+use App\Services\PhotoLibraryServices;
 use File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -153,58 +154,15 @@ class PhotoLibraryController extends Controller
     }
 
     /*
-     * Tra ve hinh anh theo loai dich vu
+     * Tim kiem
      *
      */
-    public function changeTypeServices(Request $request)
+    public function photoSearch(Request $request)
     {
-        if ($request->ajax()) {
-            $id = head(\Hashids::decode($request->id));
-
-            if ($id == null) {
-                $photo = $this->photo_library_services->all('desc');
-            } else {
-                $photo = $this->photo_library_services->photoWitdTypeServices($id, 'desc');
-            }
-            return response()->json($photo);
-        }
-        return response('changed fail !', 201);
+        $type_id = $request->type_services;
+        $images = $this->photo_library_services->photoSearch($type_id, 12);
+        $request->flash();
+        return view('admin.photo_library.index', compact('images'));
     }
 
-    /*
-     * Load diff
-     *
-     */
-    public function loadDiff(Request $request)
-    {
-        if ($request->ajax()) {
-            $id = $request->id;
-            $take = config('contants.take_load_take_photo');
-            $photo = $this->photo_library_services->loadDiff($id, $take);
-            return response()->json($photo);
-        }
-        return response('load diff fail !', 201);
-    }
-
-    /*
-     * Ajax delele
-     *
-     */
-    public function deleteAjax(Request $request)
-    {
-        if ($request->ajax()){
-            $id = $request->id;
-            $path = config('contants.upload_photo_library_path');
-            $img_default = config('contants.img_default_4_3');
-
-            $photo = PhotoLibrary::find($id);
-            if ($photo->first()){
-                checkExistsAndDeleteImage($path, $photo->image, $img_default);
-                $photo->delete();
-                return response('delete succcess !', 200);
-            }
-            return response('delete fail !', 201);
-        }
-        return response('delete fail !', 201);
-    }
 }

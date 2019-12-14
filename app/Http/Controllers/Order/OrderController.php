@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Order;
 
 use App\Bill;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateOrderRequest;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,39 +19,36 @@ class OrderController extends Controller
     {
         $admin = config('contants.role_admin');
         $manager = config('contants.role_manager');
-        $technician = config('contants.role_technician');
         $cashier = config('contants.role_cashier');
         $receptionist = config('contants.role_receptionist');
-        $status_completed = config('contants.order_status_finish');
-        $order_status_confirmed = config('contants.order_status_confirmed');
-
 
         if (Auth::check()) {
-            $user_id =  Auth::user()->id;
             $role_id = Auth::user()->role_id;
             $branch_id = Auth::user()->branch_id;
-            $all_order_with_branch = $this->order_services->allWithBranch($branch_id);
 
-            switch ($role_id) {
-                case $admin :
-                    $orders = $this->order_services->all();
-                    break;
-                case $manager :
-                    $orders = $all_order_with_branch;
-                    break;
-                case $cashier :
-                    $orders = $this->order_services->allWhereStatus($branch_id, $status_completed);
-                    break;
-                case $receptionist :
-                    $orders = $all_order_with_branch;
-                    break;
-                case $technician :
-                    $orders = $this->order_services->allOfTechnician($branch_id, $user_id, $order_status_confirmed);
-                    break;
+            $orders = $this->order_services->all(10);
+            $order_status = $this->order_status_services->all('asc');
+            $member_technicians = $this->user_services->getTechnicianWithBranch($branch_id, 'desc');
+
+
+            if ($role_id = $admin){
+                $branches = $this->branch_services->all('asc');
+                $technicians = $member_technicians;
+            }elseif ($role_id = $manager || $role_id == $cashier || $role_id == $receptionist){
+                $technicians = $member_technicians;
+            }else{
+                $branches = null;
+                $technicians = null;
             }
         }
 
-        return view('admin.orders.index', compact('orders'));
+        return view('admin.orders.index', compact(
+                'orders',
+                'branches',
+                'technicians',
+                'order_status'
+            )
+        );
     }
 
     /*
@@ -70,7 +68,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $order = new Order();
-        if (Auth::check()){
+        if (Auth::check()) {
             $order->user_id = Auth::user()->id;
             $order->branch_id = Auth::user()->branch_id;
             $order->created_by = Auth::user()->full_name;
@@ -94,7 +92,7 @@ class OrderController extends Controller
     {
         $order = $this->order_services->find($id);
 
-        $this->authorize('update', $order );
+        $this->authorize('update', $order);
 
         $admin = config('contants.role_admin');
         $manager = config('contants.role_manager');
@@ -102,18 +100,18 @@ class OrderController extends Controller
         $receptionist = config('contants.role_receptionist');
 
         $type_services = $this->type_services->all('asc');
-        $branches = $this->branch_services->all();
-        $users = $this->user_services->getUsersWithBranch($order->branch_id);
+        $branches = $this->branch_services->all('asc');
+        $users = $this->user_services->getTechnicianWithBranch($order->branch_id, 'asc');
 
-        if (Auth::check()){
+        if (Auth::check()) {
             $user_role = Auth::user()->role_id;
 
-            switch ($user_role){
+            switch ($user_role) {
                 case $admin:
-                    $orders_status = $this->order_status_services->all();
+                    $orders_status = $this->order_status_services->all('asc');
                     break;
                 case $manager:
-                    $orders_status = $this->order_status_services->all();
+                    $orders_status = $this->order_status_services->all('asc');
                     break;
                 case $technician:
                     $orders_status = $this->order_status_services->forTechnician();
@@ -139,7 +137,7 @@ class OrderController extends Controller
      * Update order
      *
      */
-    public function update(Request $request, $order_id)
+    public function update(UpdateOrderRequest $request, $order_id)
     {
         $status_completed = config('contants.order_status_finish');
 
@@ -229,5 +227,64 @@ class OrderController extends Controller
         $bill->save();
 
         return redirect()->route('orders.index')->with('toast_success', 'Xuất hóa đơn thành công !');
+    }
+
+    /*
+     * Tim kiem nang cao
+     *
+     */
+    public function advancedSearch(Request $request)
+    {
+        $role_id = Auth::user()->role_id;
+        $branch_id = Auth::user()->branch_id;
+
+        $role_admin = config('contants.role_admin');
+        $manager = config('contants.role_manager');
+        $role_technician = config('contants.role_technician');
+        $cashier = config('contants.role_cashier');
+        $receptionist = config('contants.role_receptionist');
+
+        $order_status = $this->order_status_services->all('asc');
+        $member_technicians = $this->user_services->getTechnicianWithBranch($branch_id, 'desc');
+
+        if ($role_id = $role_admin){
+            $branches = $this->branch_services->all('asc');
+            $technicians = $member_technicians;
+            $order_status_id = $request->order_status_id;
+        }elseif ($role_id = $manager || $role_id == $cashier || $role_id == $receptionist){
+            $technicians = $member_technicians;
+        }elseif($role_id == $role_technician){
+            $order_status_id = config('contants.order_status_confirmed');
+        }else{
+            $branches = null;
+            $technicians = null;
+            $branch_id = null;
+            $order_status_id = $request->order_status_id;
+        }
+
+        $user_order = $request->user_order;
+        $user_id = $request->user_id;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $searched = true;
+        $request->flash();
+
+        $orders = $this->order_services->advancedSearch(
+            $user_order,
+            $order_status_id,
+            $branch_id,
+            $user_id,
+            $start_date,
+            $end_date,
+            10
+        );
+        return view('admin.orders.index', compact(
+            'orders',
+            'branches',
+            'searched',
+            'order_status',
+            'technicians'
+            )
+        );
     }
 }

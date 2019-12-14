@@ -7,9 +7,22 @@ use Illuminate\Support\Facades\DB;
 
 class OrderServices
 {
-    public function all()
+    public function all($paginate)
     {
-        $orders = Order::join('order_services', 'order_services.order_id', '=', 'orders.id')
+        $current_user_id = \Auth::user()->id;
+        $current_role_id = \Auth::user()->role_id;
+        $current_branch_id = \Auth::user()->branch_id;
+
+        $admin = config('contants.role_admin');
+        $manager = config('contants.role_manager');
+        $technician = config('contants.role_technician');
+        $cashier = config('contants.role_cashier');
+        $receptionist = config('contants.role_receptionist');
+
+        $status_completed = config('contants.order_status_finish');
+        $order_status_confirmed = config('contants.order_status_confirmed');
+
+        $query = Order::join('order_services', 'order_services.order_id', '=', 'orders.id')
             ->select(
                 'orders.id',
                 'full_name',
@@ -23,8 +36,21 @@ class OrderServices
                 'order_status_id',
                 'orders.created_at',
                 'orders.updated_at',
-                DB::raw('group_concat(order_services.service_id) as service_id'))
-            ->groupBy(
+                DB::raw('group_concat(order_services.service_id) as service_id'));
+            if($current_role_id != $admin){
+               $query->where('branch_id', $current_branch_id);
+            }
+
+            if ($current_role_id == $cashier){
+                $query->where('order_status_id', $status_completed);
+            }
+
+            if ($current_role_id == $technician){
+                $query->where('order_status_id', $order_status_confirmed);
+                $query->where('user_id', $current_user_id);
+            }
+
+            $query->groupBy(
                 'orders.id',
                 'full_name',
                 'phone_number',
@@ -37,9 +63,10 @@ class OrderServices
                 'order_status_id',
                 'orders.created_at',
                 'orders.updated_at'
-                )
-            ->orderby('orders.id', 'desc')
-            ->get();
+            );
+            $query->orderby('orders.id', 'desc');
+
+        $orders = $query->paginate($paginate);
 
         return $orders;
     }
@@ -74,7 +101,7 @@ class OrderServices
                 'order_status_id',
                 'orders.created_at',
                 'orders.updated_at'
-                )
+            )
             ->orderby('orders.id', 'desc')
             ->findOrFail($id);
 
@@ -112,7 +139,7 @@ class OrderServices
                 'order_status_id',
                 'orders.created_at',
                 'orders.updated_at'
-                )
+            )
             ->orderby('orders.id', 'desc')
             ->get();
 
@@ -151,7 +178,7 @@ class OrderServices
                 'order_status_id',
                 'orders.created_at',
                 'orders.updated_at'
-                )
+            )
             ->orderby('orders.id', 'desc')
             ->get();
 
@@ -191,9 +218,80 @@ class OrderServices
                 'order_status_id',
                 'orders.created_at',
                 'orders.updated_at'
-                )
+            )
             ->orderby('orders.id', 'desc')
             ->get();
+
+        return $orders;
+    }
+
+    /*
+     * Tim kiem nanng cao
+     *
+     */
+    public function advancedSearch(
+        $user_order,
+        $order_status_id,
+        $branch_id,
+        $user_id,
+        $start_date,
+        $end_date,
+        $paginate
+    ) {
+        $query_builder = Order::join('order_services', 'order_services.order_id', '=', 'orders.id')
+            ->select(
+                'orders.id',
+                'full_name',
+                'phone_number',
+                'time',
+                'note',
+                'created_by',
+                'updated_by',
+                'branch_id',
+                'user_id',
+                'order_status_id',
+                'orders.created_at',
+                'orders.updated_at',
+                DB::raw('group_concat(order_services.service_id) as service_id'));
+        if ($user_order == true) {
+            $query_builder->where('phone_number', $user_order);
+        }
+
+        if ($order_status_id == true) {
+            $query_builder->where('order_status_id', $order_status_id);
+        }
+
+        if ($branch_id == true) {
+            $query_builder->where('branch_id', $branch_id);
+        }
+
+        if ($user_id == true) {
+            $query_builder->where('user_id', $user_id);
+        }
+
+        if ($start_date == true) {
+            $query_builder->where('time','>', $start_date);
+        }
+
+        if ($end_date == true) {
+            $query_builder->where('time', '<', $end_date);
+        }
+
+        $query_builder->groupBy(
+            'orders.id',
+            'full_name',
+            'phone_number',
+            'time',
+            'note',
+            'created_by',
+            'updated_by',
+            'branch_id',
+            'user_id',
+            'order_status_id',
+            'orders.created_at',
+            'orders.updated_at'
+        )->orderby('orders.id', 'desc');
+        $orders = $query_builder->paginate($paginate);
 
         return $orders;
     }

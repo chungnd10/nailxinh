@@ -15,15 +15,15 @@ class PhotoLibraryServices
     public function take($orderby, $take)
     {
         $photo = PhotoLibrary::orderby('id', $orderby)
-            ->take($take)
-            ->get();
+            ->paginate($take);
         return $photo;
     }
 
-    public function photoWitdTypeServices($type_services_id, $orderby)
+    public function photoWithTypeServices($type_services_id, $take, $orderby)
     {
         $photo = PhotoLibrary::where('type_of_service_id', $type_services_id)
             ->orderby('id', $orderby)
+            ->take($take)
             ->get();
         return $photo;
     }
@@ -42,6 +42,16 @@ class PhotoLibraryServices
         return $photo;
     }
 
+    public function loadDiffType($id, $type, $take)
+    {
+        $photo = PhotoLibrary::where('id', '<', $id)
+            ->where('type_of_service_id', $type)
+            ->orderby('id', 'desc')
+            ->take($take)
+            ->get();
+        return $photo;
+    }
+
     public function count()
     {
         $photo = PhotoLibrary::count();
@@ -52,5 +62,16 @@ class PhotoLibraryServices
     {
         $photo = PhotoLibrary::all()->random($limit);
         return $photo;
+    }
+
+    public function photoSearch($type_id, $pagianate)
+    {
+        $query = PhotoLibrary::orderby('id', 'desc');
+        if ($type_id != null) {
+            $query->where('type_of_service_id', $type_id);
+        }
+
+        $images = $query->paginate($pagianate);
+        return $images;
     }
 }

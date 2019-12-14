@@ -16,6 +16,63 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
+                <div class="box form-advanced-search">
+                    <div class="box-body">
+                        <form method="get" action="{{ route('users.advanced-search') }}">
+                            @csrf
+                            <div class="row">
+                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
+                                    <input type="text"
+                                           class="form-control pull-right"
+                                           id="full_name"
+                                           name="full_name"
+                                           value="{{ old('full_name') }}"
+                                           placeholder="Họ và tên">
+                                </div>
+                                @if(Auth::user()->isAdmin())
+                                    <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
+                                        <select name="branch_id" class="form-control" id="branch_id">
+                                            <option value="">Tất cả chi nhánh</option>
+                                                @foreach($branches as $item)
+                                                    <option value="{{ $item->id }}"
+                                                            @if(old('branch_id') == $item->id)
+                                                            selected
+                                                            @endif
+                                                    >{{ $item->name . ', ' . $item->address }}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3 ">
+                                    <select name="role_id" id="role_id" class="form-control">
+                                        <option value="">Tất cả quyền</option>
+                                        @if($roles)
+                                            @foreach($roles as $item)
+                                                <option value="{{ $item->id }}"
+                                                        @if(old('role_id') == $item->id)
+                                                        selected
+                                                        @endif
+                                                >{{ $item->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="padding-bottom-input col-xs-6 col-sm-6 col-md-3 "
+                                     style="box-sizing: border-box">
+                                    <div class="input-group date input-date">
+                                        <button class="btn btn-primary">
+                                            Tìm kiếm
+                                        </button>
+                                        <button type="button" style="margin-left: 10px"
+                                                class="btn btn-default btn-reset-form">
+                                            <i class="fa fa-refresh"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -62,6 +119,14 @@
                         </table>
                     </div>
                     <!-- /.box-body -->
+                    <div class="box-footer">
+                        @if($users->count() > 0)
+                            <div class="pull-left">
+                                <p>Tổng số: <b>{{ $users->total() }}</b> mục</p>
+                            </div>
+                        @endif
+                        {!! $users->appends($_GET)->links() !!}
+                    </div>
                 </div>
                 <!-- /.box -->
             </div>
@@ -72,41 +137,28 @@
 @endsection
 @section('script')
     <script type="text/javascript">
+        // display form search
+        $('.btn-reset-form').click(function () {
+            $('#full_name').val('');
+            $('#branch_id').val('');
+            $('#role_id').val('');
+        });
+
 
         //data table
         $('#users_table').DataTable({
             "language": {
-                "emptyTable": "Không có bản ghi nào",
-                "zeroRecords": "Không tìm thấy bản ghi nào",
-                "decimal": "",
-                "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
-                "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
-                "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Hiển thị _MENU_ mục",
-                "loadingRecords": "Loading...",
-                "processing": "Processing...",
-                "search": "Tìm kiếm:",
-                "paginate": {
-                    "first": "Đầu",
-                    "last": "Cuối",
-                    "next": "Sau",
-                    "previous": "Trước"
-                },
-                "aria": {
-                    "sortAscending": ": activate to sort column ascending",
-                    "sortDescending": ": activate to sort column descending"
-                },
+                    url: "{{ asset('admin_assets/bower_components/datatables.net-bs/lang/vietnamese-lang.json') }}"
             },
-            'paging': true,
-            'lengthChange': true,
-            'searching': true,
+            "bInfo" : false,
+            'paging': false,
+            'lengthChange': false,
+            'searching': false,
             'ordering': true,
             'autoWidth': false,
-                "scrollX": true,
+            "scrollX": true,
             "responsive": true,
-            "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
+            "columnDefs": [{"orderable": false, "targets": 'nosort'}]
         });
 
     </script>

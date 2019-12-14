@@ -91,46 +91,45 @@
                                                         value="{{ $service->id }}">{{ $service->name }}</option>
                                             @endforeach
                                         </optgroup>
-                                    @endforeach
-                                </select>
-                                <label id="service_id-error" class="error" for="service_id"></label>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
-                                <select class="staff form-control form-border" name="user_id" id="user_id">
-                                    <option value="">Chọn nhân viên</option>
-                                    <!-- @foreach($users as $user)
-                                        <option data-image="{{ $user->avatar }}"
-                                                value="{{ $user->id }}">{{ $user->full_name }}</option>
-                                    @endforeach -->
-                                </select>
-                                <label id="user_id-error" class="error" for="user_id"></label>
-                            </div>
-                            <div class="col-md-12 mb-4">
-                                <div class="mb-3">
-                                    Chọn ngày: <span class="theme-text booking_time pull-right text-bold" style="font-size: 14px;"></span>
+                                        @endforeach
+                                    </select>
+                                    <label id="service_id-error" class="error" for="service_id"></label>
                                 </div>
-                                <!-- <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div> -->
-                                <div class="" id="select-day"></div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
-                                <div class=" col-md-12 text-error2 text-danger">Vui lòng chọn thời gian</div>
-                                <div id="time_frame"></div>
-                            </div>
-                            <div class="col-md-12 mb-4">
-                                <label for="note">Ghi chú</label>
-                                <textarea class="form-control form-border"
-                                          id="note"
-                                          rows="5"
-                                          name="note"
-                                ></textarea>
-                            </div>
-                            <div class="col-md-6 offset-md-3 mb-5">
-                                <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
-                                    <i class="far fa-calendar-alt"></i>
-                                    ĐẶT LỊCH NGAY
-                                </button>
+                                <div class="col-md-6 mb-4">
+                                    <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
+                                    <select class="staff form-control form-border" name="user_id" id="user_id">
+                                        <option value="">Chọn nhân viên</option>
+                                            </select>
+                                            <label id="user_id-error" class="error" for="user_id"></label>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="mb-3">
+                                                Chọn ngày: <span class="theme-text booking_time pull-right text-bold" style="font-size: 14px;"></span>
+                                            </div>
+                                            <!-- <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div> -->
+                                            <div class="" id="select-day"></div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
+                                            <div class=" col-md-12 text-error2 text-danger">Vui lòng chọn thời gian</div>
+                                            <div id="time_frame"></div>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <label for="note">Ghi chú</label>
+                                            <textarea class="form-control form-border"
+                                            id="note"
+                                            rows="5"
+                                            name="note"
+                                            ></textarea>
+                                        </div>
+                                        <div class="col-md-6 offset-md-3 mb-5">
+                                            <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
+                                                <i class="far fa-calendar-alt"></i>
+                                                ĐẶT LỊCH NGAY
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </form>

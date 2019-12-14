@@ -7,12 +7,6 @@
             <small>hoá đơn</small>
         </h1>
         <ol class="breadcrumb">
-{{--            @can('update-orders')--}}
-{{--                <a href="{{ route('bills.create') }}"--}}
-{{--                   class="btn btn-sm btn-success">--}}
-{{--                    <i class="fa fa-plus"></i> Thêm--}}
-{{--                </a>--}}
-{{--            @endcan--}}
         </ol>
     </section>
     {{--Main content--}}
@@ -27,6 +21,7 @@
                             <tr>
                                 <th width="40">STT</th>
                                 <th width="100">Khách hàng</th>
+                                <th>Số điện thoại</th>
                                 <th>Tổng tiền(VNĐ )</th>
                                 <th>Ngày tạo</th>
                                 <th width="100">Trạng thái</th>
@@ -36,30 +31,31 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($bills as $key => $bill)
-                                    <tr>
-                                        <td>{{ $key+1 }}</td>
-                                        <td>{{ $bill->full_name }}</td>
-                                        <td>{{ number_format($bill->total_payment, 0, ',', '.') }}</td>
-                                        <td>{{ date('H:i d-m-Y', strtotime($bill->created_at)) }}</td>
-                                        <td>
-                                            <i class="fa fa-tag {{ tagColorStatus($bill->billStatus->name) }}" ></i>
-                                            {{ $bill->billStatus->name }}
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('bills.show', Hashids::encode($bill->id)) }}"
-                                               class="btn btn-xs btn-primary">
-                                                <i class="fa fa-eye"></i>
+                            @foreach($bills as $key => $bill)
+                                <tr>
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ $bill->full_name }}</td>
+                                    <td>{{ $bill->phone_number }}</td>
+                                    <td>{{ number_format($bill->total_payment, 0, ',', '.') }}</td>
+                                    <td>{{ date('H:i d-m-Y', strtotime($bill->created_at)) }}</td>
+                                    <td>
+                                        <i class="fa fa-tag {{ tagColorStatus($bill->billStatus->name) }}"></i>
+                                        {{ $bill->billStatus->name }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('bills.show', Hashids::encode($bill->id)) }}"
+                                           class="btn btn-xs btn-primary">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        @if($bill->bill_status_id == config('contants.bill_status_unpaid'))
+                                            <a href="{{ route('bills.update', Hashids::encode($bill->id)) }}"
+                                               class="btn btn-xs btn-warning">
+                                                <i class="fa fa-pencil"></i>
                                             </a>
-                                            @if($bill->bill_status_id == config('contants.bill_status_unpaid'))
-                                                <a href="{{ route('bills.update', Hashids::encode($bill->id)) }}"
-                                                   class="btn btn-xs btn-warning">
-                                                    <i class="fa fa-pencil"></i>
-                                                </a>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -79,28 +75,7 @@
             //data table
             $('#datatable').DataTable({
                 "language": {
-                    "emptyTable": "Không có bản ghi nào",
-                    "zeroRecords": "Không tìm thấy bản ghi nào",
-                    "decimal": "",
-                    "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
-                    "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
-                    "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Hiển thị _MENU_ mục",
-                    "loadingRecords": "Loading...",
-                    "processing": "Processing...",
-                    "search": "Tìm kiếm:",
-                    "paginate": {
-                        "first": "Đầu",
-                        "last": "Cuối",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "aria": {
-                        "sortAscending": ": activate to sort column ascending",
-                        "sortDescending": ": activate to sort column descending"
-                    },
+                    url: "{{ asset('admin_assets/bower_components/datatables.net-bs/lang/vietnamese-lang.json') }}"
                 },
                 'paging': true,
                 'lengthChange': true,
@@ -109,7 +84,7 @@
                 'autoWidth': false,
                 "scrollX": true,
                 "responsive": true,
-                "columnDefs": [{ "orderable": false, "targets": 'nosort' }]
+                "columnDefs": [{"orderable": false, "targets": 'nosort'}]
 
             });
         });
