@@ -14,7 +14,7 @@ class OrdersStatusTableSeeder extends Seeder
     {
         $status = [
             [
-                'name' => 'Hủy'
+                'name' => 'Đã hủy'
             ],
             [
                 'name' => 'Xác nhận thất bại'

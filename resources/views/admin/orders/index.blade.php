@@ -19,18 +19,48 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                <div class="box">
+                <div class="box form-advanced-search">
                     <div class="box-body">
-                        <form method="get" action="">
+                        <form method="post" action="{{ route('orders.advanced-search') }}">
+                            @csrf
                             <div class="row">
                                 <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
-                                    <select name="branch_id" class="form-control">
+                                    <input type="text"
+                                           class="form-control pull-right"
+                                           id="user_order"
+                                           name="user_order"
+                                           value="{{ old('user_order') }}"
+                                           placeholder="Số điện thoại">
+                                </div>
+                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-6">
+                                    <select name="branch_id" class="form-control" id="branch_id">
                                         <option value="">Tất cả chi nhánh</option>
+                                        @if($branches)
+                                            @foreach($branches as $item)
+                                                <option value="{{ $item->id }}"
+                                                        @if(old('branch_id') == $item->id)
+                                                        selected
+                                                        @endif
+                                                >{{ $item->name . ', ' . $item->address }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
-                                    <select name="user_id" class="form-control">
+                                    <select name="user_id" id="user_id" class="form-control">
                                         <option value="">Tất cả nhân viên</option>
+                                    </select>
+                                </div>
+                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3 ">
+                                    <select name="order_status_id" id="order_status_id" class="form-control">
+                                        <option value="">Tất cả trạng thái</option>
+                                        @foreach($order_status as $item)
+                                            <option value="{{ $item->id }}"
+                                                    @if(old('order_status_id') == $item->id)
+                                                    selected
+                                                    @endif
+                                            >{{ $item->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
@@ -42,10 +72,11 @@
                                                class="form-control pull-right"
                                                id="start_date"
                                                name="start_date"
+                                               value="{{ old('start_date') }}"
                                                placeholder="Ngày bắt đầu">
                                     </div>
                                 </div>
-                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
+                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3 ">
                                     <div class="input-group date input-date">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
@@ -54,7 +85,20 @@
                                                class="form-control pull-right"
                                                id="end_date"
                                                name="end_date"
+                                               value="{{ old('end_date') }}"
                                                placeholder="Ngày kết thúc">
+                                    </div>
+                                </div>
+                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3 "
+                                     style="box-sizing: border-box">
+                                    <div class="input-group date input-date">
+                                        <button class="btn btn-primary">
+                                            Tìm kiếm
+                                        </button>
+                                        <button type="button" style="margin-left: 10px"
+                                                class="btn btn-default btn-reset-form">
+                                            <i class="fa fa-refresh"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -69,9 +113,11 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Người đặt</th>
-                                <th >Dịch vụ</th>
-                                <th>Thời gian</th>
+                                <th>Số điện thoại</th>
+                                <th>Kỹ thuật viên</th>
+                                <th>Thời gian đặt</th>
                                 <th>Trạng thái</th>
+                                <th>Chi nhánh</th>
                                 <th class="nosort">
                                     Hành động
                                 </th>
@@ -82,12 +128,14 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $order->full_name }}</td>
-                                    <td>{{ $order->getNameServices($order->service_id) }}</td>
+                                    <td>{{ $order->phone_number }}</td>
+                                    <td>{{ $order->user->full_name }}</td>
                                     <td>{{ date('H:i d-m-Y', strtotime($order->time)) }}</td>
                                     <td>
                                         <i class="fa fa-tag {{ tagColorStatus($order->orderStatus->name) }}"></i>
                                         {{ $order->orderStatus->name }}
                                     </td>
+                                    <td>{!!  $order->branch->name. '<br>'.$order->branch->address !!} </td>
                                     <td>
                                         <a href="#"
                                            class="btn btn-xs btn-primary"
@@ -212,13 +260,6 @@
                                             </table>
                                         </div>
                                         <div class="modal-footer">
-                                            @can('print-bills')
-                                                <a href="{{ route('orders.export-bill', Hashids::encode($order->id)) }}"
-                                                   class="btn btn-success pull-left">
-                                                    <i class="fa fa-external-link"></i>
-                                                    Xuất hóa đơn
-                                                </a>
-                                            @endcan
                                             <button type="button" class="btn btn-default pull-right"
                                                     data-dismiss="modal">
                                                 Đóng
@@ -244,6 +285,50 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            let branch = $('#branch_id');
+            let select_user_id = $("#user_id");
+            let url_get_users_with_branch = "{{ route('get-users-with-branch') }}";
+            let branch_id = branch.val();
+            let old_user_id = "{{ old('user_id') }}";
+
+            // lay ky thuat vien theo chi nhanh
+            function getUserWithBranch(url, branch_id, old_user_id) {
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: url,
+                    data: {'branch_id': branch_id},
+                    success: function (data) {
+                        select_user_id.html('');
+                        select_user_id.append("<option value=''>Tất cả nhân viên</option>");
+                        $.each(data, function (key, value) {
+                            let selected = parseInt(value.id) === parseInt(old_user_id) ? 'selected' : '';
+                            $("#user_id").append(
+                                "<option value='" + value.id + "'" + selected + ">" + value.full_name + "</option>"
+                            );
+                        });
+                    }
+                });
+            }
+
+            branch.change(function () {
+                getUserWithBranch(url_get_users_with_branch, branch_id, old_user_id);
+            });
+
+            if (branch_id !== null) {
+                getUserWithBranch(url_get_users_with_branch, branch_id, old_user_id);
+            }
+
+            // display form search
+            $('.btn-reset-form').click(function () {
+                $('#user_order').val('');
+                $('#branch_id').val('');
+                $('#user_id').val('');
+                $('#order_status_id').val('');
+                $('#start_date').val('');
+                $('#end_date').val('');
+            });
+
             //date start
             $('#start_date').datetimepicker({
                 format: 'yyyy-mm-dd hh:00',
@@ -261,32 +346,11 @@
             //data table
             $('#datatable').DataTable({
                 "language": {
-                    "emptyTable": "Không có bản ghi nào",
-                    "zeroRecords": "Không tìm thấy bản ghi nào",
-                    "decimal": "",
-                    "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
-                    "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
-                    "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Hiển thị _MENU_ mục",
-                    "loadingRecords": "Loading...",
-                    "processing": "Processing...",
-                    "search": "Tìm kiếm:",
-                    "paginate": {
-                        "first": "Đầu",
-                        "last": "Cuối",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "aria": {
-                        "sortAscending": ": activate to sort column ascending",
-                        "sortDescending": ": activate to sort column descending"
-                    },
+                    url: "{{ asset('admin_assets/bower_components/datatables.net-bs/lang/vietnamese-lang.json') }}"
                 },
                 'paging': true,
-                'lengthChange': true,
-                'searching': true,
+                'lengthChange': false,
+                'searching': false,
                 'ordering': true,
                 'autoWidth': false,
                 "scrollX": true,
@@ -295,5 +359,8 @@
 
             });
         });
+    </script>
+    <script type="text/javascript">
+
     </script>
 @endsection

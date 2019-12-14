@@ -15,7 +15,6 @@ class CreateOrderServicesTable extends Migration
     {
         Schema::create('order_services', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')
@@ -28,6 +27,8 @@ class CreateOrderServicesTable extends Migration
                 ->references('id')
                 ->on('services')
                 ->onDelete('CASCADE');
+
+            $table->timestamps();
 
         });
     }

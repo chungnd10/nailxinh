@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PhotoLibrary;
 
 use App\Http\Requests\PhotoLibraryRequest;
 use App\PhotoLibrary;
+use App\Services\PhotoLibraryServices;
 use File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -153,6 +154,17 @@ class PhotoLibraryController extends Controller
     }
 
     /*
+     * Tim kiem
+     *
+     */
+    public function photoSearch(Request $request)
+    {
+        $type_id = $request->type_services;
+        $images = $this->photo_library_services->photoSearch($type_id, 12);
+        $request->flash();
+        return view('admin.photo_library.index', compact('images'));
+    }
+    /*
      * Tra ve hinh anh theo loai dich vu
      *
      */
@@ -164,7 +176,7 @@ class PhotoLibraryController extends Controller
             if ($id == null) {
                 $photo = $this->photo_library_services->all('desc');
             } else {
-                $photo = $this->photo_library_services->photoWitdTypeServices($id, 'desc');
+                $photo = $this->photo_library_services->photoWithTypeServices($id, 2,'desc');
             }
             return response()->json($photo);
         }
@@ -180,7 +192,24 @@ class PhotoLibraryController extends Controller
         if ($request->ajax()) {
             $id = $request->id;
             $take = config('contants.take_load_take_photo');
-            $photo = $this->photo_library_services->loadDiff($id, $take);
+            $photo = $this->photo_library_services->loadDiff($id, 2);
+            return response()->json($photo);
+        }
+        return response('load diff fail !', 201);
+    }
+
+
+    /*
+     * loadDiffTypeService
+     *
+     */
+    public function loadDiffTypeService(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->id;
+            $type = $request->type_service;
+            $take = config('contants.take_load_take_photo');
+            $photo = $this->photo_library_services->loadDiff($id, $type, 1);
             return response()->json($photo);
         }
         return response('load diff fail !', 201);

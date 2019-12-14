@@ -13,93 +13,14 @@ class BillController extends Controller
 {
     public function index()
     {
-        $bills = Bill::join('orders', 'orders.id', '=', 'bills.order_id')
-            ->join('order_services', 'order_services.order_id', '=', 'orders.id')
-            ->select(
-                'total_price',
-                'total_payment',
-                'discount',
-                'bill_status_id',
-                'bills.note',
-                'bills.created_at',
-                'bills.updated_at',
-                'bills.id',
-                'full_name',
-                'phone_number',
-                'orders.time',
-                'orders.note',
-                'created_by',
-                'updated_by',
-                'branch_id',
-                'user_id',
-                'order_status_id',
-                'orders.created_at',
-                'orders.updated_at',
-                DB::raw('group_concat(order_services.service_id) as service_id'))
-            ->groupBy(
-                'total_price',
-                'total_payment',
-                'discount',
-                'bill_status_id',
-                'bills.note',
-                'bills.created_at',
-                'bills.updated_at',
-                'bills.id',
-                'full_name',
-                'phone_number',
-                'orders.time',
-                'orders.note',
-                'created_by',
-                'updated_by',
-                'branch_id',
-                'user_id',
-                'order_status_id',
-                'orders.created_at',
-                'orders.updated_at'
-                )
-            ->orderby('orders.id', 'desc')
-            ->get();
-
-
+        $bills = $this->bill_services->getAllBillJoinOrderJoinOrderServices('desc');
         return view('admin.bills.index', compact('bills'));
     }
 
     // xem chi tiết 1 hóa đơn
-    public function show($order_id)
+    public function show($bill_id)
     {
-        $bill = Bill::join('orders', 'orders.id', '=', 'bills.order_id')
-            ->join('order_services', 'order_services.order_id', '=', 'orders.id')
-            ->select(
-                'total_price',
-                'total_payment',
-                'discount',
-                'bill_status_id',
-                'bills.note',
-                'bills.created_at',
-                'bills.updated_at',
-                'bills.id',
-                'full_name',
-                'phone_number',
-                'orders.time',
-                'branch_id',
-                DB::raw('group_concat(order_services.service_id) as service_id'))
-            ->groupBy(
-                'total_price',
-                'total_payment',
-                'discount',
-                'bill_status_id',
-                'bills.note',
-                'bills.created_at',
-                'bills.updated_at',
-                'bills.id',
-                'full_name',
-                'phone_number',
-                'orders.time',
-                'branch_id'
-                )
-            ->orderby('orders.id', 'desc')
-            ->firstOrFail();
-
+        $bill = $this->bill_services->show($bill_id);
         return view('admin.bills.show', compact('bill'));
     }
 
@@ -123,79 +44,16 @@ class BillController extends Controller
     public function update(Request $request, $bill_id)
     {
         // lấy hóa đơn theo id
-        $bill = Bill::join('orders', 'orders.id', '=', 'bills.order_id')
-            ->join('order_services', 'order_services.order_id', '=', 'orders.id')
-            ->select(
-                'total_price',
-                'total_payment',
-                'discount',
-                'bill_status_id',
-                'bills.note',
-                'bills.created_at',
-                'bills.updated_at',
-                'bills.id',
-                'full_name',
-                'phone_number',
-                'orders.time',
-                'branch_id',
-                DB::raw('group_concat(order_services.service_id) as service_id'))
-            ->where('bills.id', $bill_id)
-            ->groupBy(
-                'total_price',
-                'total_payment',
-                'discount',
-                'bill_status_id',
-                'bills.note',
-                'bills.created_at',
-                'bills.updated_at',
-                'bills.id',
-                'full_name',
-                'phone_number',
-                'orders.time',
-                'branch_id'
-                )
-            ->orderby('orders.id', 'desc')
-            ->firstOrFail();
+        $bill = $this->bill_services->show($bill_id);
 
+        // chỉ được update hóa đơn chưa thanh toán
         $this->authorize('update', $bill);
 
         $bill_status_paid = config('contants.bill_status_paid');
 
         if ($request->bill_status_id == $bill_status_paid) {
             // lấy thông tin bill join lịch đặt
-            $bill_order = Bill::join('orders', 'orders.id', '=', 'bills.order_id')
-            ->join('order_services', 'order_services.order_id', '=', 'orders.id')
-            ->select(
-                'total_price',
-                'total_payment',
-                'discount',
-                'bill_status_id',
-                'bills.note',
-                'bills.created_at',
-                'bills.updated_at',
-                'bills.id',
-                'full_name',
-                'phone_number',
-                'orders.time',
-                'branch_id',
-                DB::raw('group_concat(order_services.service_id) as service_id'))
-            ->where('bills.id', $bill_id)
-            ->groupBy(
-                'total_price',
-                'total_payment',
-                'discount',
-                'bill_status_id',
-                'bills.note',
-                'bills.created_at',
-                'bills.updated_at',
-                'bills.id',
-                'full_name',
-                'phone_number',
-                'orders.time',
-                'branch_id'
-                )
-            ->orderby('orders.id', 'desc')
-            ->firstOrFail();
+            $bill_order = $this->bill_services->show($bill_id);
 
             // lấy số điện thoại trong lịch đặt
             $phone_number = $bill_order->phone_number;

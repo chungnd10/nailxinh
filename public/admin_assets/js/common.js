@@ -57,3 +57,8 @@ function confirmmBack() {
     return confirm('Mọi thay đổi sẽ không được lưu!');
 }
 
+//confirm delete
+function confirmDelete() {
+    return confirm('Bạn có chắc chắn muốn xóa? ');
+}
+

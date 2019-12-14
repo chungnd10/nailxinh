@@ -128,6 +128,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
         Route::get('get-users-with-branch', 'User\UserController@getUsersWithBranch')
             ->name('get-users-with-branch');
+
+        Route::post('advanced-search', 'User\UserController@advancedSearch')
+            ->name('users.advanced-search');
     });
 
     //type of services
@@ -269,6 +272,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('export-bill/{id}', 'Order\OrderController@exportBill')
             ->middleware('can:update-orders')
             ->name('orders.export-bill');
+
+        Route::post('advanced-search', 'Order\OrderController@advancedSearch')
+            ->name('orders.advanced-search');
     });
 
     //branch
@@ -511,6 +517,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('load-diff', 'PhotoLibrary\PhotoLibraryController@loadDiff')
             ->middleware('can:view-photo-library')
             ->name('photo-library.load-diff');
+
+        Route::get('load-diff-type-service', 'PhotoLibrary\PhotoLibraryController@loadDiffTypeService')
+            ->middleware('can:view-photo-library')
+            ->name('photo-library.load-diff-type-service');
+
+        Route::get('photo-search', 'PhotoLibrary\PhotoLibraryController@photoSearch')
+            ->middleware('can:view-photo-library')
+            ->name('photo-search');
 
         //ajax
         Route::get('delete', 'PhotoLibrary\PhotoLibraryController@deleteAjax')

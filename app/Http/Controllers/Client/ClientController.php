@@ -27,7 +27,7 @@ class ClientController extends Controller
         $orders = $this->order_services->count();
         $feedbacks = $this->feedback_services->allWithDisplayStatus($display_status_id);
         $slides = $this->slide_services->allDisplay('asc');
-        $technicians = $this->user_services->getTechnician();
+        $technicians = $this->user_services->getTechnicianWithStatus($display_status_id);
         $index_active = true;
 
         return view('client.index', compact(
@@ -123,11 +123,10 @@ class ClientController extends Controller
     public function booking()
     {
         $booking_active = true;
-        $branchs = $this->branch_services->all();
+        $branchs = $this->branch_services->all('asc');
         $type_services = $this->type_services->all('asc');
-        $users = $this->user_services->getTechnician();
 
-        return view('client.booking', compact('branchs', 'type_services', 'users', 'booking_active'));
+        return view('client.booking', compact('branchs', 'type_services', 'booking_active'));
     }
 
     /*

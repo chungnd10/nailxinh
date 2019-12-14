@@ -39,9 +39,6 @@
                                         @if($errors->first('full_name'))
                                             <span class="text-danger">{{ $errors->first('full_name') }}</span>
                                         @endif
-                                        @if($errors->first('email'))
-                                            <span class="text-danger">{{ $errors->first('email') }}</span>
-                                        @endif
                                     </div>
                                     <!-- /.form-group -->
                                     <div class="form-group">

@@ -6,9 +6,10 @@ use App\OrderStatus;
 
 class OrderStatusServices
 {
-    public function all()
+    public function all($order_by)
     {
-        $status = OrderStatus::all();
+        $status = OrderStatus::orderBy('id', $order_by)
+            ->get();
         return $status;
     }
 

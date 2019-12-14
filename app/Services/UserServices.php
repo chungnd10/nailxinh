@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\User;
 use Config;
+use Illuminate\Support\Facades\Auth;
 
 class UserServices
 {
@@ -46,7 +47,7 @@ class UserServices
     {
         $role_admin = config('contants.role_admin');
 
-        $user = User::where('role_id','<>', $role_admin)
+        $user = User::where('role_id', '<>', $role_admin)
             ->orderby('id', $order_by)
             ->get();
         return $user;
@@ -59,18 +60,17 @@ class UserServices
         $role_admin = config('contants.role_admin');
         $role_manager = config('contants.role_manager');
 
-        $user = User::where('branch_id',$branch_id)
-                ->where('role_id','<>', $role_admin)
-                ->where('role_id','<>', $role_manager)
-                ->orderby('id', $order_by)
-                ->get();
+        $user = User::where('branch_id', $branch_id)
+            ->where('role_id', '<>', $role_admin)
+            ->where('role_id', '<>', $role_manager)
+            ->orderby('id', $order_by)
+            ->get();
         return $user;
     }
 
     //lấy tất cả kỹ thuật viên có trạng thái là hiển thị
-    public function getTechnician()
+    public function getTechnicianWithStatus($status)
     {
-        $status = config('contants.display_status_display');
         $role_technician = config('contants.role_technician');
         $users = User::where('role_id', $role_technician)
             ->where('display_status_id', $status)
@@ -79,13 +79,51 @@ class UserServices
         return $users;
     }
 
-    public function getUsersWithBranch($branch_id)
+    public function getUsersWithBranch($branch_id, $order_by)
     {
         $role_technician = config('contants.role_technician');
         $users = User::where('role_id', $role_technician)
             ->where('branch_id', $branch_id)
-            ->orderby('id', 'desc')
+            ->orderby('id', $order_by)
             ->get();
         return $users;
+    }
+
+    /*
+     * Tim kiem nang cao
+     *
+     */
+    public function advancedSearch($full_name, $branch_id, $role_id, $order_by)
+    {
+        $role_admin = config('contants.role_admin');
+        $role_manager = config('contants.role_manager');
+
+        $query_builder = User::orderBy('id', $order_by);
+
+        if(Auth::user()->role_id != $role_admin){
+            $query_builder->where('role_id', '<>', $role_admin);
+            $query_builder->where('role_id', '<>', $role_manager);
+        }
+
+        if ($full_name != '') {
+            $query_builder->where('full_name', 'like', '%' . $full_name . '%');
+        }
+
+        if ($branch_id != '') {
+            $query_builder->where('branch_id', $branch_id);
+        }
+
+        if ($role_id != '') {
+            $query_builder->where('role_id', $role_id);
+        }
+
+        if ($role_admin != '') {
+            $query_builder->where('role_id', '<>', $role_admin);
+        }
+
+        $users = $query_builder->get();
+
+        return $users;
+
     }
 }

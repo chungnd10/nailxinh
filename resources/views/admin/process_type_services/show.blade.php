@@ -134,23 +134,23 @@
                 }
             });
 
-			// ajax get process with type services
-            $('#service_id').change(function () {
-                var service_id = $('#service_id').val();
 
+            let service = $('#service_id');
+            let service_id = service.val();
+            let csrf = $('meta[name="csrf-token"]').attr('content');
+            let url_get_procces_with_services = "{{ route('get-procces-with-services') }}";
+
+			// ajax get process with type services
+            function getProcessOfServices()
+            {
                 $.ajax({
-                    headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                    url: "{{ route('get-procces-with-services') }}",
+                    headers: { 'X-CSRF-TOKEN': csrf },
+                    url: url_get_procces_with_services,
                     method: 'POST',
-                    data: {
-                        service_id: service_id
-                    },
+                    data: { service_id: service_id },
                     success: function (data) {
                         $("#result").html('');
-                        if (data.length == 0)
-                        {
+                        if (data.length === 0){
                             $(".result-process").append(
                                 "<span class='text-danger'>Loại dịch vụ này chưa có quy trình nào!</span>"
                             );
@@ -184,7 +184,18 @@
                         }
                     }
                 });
+            }
+
+            //lay khi trinh khi load xong trang
+            if (service_id != null){
+                getProcessOfServices();
+            }
+
+            //lay quy trinh khi co thay doi
+            service.change(function () {
+                getProcessOfServices();
             });
+
         });
     </script>
     @endsection
