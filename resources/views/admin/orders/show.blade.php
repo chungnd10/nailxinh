@@ -10,8 +10,8 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('orders.update', Hashids::encode($order->id,'123456789')) }}" method="POST"
-                  id="orders">
+            <form action="{{ route('orders.update', Hashids::encode($order->id)) }}" method="POST"
+                  id="update-orders">
                 @csrf
                 <div class="box-body">
                     <div class="row">
@@ -37,16 +37,10 @@
                             </div>
                             <div class="form-group">
                                 <label>Thời gian</label><span class="text-danger">*</span>
-                                <div class="input-group date input-date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input type="text" class="form-control"
+                                <input type="text" class="form-control"
                                            name="time"
                                            id="time"
                                            value="{{ date('Y-m-d H:i', strtotime(old('time', $order->time))) }}">
-                                </div>
-
                                 @if($errors->first('time'))
                                     <span class="text-danger">{{ $errors->first('time') }}</span>
                                 @endif
@@ -79,19 +73,6 @@
                                             {{ $item->name.', '.$item->address }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Nhân viên</label>
-                                <select name="user_id" class="form-control" id="user_id">
-                                    <option value="">Chọn nhân viên</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}"
-                                            {{ $user->id == $order->user_id ? 'selected' : '' }}
-                                        >
-                                            {{ $user->full_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="form-group">
                                 <label>Dịch vụ</label><span class="text-danger">*</span>
                                 <select class="form-control select2 select2-hidden-accessible"
@@ -169,40 +150,31 @@
             });
 
             //validate
-            $("#addBranch").validate({
-                rules: {
-                    name: {
-                        required: true,
-                        maxlength: 100
-                    },
-                    city_id: {
-                        required: true,
-                    },
-                    phone_number: {
-                        required: true,
-                        phoneNumberVietNam: true,
-                        maxlength: 11
-                    },
-                    address: {
-                        required: true,
-                        maxlength: 200
-                    }
+            // $("#update-orders").validate({
+            //     ignore: [],
+            //     rules: {
+            //         full_name: {
+            //             required: true,
+            //         },
+            //         phone_number: {
+            //             required: true,
+            //         },
+            //         time: {
+            //             required: true,
+            //         },
+            //         order_status_id: {
+            //             required: true,
+            //         },
+            //         branch_id: {
+            //             required: true,
+            //         },
+            //         select2: {
+            //             required: true,
+            //         }
+            //     }
+            // });
 
-                },
-
-                messages: {
-                    name: {
-                        maxlength: "*Không được vượt quá 100 ký tự"
-                    },
-                    phone_number: {
-                        maxlength: "*Không được vượt quá 11 ký tự"
-                    },
-                    address: {
-                        maxlength: "*Không được vượt quá 200 ký tự"
-                    },
-                }
-            });
-
+            // start: lay KTV theo chi nhanh
             $('#branch_id').change(function () {
                 let url_get_users_with_branch = "{{ route('get-users-with-branch') }}";
                 let branch_id = $(this).val();
@@ -230,6 +202,7 @@
                     },
                 });
             });
+            // end: lay KTV theo chi nhanh
 
         });
     </script>

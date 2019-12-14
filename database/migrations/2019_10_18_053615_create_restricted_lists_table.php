@@ -16,7 +16,6 @@ class CreateRestrictedListsTable extends Migration
         Schema::create('restricted_lists', function (Blueprint $table) {
             $table->increments('id');
             $table->string('phone_number', 11);
-            $table->string('note', 500)->nullable();
             $table->timestamps();
         });
     }

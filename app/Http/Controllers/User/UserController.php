@@ -22,13 +22,13 @@ class UserController extends Controller
     {
         //nếu là admin thì lấy all
         if (Auth::user()->isAdmin()) {
-            $users = $this->user_services->allForAdmin('asc');
+            $users = $this->user_services->allForAdmin('asc', 10);
             $branches = $this->branch_services->all('asc');
             $roles = $this->role_services->allForAdmin('asc');
         }
         // chủ tiệm thì lấy nhân viên của tiệm
         if (Auth::user()->isManager()) {
-            $users = $this->user_services->allForManager(Auth::user()->branch_id, 'desc');
+            $users = $this->user_services->allForManager(Auth::user()->branch_id, 'desc', 10);
             $roles = $this->role_services->allForManager('asc');
         }
 
@@ -314,37 +314,40 @@ class UserController extends Controller
      * Ajax get user with branch
      *
      */
-    public function getUsersWithBranch(Request $request)
+    public function getTechnicianWithBranch(Request $request)
     {
         if ($request->ajax()) {
             $branch_id = $request->branch_id;
-            $users = $this->user_services->getUsersWithBranch($branch_id, 'asc');
+            $users = $this->user_services->getTechnicianWithBranch($branch_id, 'asc');
             return response()->json($users);
         }
         return response('load diff fail !', 201);
     }
 
+
     /*
-     *
+     * Tim kiem nang cao
      *
      */
     public function advancedSearch(Request $request)
     {
         $full_name = $request->full_name;
-        $branch_id = $request->branch_id;
+
         $role_id = $request->role_id;
 
-        //nếu là admin thì lấy all
+        //nếu là admin thì lấy all role
         if (Auth::user()->isAdmin()) {
             $branches = $this->branch_services->all('asc');
             $roles = $this->role_services->allForAdmin('asc');
+            $branch_id = $request->branch_id;
         }
-        // chủ tiệm thì lấy nhân viên của tiệm
+        // chủ tiệm thì lấy role nhân viên của tiệm
         if (Auth::user()->isManager()) {
             $roles = $this->role_services->allForManager('asc');
+            $branch_id = Auth::user()->branch_id;
         }
 
-        $users = $this->user_services->advancedSearch($full_name, $branch_id, $role_id, 'desc');
+        $users = $this->user_services->advancedSearch($full_name, $branch_id, $role_id, 'desc', 10);
         $request->flash();
 
         return view('admin.users.index', compact('users', 'branches', 'roles'));

@@ -74,8 +74,8 @@ class BillServices
                 'branch_id',
                 'user_id',
                 'order_status_id',
-                'orders.created_at',
-                'orders.updated_at',
+                'bills.created_at',
+                'bills.updated_at',
                 DB::raw('group_concat(order_services.service_id) as service_id'))
             ->groupBy(
                 'total_price',
@@ -95,8 +95,8 @@ class BillServices
                 'branch_id',
                 'user_id',
                 'order_status_id',
-                'orders.created_at',
-                'orders.updated_at'
+                'bills.created_at',
+                'bills.updated_at'
             )
             ->orderby('orders.id', $order_by)
             ->get();

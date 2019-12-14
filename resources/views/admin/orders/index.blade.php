@@ -6,14 +6,6 @@
             Danh sách
             <small>lịch đặt</small>
         </h1>
-        <ol class="breadcrumb">
-            @can('add-orders')
-                <a href="{{ route('orders.create') }}"
-                   class="btn btn-sm btn-success">
-                    <i class="fa fa-plus"></i> Thêm
-                </a>
-            @endcan
-        </ol>
     </section>
     {{--Main content--}}
     <section class="content">
@@ -21,7 +13,7 @@
             <div class="col-xs-12">
                 <div class="box form-advanced-search">
                     <div class="box-body">
-                        <form method="post" action="{{ route('orders.advanced-search') }}">
+                        <form method="get" action="{{ route('orders.advanced-search') }}">
                             @csrf
                             <div class="row">
                                 <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
@@ -32,25 +24,35 @@
                                            value="{{ old('user_order') }}"
                                            placeholder="Số điện thoại">
                                 </div>
-                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-6">
-                                    <select name="branch_id" class="form-control" id="branch_id">
-                                        <option value="">Tất cả chi nhánh</option>
-                                        @if($branches)
-                                            @foreach($branches as $item)
-                                                <option value="{{ $item->id }}"
-                                                        @if(old('branch_id') == $item->id)
-                                                        selected
-                                                        @endif
-                                                >{{ $item->name . ', ' . $item->address }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
+                                @if(Auth::user()->role_id == config('contants.role_admin'))
+                                    <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-6">
+                                        <select name="branch_id" class="form-control" id="branch_id">
+                                            <option value="">Tất cả chi nhánh</option>
+
+                                                @foreach($branches as $item)
+                                                    <option value="{{ $item->id }}"
+                                                            @if(old('branch_id') == $item->id)
+                                                            selected
+                                                            @endif
+                                                    >{{ $item->name . ', ' . $item->address }}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+                                @if(Auth::user()->role_id != config('contants.role_technician'))
                                 <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
                                     <select name="user_id" id="user_id" class="form-control">
                                         <option value="">Tất cả nhân viên</option>
+                                        @foreach($technicians as $item)
+                                            <option value="{{ $item->id }}"
+                                                    @if(old('user_id') == $item->id)
+                                                    selected
+                                                    @endif
+                                            >{{ $item->full_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+                                @endif
                                 <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3 ">
                                     <select name="order_status_id" id="order_status_id" class="form-control">
                                         <option value="">Tất cả trạng thái</option>
@@ -273,6 +275,14 @@
                         @endforeach
                     </div>
                     <!-- /.box-body -->
+                    <div class="box-footer">
+                        @if($orders->count() > 0)
+                            <div class="pull-left">
+                                <p>Tổng số: <b>{{ $orders->total() }}</b> mục</p>
+                            </div>
+                        @endif
+                        {!! $orders->appends($_GET)->links() !!}
+                    </div>
                 </div>
                 <!-- /.box -->
             </div>
@@ -291,7 +301,7 @@
             let branch_id = branch.val();
             let old_user_id = "{{ old('user_id') }}";
 
-            // lay ky thuat vien theo chi nhanh
+            //start: lay ky thuat vien theo chi nhanh
             function getUserWithBranch(url, branch_id, old_user_id) {
                 $.ajax({
                     type: "GET",
@@ -310,14 +320,20 @@
                     }
                 });
             }
+            //end:lay ky thuat vien theo chi nhanh
 
+            //start: lay khi co thay doi
             branch.change(function () {
+                let branch_id = branch.val();
                 getUserWithBranch(url_get_users_with_branch, branch_id, old_user_id);
             });
+            //end: lay khi co thay doi
 
-            if (branch_id !== null) {
-                getUserWithBranch(url_get_users_with_branch, branch_id, old_user_id);
-            }
+            //start: lay khi load xong trang
+            // if (branch_id !== null) {
+            //     getUserWithBranch(url_get_users_with_branch, branch_id, old_user_id);
+            // }
+            //end: lay khi load xong trang
 
             // display form search
             $('.btn-reset-form').click(function () {
@@ -348,9 +364,10 @@
                 "language": {
                     url: "{{ asset('admin_assets/bower_components/datatables.net-bs/lang/vietnamese-lang.json') }}"
                 },
-                'paging': true,
+                'paging': false,
                 'lengthChange': false,
                 'searching': false,
+                "bInfo" : false,
                 'ordering': true,
                 'autoWidth': false,
                 "scrollX": true,

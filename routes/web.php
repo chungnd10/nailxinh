@@ -63,6 +63,8 @@ Route::post('/ajax/check-limit-order', 'Client\ClientController@checkLimitOrder'
 Route::post('/ajax/check-time-user', 'Client\ClientController@checkTimeUser')
     ->name('ajax.check-time-user');
 
+Route::post('/ajax/check-limited-list', 'Client\ClientController@checkLimitedList')
+    ->name('ajax.check-limited-list');
 // end client
 
 
@@ -126,10 +128,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('change-image-profile/{id}', 'User\UserController@changeImageProfile')
             ->name('users.change-image-profile');
 
-        Route::get('get-users-with-branch', 'User\UserController@getUsersWithBranch')
+        Route::get('get-users-with-branch', 'User\UserController@getTechnicianWithBranch')
             ->name('get-users-with-branch');
 
-        Route::post('advanced-search', 'User\UserController@advancedSearch')
+        Route::get('advanced-search', 'User\UserController@advancedSearch')
             ->name('users.advanced-search');
     });
 
@@ -253,13 +255,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:view-orders')
             ->name('orders.index');
 
-        Route::get('create', 'Order\OrderController@create')
-            ->middleware('can:add-orders')
-            ->name('orders.create');
-
-        Route::post('create', 'Order\OrderController@store')
-            ->middleware('can:add-orders')
-            ->name('orders.store');
+//        Route::get('create', 'Order\OrderController@create')
+//            ->middleware('can:add-orders')
+//            ->name('orders.create');
+//
+//        Route::post('create', 'Order\OrderController@store')
+//            ->middleware('can:add-orders')
+//            ->name('orders.store');
 
         Route::get('update/{id}', 'Order\OrderController@show')
             ->middleware('can:update-orders')
@@ -273,7 +275,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:update-orders')
             ->name('orders.export-bill');
 
-        Route::post('advanced-search', 'Order\OrderController@advancedSearch')
+        Route::get('advanced-search', 'Order\OrderController@advancedSearch')
             ->name('orders.advanced-search');
     });
 
@@ -510,26 +512,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:remove-photo-library')
             ->name('photo-library.delete-many');
 
-        Route::get('change-type-services', 'PhotoLibrary\PhotoLibraryController@changeTypeServices')
-            ->middleware('can:view-photo-library')
-            ->name('photo-library.change-type-services');
-
-        Route::get('load-diff', 'PhotoLibrary\PhotoLibraryController@loadDiff')
-            ->middleware('can:view-photo-library')
-            ->name('photo-library.load-diff');
-
-        Route::get('load-diff-type-service', 'PhotoLibrary\PhotoLibraryController@loadDiffTypeService')
-            ->middleware('can:view-photo-library')
-            ->name('photo-library.load-diff-type-service');
-
         Route::get('photo-search', 'PhotoLibrary\PhotoLibraryController@photoSearch')
             ->middleware('can:view-photo-library')
             ->name('photo-search');
 
-        //ajax
-        Route::get('delete', 'PhotoLibrary\PhotoLibraryController@deleteAjax')
-            ->middleware('can:remove-photo-library')
-            ->name('photo-library.delete');
     });
 });
 

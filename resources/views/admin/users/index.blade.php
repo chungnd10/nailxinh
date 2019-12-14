@@ -18,7 +18,7 @@
             <div class="col-xs-12">
                 <div class="box form-advanced-search">
                     <div class="box-body">
-                        <form method="post" action="{{ route('users.advanced-search') }}">
+                        <form method="get" action="{{ route('users.advanced-search') }}">
                             @csrf
                             <div class="row">
                                 <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
@@ -29,11 +29,10 @@
                                            value="{{ old('full_name') }}"
                                            placeholder="Họ và tên">
                                 </div>
-                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
-                                    @if(Auth::user()->isAdmin())
+                                @if(Auth::user()->isAdmin())
+                                    <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
                                         <select name="branch_id" class="form-control" id="branch_id">
                                             <option value="">Tất cả chi nhánh</option>
-
                                                 @foreach($branches as $item)
                                                     <option value="{{ $item->id }}"
                                                             @if(old('branch_id') == $item->id)
@@ -42,12 +41,8 @@
                                                     >{{ $item->name . ', ' . $item->address }}</option>
                                                 @endforeach
                                         </select>
-                                    @endif
-                                    @if(Auth::user()->isManager())
-                                        <p>{!!  Auth::user()->branch->name.', <br>'.Auth::user()->branch->address !!} </p>
-                                            <input type="hidden" name="branch_id" value="{{ Auth::user()->branch_id }}">
-                                    @endif
-                                </div>
+                                    </div>
+                                @endif
                                 <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3 ">
                                     <select name="role_id" id="role_id" class="form-control">
                                         <option value="">Tất cả quyền</option>
@@ -124,6 +119,14 @@
                         </table>
                     </div>
                     <!-- /.box-body -->
+                    <div class="box-footer">
+                        @if($users->count() > 0)
+                            <div class="pull-left">
+                                <p>Tổng số: <b>{{ $users->total() }}</b> mục</p>
+                            </div>
+                        @endif
+                        {!! $users->appends($_GET)->links() !!}
+                    </div>
                 </div>
                 <!-- /.box -->
             </div>
@@ -147,7 +150,8 @@
             "language": {
                     url: "{{ asset('admin_assets/bower_components/datatables.net-bs/lang/vietnamese-lang.json') }}"
             },
-            'paging': true,
+            "bInfo" : false,
+            'paging': false,
             'lengthChange': false,
             'searching': false,
             'ordering': true,

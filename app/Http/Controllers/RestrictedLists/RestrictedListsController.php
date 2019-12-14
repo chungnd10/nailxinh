@@ -17,7 +17,7 @@ class RestrictedListsController extends Controller
 
     public function add($phone_number)
     {
-        $black_list = RestrictedList::find($phone_number);
+        $black_list = RestrictedList::where('phone_number', $phone_number)->first();
         if ($black_list == null){
             $black_list = new  RestrictedList();
             $black_list->phone_number = $phone_number;
@@ -27,7 +27,7 @@ class RestrictedListsController extends Controller
             ->with('toast_success', 'Thêm vào danh sách hạn chế thành công !');
         }
         return redirect()->route('orders.index')
-            ->with('toast_error', 'Thêm thất bại !');
+            ->with('toast_error', 'Đã được thêm trước đây !');
     }
 
     public function destroy($id)

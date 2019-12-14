@@ -43,19 +43,19 @@ class UserServices
      * Get all except admin
      *
      */
-    public function allForAdmin($order_by)
+    public function allForAdmin($order_by, $paginate)
     {
         $role_admin = config('contants.role_admin');
 
         $user = User::where('role_id', '<>', $role_admin)
             ->orderby('id', $order_by)
-            ->get();
+            ->paginate($paginate);
         return $user;
     }
 
 
     //lấy user theo chi nhánh va trừ admin quan ly chi nhanh
-    public function allForManager($branch_id, $order_by)
+    public function allForManager($branch_id, $order_by, $paginate)
     {
         $role_admin = config('contants.role_admin');
         $role_manager = config('contants.role_manager');
@@ -64,7 +64,7 @@ class UserServices
             ->where('role_id', '<>', $role_admin)
             ->where('role_id', '<>', $role_manager)
             ->orderby('id', $order_by)
-            ->get();
+            ->paginate($paginate);
         return $user;
     }
 
@@ -79,7 +79,12 @@ class UserServices
         return $users;
     }
 
-    public function getUsersWithBranch($branch_id, $order_by)
+
+    /*
+     * Lay ky thuat vien theo chi nhanh
+     *
+     */
+    public function getTechnicianWithBranch($branch_id, $order_by)
     {
         $role_technician = config('contants.role_technician');
         $users = User::where('role_id', $role_technician)
@@ -93,7 +98,7 @@ class UserServices
      * Tim kiem nang cao
      *
      */
-    public function advancedSearch($full_name, $branch_id, $role_id, $order_by)
+    public function advancedSearch($full_name, $branch_id, $role_id, $order_by, $paginate)
     {
         $role_admin = config('contants.role_admin');
         $role_manager = config('contants.role_manager');
@@ -121,7 +126,7 @@ class UserServices
             $query_builder->where('role_id', '<>', $role_admin);
         }
 
-        $users = $query_builder->get();
+        $users = $query_builder->paginate($paginate);
 
         return $users;
 

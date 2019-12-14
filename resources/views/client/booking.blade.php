@@ -98,10 +98,6 @@
                                     <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
                                     <select class="staff form-control form-border" name="user_id" id="user_id">
                                         <option value="">Chọn nhân viên</option>
-                                    <!-- @foreach($users as $user)
-                                        <option data-image="{{ $user->avatar }}"
-                                                value="{{ $user->id }}">{{ $user->full_name }}</option>
-                                                @endforeach -->
                                             </select>
                                             <label id="user_id-error" class="error" for="user_id"></label>
                                         </div>

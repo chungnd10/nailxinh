@@ -21,6 +21,7 @@
                             <tr>
                                 <th width="40">STT</th>
                                 <th width="100">Khách hàng</th>
+                                <th>Số điện thoại</th>
                                 <th>Tổng tiền(VNĐ )</th>
                                 <th>Ngày tạo</th>
                                 <th width="100">Trạng thái</th>
@@ -34,6 +35,7 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $bill->full_name }}</td>
+                                    <td>{{ $bill->phone_number }}</td>
                                     <td>{{ number_format($bill->total_payment, 0, ',', '.') }}</td>
                                     <td>{{ date('H:i d-m-Y', strtotime($bill->created_at)) }}</td>
                                     <td>

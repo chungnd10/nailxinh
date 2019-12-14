@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderRequest extends FormRequest
+class UpdateOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,9 +32,7 @@ class OrderRequest extends FormRequest
             'time' => 'required',
             'note' => 'nullable|max:200',
             'branch_id' => 'required',
-            'user_id' => 'required',
             'service_id' => 'required',
-            'sir' => 'required',
         ];
     }
 
@@ -48,9 +46,7 @@ class OrderRequest extends FormRequest
             'time.required'             => '*Mục này không được để trống',
             'note.max'                  => '*Không được vượt quá 200 ký tự',
             'branch_id.required'        => '*Mục này không được để trống',
-            'user_id.required'          => '*Mục này không được để trống',
             'service_id.required'       => '*Mục này không được để trống',
-             'sir.required'             => '*Mục này không được để trống',
         ];
     }
 }

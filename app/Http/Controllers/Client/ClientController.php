@@ -192,6 +192,19 @@ class ClientController extends Controller
         return response()->json(['fail' => 'Store fail']);
     }
 
+     /*
+     * Kiem tra xem co phai danh sach hạn che khong
+     *
+     */
+    public function checkLimitedList(Request $request)
+    {
+        if ($request->ajax()) {
+            $phone_number = $request->phone_number;
+            $limited_phone_number = $this->restricted_lists->checkLimitedList($phone_number);
+            return $limited_phone_number;
+        }
+        return response()->json(['fail' => 'check fail.']);
+    }
 
     /*
      * Display gallery
@@ -240,10 +253,12 @@ class ClientController extends Controller
         if ($request->ajax()) {
             $branch_id = $request->branch_id;
             $service_id = $request->service_id;
+            $status_inactive = config('contants.operation_status_inactive');
 
             $users = User::join('user_services', 'user_services.user_id', '=','users.id')
                 ->where('branch_id', $branch_id)
                 ->where('service_id', $service_id)
+                ->where('operation_status_id','<>', $status_inactive)
                 ->select('users.id', 'users.full_name', 'users.avatar')
                 ->get();
 
