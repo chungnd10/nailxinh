@@ -3686,7 +3686,8 @@ span.select2.select2-container.select2-container--default {
 }
 
 img.img-flag {
-    width: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 
