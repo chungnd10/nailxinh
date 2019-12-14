@@ -186,8 +186,9 @@ class ClientController extends Controller
             $order->note = $request->note;
             $order->order_status_id = config('contants.order_status_unconfirmed');
             $order->save();
-            $order->services()->sync($order->id, $request->service_id);
-
+            $services_id[] = $request->service_id;
+            $order->services()->sync($services_id, $order->id);
+           
             return response()->json(['success'=>'Store Successfully']);
         }
         return response()->json(['fail' => 'Store fail']);
@@ -295,8 +296,9 @@ class ClientController extends Controller
             $result = Order::where('user_id', $user_id)
                 ->whereIn('time', $date_time)
                 ->select('time')
+                ->orderBy('time', 'asc')
                 ->get();
-            
+            $time_was_used =[]; 
             foreach ($result as $item) {
                 $time_was_used[] = $item->time;
             }
