@@ -14,7 +14,7 @@
         </div>
         <div class="row" id="our_service_mobi">
             <div class="col-md-12">
-                <div class="our_service_mobile">
+                <div class="our_service_mobile" id="our_service">
                 @foreach($type_services as $type_service)
                     <div class="service-box text-center">
                         <figure>

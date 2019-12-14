@@ -201,6 +201,9 @@
         let current_time = moment().format(time_format_pttrn);
         /* create variable save_data */
         let save_data;
+        let btn_address_booking = $('.btn-address-booking');
+        console.log('btn_adres',btn_address_booking[0]);
+            btn_address_booking[0].classList.add('active');
         /* ============= render HTML time slot ============= */
         function renderTimeSlot(data, next_date) {
             let current_date_time = moment().format('YYYY-MM-DD HH:MM');
@@ -444,6 +447,8 @@
         $('#user_id').on('change', function(){
             let user_id = $('#user_id').find(":selected").val();
             let date = moment().format(date_format_pttrn);
+            $('.btn-select').removeClass('btn_primary');
+            $('.btn-select')[0].classList.add('btn_primary');
             getAjaxSlotFromServer(user_id,date);
         });
 
@@ -576,6 +581,7 @@
         /* render show operator when choose service */
         function renderOperatorFromService(result_data){
             let service_id = $('#service_id').find(":selected").val();
+            let btn_address = $('.btn-address-booking.active');
             let option_html = [];
             let operator_opt = service_id ? "<option value=''>Không có nhân viên nào!</option>" : "<option value=''>Vui lòng chọn dịch vụ</option>";
             console.log(operator_opt);
@@ -646,7 +652,7 @@
             }
             return is_valid;
         };
-
+    
         // Validation with Jquery validation
         $('#booking-form').validate({
             ignore: 'input[type="hidden"]',
@@ -656,7 +662,9 @@
                     phoneNumberVietNam: true,
                 },
                 full_name:{
-                    required:true                
+                    required:true,
+                    onlyVietnamese: true,
+                    maxlength: 100             
                 },
                 service_id:{
                     required:true
@@ -671,11 +679,11 @@
             messages: {
                 phone_number:{
                     required: "*Mời bạn nhập vào số điện thoại",
-                    remote: "*Ban da dat 2 luot trong ngay"
-
+                    remote: "*Bạn đã đặt quá số lần quy định"
                 },
                 full_name:{
-                    required:"*Mời bạn nhập vào họ và tên"
+                    required:"*Mời bạn nhập vào họ và tên",
+                    maxlength:"*Không được vượt quá 100 ký tự"
                 },
                 service_id:{
                     required:"*Mời bạn chọn dịch vụ"
@@ -690,10 +698,10 @@
         });
 
         // submit form send ajax 
-
         $('#btn-booking').click(function(e){
-            e.preventDefault();
             let form = $('#booking-form');
+            e.preventDefault();
+            
             if( form.valid() ){
                 let data = {
                     branch_id: $('.btn-address-booking.active').attr('data-branch-id'),
