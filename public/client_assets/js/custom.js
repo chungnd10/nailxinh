@@ -69,7 +69,30 @@
                 }
             }
         });
-
+        // other service
+        $("#our_service").owlCarousel({
+            items: 4,
+            loop: true,
+            nav: true,
+            margin:30,
+            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+            autoplay: true,
+            autoplayTimeout: 3000,
+            animateIn: 'fadeInLeft',
+            animateOut: 'fadeInRight',
+            smartSpeed: 250,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:4
+                }
+            }
+        });
 
         // Beauticans Slider
         $(".beauticians-slider").owlCarousel({
@@ -88,7 +111,7 @@
                 0:{
                     items:1
                 },
-                600:{
+                767:{
                     items:3
                 },
                 1000:{
@@ -135,7 +158,7 @@
                 0: {
                     items: 1
                 },
-                600: {
+                767: {
                     items: 2,
                 },
                 1000: {
@@ -173,7 +196,7 @@
                 0: {
                     items: 1
                 },
-                700: {
+                767: {
                     items: 3,
                 },
                 1000: {
@@ -210,7 +233,7 @@
                 0: {
                     items: 1
                 },
-                700: {
+                767: {
                     items: 1,
                 },
                 1000: {
@@ -232,7 +255,7 @@
                 0: {
                     items: 1
                 },
-                700: {
+                767: {
                     items: 1,
                 },
                 1000: {

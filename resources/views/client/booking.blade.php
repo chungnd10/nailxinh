@@ -1,80 +1,80 @@
 @extends('client.layouts.index')
 @section('content')
     <!-- Start: Breadcrumb Area
-    ============================= -->
+        ============================= -->
 
-    <section id="breadcrumb-area" class="breadcrumb-booking">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h2>NailXinh</h2>
-                    <ul class="breadcrumb-nav list-inline">
-                        <li><a href="/">NailXinh</a></li>
-                        <i class="fas fa-chevron-right"></i>
-                        <li>Đặt lịch</li>
-                    </ul>
+        <section id="breadcrumb-area" class="breadcrumb-booking">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2>NailXinh</h2>
+                        <ul class="breadcrumb-nav list-inline">
+                            <li><a href="/">NailXinh</a></li>
+                            <li><i class="fa fa-angle-right"></i></li>
+                            <li>Đặt lịch</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <!-- End: Breadcrumb Area
-    ============================= -->
+        ============================= -->
 
     <!-- Start: Booking
-    ============================= -->
-    <section id="booking" style="padding-top:80px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <form id="booking-form" class="form-horizontal">
-                        @csrf
-                        <meta name="csrf-token" content="{{ csrf_token() }}">
-                        <div class="row">
-                            <div class="col-md-12 mb-3">
-                                <span class="text-pink">Thông tin của bạn</span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <span class="text-danger validation">*</span>
-                                <input type="text"
-                                       class="form-control form-border form-require"
-                                       name="phone_number"
-                                       value="{{ old('phone_number') }}"
-                                       pa
-                                       placeholder="Số điện thoại"
-                                       id="phone_number">
-                                <label id="phone_number-error" class="error mt-2" for="phone_number"></label>
-                                <span class="general-message"></span>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <span class="text-danger validation">*</span>
-                                <input type="text"
-                                       id="full_name"
-                                       name="full_name"
-                                       class="form-control form-border form-require"
-                                       value="{{ old('full_name') }}"
-                                       placeholder="Họ và tên"
-                                       id="full_name">
-                                <label id="full_name-error" class="error mt-2" for="full_name"></label>
-                            </div>
-                            <div class="adress col-md-12">
-                                <div class="mb-3">
-                                    Địa điểm
-                                    <span class="text-danger">*</span>
+        ============================= -->
+        <section id="booking" style="padding-top:80px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <form id="booking-form" class="form-horizontal">
+                            @csrf
+                            <meta name="csrf-token" content="{{ csrf_token() }}">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <span class="text-pink">Thông tin của bạn</span>
                                 </div>
-                                <div class="row" id="locationBtn" >
-                                    <div class="col-md-12 text-error text-danger">Vui lòng chọn địa chỉ</div>
-                                    @foreach($branchs as $branch)
+                                <div class="form-group col-md-6">
+                                    <span class="text-danger validation">*</span>
+                                    <input type="text"
+                                    class="form-control form-border form-require"
+                                    name="phone_number"
+                                    value="{{ old('phone_number') }}"
+                                    pa
+                                    placeholder="Số điện thoại"
+                                    id="phone_number">
+                                    <label id="phone_number-error" class="error mt-2" for="phone_number"></label>
+                                    <span class="general-message"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <span class="text-danger validation">*</span>
+                                    <input type="text"
+                                    id="full_name"
+                                    name="full_name"
+                                    class="form-control form-border form-require"
+                                    value="{{ old('full_name') }}"
+                                    placeholder="Họ và tên"
+                                    id="full_name">
+                                    <label id="full_name-error" class="error mt-2" for="full_name"></label>
+                                </div>
+                                <div class="adress col-md-12">
+                                    <div class="mb-3">
+                                        Địa điểm
+                                        <span class="text-danger">*</span>
+                                    </div>
+                                    <div class="row" id="locationBtn" >
+                                        <div class="col-md-12 text-error text-danger">Vui lòng chọn địa chỉ</div>
+                                        @foreach($branchs as $branch)
                                         <div class="col-md-6 mb-3">
                                             <button type="button"
-                                                    name="branch_id"
-                                                    data-branch-id="{{ $branch->id }}"
-                                                    class="btn btn-address-booking">
-                                                {{ $branch->name }}
-                                                <br>
-                                                <div class="font-11">{{ $branch->address }}</div>
-                                            </button>
-                                        </div>
+                                            name="branch_id"
+                                            data-branch-id="{{ $branch->id }}"
+                                            class="btn btn-address-booking">
+                                            {{ $branch->name }}
+                                            <br>
+                                            <div class="font-11">{{ $branch->address }}</div>
+                                        </button>
+                                    </div>
                                     @endforeach
                                     
                                 </div>
@@ -84,109 +84,109 @@
                                 <select class="services form-control form-border" name="service_id" id="service_id">
                                     <option value="">Chọn dịch vụ</option>
                                     @foreach($type_services as $type_service)
-                                        <optgroup label="{{ $type_service->name }}">
-                                            @foreach($type_service->showServices($type_service->id) as $service)
-                                                <option data-image="{{ $service->image }}"
-                                                        value="{{ $service->id }}">{{ $service->name }}</option>
+                                    <optgroup label="{{ $type_service->name }}">
+                                        @foreach($type_service->showServices($type_service->id) as $service)
+                                        <option data-image="{{ $service->image }}"
+                                            value="{{ $service->id }}">{{ $service->name }}</option>
                                             @endforeach
                                         </optgroup>
-                                    @endforeach
-                                </select>
-                                <label id="service_id-error" class="error" for="service_id"></label>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
-                                <select class="staff form-control form-border" name="user_id" id="user_id">
-                                    <option value="">Chọn nhân viên</option>
+                                        @endforeach
+                                    </select>
+                                    <label id="service_id-error" class="error" for="service_id"></label>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="mb-2">Nhân viên <span class="text-danger">*</span></div>
+                                    <select class="staff form-control form-border" name="user_id" id="user_id">
+                                        <option value="">Chọn nhân viên</option>
                                     <!-- @foreach($users as $user)
                                         <option data-image="{{ $user->avatar }}"
                                                 value="{{ $user->id }}">{{ $user->full_name }}</option>
-                                    @endforeach -->
-                                </select>
-                                <label id="user_id-error" class="error" for="user_id"></label>
-                            </div>
-                            <div class="col-md-12 mb-4">
-                                <div class="mb-3">
-                                    Chọn ngày: <span class="theme-text booking_time pull-right text-bold" style="font-size: 14px;"></span>
-                                </div>
-                                <!-- <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div> -->
-                                <div class="" id="select-day"></div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
-                                <div class=" col-md-12 text-error2 text-danger">Vui lòng chọn thời gian</div>
-                                <div id="time_frame"></div>
-                            </div>
-                            <div class="col-md-12 mb-4">
-                                <label for="note">Ghi chú</label>
-                                <textarea class="form-control form-border"
-                                          id="note"
-                                          rows="5"
-                                          name="note"
-                                ></textarea>
-                            </div>
-                            <div class="col-md-6 offset-md-3 mb-5">
-                                <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
-                                    <i class="far fa-calendar-alt"></i>
-                                    ĐẶT LỊCH NGAY
-                                </button>
+                                                @endforeach -->
+                                            </select>
+                                            <label id="user_id-error" class="error" for="user_id"></label>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <div class="mb-3">
+                                                Chọn ngày: <span class="theme-text booking_time pull-right text-bold" style="font-size: 14px;"></span>
+                                            </div>
+                                            <!-- <div class="mb-2">Chọn ngày <span class="text-danger">*</span></div> -->
+                                            <div class="" id="select-day"></div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
+                                            <div class=" col-md-12 text-error2 text-danger">Vui lòng chọn thời gian</div>
+                                            <div id="time_frame"></div>
+                                        </div>
+                                        <div class="col-md-12 mb-4">
+                                            <label for="note">Ghi chú</label>
+                                            <textarea class="form-control form-border"
+                                            id="note"
+                                            rows="5"
+                                            name="note"
+                                            ></textarea>
+                                        </div>
+                                        <div class="col-md-6 offset-md-3 mb-5">
+                                            <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
+                                                <i class="far fa-calendar-alt"></i>
+                                                ĐẶT LỊCH NGAY
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+                    </div>
+                </section>
     <!-- End: Booking
-    ============================= -->
+        ============================= -->
 
 
-@endsection
+        @endsection
 
-@section('script')
-<script type="text/javascript">
-    $(document).ready(function () {
+        @section('script')
+        <script type="text/javascript">
+            $(document).ready(function () {
         // format time
         let time_format_pttrn = "HH:mm";
 
         /* array slotTime */
         let checkSlotTime = [
-            "09:00", 
-            "09:30", 
-            "10:00", 
-            "10:30", 
-            "11:00", 
-            "11:30", 
-            "12:00", 
-            "12:30", 
-            "13:00", 
-            "13:30",
-            "14:00", 
-            "14:30", 
-            "15:00", 
-            "15:30", 
-            "16:00", 
-            "16:30", 
-            "17:00", 
-            "17:30", 
-            "18:00", 
-            "18:30", 
-            "19:00",
-            "19:30",
-            "20:00",
-            "20:30",
-            "21:00",
-            "21:30"
+        "09:00", 
+        "09:30", 
+        "10:00", 
+        "10:30", 
+        "11:00", 
+        "11:30", 
+        "12:00", 
+        "12:30", 
+        "13:00", 
+        "13:30",
+        "14:00", 
+        "14:30", 
+        "15:00", 
+        "15:30", 
+        "16:00", 
+        "16:30", 
+        "17:00", 
+        "17:30", 
+        "18:00", 
+        "18:30", 
+        "19:00",
+        "19:30",
+        "20:00",
+        "20:30",
+        "21:00",
+        "21:30"
         ];
         /* init day in week */
         let weekday = new Array(7);
-            weekday[1] = "Thứ Hai";
-            weekday[2] = "Thứ Ba";
-            weekday[3] = "Thứ Tư";
-            weekday[4] = "Thứ Năm";
-            weekday[5] = "Thứ Sáu";
-            weekday[6] = "Thứ Bảy";
-            weekday[0] = "Chủ Nhật";
+        weekday[1] = "Thứ Hai";
+        weekday[2] = "Thứ Ba";
+        weekday[3] = "Thứ Tư";
+        weekday[4] = "Thứ Năm";
+        weekday[5] = "Thứ Sáu";
+        weekday[6] = "Thứ Bảy";
+        weekday[0] = "Chủ Nhật";
         /*  render date array */
         let dateRenderArray = [];
         /* create total day in week */
@@ -266,8 +266,8 @@
                         } else{
                                 // btn còn chỗ
                                 btn.html("<div class='time theme-text'>" + tempMoment + "</div><div class='slot'> </div>");
-                        }  
-                    }); 
+                            }  
+                        }); 
                     // console.log(array_date_time)
                 }
                 else{
@@ -278,25 +278,25 @@
                             btn.addClass('disable-click btn-time-danger');
                             btn.html("<div class='time'>" + tempMoment + "</div><div class='slot'>Hết chỗ</div>");
                             
-                    } else{
+                        } else{
                             // btn còn chỗ
                             btn.html("<div class='time theme-text'>" + tempMoment + "</div><div class='slot'> </div>");
+                        }
                     }
-                }
-                $("#time_frame").append(btn);
+                    $("#time_frame").append(btn);
+                };
             };
-        };
 
-        
+            
 
-        for(i; i < days; i++ ) {
-            renderDateObj = moment().add(i, 'days');
-            dateRenderArray.push({
-                data_date: moment(Object.assign({}, renderDateObj)).format(date_format_pttrn),
-                date_title: moment(Object.assign({}, renderDateObj)).format("DD-MM"),
-                day_of_week: weekday[moment(Object.assign({}, renderDateObj)).day()],
-            });
-        }
+            for(i; i < days; i++ ) {
+                renderDateObj = moment().add(i, 'days');
+                dateRenderArray.push({
+                    data_date: moment(Object.assign({}, renderDateObj)).format(date_format_pttrn),
+                    date_title: moment(Object.assign({}, renderDateObj)).format("DD-MM"),
+                    day_of_week: weekday[moment(Object.assign({}, renderDateObj)).day()],
+                });
+            }
 
         // change date when click change date
         $(document).on("click", '.btn-select', function(e){
@@ -380,7 +380,7 @@
 
 
          // get current time
-        function showBookingDateTime(currentTime, date_selected){
+         function showBookingDateTime(currentTime, date_selected){
             let dateObj = moment(date_selected);
             let currentDay = weekday[dateObj.day()];
 
@@ -398,7 +398,7 @@
             let i, renderArray = [];
             for(i in  dateRenderArray) {
                 let classDate = currentDate === dateRenderArray[i].data_date ? "btn_primary" : "";
-            
+                
                 renderArray.push('<div class="col-xs-4">');
                 renderArray.push(`<div class="btn-select btn-inactive btn-primary ${classDate}" data-date=${dateRenderArray[i].data_date}>`);
                 renderArray.push('<div class="select-day-title">');
@@ -428,29 +428,29 @@
             prevArrow: '<button type="button" class="custom-slick-arrow-prev icon-circle-left2"><i class="fas fa-chevron-circle-left"></i></button>',
             nextArrow: '<button type="button" class="custom-slick-arrow-next icon-circle-right2"><i class="fas fa-chevron-circle-right"></i></button>',
             responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        infinite: true,
-                        dots: true
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                },
-                {
-                breakpoint: 480,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2   
-                    }
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
                 }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2   
+                }
+            }
             ]
         });
         
@@ -472,29 +472,29 @@
                 url: "",
                 data: timeData,
                 success: function(data) {
-                if (data) {
-                    checkSlotArray = data.timeFrame.timeFrame;  
-                    workingHours = data.timeFrame.workingHours;
+                    if (data) {
+                        checkSlotArray = data.timeFrame.timeFrame;  
+                        workingHours = data.timeFrame.workingHours;
 
-                    if(workingHours) {
-                        if (workingHours.start_time) {
-                        defaultStartTime = convert_HHMMSSString_to_object(workingHours.start_time); 
-                        if (defaultStartTime == null) defaultStartTime = {hour: 8, min: 0};
+                        if(workingHours) {
+                            if (workingHours.start_time) {
+                                defaultStartTime = convert_HHMMSSString_to_object(workingHours.start_time); 
+                                if (defaultStartTime == null) defaultStartTime = {hour: 8, min: 0};
+                            }
+                            if (workingHours.end_time) {
+                                defaultEndTime = convert_HHMMSSString_to_object(workingHours.end_time); 
+
+                                if (defaultEndTime == null) defaultEndTime = {hour: 22, min: 0};
+                            }
+
+                            var startTime_moment = moment().hours(defaultStartTime.hour).minutes(defaultStartTime.min).seconds(0);
+                            var endTime_moment = moment().hours(defaultEndTime.hour).minutes(defaultEndTime.min).seconds(0);
+
+                            $('#working_start_time').text(startTime_moment.format(time_format_pttrn));
+                            $('#working_end_time').text(endTime_moment.format(time_format_pttrn));
                         }
-                        if (workingHours.end_time) {
-                        defaultEndTime = convert_HHMMSSString_to_object(workingHours.end_time); 
-
-                        if (defaultEndTime == null) defaultEndTime = {hour: 22, min: 0};
-                        }
-
-                        var startTime_moment = moment().hours(defaultStartTime.hour).minutes(defaultStartTime.min).seconds(0);
-                        var endTime_moment = moment().hours(defaultEndTime.hour).minutes(defaultEndTime.min).seconds(0);
-
-                        $('#working_start_time').text(startTime_moment.format(time_format_pttrn));
-                        $('#working_end_time').text(endTime_moment.format(time_format_pttrn));
+                        renderTimeSlot();
                     }
-                    renderTimeSlot();
-                }
                 },
             });
         };
@@ -539,7 +539,7 @@
             // console.log(user_id,date);
 
         })
-         function getAjaxSlotFromServer(user_id,date){
+        function getAjaxSlotFromServer(user_id,date){
             let url = "{{ route('ajax.check-time-user') }}";
             
             let input_data = {
@@ -566,7 +566,7 @@
                     console.log(error);
                 }
             });
-         }
+        }
 
         /* ====================================================  */
 
@@ -796,13 +796,13 @@
                             title: 'Bạn đã đặt lịch thành công !, chúng tôi sẽ liên hệ với bạn sớm nhất có thể.'
                         });
                         $('.btn-address-booking.active').attr('data-branch-id'),
-                            $('#phone_number').val(''),
-                            $('#full_name').val(''),
-                            $('#service_id').find(":selected").val(),
-                            $('#user_id').find(":selected").val(),
-                            $('#select-day .btn_primary').attr('data-date')
+                        $('#phone_number').val(''),
+                        $('#full_name').val(''),
+                        $('#service_id').find(":selected").val(),
+                        $('#user_id').find(":selected").val(),
+                        $('#select-day .btn_primary').attr('data-date')
                         $('.time-frame.btn_primary').attr('time-frame'),
-                            $('#note').val('')
+                        $('#note').val('')
                     }
 
                     if (data.fail){
@@ -821,5 +821,5 @@
 
     });
 </script>
-  
+
 @endsection
