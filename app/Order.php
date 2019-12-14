@@ -98,6 +98,8 @@ class Order extends Model
         $services = $services->pluck('name');
         return implode(', ', $services->toArray());
 
+
+
     }
 
     // lấy danh sách dịch vụ cho hóa đơn

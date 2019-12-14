@@ -15,7 +15,7 @@
         box-shadow: none
     }
     .section-title h2 {
-        font-size: 36px;
+        font-size: 35px;
         line-height: 1.5em;
     }   
     .single-contact {
@@ -124,8 +124,13 @@
     #breadcrumb-area{
         padding: 10px 0;
     }
-
-
+    .section-title h2 {
+        font-size: 34px;
+        line-height: 1.5em;
+    }  
+    .nail-content {
+        padding: 0px;
+    }
 }
 
 
@@ -149,14 +154,14 @@
     .single-testimonial p {
         width: 100%;
     }
-        
+
     .mean-container a.meanmenu-reveal {       
         top: -98px;
         right: -65px !important;
         border-radius: 4px;
         padding: 5px 6px;
         -webkit-transform: scale(.8);
-                transform: scale(.8);
+        transform: scale(.8);
     }
 
     .is-sticky .mean-container a.meanmenu-reveal {       
@@ -262,71 +267,75 @@
     }
 
     .video-section {
-       display: block;
-        position: relative;
-        height: 500px;
-        width: 100%;
-    }
+     display: block;
+     position: relative;
+     height: 500px;
+     width: 100%;
+ }
 
-    .product-carousel .owl-next,
-    .product-carousel .owl-prev {
-        top: auto;
-    }
+ .product-carousel .owl-next,
+ .product-carousel .owl-prev {
+    top: auto;
+}
 
-    .product-carousel .owl-prev {
-        left: 40%;
-    }
+.product-carousel .owl-prev {
+    left: 40%;
+}
 
-    .product-carousel .owl-next {
-        right: 40%;
-    }
+.product-carousel .owl-next {
+    right: 40%;
+}
 
-    .portfolio-tab-sorting {
-        border: 0;
-        width: 100%;
-        border-radius: 0;
-    }
+.portfolio-tab-sorting {
+    border: 0;
+    width: 100%;
+    border-radius: 0;
+}
 
-    .portfolio-tab-sorting li a {
-        margin-bottom: 10px;
-        margin-right: 10px;
-        border: 1px solid #eee;
-    }
+.portfolio-tab-sorting li a {
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border: 1px solid #eee;
+}
 
-    /* Beautician */
-    .single-beauticians .img-wrapper {
-        text-align: center;
-        box-shadow: none;
-    }
+/* Beautician */
+.single-beauticians .img-wrapper {
+    text-align: center;
+    box-shadow: none;
+}
 
-    .single-beauticians .img-wrapper img {
-        width: auto;
-    }
+.single-beauticians .img-wrapper img {
+    width: auto;
+}
 
-    .single-beauticians .beautician-content {
-        visibility: hidden;
-        text-align: center;
-    }
+.single-beauticians .beautician-content {
+    visibility: hidden;
+    text-align: center;
+}
 
-    .single-beauticians:hover .beautician-content {
-        visibility: visible;
-    }
+.single-beauticians:hover .beautician-content {
+    visibility: visible;
+}
 
-    .widdget-instagram li {
-        margin-right: 10px;
-        width: auto;
-    }
+.widdget-instagram li {
+    margin-right: 10px;
+    width: auto;
+}
 
-    .widdget-instagram li:nth-child(6), .widdget-instagram li:nth-child(3) {
-        margin-right: 10px;
-    }
+.widdget-instagram li:nth-child(6), .widdget-instagram li:nth-child(3) {
+    margin-right: 10px;
+}
 
 }
 
 
 
 @media only screen and (max-width:767px) {
-
+    .section-title h2,
+    #breadcrumb-area h2 {
+        font-size: 24px;
+        line-height: 1.5em;
+    }
     header {
         padding-bottom: 10px;
     }
@@ -477,7 +486,9 @@
     .booking-fixed {
         display: none;
     }
- 
+    .nail-content {
+        padding: 0px;
+    }
 }
 
 @media only screen and (max-width:600px) {
@@ -553,7 +564,7 @@
 }
 
 @media only screen and (max-width:480px) {
-    
+
     .nav-tabs{
         justify-content: center;
     }
@@ -570,7 +581,7 @@
     }
     .section-title h2,
     #breadcrumb-area h2 {
-        font-size: 24px;
+        font-size: 2spx;
         line-height: 1.5em;
     }
     .header-slider p {
