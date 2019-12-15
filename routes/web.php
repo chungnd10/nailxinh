@@ -246,6 +246,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('update/{id}', 'Bill\BillController@update')
             ->middleware('can:update-bills')
             ->name('bills.update');
+
+        Route::get('advanced-search', 'Bill\BillController@advancedSearch')
+            ->middleware('can:view-bills')
+            ->name('bills.advanced-search');
     });
 
     //order

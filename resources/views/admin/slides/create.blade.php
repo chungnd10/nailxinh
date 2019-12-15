@@ -63,7 +63,9 @@
                             </div>
                         </div>
                         <!-- /.col -->
-                        <div class="col-md-6">
+                        <div class="col-md-6">@foreach($errors->all() as $item)
+                                                  <p>{{ $item }}</p>
+                                              @endforeach
                             <div class="form-group">
                                 <label>Tiêu đề</label>
                                 <input type="text"

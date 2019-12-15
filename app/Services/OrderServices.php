@@ -21,6 +21,7 @@ class OrderServices
 
         $status_completed = config('contants.order_status_finish');
         $order_status_confirmed = config('contants.order_status_confirmed');
+        $order_status_finish = config('contants.order_status_finish');
 
         $query = Order::join('order_services', 'order_services.order_id', '=', 'orders.id')
             ->select(
@@ -29,7 +30,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -46,8 +46,10 @@ class OrderServices
             }
 
             if ($current_role_id == $technician){
-                $query->where('order_status_id', $order_status_confirmed);
                 $query->where('user_id', $current_user_id);
+                $query->where('order_status_id', $order_status_confirmed);
+                $query->orwhere('user_id', $current_user_id);
+                $query->where('order_status_id', $order_status_finish);
             }
 
             $query->groupBy(
@@ -56,7 +58,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -67,7 +68,6 @@ class OrderServices
             $query->orderby('orders.id', 'desc');
 
         $orders = $query->paginate($paginate);
-
         return $orders;
     }
 
@@ -80,7 +80,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -94,7 +93,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -117,7 +115,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -132,7 +129,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -155,7 +151,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -171,7 +166,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -194,7 +188,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -211,7 +204,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -238,6 +230,13 @@ class OrderServices
         $end_date,
         $paginate
     ) {
+
+        $current_user_id = \Auth::user()->id;
+        $current_role_id = \Auth::user()->role_id;
+        $technician = config('contants.role_technician');
+        $order_status_confirmed = config('contants.order_status_confirmed');
+        $order_status_finish = config('contants.order_status_finish');
+
         $query_builder = Order::join('order_services', 'order_services.order_id', '=', 'orders.id')
             ->select(
                 'orders.id',
@@ -245,7 +244,6 @@ class OrderServices
                 'phone_number',
                 'time',
                 'note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -277,13 +275,19 @@ class OrderServices
             $query_builder->where('time', '<', $end_date);
         }
 
+        if ($current_role_id == $technician){
+                $query_builder->where('user_id', $current_user_id);
+                $query_builder->where('order_status_id', $order_status_confirmed);
+                $query_builder->orwhere('user_id', $current_user_id);
+                $query_builder->where('order_status_id', $order_status_finish);
+        }
+
         $query_builder->groupBy(
             'orders.id',
             'full_name',
             'phone_number',
             'time',
             'note',
-            'created_by',
             'updated_by',
             'branch_id',
             'user_id',
