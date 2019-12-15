@@ -47,6 +47,7 @@ class AccumulatePoints extends Model
         $membership_type = MembershipType::orderby('money_level', 'asc')->get();
 
         // kiểm tra xem khách hàng thuộc lại thành viên nào và lấy % giảm giá
+        $title = 0;
         $t = -1;
         foreach ($membership_type as $item) {
             if ($item->money_level < $money && $item->money_level > $t) {
