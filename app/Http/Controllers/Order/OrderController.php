@@ -30,10 +30,10 @@ class OrderController extends Controller
             $order_status = $this->order_status_services->all('asc');
 
 
-            if ($role_id = $admin) {
+            if ($role_id == $admin) {
                 $branches = $this->branch_services->all('asc');
                 $technicians = $this->user_services->getTechnician('asc');
-            } elseif ($role_id = $manager || $role_id == $cashier || $role_id == $receptionist) {
+            } elseif ($role_id == $manager || $role_id == $cashier || $role_id == $receptionist) {
                 $technicians = $this->user_services->getTechnicianWithBranch($branch_id, 'asc');
             } else {
                 $branches = null;
@@ -160,6 +160,7 @@ class OrderController extends Controller
             //lấy danh sách loại thành viên
             $membership_type = $this->membership_type->all('asc');
 
+            $bill->discount = 0;
             // nếu có rồi thì lấy ra tích điểm của khách
             if ($accumulate != null) {
                 $accumulate_of_guest = $accumulate;
@@ -168,12 +169,8 @@ class OrderController extends Controller
                 foreach ($membership_type as $item) {
                     if ($item->money_level < $accumulate_of_guest && $item->money_level > $t) {
                         $bill->discount = $item->discount_level;
-                    }else{
-                        $bill->discount = 0;
                     }
                 }
-            } else {
-                $bill->discount = 0;
             }
 
             $bill->order_id = $order_id;
@@ -254,13 +251,14 @@ class OrderController extends Controller
 
         $order_status = $this->order_status_services->all('asc');
 
-        if ($current_role_id = $role_admin) {
+        if ($current_role_id == $role_admin) {
             $branches = $this->branch_services->all('asc');
             $technicians = $this->user_services->getTechnician('asc');
             $order_status_id = $request->order_status_id;
-        } elseif ($current_role_id = $manager || $current_role_id == $cashier || $current_role_id == $receptionist) {
+        } elseif ($current_role_id == $manager || $current_role_id == $cashier || $current_role_id == $receptionist) {
+             $branch_id = Auth::user()->branch_id;
              $technicians = $this->user_services->getTechnicianWithBranch($branch_id, 'asc');
-            $branch_id = Auth::user()->branch_id;
+             $order_status_id = $request->order_status_id;
         } else {
             $branches = null;
             $technicians = null;
@@ -285,6 +283,7 @@ class OrderController extends Controller
             $end_date,
             10
         );
+
         return view('admin.orders.index', compact(
                 'orders',
                 'branches',

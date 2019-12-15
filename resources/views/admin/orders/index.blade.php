@@ -128,6 +128,13 @@
                             </tr>
                             </thead>
                             <tbody>
+{{--                            @if(!$orders->first())--}}
+{{--                                <tr>--}}
+{{--                                    <td class="text-danger" colspan="8">--}}
+{{--                                        Không có bản ghi nào--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                            @endif--}}
                             @foreach($orders as $key => $order)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
@@ -332,8 +339,9 @@
             });
             //end: lay khi co thay doi
 
+            console.log(branch);
             //start: lay khi load xong trang
-            if (branch_id !== '') {
+            if (branch.length > 0 && branch_id !== '') {
                 select_user_id.val('');
                 getUserWithBranch(url_get_users_with_branch, branch_id, old_user_id);
             }
