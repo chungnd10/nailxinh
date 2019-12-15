@@ -337,4 +337,16 @@ class OrderServices
         $order = implode(',', $order);
         return rtrim($order, ',');
     }
+
+    /*
+     * Check nhan vien da dat lich
+     *
+     */
+    public function checkExsitsOrder($user_id, $date_time)
+    {
+        $order = Order::where('time', $date_time)
+            ->where('user_id', $user_id)
+            ->count();
+        return $order;
+    }
 }

@@ -84,7 +84,7 @@ class TypeOfService extends Model
         $images = PhotoLibrary::where('type_of_service_id', $type_services_id)
             ->where('display_status_id', $display_status)
             ->orderby('id', 'desc')
-            ->take(9)->get();
+            ->take(5)->get();
         return $images;
     }
 }
