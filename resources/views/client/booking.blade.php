@@ -123,7 +123,7 @@
                                             name="note"
                                             ></textarea>
                                         </div>
-                                        <div class="col-md-6 offset-md-3 mb-5">
+                                        <div class="col-lg-6 offset-lg-3 col-md-12 mb-5">
                                             <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
                                                 <i class="far fa-calendar-alt"></i>
                                                 ĐẶT LỊCH NGAY
@@ -172,12 +172,7 @@
             "17:30", 
             "18:00", 
             "18:30", 
-            "19:00",
-            "19:30",
-            "20:00",
-            "20:30",
-            "21:00",
-            "21:30"
+            "19:00"
         ];
         /* init day in week */
         let weekday = new Array(7);
@@ -218,6 +213,7 @@
                     if(next_date){
                         data.forEach(function(item){
                             let time_checked = moment(item).format(time_format_pttrn);
+                            console.log("1");
                             if(temp_moment === time_checked ){
                                 btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                                 btn.addClass('disable-click btn-time-danger');
@@ -229,6 +225,7 @@
                         data.forEach(function(item){
                             let time_checked = moment(item).format(time_format_pttrn);
                             if(temp_moment === time_checked || temp_moment < current_time){
+                                console.log("1.1");
                                 btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                                 btn.addClass('disable-click btn-time-danger');
                             } else{
@@ -237,12 +234,14 @@
                         });
                     } 
                 } else if(next_date){
+                    console.log("2");
                     showBookingDateTime(current_time,next_date);
                     let array_date_time = [];
                     let date_time = `${next_date} ${check_slot_time[k]}`;
                     array_date_time.push(date_time);
                     array_date_time.forEach(function(item){
                         if(item < current_date_time){
+                            console.log("2.1");
                             btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                             btn.addClass('disable-click btn-time-danger');
                         } else{
@@ -251,8 +250,10 @@
                     }); 
                 }
                 else{
+                    console.log("3");
                     showBookingDateTime(current_time,current_date);
                     if(temp_moment < current_time){
+                        console.log("3.1");
                         btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                         btn.addClass('disable-click btn-time-danger');       
                     } else{
@@ -378,7 +379,7 @@
         };
         /*  ================================== run function ==================================*/
         renderBookingDate();
-        renderTimeSlot([],current_date);
+        renderTimeSlot([]);
 
         /* slick slider render */
         $('#select-day').slick({
@@ -460,7 +461,7 @@
         /* ====================================================  */
 
         /* check phone number limit booking in day */
-        $('#phone_number').bind('input change blur',function(event){
+        $('#phone_number').bind('input change propertychange mouseleave',function(event){
             let value = event.target.value;
             if(value.length >=10){
                 checkPhoneLimitBooking(value);
@@ -522,6 +523,7 @@
                 url: url,
                 data: data,
                 success : function(result_data){
+                    console.log('result_data',result_data);
                     if(result_data > 0){
                         $('#phone_number-error').css('display','block');
                         $('#phone_number-error').text("*Số điện thoại nằm trong danh sách hạn chế");
@@ -683,7 +685,9 @@
                 }
             }
         });
-
+        $('select').on('change', function() {
+            $(this).valid();
+        });
         // submit form send ajax 
         $('#btn-booking').click(function(e){
             let form = $('#booking-form');
