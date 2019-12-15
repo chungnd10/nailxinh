@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
             //chi nhanh 1
     		[
 	            'full_name' => 'Super Admin',
-	            'email' => 'admin@localhost.com',
+	            'email' => 'chungnd10@gmail.com',
 	            'password' => bcrypt('12345678'),
                 'role_id'   => config('contants.role_admin'),
                 'birthday'  =>  '1990-10-25',

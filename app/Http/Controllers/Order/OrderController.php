@@ -91,10 +91,13 @@ class OrderController extends Controller
     {
         $order = $this->order_services->find($id);
         $bill = Bill::where('order_id', $order->id)->first();
-        $bill_status_id = $bill->bill_status_id;
-
-        $this->authorize('update', [ $order, $bill_status_id ]);
-
+        if($bill){
+            $bill_status_id = $bill->bill_status_id;
+            $this->authorize('update', [ $order, $bill_status_id ]);
+        }else{
+            $chua_co_hoa_don = 0;
+            $this->authorize('show', [$order, $chua_co_hoa_don]);
+        }
 
         $admin = config('contants.role_admin');
         $manager = config('contants.role_manager');
