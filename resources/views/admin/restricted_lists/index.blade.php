@@ -19,7 +19,6 @@
                             <tr>
                                 <th width="40" >STT</th>
                                 <th width="100">Số điện thoại</th>
-                                <th class="nosort" >Lý do</th>
                                 <th>Ngày thêm</th>
                                 <th class="nosort"  width="80">Hành động</th>
                             </tr>
@@ -29,7 +28,6 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $item->phone_number }}</td>
-                                    <td>{{ $item->note }}</td>
                                     <td>{{ $item->created_at->format('H:i d/m/Y') }}</td>
                                     <td>
                                         <a href="{{ route('restricted-lists.destroy', Hashids::encode($item->id)) }}"
