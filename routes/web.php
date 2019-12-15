@@ -281,6 +281,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
         Route::get('advanced-search', 'Order\OrderController@advancedSearch')
             ->name('orders.advanced-search');
+
+        Route::get('destroy/{id}', 'Order\OrderController@destroy')
+            ->middleware('can:remove-orders')
+            ->name('orders.destroy');
     });
 
     //branch
