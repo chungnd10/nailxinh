@@ -636,6 +636,174 @@ class ProcessOfServicesTableSeeder extends Seeder
                 'content' => 'Bước cuối cùng, chuyên viên sẽ dưỡng viền móng để tránh việc da bị khô sau khi làm móng',
                 'service_id' => 16
             ],
+
+            [
+                'name' => 'VỆ SINH MÓNG VÀ NHẶT DA',
+                'step' => 1,
+                'content' => 'Khách hàng sẽ ngâm tay và được các chuyên viên vệ sinh sạch sẽ. Sau đó, các chuyên sẽ sẽ 
+                nhặt sạch da chết xung quanh móng',
+                'service_id' => 17
+            ],
+            [
+                'name' => 'TẠO FORM MÓNG',
+                'step' => 2,
+                'content' => 'Khách hàng lựa chọn form móng yêu thích và các chuyên viên sẽ dũa móng để tạo được form 
+                chuẩn',
+                'service_id' => 17
+            ],
+            [
+                'name' => 'SƠN MỘT LỚP NỀN (SƠN BASE)',
+                'step' => 3,
+                'content' => 'Chuyên viên sẽ sơn một lớp nền lên móng. Sau đó, móng sẽ được hong khô dưới đèn 
+                khoảng 20s - 30s',
+                'service_id' => 17
+            ],
+            [
+                'name' => 'SƠN GEL, TẠO KIỂU',
+                'step' => 4,
+                'content' => 'Khách hàng sẽ lựa chọn dòng gel và mẫu nail theo mong muốn. Các chuyên viên sẽ design 
+                theo mẫu của khách hàng',
+                'service_id' => 17
+            ],
+            [
+                'name' => 'SƠN BÓNG GEL ( SƠN GEL TOP NONE CLEANER)',
+                'step' => 5,
+                'content' => 'Sau khi đã làm xong bộ nail ưng ý, chuyên viên sẽ sơn một lớp sơn top giúp móng trở nên 
+                bóng và bảo vệ móng bền hơn',
+                'service_id' => 17
+            ],
+            [
+                'name' => 'DƯỠNG VIỀN MÓNG',
+                'step' => 6,
+                'content' => 'Bước cuối cùng, chuyên viên sẽ dưỡng viền móng để tránh việc da bị khô sau khi làm móng',
+                'service_id' => 17
+            ],
+
+            [
+                'name' => 'VỆ SINH MÓNG VÀ NHẶT DA',
+                'step' => 1,
+                'content' => 'Khách hàng sẽ ngâm tay và được các chuyên viên vệ sinh sạch sẽ. Sau đó, các chuyên sẽ sẽ 
+                nhặt sạch da chết xung quanh móng',
+                'service_id' => 18
+            ],
+            [
+                'name' => 'TẠO FORM MÓNG',
+                'step' => 2,
+                'content' => 'Khách hàng lựa chọn form móng yêu thích và các chuyên viên sẽ dũa móng để tạo được form 
+                chuẩn',
+                'service_id' => 18
+            ],
+            [
+                'name' => 'SƠN MỘT LỚP NỀN (SƠN BASE)',
+                'step' => 3,
+                'content' => 'Chuyên viên sẽ sơn một lớp nền lên móng. Sau đó, móng sẽ được hong khô dưới đèn 
+                khoảng 20s - 30s',
+                'service_id' => 18
+            ],
+            [
+                'name' => 'SƠN GEL, TẠO KIỂU',
+                'step' => 4,
+                'content' => 'Khách hàng sẽ lựa chọn dòng gel và mẫu nail theo mong muốn. Các chuyên viên sẽ design 
+                theo mẫu của khách hàng',
+                'service_id' => 18
+            ],
+            [
+                'name' => 'SƠN BÓNG GEL ( SƠN GEL TOP NONE CLEANER)',
+                'step' => 5,
+                'content' => 'Sau khi đã làm xong bộ nail ưng ý, chuyên viên sẽ sơn một lớp sơn top giúp móng trở nên 
+                bóng và bảo vệ móng bền hơn',
+                'service_id' => 18
+            ],
+            [
+                'name' => 'DƯỠNG VIỀN MÓNG',
+                'step' => 6,
+                'content' => 'Bước cuối cùng, chuyên viên sẽ dưỡng viền móng để tránh việc da bị khô sau khi làm móng',
+                'service_id' => 18
+            ],
+
+            [
+                'name' => 'VỆ SINH MÓNG VÀ NHẶT DA',
+                'step' => 1,
+                'content' => 'Khách hàng sẽ ngâm tay và được các chuyên viên vệ sinh sạch sẽ. Sau đó, các chuyên sẽ sẽ 
+                nhặt sạch da chết xung quanh móng',
+                'service_id' => 19
+            ],
+            [
+                'name' => 'TẠO FORM MÓNG',
+                'step' => 2,
+                'content' => 'Khách hàng lựa chọn form móng yêu thích và các chuyên viên sẽ dũa móng để tạo được form 
+                chuẩn',
+                'service_id' => 19
+            ],
+            [
+                'name' => 'SƠN MỘT LỚP NỀN (SƠN BASE)',
+                'step' => 3,
+                'content' => 'Chuyên viên sẽ sơn một lớp nền lên móng. Sau đó, móng sẽ được hong khô dưới đèn 
+                khoảng 20s - 30s',
+                'service_id' => 19
+            ],
+            [
+                'name' => 'SƠN GEL, TẠO KIỂU',
+                'step' => 4,
+                'content' => 'Khách hàng sẽ lựa chọn dòng gel và mẫu nail theo mong muốn. Các chuyên viên sẽ design 
+                theo mẫu của khách hàng',
+                'service_id' => 19
+            ],
+            [
+                'name' => 'SƠN BÓNG GEL ( SƠN GEL TOP NONE CLEANER)',
+                'step' => 5,
+                'content' => 'Sau khi đã làm xong bộ nail ưng ý, chuyên viên sẽ sơn một lớp sơn top giúp móng trở nên 
+                bóng và bảo vệ móng bền hơn',
+                'service_id' => 19
+            ],
+            [
+                'name' => 'DƯỠNG VIỀN MÓNG',
+                'step' => 6,
+                'content' => 'Bước cuối cùng, chuyên viên sẽ dưỡng viền móng để tránh việc da bị khô sau khi làm móng',
+                'service_id' => 19
+            ],
+
+            [
+                'name' => 'VỆ SINH MÓNG VÀ NHẶT DA',
+                'step' => 1,
+                'content' => 'Khách hàng sẽ ngâm tay và được các chuyên viên vệ sinh sạch sẽ. Sau đó, các chuyên sẽ sẽ 
+                nhặt sạch da chết xung quanh móng',
+                'service_id' => 20
+            ],
+            [
+                'name' => 'TẠO FORM MÓNG',
+                'step' => 2,
+                'content' => 'Khách hàng lựa chọn form móng yêu thích và các chuyên viên sẽ dũa móng để tạo được form 
+                chuẩn',
+                'service_id' => 20
+            ],
+            [
+                'name' => 'SƠN MỘT LỚP NỀN (SƠN BASE)',
+                'step' => 3,
+                'content' => 'Chuyên viên sẽ sơn một lớp nền lên móng. Sau đó, móng sẽ được hong khô dưới đèn 
+                khoảng 20s - 30s',
+                'service_id' => 20
+            ],
+            [
+                'name' => 'SƠN GEL, TẠO KIỂU',
+                'step' => 4,
+                'content' => 'Khách hàng sẽ lựa chọn dòng gel và mẫu nail theo mong muốn. Các chuyên viên sẽ design 
+                theo mẫu của khách hàng',
+                'service_id' => 20
+            ],
+            [
+                'name' => 'SƠN BÓNG GEL ( SƠN GEL TOP NONE CLEANER)',
+                'step' => 5,
+                'content' => 'Sau khi đã làm xong bộ nail ưng ý, chuyên viên sẽ sơn một lớp sơn top giúp móng trở nên 
+                bóng và bảo vệ móng bền hơn',
+                'service_id' => 20
+            ],
+            [
+                'name' => 'DƯỠNG VIỀN MÓNG',
+                'step' => 6,
+                'content' => 'Bước cuối cùng, chuyên viên sẽ dưỡng viền móng để tránh việc da bị khô sau khi làm móng',
+                'service_id' => 20
+            ],
         ];
 
         DB::table('process_of_services')->insert($process);

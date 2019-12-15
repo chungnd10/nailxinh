@@ -19,6 +19,7 @@ class CreateBillsTable extends Migration
             $table->double('total_payment', 15, 2);
             $table->integer('discount');
             $table->string('note', 200)->nullable();
+            $table->integer('payment_by')->nullable();
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')
