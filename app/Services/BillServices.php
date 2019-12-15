@@ -52,7 +52,7 @@ class BillServices
      * Lấy tất cả bảng hóa đơn join order join order_services
      *
      */
-    public function getAllBillJoinOrderJoinOrderServices($order_by)
+    public function getAllBillJoinOrderJoinOrderServices($order_by, $paginate)
     {
         $bills = Bill::join('orders', 'orders.id', '=', 'bills.order_id')
             ->join('order_services', 'order_services.order_id', '=', 'orders.id')
@@ -69,7 +69,6 @@ class BillServices
                 'phone_number',
                 'orders.time',
                 'orders.note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -90,7 +89,6 @@ class BillServices
                 'phone_number',
                 'orders.time',
                 'orders.note',
-                'created_by',
                 'updated_by',
                 'branch_id',
                 'user_id',
@@ -99,7 +97,7 @@ class BillServices
                 'bills.updated_at'
             )
             ->orderby('orders.id', $order_by)
-            ->get();
+            ->paginate($paginate);
 
         return $bills;
     }
@@ -143,5 +141,80 @@ class BillServices
             ->where('bills.id', $bill_id)
             ->firstOrFail();
         return $bill;
+    }
+
+    /*
+     * advancedSearch
+     *
+     */
+    public function advancedSearch($phone_number, $start_date, $end_date, $paginate)
+    {
+        $role_admin = config('contants.role_admin');
+        $current_role_id = \Auth::user()->role_id;
+        $current_branch_id = \Auth::user()->branch_id;
+
+         $query = Bill::join('orders', 'orders.id', '=', 'bills.order_id')
+            ->join('order_services', 'order_services.order_id', '=', 'orders.id')
+            ->select(
+                'total_price',
+                'total_payment',
+                'discount',
+                'bill_status_id',
+                'bills.note',
+                'bills.created_at',
+                'bills.updated_at',
+                'bills.id',
+                'full_name',
+                'phone_number',
+                'orders.time',
+                'orders.note',
+                'updated_by',
+                'branch_id',
+                'user_id',
+                'order_status_id',
+                'bills.created_at',
+                'bills.updated_at',
+                DB::raw('group_concat(order_services.service_id) as service_id'));
+
+            if ($phone_number != null){
+                $query->where('phone_number', $phone_number);
+            }
+
+            if ($start_date != null){
+                $query->where('bills.created_at','>=' , $start_date);
+            }
+
+            if ($end_date != null){
+                $query->where('bills.created_at','<=' , $end_date);
+            }
+
+            if ($current_role_id != $role_admin){
+                 $query->where('branch_id', $current_branch_id);
+            }
+
+            $query->groupBy(
+                'total_price',
+                'total_payment',
+                'discount',
+                'bill_status_id',
+                'bills.note',
+                'bills.created_at',
+                'bills.updated_at',
+                'bills.id',
+                'full_name',
+                'phone_number',
+                'orders.time',
+                'orders.note',
+                'updated_by',
+                'branch_id',
+                'user_id',
+                'order_status_id',
+                'bills.created_at',
+                'bills.updated_at'
+            );
+            $query->orderby('bills.id', 'desc');
+
+        $bills = $query->paginate($paginate);
+        return $bills;
     }
 }

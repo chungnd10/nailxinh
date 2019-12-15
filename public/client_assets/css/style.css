@@ -4287,6 +4287,7 @@ section#calltoaction {
 /* booking fixed */
 
 .booking-fixed a {
+    border-radius: 5px 0 0 5px;
     box-shadow: 0 0 5px rgba(123, 123, 123, .75);
     background: #EFCEC9;
     color: #955f23;
@@ -4298,7 +4299,7 @@ section#calltoaction {
     top: 20%;
     right: 0;
     text-align: center;
-    padding: 15px 10px;
+    padding: 13px 10px;
 }
 
 .booking-fixed svg {

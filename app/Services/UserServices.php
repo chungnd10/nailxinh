@@ -71,14 +71,27 @@ class UserServices
     //lấy tất cả kỹ thuật viên có trạng thái là hiển thị
     public function getTechnicianWithStatus($status)
     {
+        $operation_status_id  = config('contants.operation_status_active');
         $role_technician = config('contants.role_technician');
         $users = User::where('role_id', $role_technician)
             ->where('display_status_id', $status)
+            ->where('operation_status_id', $operation_status_id)
             ->orderby('id', 'desc')
             ->get();
         return $users;
     }
 
+    /*
+     * Lấy tất cả kỹ thuật viên
+     *
+     */
+    public function getTechnician($order_by){
+        $role_technician = config('contants.role_technician');
+        $users = User::where('role_id', $role_technician)
+            ->orderby('id', $order_by)
+            ->get();
+        return $users;
+    }
 
     /*
      * Lay ky thuat vien theo chi nhanh

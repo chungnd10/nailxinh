@@ -97,8 +97,21 @@ class Order extends Model
 
         $services = $services->pluck('name');
         return implode(', ', $services->toArray());
+    }
 
-
+    /*
+     * Lay ten nguoi cap nhat lan cuoi
+     *
+     */
+    public function getNameUpdatedBy($user_id)
+    {
+        $name = User::where('id', $user_id)->first();
+        if ($name != null){
+            $name = $name->full_name;
+        }else{
+            $name = '';
+        }
+        return $name;
 
     }
 

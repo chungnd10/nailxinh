@@ -5,9 +5,9 @@ use App\AccumulatePoints;
 
 class AccumulatePointServices
 {
-    public function all()
+    public function all($order_by)
     {
-        $points = AccumulatePoints::orderby('created_at', 'desc')->get();
+        $points = AccumulatePoints::orderby('created_at', $order_by)->get();
         return $points;
     }
 
