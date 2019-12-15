@@ -776,7 +776,7 @@
                         if (data.error){
                             Swal.fire({
                                 type: 'error',
-                                title: 'Thời gian bạn chọn đã được đặt.'
+                                title: 'Thời gian bạn chọn đã được người khác đặt.'
                             });
                         }
                     },
