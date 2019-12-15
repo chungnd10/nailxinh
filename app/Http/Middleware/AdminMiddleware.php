@@ -11,24 +11,21 @@ class AdminMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        $role_admin = config('contants.role_admin');
-
-        if (Auth::check())
-        {
-            if (Auth::user()->role_id == $role_admin )
-            {
+        $operation_status_active = config('contants.operation_status_active');
+        if (Auth::check()) {
+            if (Auth::user()->operation_status_id == $operation_status_active) {
                 return $next($request);
-                dd(Auth::user()->role_id);
+            }else{
+                return redirect()->route('login')->with('danger', '*Tài khoản của bạn đã bị vô hiệu hóa !');
             }
-            dd(Auth::user()->role_id);
+        }else{
             return redirect()->route('login');
         }
-        return redirect()->route('login');
     }
 }

@@ -25,7 +25,7 @@ class AddSlideRequest extends FormRequest
         //trường hợp thêm
         if (!$this->id)
         {
-            $validate['avatar_hidden']      = 'required';
+            $validate['images']      = 'required';
             $validate['display_status_id']  = 'required';
         }
         return $validate;
