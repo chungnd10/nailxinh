@@ -15,6 +15,19 @@ class OrderPolicy
      *
      * @return mixed
      */
+    public function show(User $user, Order $order, $bill_status_id)
+    {
+        $role_technician = config('contants.role_technician');
+        $khong_co_lich_dat = 0;
+        if ($user->role_id == $role_technician) {
+            //nếu là KTV
+            return $user->can('update-orders')
+                && $user->id == $order->user_id
+                && $bill_status_id == $khong_co_lich_dat;
+        }
+        return $user->can('update-orders') && $bill_status_id == $khong_co_lich_dat;
+    }
+
     public function update(User $user, Order $order, $bill_status_id)
     {
         $role_technician = config('contants.role_technician');
