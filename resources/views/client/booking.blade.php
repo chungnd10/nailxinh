@@ -213,7 +213,6 @@
                     if(next_date){
                         data.forEach(function(item){
                             let time_checked = moment(item).format(time_format_pttrn);
-                            console.log("1");
                             if(temp_moment === time_checked ){
                                 btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                                 btn.addClass('disable-click btn-time-danger');
@@ -225,7 +224,6 @@
                         data.forEach(function(item){
                             let time_checked = moment(item).format(time_format_pttrn);
                             if(temp_moment === time_checked || temp_moment < current_time){
-                                console.log("1.1");
                                 btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                                 btn.addClass('disable-click btn-time-danger');
                             } else{
@@ -234,14 +232,12 @@
                         });
                     } 
                 } else if(next_date){
-                    console.log("2");
                     showBookingDateTime(current_time,next_date);
                     let array_date_time = [];
                     let date_time = `${next_date} ${check_slot_time[k]}`;
                     array_date_time.push(date_time);
                     array_date_time.forEach(function(item){
                         if(item < current_date_time){
-                            console.log("2.1");
                             btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                             btn.addClass('disable-click btn-time-danger');
                         } else{
@@ -250,10 +246,8 @@
                     }); 
                 }
                 else{
-                    console.log("3");
                     showBookingDateTime(current_time,current_date);
                     if(temp_moment < current_time){
-                        console.log("3.1");
                         btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                         btn.addClass('disable-click btn-time-danger');       
                     } else{
@@ -523,7 +517,6 @@
                 url: url,
                 data: data,
                 success : function(result_data){
-                    console.log('result_data',result_data);
                     if(result_data > 0){
                         $('#phone_number-error').css('display','block');
                         $('#phone_number-error').text("*Số điện thoại nằm trong danh sách hạn chế");
