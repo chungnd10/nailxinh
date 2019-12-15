@@ -15,12 +15,17 @@ class OrderPolicy
      *
      * @return mixed
      */
-    public function update(User $user, Order $order)
+    public function update(User $user, Order $order, $bill_status_id)
     {
         $role_technician = config('contants.role_technician');
+        $bill_status_unpaid = config('contants.bill_status_unpaid');
+
         if ($user->role_id == $role_technician) {
-            return $user->can('update-orders') && $user->id == $order->user_id;
+            //nếu là KTV
+            return $user->can('update-orders')
+                && $user->id == $order->user_id
+                && $bill_status_id == $bill_status_unpaid;
         }
-        return $user->can('update-orders');
+        return $user->can('update-orders') && $bill_status_id == $bill_status_unpaid;
     }
 }

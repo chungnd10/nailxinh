@@ -56,7 +56,7 @@
                                                     <h4>{{ limit($service->name, 19, '...') }}
                                                         <span class="price">{{ number_format($service->price) }} đ</span>
                                                     </h4>
-                                                    <p class="text-dark">{{ limit($service->description, 70, '...') }}</p>
+                                                    <p class="text-dark">{{ limit($service->description, 45, '...') }}</p>
                                                 </a>
                                             </li>
                                         </ul>

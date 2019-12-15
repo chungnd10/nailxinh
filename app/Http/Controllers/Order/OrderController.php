@@ -90,8 +90,11 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = $this->order_services->find($id);
+        $bill = Bill::where('order_id', $order->id)->first();
+        $bill_status_id = $bill->bill_status_id;
 
-        $this->authorize('update', $order);
+        $this->authorize('update', [ $order, $bill_status_id ]);
+
 
         $admin = config('contants.role_admin');
         $manager = config('contants.role_manager');
