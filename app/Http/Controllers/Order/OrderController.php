@@ -91,10 +91,13 @@ class OrderController extends Controller
     {
         $order = $this->order_services->find($id);
         $bill = Bill::where('order_id', $order->id)->first();
-        $bill_status_id = $bill->bill_status_id;
-
-        $this->authorize('update', [ $order, $bill_status_id ]);
-
+        if($bill){
+            $bill_status_id = $bill->bill_status_id;
+            $this->authorize('update', [ $order, $bill_status_id ]);
+        }else{
+            $chua_co_hoa_don = 0;
+            $this->authorize('show', [$order, $chua_co_hoa_don]);
+        }
 
         $admin = config('contants.role_admin');
         $manager = config('contants.role_manager');
@@ -165,12 +168,13 @@ class OrderController extends Controller
                 foreach ($membership_type as $item) {
                     if ($item->money_level < $accumulate_of_guest && $item->money_level > $t) {
                         $bill->discount = $item->discount_level;
+                    }else{
+                        $bill->discount = 0;
                     }
                 }
             } else {
                 $bill->discount = 0;
             }
-
 
             $bill->order_id = $order_id;
             $bill->bill_status_id = config('contants.bill_status_unpaid');
@@ -289,5 +293,20 @@ class OrderController extends Controller
                 'technicians'
             )
         );
+    }
+
+    /*
+     * Xoa lich dat
+     *
+     */
+    public function destroy($order_id){
+        $order = Order::findOrFail($order_id);
+        $order_status_finish = config('contants.order_status_finish');
+        if ($order->order_status_id == $order_status_finish){
+            return redirect()->route('orders.index')->with('toast_error', 'Không thể xóa lịch đặt đã hoàn thành !');
+        }
+        $order->delete();
+
+        return redirect()->route('orders.index')->with('toast_success', 'Xóa thành công !');
     }
 }

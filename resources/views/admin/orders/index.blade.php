@@ -162,6 +162,16 @@
                                                 </a>
                                             @endif
                                         @endcan
+                                        @can('remove-orders')
+                                            @if($order->order_status_id != config('contants.order_status_finish'))
+                                                <a href="{{ route('orders.destroy', Hashids::encode($order->id)) }}"
+                                                   class="btn btn-xs btn-danger"
+                                                   onclick="return confirmDelete()"
+                                                >
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            @endif
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
