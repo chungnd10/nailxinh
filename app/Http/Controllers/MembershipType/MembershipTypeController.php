@@ -10,7 +10,7 @@ class MembershipTypeController extends Controller
 {
     public function index()
     {
-        $membership_type = $this->membership_type->all();
+        $membership_type = $this->membership_type->all('desc');
 
         return view('admin.membership_type.index', compact('membership_type'));
     }
