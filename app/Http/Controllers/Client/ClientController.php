@@ -175,13 +175,17 @@ class ClientController extends Controller
                     ]
                 );
             }
-
+            $time = $request->date .' '. $request->hours;
+            $check_exists_order = $this->order_services->checkExsitsOrder($request->user_id, $time);
+            if ($check_exists_order > 0){
+                return response()->json(['error' => 'Lich dat da ton tai !']);
+            }
             $order = new Order();
             $order->phone_number = $request->phone_number;
             $order->full_name = $request->full_name;
             $order->branch_id = $request->branch_id;
             $order->user_id = $request->user_id;
-            $order->time = $request->date .' '. $request->hours;
+            $order->time = $time;
             $order->note = $request->note;
             $order->order_status_id = config('contants.order_status_unconfirmed');
             $order->save();
