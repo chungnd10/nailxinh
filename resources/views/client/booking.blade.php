@@ -773,6 +773,12 @@
                                 title: 'Đặt lịch thất bại !.'
                             });
                         }
+                        if (data.error){
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Thời gian bạn chọn đã được đặt.'
+                            });
+                        }
                     },
                     error: function(xhr, status, error){
                         console.log(error);
