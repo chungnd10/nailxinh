@@ -66,6 +66,9 @@
         </div>
         <div class="row">
             <div class="col-xs-6">
+                @if($bill->payment_by != null)
+                    <h5>Thu ngân: {{ $bill->getNameUser($bill->payment_by) }} </h5>
+                @endif
                 <h4>Ghi chú:</h4>
                 @if($bill->note != "")
                     <i>{{'- '.$bill->note }}</i>

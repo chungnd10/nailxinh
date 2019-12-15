@@ -78,7 +78,7 @@ class BillController extends Controller
             $accumulate->save();
         }
 
-        // cập nhật hóa đơn
+        $bill->payment_by = \Auth::user()->id;
         $bill->fill($request->all())->save();
 
         return redirect()->route('bills.index')->with('toast_success', 'Cập nhật thành công');

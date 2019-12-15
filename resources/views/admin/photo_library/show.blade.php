@@ -3,8 +3,8 @@
     {{--Content Header (Page header)--}}
     <section class="content-header">
         <h1>
-            Thông tin
-            <small>website</small>
+            Sửa
+            <small>ảnh</small>
         </h1>
     </section>
     {{--  content  --}}

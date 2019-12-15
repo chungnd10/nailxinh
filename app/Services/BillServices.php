@@ -54,7 +54,17 @@ class BillServices
      */
     public function getAllBillJoinOrderJoinOrderServices($order_by, $paginate)
     {
-        $bills = Bill::join('orders', 'orders.id', '=', 'bills.order_id')
+        $current_user_id = \Auth::user()->id;
+        $current_role_id = \Auth::user()->role_id;
+        $current_branch_id = \Auth::user()->branch_id;
+
+        $admin = config('contants.role_admin');
+        $manager = config('contants.role_manager');
+        $technician = config('contants.role_technician');
+        $cashier = config('contants.role_cashier');
+        $receptionist = config('contants.role_receptionist');
+
+        $query = Bill::join('orders', 'orders.id', '=', 'bills.order_id')
             ->join('order_services', 'order_services.order_id', '=', 'orders.id')
             ->select(
                 'total_price',
@@ -75,30 +85,33 @@ class BillServices
                 'order_status_id',
                 'bills.created_at',
                 'bills.updated_at',
-                DB::raw('group_concat(order_services.service_id) as service_id'))
-            ->groupBy(
-                'total_price',
-                'total_payment',
-                'discount',
-                'bill_status_id',
-                'bills.note',
-                'bills.created_at',
-                'bills.updated_at',
-                'bills.id',
-                'full_name',
-                'phone_number',
-                'orders.time',
-                'orders.note',
-                'updated_by',
-                'branch_id',
-                'user_id',
-                'order_status_id',
-                'bills.created_at',
-                'bills.updated_at'
-            )
-            ->orderby('orders.id', $order_by)
-            ->paginate($paginate);
+                DB::raw('group_concat(order_services.service_id) as service_id'));
+        if ($current_role_id == $manager || $cashier){
+            $query->where('branch_id', $current_branch_id);
+        }
+        $query->groupBy(
+            'total_price',
+            'total_payment',
+            'discount',
+            'bill_status_id',
+            'bills.note',
+            'bills.created_at',
+            'bills.updated_at',
+            'bills.id',
+            'full_name',
+            'phone_number',
+            'orders.time',
+            'orders.note',
+            'updated_by',
+            'branch_id',
+            'user_id',
+            'order_status_id',
+            'bills.created_at',
+            'bills.updated_at'
+        );
+        $query->orderby('orders.id', $order_by);
 
+        $bills =$query->paginate($paginate);
         return $bills;
     }
 
@@ -113,6 +126,7 @@ class BillServices
             ->select(
                 'total_price',
                 'total_payment',
+                'payment_by',
                 'discount',
                 'bill_status_id',
                 'bills.note',
@@ -127,6 +141,7 @@ class BillServices
             ->groupBy(
                 'total_price',
                 'total_payment',
+                'payment_by',
                 'discount',
                 'bill_status_id',
                 'bills.note',
