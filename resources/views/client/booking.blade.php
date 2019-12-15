@@ -112,7 +112,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">Chọn giờ <span class="text-danger">*</span></div>
-                                            <div class=" col-md-12 text-error2 text-danger">Vui lòng chọn thời gian</div>
+                                            <div class=" col-md-12 text-error2 text-danger">*Vui lòng chọn thời gian</div>
                                             <div id="time_frame"></div>
                                         </div>
                                         <div class="col-md-12 mb-4">
@@ -202,7 +202,6 @@
         /* create variable save_data */
         let save_data;
         let btn_address_booking = $('.btn-address-booking');
-        console.log('btn_adres',btn_address_booking[0]);
             btn_address_booking[0].classList.add('active');
         /* ============= render HTML time slot ============= */
         function renderTimeSlot(data, next_date) {
@@ -216,13 +215,10 @@
                 btn.attr('time-frame', temp_moment);
                 btn.addClass('btn btn-default time-frame mb-2');
                 if(data.length !== 0){
-                    console.log("1");
                     if(next_date){
-                        console.log("1.1");
                         data.forEach(function(item){
                             let time_checked = moment(item).format(time_format_pttrn);
                             if(temp_moment === time_checked ){
-                                btn.addClass('disable-click');
                                 btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                                 btn.addClass('disable-click btn-time-danger');
                             } else{
@@ -230,31 +226,23 @@
                             }
                         });
                     } else{
-                        console.log("1.2");
-                        console.log('data',data);
                         data.forEach(function(item){
                             let time_checked = moment(item).format(time_format_pttrn);
-                            console.log('item',time_checked);
                             if(temp_moment === time_checked || temp_moment < current_time){
-                                console.log("1.2.1");
-                                btn.addClass('disable-click');
                                 btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                                 btn.addClass('disable-click btn-time-danger');
                             } else{
-                                console.log("1.2.2");
                                 btn.html(`<div class="time theme-text">${temp_moment}</div>`);
                             }
                         });
                     } 
                 } else if(next_date){
-                    console.log("4");
                     showBookingDateTime(current_time,next_date);
                     let array_date_time = [];
                     let date_time = `${next_date} ${check_slot_time[k]}`;
                     array_date_time.push(date_time);
                     array_date_time.forEach(function(item){
                         if(item < current_date_time){
-                            btn.addClass('disable-click');
                             btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                             btn.addClass('disable-click btn-time-danger');
                         } else{
@@ -263,10 +251,8 @@
                     }); 
                 }
                 else{
-                    console.log("5");
                     showBookingDateTime(current_time,current_date);
                     if(temp_moment < current_time){
-                        btn.addClass('disable-click');
                         btn.html(`<div class="time">${temp_moment}</div><div class="slot">Hết chỗ</div>`);
                         btn.addClass('disable-click btn-time-danger');       
                     } else{
@@ -284,8 +270,6 @@
                 date_title: moment(Object.assign({}, render_date_obj)).format("DD/MM"),
                 day_of_week: weekday[moment(Object.assign({}, render_date_obj)).day()],
             });
-
-            console.log(date_render_array);
         };
 
         /* Click day button render html */
@@ -314,9 +298,7 @@
                         data: data,
                         success : function(result_data){
                             $("#time_frame").empty();
-                            console.log('test_ data_length', result_data.length);
                             if(result_data.length !== 0){
-                                console.log('chui')
                                 renderTimeSlot(result_data,next_date);
                             } else{
                                 renderTimeSlot([],next_date);
@@ -334,10 +316,8 @@
             } 
             else{
                 if(user_id){
-                    console.log('abc');
                     getAjaxSlotFromServer(user_id,current_date);
                 }
-                console.log('sao lai vao day');
                 $("#time_frame").empty();
                 renderTimeSlot([]);
             }
@@ -361,7 +341,7 @@
             $('#time_frame .time').removeClass('text-white');
             $(this).find('.time').addClass('text-white');
             showBookingDateTime(current_time,next_day);
-            $('.general-message').hide();
+            $('.text-error2').hide();
             $('#time-select').css({'color': ''});
         });
 
@@ -480,10 +460,12 @@
         /* ====================================================  */
 
         /* check phone number limit booking in day */
-        $('#phone_number').bind('propertychange change blur',function(){
-            let phone_number = $('#phone_number').val();
-            checkPhoneLimitBooking(phone_number);
-            checkLimitList(phone_number);
+        $('#phone_number').bind('input change blur',function(event){
+            let value = event.target.value;
+            if(value.length >=10){
+                checkPhoneLimitBooking(value);
+                checkLimitList(value);
+            }
         });
         function checkPhoneLimitBooking(numbers,date){
             let url = "{{ route('ajax.check-limit-order') }}";
@@ -540,9 +522,8 @@
                 url: url,
                 data: data,
                 success : function(result_data){
-                    console.log("limited",result_data);
                     if(result_data > 0){
-                        $('#phone_number-error').show();
+                        $('#phone_number-error').css('display','block');
                         $('#phone_number-error').text("*Số điện thoại nằm trong danh sách hạn chế");
                         $('#phone_number').focus();
                         return false;
@@ -563,8 +544,6 @@
                 service_id: service_id,
                 _token : $('meta[name="csrf-token"]').attr('content')
             };
-            console.log("branch_id",branch_id);
-            console.log("service_id",service_id);
             let url = "{{ route('ajax.get-employees') }}";
             $.ajax({
                 type: 'POST',
@@ -593,7 +572,6 @@
             let btn_address = $('.btn-address-booking.active');
             let option_html = [];
             let operator_opt = service_id ? "<option value=''>Không có nhân viên nào!</option>" : "<option value=''>Vui lòng chọn dịch vụ</option>";
-            console.log(operator_opt);
             if(result_data.length > 0){
                 option_html.push("<option value=''>Vui lòng chọn nhân viên</option>");
                 for (i =0;  i<result_data.length; i++) {
@@ -722,7 +700,6 @@
                     hours: $('.time-frame.btn_primary').attr('time-frame'),
                     note: $('#note').val(),
                 };
-                console.log(data);
                 let url = "{{ route('booking') }}";
                 $.ajax({
                     type: 'POST',
