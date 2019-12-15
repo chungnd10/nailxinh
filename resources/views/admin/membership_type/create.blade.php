@@ -72,7 +72,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('membership_type.index') }}"
+                    <a href="{{ url()->previous() }}"
                        class="btn btn-default"
                     >
                         <i class="fa fa-arrow-circle-o-left"></i>

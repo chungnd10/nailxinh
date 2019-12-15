@@ -27,8 +27,8 @@
                                 <th width="160">Tên quy trình</th>
                                 <th width="100">Dịch vụ</th>
                                 <th>Bước</th>
-                                <th>Mô tả</th>
-                                <th width="70">
+                                <th class="nosort">Mô tả</th>
+                                <th class="nosort" width="70">
                                     Hành động
                                 </th>
                             </tr>
@@ -77,42 +77,20 @@
             //datatable
             $('#datatable').DataTable({
                 "language": {
-                    "emptyTable": "Không có bản ghi nào",
-                    "zeroRecords": "Không tìm thấy bản ghi nào",
-                    "decimal": "",
-                    "info": "Hiển thị _START_ đến _END_ trong _TOTAL_ mục",
-                    "infoEmpty": "Hiển thị 0 đến 0 trong số 0 mục",
-                    "infoFiltered": "(Được lọc từ tổng số  _MAX_ mục)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Hiển thị _MENU_ mục",
-                    "loadingRecords": "Loading...",
-                    "processing": "Processing...",
-                    "search": "Tìm kiếm:",
-                    "paginate": {
-                        "first": "Đầu",
-                        "last": "Cuối",
-                        "next": "Sau",
-                        "previous": "Trước"
-                    },
-                    "aria": {
-                        "sortAscending": ": activate to sort column ascending",
-                        "sortDescending": ": activate to sort column descending"
-                    },
+                    url: "{{ asset('admin_assets/bower_components/datatables.net-bs/lang/vietnamese-lang.json') }}"
                 },
                 'paging': true,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'autoWidth': true,
+                'autoWidth': false,
+                "scrollX": true,
                 "responsive": true,
-                "columnDefs": [
-                    {orderable: false, "targets": [4, 5]}
-                ]
+                "columnDefs": [{"orderable": false, "targets": 'nosort'}]
             });
 
             // hide content
-            moreText(80);
+            moreText(50);
             //end hide content
         });
     </script>

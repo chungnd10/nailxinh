@@ -14,16 +14,16 @@ class OrdersStatusTableSeeder extends Seeder
     {
         $status = [
             [
-                'name' => 'Chưa xác nhận'
-            ],
-            [
-                'name' => 'Đã xác nhận'
+                'name' => 'Đã hủy'
             ],
             [
                 'name' => 'Xác nhận thất bại'
             ],
             [
-                'name' => 'Đang xử lý'
+                'name' => 'Chưa xác nhận'
+            ],
+            [
+                'name' => 'Đã xác nhận'
             ],
             [
                 'name' => 'Đã hoàn thành'

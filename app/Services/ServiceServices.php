@@ -27,16 +27,41 @@ class ServiceServices
         return $service;
     }
 
+    /*
+     * Find by slug
+     *
+     */
+    public function findBySlug($slug)
+    {
+        $service = Service::where('slug', $slug)->first();
+        return $service;
+    }
+
     // lấy ra những dịch vụ mà ktv đó có thể làm
     public function getSkillOfTechnician($user_id)
     {
         return UserServices::where('user_id', $user_id)->get();
     }
 
-    // lấy giá của tất cả dịch vụ đã sử dụng
+    // lấy giá của  dịch vụ đã sử dụng
     public function getPriceWithServices($services_id)
     {
-        $service_price =   Service::whereIn('id',$services_id)->get();
+        $service_price = Service::whereIn('id',$services_id)
+            ->get();
         return array_sum($service_price->pluck('price')->toArray());
     }
+
+    /*
+    * Lấy dịch vụ khác
+    *
+    */
+    public function getOrtherServices($service_id, $type_services)
+    {
+        $services = Service::where('id', '<>', $service_id)
+            ->where('type_of_services_id', '=', $type_services)
+            ->get();
+        return $services;
+    }
+
+
 }

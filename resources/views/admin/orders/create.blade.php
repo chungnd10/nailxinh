@@ -10,7 +10,7 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('orders.store') }}" method="POST" id="orders">
+            <form action="{{ route('orders.store') }}" method="POST" id="addOrder">
                 @csrf
                 <div class="box-body">
                     <div class="row">
@@ -92,7 +92,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer ">
-                    <a href="{{ route('orders.index') }}" class="btn btn-default" >
+                    <a href="{{ url()->previous() }}" class="btn btn-default" >
                         <i class="fa fa-arrow-circle-o-left"></i>
                         Trở về
                     </a>
@@ -115,40 +115,42 @@
             $('#time').datetimepicker({
                 format: 'yyyy-mm-dd hh:00',
                 minView: 1,
+                autoclose: true
             });
 
             //validate
-            $("#addBranch").validate({
+            $("#addOrder").validate({
                 rules: {
-                    name: {
+                    full_name: {
                         required: true,
                         maxlength: 100
                     },
-                    city_id: {
+                    time: {
                         required: true,
+                    },
+                    service_id: {
+                        required: true,
+                    },
+                    note: {
+                        maxlength: 300
                     },
                     phone_number: {
                         required: true,
                         phoneNumberVietNam: true,
                         maxlength: 11
-                    },
-                    address: {
-                        required: true,
-                        maxlength: 200
                     }
-
                 },
 
                 messages: {
-                    name: {
+                    full_name: {
                         maxlength: "*Không được vượt quá 100 ký tự"
                     },
+                    note: {
+                        maxlength: "*Không được vượt quá 300 ký tự"
+                    },
                     phone_number: {
-                        maxlength: "*Không được vượt quá 11 ký tự"
-                    },
-                    address: {
-                        maxlength: "*Không được vượt quá 200 ký tự"
-                    },
+                        phoneNumberVietNam: true,
+                    }
                 }
             });
 

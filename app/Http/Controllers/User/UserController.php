@@ -6,40 +6,50 @@ use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\User;
 use Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Intervention\Image\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    /*
+     * Show page index
+     *
+     */
     public function index()
     {
         //nếu là admin thì lấy all
         if (Auth::user()->isAdmin()) {
-            $users = $this->user_services->allForAdmin();
+            $users = $this->user_services->allForAdmin('asc', 10);
+            $branches = $this->branch_services->all('asc');
+            $roles = $this->role_services->allForAdmin('asc');
         }
-        if (Auth::user()->isManager())
-        {
-            // chủ tiệm thì lấy nhân viên của tiệm
-            $users = $this->user_services->allForManager(Auth::user()->branch_id);
+        // chủ tiệm thì lấy nhân viên của tiệm
+        if (Auth::user()->isManager()) {
+            $users = $this->user_services->allForManager(Auth::user()->branch_id, 'desc', 10);
+            $roles = $this->role_services->allForManager('asc');
         }
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users', 'branches', 'roles'));
     }
 
+    /*
+     * Show page create user
+     *
+     */
     public function create()
     {
         $genders = $this->gender_services->all();
 
-        if (Auth::user()->isAdmin()){
-            $roles = $this->role_services->allForAdmin();
-            $branchs = $this->branch_services->all();
+        if (Auth::user()->isAdmin()) {
+            $roles = $this->role_services->allForAdmin('asc');
+            $branchs = $this->branch_services->all('asc');
         }
         if (Auth::user()->isManager()) {
-            $roles = $this->role_services->allForManager();
-            $branchs = Auth::user()->branch->name.', '.Auth::user()->branch->address;
+            $roles = $this->role_services->allForManager('asc');
+            $branchs = Auth::user()->branch->name . ', ' . Auth::user()->branch->address;
         }
 
         $operation_status = $this->operation_status_services->all();
@@ -52,40 +62,47 @@ class UserController extends Controller
         );
     }
 
+    /*
+     * Store new user
+     *
+     */
     public function store(AddUserRequest $request)
     {
         $user = new User();
-
+        $branch_id = Auth::user()->branch_id;
         $user->display_status_id = config('contants.display_status_hide');
-
+        $user->password = Hash::make(uniqid(16));
+        $user->branch_id = $branch_id;
         $user->fill($request->all())->save();
 
         return redirect()->route('users.index')->with('toast_success', 'Thêm thành công !');
     }
 
+    /*
+     * Show user for editing
+     *
+     */
     public function show($id)
     {
         $user = $this->user_services->find($id);
 
-        $this->authorize('show',$user);
+        $this->authorize('show', $user);
 
         $genders = $this->gender_services->all();
         $operation_status = $this->operation_status_services->all();
         $display_status = $this->display_status_services->all();
-        $type_services = $this->type_services->all();
+        $type_services = $this->type_services->all('desc');
         $services_of_user = $this->user_services_services->getServiceWithId($id);
         $type_services_of_user = $this->user_type_service_services->getTypeServicesOfUser($id);
 
-        if (Auth::user()->isAdmin()){
-            $roles = $this->role_services->allForAdmin();
-            $branchs = $this->branch_services->all();
+        if (Auth::user()->isAdmin()) {
+            $roles = $this->role_services->allForAdmin('asc');
+            $branchs = $this->branch_services->all('asc');
         }
         if (Auth::user()->isManager()) {
-            $roles = $this->role_services->allForManager();
-            $branchs = Auth::user()->branch->name.', '.Auth::user()->branch->address;
+            $roles = $this->role_services->allForManager('asc');
+            $branchs = Auth::user()->branch->name . ', ' . Auth::user()->branch->address;
         }
-
-//        dd($branchs);
 
         return view('admin.users.show', compact('user',
                 'branchs',
@@ -100,30 +117,42 @@ class UserController extends Controller
         );
     }
 
+    /*
+     * Update information user
+     *
+     */
     public function update(AddUserRequest $request, $id)
     {
         $user = $this->user_services->find($id);
-
+        $this->authorize('show', $user);
         $user->fill($request->all())->save();
 
         return redirect()->route('users.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
+    /*
+     * Delete user
+     *
+     */
     public function destroy($id)
     {
         $user = $this->user_services->find($id);
 
-        if (file_exists('upload/images/users/'.$user->avatar)
-            && $user->avatar != 'avatar-default.png')
-        {
-            unlink('upload/images/users/'.$user->avatar);
-        }
+        $this->authorize('destroy', $user);
 
+        $path = config('contants.upload_users_path');
+        $img_default = config('contants.img_user_default');
+
+        checkExistsAndDeleteImage($path, $user->avatar, $img_default);
         $user->delete();
 
         return redirect()->route('users.index')->with('toast_success', 'Xoá thành công !');
     }
 
+    /*
+     * Set new password for user
+     *
+     */
     public function setPassword(Request $request, $id)
     {
         $user = $this->user_services->find($id);
@@ -143,7 +172,7 @@ class UserController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->route('users.update', $id.'#tab_2')
+            return redirect()->route('users.update', $id . '#tab_2')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -155,7 +184,10 @@ class UserController extends Controller
             ->with('toast_success', 'Đặt lại mật khẩu thành công !');
     }
 
-    //set services cho nhan vien
+    /*
+     * Set services for technician
+     *
+     */
     public function setServices(Request $request, $id)
     {
         $user = $this->user_services->find($id);
@@ -170,6 +202,10 @@ class UserController extends Controller
 
     }
 
+    /*
+     * Change password in page profile
+     *
+     */
     public function changePassword(Request $request, $id)
     {
         $user = $this->user_services->find($id);
@@ -191,7 +227,7 @@ class UserController extends Controller
         );
 
         if ($validator->fails()) {
-            return redirect()->route('profile', $id .'#tab_2')
+            return redirect()->route('profile', \Hashids::encode($id) . '#tab_2')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -204,26 +240,26 @@ class UserController extends Controller
             return redirect()->route('admin.index')
                 ->with('toast_success', 'Cập nhật mật khẩu thành công !');
         } else {
-            return redirect()->route('profile', $id.'#tab_2')
+            return redirect()->route('profile', \Hashids::encode($id) . '#tab_2')
                 ->with('old_password', '*Mật khẩu cũ không đúng');
         }
     }
 
+    /*
+     * Show page update profile only me
+     *
+     */
     public function profile($id)
     {
         $user = $this->user_services->find($id);
 
-        if ($user) {
-            if (Auth::user()->id != $user->id) {
-                return view('admin.errors.404');
-            }
-        } else {
-            return view('admin.errors.404');
+        if (Auth::user()->id != $user->id) {
+            return view('errors.404');
         }
 
-        $branchs = $this->branch_services->all();
+        $branchs = $this->branch_services->all('asc');
         $genders = $this->gender_services->all();
-        $roles = $this->role_services->allForAdmin();
+        $roles = $this->role_services->allForAdmin('asc');
         $operation_status = $this->operation_status_services->all();
 
         return view('admin.users.profile', compact('user',
@@ -235,92 +271,86 @@ class UserController extends Controller
         );
     }
 
-    public function updateImageProfile(Request $request, $id)
-    {
-
-        $user = $this->user_services->find($id);
-
-        $request->validate(
-            [
-                'avatar' => 'required|mimes:png,jpg,jpeg'
-            ],
-            [
-                'avatar.required' => '*Hãy chọn ảnh',
-                'avatar.mimes' => '*Chỉ chấp nhận ảnh JPG, JPEG, PNG'
-            ]
-        );
-
-        if ($request->hasFile('avatar'))
-        {
-            if (file_exists('upload/images/users/'.$user->avatar)
-                && $user->avatar != 'avatar-default.png')
-            {
-                unlink('upload/images/users/'.$user->avatar);
-            }
-
-            $file = $request->file('avatar');
-            $name = time() . $file->getClientOriginalName();
-            $file->storeAs('images/users', $name);
-            $user->avatar = $name;
-        }
-
-        $user->save();
-
-        return redirect()->route('admin.index')->with('toast_success', 'Cập nhật thành công !');
-    }
-
+    /*
+     * Update profile only me
+     *
+     */
     public function updateProfile(UpdateProfileRequest $request, $id)
     {
-//        dd($request->all());
-
-        $data = json_decode($request->get('image'), true);
-        $file = $request->file('image');
-
-        dd($data, $file);
-
         $user = $this->user_services->find($id);
+        $path = config('contants.upload_users_path');
+        $img_default = config('contants.img_user_default');
+
+        if ($request->avatar_hidden != null) {
+            $image = handleImageBase64($request->avatar_hidden);
+            $imageName = getNameImageUnique(12);
+            checkExistsAndDeleteImage($path, $user->avatar, $img_default);
+            File::put($path . $imageName, $image);
+            $user->avatar = $imageName;
+        }
 
         $user->fill($request->all())->save();
-
         return redirect()->route('admin.index')->with('toast_success', 'Cập nhật thành công !');
     }
 
+    /*
+     * Change operation status
+     *
+     */
     public function changeStatus(Request $request)
     {
-        $rq = $request->all();
+        if ($request->ajax()) {
+            $id = $request->id;
+            $user = $this->user_services->find($id);
+            $user->operation_status_id = $request->operation_status_id;
+            $user->save();
 
-        $user = $this->user_services->find($rq->id);
-
-        $user->operation_status_id = $rq->operation_status_id;
-
-        $user->save();
-
-        return response()->json(['success' => 'Status change successfully.']);
+            return response()->json(['success' => 'Status change successfully !']);
+        }
+        return response()->json(['fail' => 'Status change fail !']);
     }
 
-    public function changeImageProfile(Request $request, $id)
+     /*
+     * Ajax get user with branch
+     *
+     */
+    public function getTechnicianWithBranch(Request $request)
     {
+        if ($request->ajax()) {
+            $branch_id = $request->branch_id;
+            $users = $this->user_services->getTechnicianWithBranch($branch_id, 'asc');
+            return response()->json($users);
+        }
+        return response('load diff fail !', 201);
+    }
 
-        if ($request->hasFile('avatar'))
-        {
-            $file = $request->file('avatar');
-            $user = $this->user_services->find($id);
 
-            $file_name = time().uniqid().$file->getClientOriginalName();
+    /*
+     * Tim kiem nang cao
+     *
+     */
+    public function advancedSearch(Request $request)
+    {
+        $full_name = $request->full_name;
 
-            if (file_exists('upload/images/users/'.$user->avatar)
-                && $user->avatar != 'avatar-default.png')
-            {
-                unlink('upload/images/users/'.$user->avatar);
-            }
+        $role_id = $request->role_id;
 
-            $file->storeAs('images/users', $file_name);
+        //nếu là admin thì lấy all role
+        if (Auth::user()->isAdmin()) {
+            $branches = $this->branch_services->all('asc');
+            $roles = $this->role_services->allForAdmin('asc');
+            $branch_id = $request->branch_id;
+        }
+        // chủ tiệm thì lấy role nhân viên của tiệm
+        if (Auth::user()->isManager()) {
+            $roles = $this->role_services->allForManager('asc');
+            $branch_id = Auth::user()->branch_id;
         }
 
-        $user->avatar = $file_name;
-        $user->save();
+        $users = $this->user_services->advancedSearch($full_name, $branch_id, $role_id, 'desc', 10);
+        $request->flash();
 
-        return response('success', 200);
+        return view('admin.users.index', compact('users', 'branches', 'roles'));
 
     }
 }

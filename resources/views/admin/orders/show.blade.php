@@ -10,7 +10,8 @@
     {{--Main content--}}
     <section class="content">
         <div class="box box-default">
-            <form action="{{ route('orders.update', Hashids::encode($order->id,'123456789')) }}" method="POST" id="orders">
+            <form action="{{ route('orders.update', Hashids::encode($order->id)) }}" method="POST"
+                  id="update-orders">
                 @csrf
                 <div class="box-body">
                     <div class="row">
@@ -37,10 +38,9 @@
                             <div class="form-group">
                                 <label>Thời gian</label><span class="text-danger">*</span>
                                 <input type="text" class="form-control"
-                                       name="time"
-                                       id="time"
-                                       value="{{ old('time', $order->time) }}"
-                                >
+                                           name="time"
+                                           id="time"
+                                           value="{{ date('Y-m-d H:i', strtotime(old('time', $order->time))) }}">
                                 @if($errors->first('time'))
                                     <span class="text-danger">{{ $errors->first('time') }}</span>
                                 @endif
@@ -50,9 +50,9 @@
                                 <select name="order_status_id" class="form-control">
                                     @foreach($orders_status as $status)
                                         <option value="{{ $status->id }}"
-                                            @if($order->order_status_id == $status->id)
+                                                @if($order->order_status_id == $status->id)
                                                 selected
-                                            @endif
+                                                @endif
                                         >
                                             {{ $status->name }}</option>
                                     @endforeach
@@ -62,14 +62,26 @@
                         <!-- /.col -->
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label for="">Chi nhánh</label>
+                                <select name="branch_id" class="form-control" id="branch_id">
+                                    @foreach($branches as $item)
+                                        <option value="{{ $item->id }}"
+                                                @if($order->branch_id == $item->id)
+                                                selected
+                                                @endif
+                                        >
+                                            {{ $item->name.', '.$item->address }}</option>
+                                    @endforeach
+                                </select>
+                            <div class="form-group">
                                 <label>Dịch vụ</label><span class="text-danger">*</span>
                                 <select class="form-control select2 select2-hidden-accessible"
+                                            multiple="" data-placeholder="Select a State"
+                                            style="width: 100%;" data-select2-id="7"
+                                            tabindex="-1"
+                                            aria-hidden="true"
+                                            name="service_id[]"
                                         id="select2"
-                                        multiple="" data-placeholder="Select a State"
-                                        style="width: 100%;" data-select2-id="7"
-                                        tabindex="-1"
-                                        aria-hidden="true"
-                                        name="service_id[]"
                                     >
                                     <option value="">Chọn dịch vụ</option>
                                     @foreach($type_services as $type_service)
@@ -77,6 +89,9 @@
                                             @foreach($type_service->showServices($type_service->id) as $service)
                                                 <option data-image="{{ $service->image }}"
                                                         value="{{ $service->id }}"
+                                                        @if(old('service_id') == $service->id)
+                                                        selected
+                                                        @endif
                                                 >{{ $service->name.' - '.number_format( $service->price, 0, ',', '.').'đ' }}
                                                 </option>
                                             @endforeach
@@ -90,7 +105,8 @@
                             <!-- /.form-group -->
                             <div class="form-group">
                                 <label>Ghi chú</label>
-                                <textarea name="note"  cols="30" rows="6" class="form-control">{{ old('note', $order->note) }}</textarea>
+                                <textarea name="note" cols="30" rows="6"
+                                          class="form-control">{{ old('note', $order->note) }}</textarea>
                                 @if($errors->first('note'))
                                     <span class="text-danger">{{ $errors->first('note') }}</span>
                                 @endif
@@ -122,48 +138,71 @@
 
             //Initialize Select2 Elements
             $('.select2').select2();
-            $('#select2').val([ <?= $order->service_id ?> ]).change();
+            $('#select2').val([<?= $order->service_id ?>]).change();
 
-            $('#time').datepicker({
-                format: 'yyyy-mm-dd',
-                minView: 1,
+            {{--var minDate = "{{ $order->time }}";--}}
+
+            $('#time').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                autoclose: true,
+                minView: 1
+                // minDate: minDate,
             });
 
             //validate
-            $("#addBranch").validate({
-                rules: {
-                    name: {
-                        required: true,
-                        maxlength: 100
-                    },
-                    city_id: {
-                        required: true,
-                    },
-                    phone_number: {
-                        required: true,
-                        phoneNumberVietNam: true,
-                        maxlength: 11
-                    },
-                    address: {
-                        required: true,
-                        maxlength: 200
-                    }
+            // $("#update-orders").validate({
+            //     ignore: [],
+            //     rules: {
+            //         full_name: {
+            //             required: true,
+            //         },
+            //         phone_number: {
+            //             required: true,
+            //         },
+            //         time: {
+            //             required: true,
+            //         },
+            //         order_status_id: {
+            //             required: true,
+            //         },
+            //         branch_id: {
+            //             required: true,
+            //         },
+            //         select2: {
+            //             required: true,
+            //         }
+            //     }
+            // });
 
-                },
+            // start: lay KTV theo chi nhanh
+            $('#branch_id').change(function () {
+                let url_get_users_with_branch = "{{ route('get-users-with-branch') }}";
+                let branch_id = $(this).val();
+                let technician = "{{ $order->user_id }}";
 
-                messages: {
-                    name: {
-                        maxlength: "*Không được vượt quá 100 ký tự"
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: url_get_users_with_branch,
+                    data: {'branch_id': branch_id},
+                    success: function (data) {
+                        $("#user_id").html('');
+                        $("#user_id").append(
+                            "<option value=''>Chọn nhân viên</option>"
+                        );
+                        $.each(data, function (key, value) {
+                            let selected = parseInt(value.id) === parseInt(technician) ? 'selected' : '';
+                            $("#user_id").append(
+                                "<option value='"+ value.id +"'"+ selected +">"+value.full_name +"</option>"
+                            );
+                        });
                     },
-                    phone_number: {
-                        maxlength: "*Không được vượt quá 11 ký tự"
+
+                    error: function () {
                     },
-                    address: {
-                        maxlength: "*Không được vượt quá 200 ký tự"
-                    },
-                }
+                });
             });
-
+            // end: lay KTV theo chi nhanh
 
         });
     </script>

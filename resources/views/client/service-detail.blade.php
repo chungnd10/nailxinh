@@ -4,13 +4,14 @@
     <!-- Start: Breadcrumb Area
     ============================= -->
 
-    <section id="breadcrumb-area">
+    <section id="breadcrumb-area" class="breadcrumb-service-detail">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
                     <h2>NailXinh</h2>
                     <ul class="breadcrumb-nav list-inline">
                         <li><a href="/">NailXinh</a></li>
+                        <li><i class="fa fa-angle-right"></i></li>
                         <li>Liên hệ</li>
                     </ul>
                 </div>
@@ -27,16 +28,17 @@
     <section id="nailit" class="pt-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-lg-1"></div>
+                <div class=" col-lg-5 col-md-6">
                     <div class="service-detail-img">
                         <img src="upload/images/service/{{ $service->image }}" alt="">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class=" col-lg-5 col-md-6">
                     <div class="service-detaill-content p-4">
-                        <h2 class="text-upercase">{{ $service->name }}</h2>
-                        <h4>Giá: {{ number_format($service->price, 0, ',', '.') }}</h4>
-                        <h4>Thời gian hoàn thành: {{ $service->completion_time }}</h4>
+                        <h2 class="text-upercase mb-3">{{ $service->name }}</h2>
+                        <h4 class="mb-2">Giá: {{ number_format($service->price, 0, ',', '.') }}</h4>
+                        <h4 class="mb-2">Thời gian hoàn thành: {{ $service->completion_time }}</h4>
                         <p>{{ $service->description }}</p>
                         <a class="btn btn-dl text-uppercase" href="{{ route('booking') }}">Đặt lịch</a>
                     </div>
@@ -98,83 +100,39 @@
 
     <!-- Start: Expert Beauticians
     ============================= -->
-    
     <section id="services" class="section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3 col-12 text-center">
-                    <div class="section-title">
-                        <h2>LOẠI DỊCH VỤ KHÁC</h2>
-                        <hr>
-                    </div>
-                </div>                
-            </div>
-
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6 mb-4 mb-lg-0">
-                    <div class="card services-box">
-                        <img src="client_assets/img/beauticians/beauticians02.jpg" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-pink">DA</h5>
-                            <p class="card-text">
-                                Để khách hàng có làn da sáng mịn và những 
-                                phút giây thư giãn sau giờ làm việc.... 
-                            </p>
-                        </div>
-                        <div class="overlay-service text-center">
-                            <h5 class="card-title text-white">DA</h5>
-                            <p class="card-text text-white">
-                                Để khách hàng có làn da sáng mịn và những 
-                                phút giây thư giãn sau giờ làm việc.... 
-                            </p>
-                            <a href="" class="btn boxed-btn">ĐẶT LỊCH</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 mb-4 mb-lg-0">
-                    <div class="card services-box">
-                        <img src="client_assets/img/beauticians/beauticians02.jpg" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-pink">DA</h5>
-                            <p class="card-text">
-                                Để khách hàng có làn da sáng mịn và những 
-                                phút giây thư giãn sau giờ làm việc.... 
-                            </p>
-                        </div>
-                        <div class="overlay-service text-center">
-                            <h5 class="card-title text-white">DA</h5>
-                            <p class="card-text text-white">
-                                Để khách hàng có làn da sáng mịn và những 
-                                phút giây thư giãn sau giờ làm việc.... 
-                            </p>
-                            <a href="" class="btn boxed-btn">ĐẶT LỊCH</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 mb-4 mb-lg-0">
-                    <div class="card services-box">
-                        <img src="client_assets/img/beauticians/beauticians02.jpg" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-pink">DA</h5>
-                            <p class="card-text">
-                                Để khách hàng có làn da sáng mịn và những 
-                                phút giây thư giãn sau giờ làm việc.... 
-                            </p>
-                        </div>
-                        <div class="overlay-service text-center">
-                            <h5 class="card-title text-white">DA</h5>
-                            <p class="card-text text-white">
-                                Để khách hàng có làn da sáng mịn và những 
-                                phút giây thư giãn sau giờ làm việc.... 
-                            </p>
-                            <a href="" class="btn boxed-btn">ĐẶT LỊCH</a>
-                        </div>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-12 text-center">
+                <div class="section-title">
+                    <h2>DỊCH VỤ KHÁC</h2>
+                    <hr>
+                    <p>Bạn có thể tham khảo những dịch vụ dưới đây để rõ hơn về NAILXINH</p>
                 </div>
             </div>
         </div>
-    </section>
-
+        <div class="row" id="our_service_mobi">
+            <div class="col-md-12">
+                <div class="our_service_mobile" id="our_service">
+                @foreach($orther_services as $item)
+                    <div class="service-box service-box-detail text-center">
+                        <figure>
+                            <img class="fix-border-radius" src="upload/images/service/{{ $item->image }}" alt="">
+                            <figcaption>
+                                <div class="inner-text">
+                                    <a href="{{ route('service-detail', $item->slug ) }}" class="boxed-btn">Chi tiết</a>
+                                </div>
+                            </figcaption>
+                        </figure>
+                        <h4>{{ $item->name }}</h4>
+                        <p>{{ limit( $item->description, 60, '...') }}</p>
+                    </div>
+                @endforeach
+                </div>  
+            </div>
+        </div>
+    </div>
+</section>
     <!-- End: Expert Beauticians
     ============================= -->
 

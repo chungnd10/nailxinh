@@ -12,7 +12,7 @@
             <div class="col-xs-12">
                 <h2 class="page-header">
                     <img src="client_assets/img/favicon.png" width="30"> NailXinh
-                    <small class="pull-right">{{ date(' H:i d-m-Y') }}</small>
+                    <small class="pull-right">{{ date('H:i d-m-Y', strtotime($bill->created_at)) }}</small>
                 </h2>
             </div>
             <!-- /.col -->
@@ -66,8 +66,6 @@
         </div>
         <div class="row">
             <div class="col-xs-6">
-                <i>*Thời gian thực hiện từ: {{ date('H:i d-m-Y', strtotime($bill->time)) }}</i>
-                <br><br>
                 <h4>Ghi chú:</h4>
                 @if($bill->note != "")
                     <i>{{'- '.$bill->note }}</i>
@@ -76,7 +74,7 @@
                 @endif
             </div>
             <div class="col-xs-6 ">
-                <p class="lead">Ngày thanh toán {{ date( 'd-m-Y') }}</p>
+                <p class="lead">Ngày thanh toán {{ date( 'd-m-Y', strtotime($bill->created_at)) }}</p>
 
                 <div class="table-responsive">
                     <table class="table">

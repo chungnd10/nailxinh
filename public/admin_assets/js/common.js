@@ -6,10 +6,6 @@ $(document).ready(function () {
         dateFormat: 'yyyy-mm-dd'
     });
 
-    // hide content
-
-    // end hide content
-
 });
 
 //more text
@@ -60,3 +56,9 @@ function getBase64(file, selector) {
 function confirmmBack() {
     return confirm('Mọi thay đổi sẽ không được lưu!');
 }
+
+//confirm delete
+function confirmDelete() {
+    return confirm('Bạn có chắc chắn muốn xóa? ');
+}
+

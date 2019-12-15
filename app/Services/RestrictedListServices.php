@@ -16,4 +16,10 @@ class RestrictedListServices
         $list = RestrictedList::findOrFail($id);
         return $list;
     }
+
+    public function checkLimitedList($phone_number)
+    {
+        $list = RestrictedList::where('phone_number', $phone_number)->count();
+        return $list;
+    }
 }

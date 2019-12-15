@@ -12,9 +12,15 @@
 */
 
 
+// auth
 Auth::routes(['register' => false]);
-//client
 
+// hashids
+Route::bind('id', function ($id) {
+    return $id =  Hashids::decode($id)[0] ?? "";
+});
+
+//client
 Route::get('/', 'Client\ClientController@index')
     ->name('index');
 
@@ -26,19 +32,18 @@ Route::get('/contact', 'Client\ClientController@contact')
 
 Route::get('/services', 'Client\ClientController@services')
     ->name('services');
-Route::get('/services-detail/{slug}/{id}', 'Client\ClientController@servicesDetail')
+
+Route::get('/services/{slug}', 'Client\ClientController@servicesDetail')
     ->name('service-detail');
 
-Route::get('/type-services/{slug}/{id}', 'Client\ClientController@typeServices')
+Route::get('/type-services/{slug}', 'Client\ClientController@typeServices')
     ->name('type-service');
 
 Route::get('/booking', 'Client\ClientController@booking')
     ->name('booking');
-Route::post('/booking', 'Client\ClientController@store');
 
-Route::get('/booking-test', 'Client\ClientController@bookingTest')
-    ->name('booking-test');
-Route::post('/booking-test', 'Client\ClientController@bookingTestStore');
+Route::post('/booking', 'Client\ClientController@store')
+    ->name('booking');
 
 Route::get('/gallery', 'Client\ClientController@gallery')
     ->name('gallery');
@@ -49,6 +54,17 @@ Route::post('/subscribe','Client\ClientController@subscribe')
 Route::get('/download-excel','Subscribe\SubscribeController@downloadExcel')
     ->name('download-excel');
 
+Route::post('/ajax/get-employees', 'Client\ClientController@getEmployees')
+    ->name('ajax.get-employees');
+
+Route::post('/ajax/check-limit-order', 'Client\ClientController@checkLimitOrder')
+    ->name('ajax.check-limit-order');
+
+Route::post('/ajax/check-time-user', 'Client\ClientController@checkTimeUser')
+    ->name('ajax.check-time-user');
+
+Route::post('/ajax/check-limited-list', 'Client\ClientController@checkLimitedList')
+    ->name('ajax.check-limited-list');
 // end client
 
 
@@ -68,8 +84,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('update-image-profile/{id}', 'User\UserController@updateImageProfile')
         ->name('update-image-profile');
 
-    Route::post('changePassword/{id}', 'User\UserController@changePassword')
-        ->name('changePassword');
+    Route::post('change-password/{id}', 'User\UserController@changePassword')
+        ->name('change-password');
     //user
     Route::prefix('users')->group(function () {
 
@@ -111,6 +127,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
         Route::post('change-image-profile/{id}', 'User\UserController@changeImageProfile')
             ->name('users.change-image-profile');
+
+        Route::get('get-users-with-branch', 'User\UserController@getTechnicianWithBranch')
+            ->name('get-users-with-branch');
+
+        Route::get('advanced-search', 'User\UserController@advancedSearch')
+            ->name('users.advanced-search');
     });
 
     //type of services
@@ -218,11 +240,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->name('bills.print');
 
         Route::get('update/{id}', 'Bill\BillController@showUpdate')
-            ->middleware('can:update-bill-status')
+            ->middleware('can:update-bills')
             ->name('bills.update');
 
         Route::post('update/{id}', 'Bill\BillController@update')
-            ->middleware('can:update-bill-status')
+            ->middleware('can:update-bills')
             ->name('bills.update');
     });
 
@@ -233,13 +255,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:view-orders')
             ->name('orders.index');
 
-        Route::get('create', 'Order\OrderController@create')
-            ->middleware('can:add-orders')
-            ->name('orders.create');
-
-        Route::post('create', 'Order\OrderController@store')
-            ->middleware('can:add-orders')
-            ->name('orders.store');
+//        Route::get('create', 'Order\OrderController@create')
+//            ->middleware('can:add-orders')
+//            ->name('orders.create');
+//
+//        Route::post('create', 'Order\OrderController@store')
+//            ->middleware('can:add-orders')
+//            ->name('orders.store');
 
         Route::get('update/{id}', 'Order\OrderController@show')
             ->middleware('can:update-orders')
@@ -249,6 +271,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:update-orders')
             ->name('orders.update');
 
+        Route::get('export-bill/{id}', 'Order\OrderController@exportBill')
+            ->middleware('can:update-orders')
+            ->name('orders.export-bill');
+
+        Route::get('advanced-search', 'Order\OrderController@advancedSearch')
+            ->name('orders.advanced-search');
     });
 
     //branch
@@ -323,6 +351,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('', 'RestrictedLists\RestrictedListsController@index')
             ->middleware('can:view-restricted-lists')
             ->name('restricted-lists.index');
+
+        Route::get('add/{phone_number}', 'RestrictedLists\RestrictedListsController@add')
+            ->middleware('can:add-restricted-lists')
+            ->name('restricted-lists.add');
 
         Route::get('destroy/{id}', 'RestrictedLists\RestrictedListsController@destroy')
             ->middleware('can:remove-restricted-lists')
@@ -444,9 +476,47 @@ Route::prefix('admin')->middleware('auth')->group(function () {
             ->middleware('can:remove-subscribe')
             ->name('subscribe.delete-many');
     });
+
+    //photo-library
+    Route::prefix('photo-library')->group(function () {
+
+        Route::get('', 'PhotoLibrary\PhotoLibraryController@index')
+            ->middleware('can:view-photo-library')
+            ->name('photo-library.index');
+
+        Route::get('create', 'PhotoLibrary\PhotoLibraryController@create')
+            ->middleware('can:add-photo-library')
+            ->name('photo-library.create');
+
+        Route::post('create', 'PhotoLibrary\PhotoLibraryController@store')
+            ->middleware('can:add-photo-library')
+            ->name('photo-library.create');
+
+        Route::get('update/{photo}', 'PhotoLibrary\PhotoLibraryController@show')
+            ->middleware('can:edit-photo-library')
+            ->name('photo-library.show');
+
+        Route::post('update/{photo}', 'PhotoLibrary\PhotoLibraryController@update')
+            ->middleware('can:edit-photo-library')
+            ->name('photo-library.update');
+
+        Route::get('destroy/{photo}', 'PhotoLibrary\PhotoLibraryController@destroy')
+            ->middleware('can:remove-photo-library')
+            ->name('photo-library.destroy');
+
+        Route::get('change-status', 'PhotoLibrary\PhotoLibraryController@changeStatus')
+            ->middleware('can:edit-photo-library')
+            ->name('photo-library.change-status');
+
+        Route::post('delete-many', 'PhotoLibrary\PhotoLibraryController@deleteMany')
+            ->middleware('can:remove-photo-library')
+            ->name('photo-library.delete-many');
+
+        Route::get('photo-search', 'PhotoLibrary\PhotoLibraryController@photoSearch')
+            ->middleware('can:view-photo-library')
+            ->name('photo-search');
+
+    });
 });
 
-Route::bind('id', function ($id) {
-    return Hashids::decode($id)[0] ?? $id;
-});
 

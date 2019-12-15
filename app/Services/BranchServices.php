@@ -7,9 +7,9 @@ use App\Branch;
 class BranchServices
 {
     // lấy tất cả branch
-    public function all()
+    public function all($order_by)
     {
-        $branch = Branch::orderby('id', 'desc')->get();
+        $branch = Branch::orderby('id', $order_by)->get();
         return $branch;
     }
 

@@ -42,7 +42,7 @@ class OrderRequest extends FormRequest
     {
         return [
             'full_name.required'        => '*Mục này không được để trống',
-            'full_name.max'        => '*Không được vượt quá 100 ký tự',
+            'full_name.max'             => '*Không được vượt quá 100 ký tự',
             'phone_number.required'     => '*Mục này không được để trống',
             'phone_number.regex'        => '*Số điện thoại sai định dạng',
             'time.required'             => '*Mục này không được để trống',

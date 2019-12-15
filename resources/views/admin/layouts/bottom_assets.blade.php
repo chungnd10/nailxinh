@@ -3,6 +3,10 @@
 {{--jquery validate--}}
 <script src="admin_assets/plugins/jquery-validate/jquery.validate.min.js"></script>
 <script src="admin_assets/plugins/jquery-validate/additional-methods.js"></script>
+{{--<script src="admin_assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>--}}
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="admin_assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- DataTables -->
@@ -12,10 +16,11 @@
 <script src="admin_assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="admin_assets/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="admin_assets/bower_components/moment/min/moment.min.js"></script>
 <!-- bootstrap datepicker -->
 <script src="admin_assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- bootstrap datepimepicker -->
-<script src="admin_assets/bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="admin_assets/bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <!-- AdminLTE App -->
 <script src="admin_assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->

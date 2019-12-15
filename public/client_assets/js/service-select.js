@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
     function formatState(state) {
         if (!state.id) {
@@ -8,7 +8,7 @@ $(document).ready(function () {
 
         var $state = $(
             "<div class=custom_img><img src=" + baseUrl + "/" + state.element.getAttribute('data-image') +
-            " class=img-flag /> " + "<span class=ml-5 >" + state.text + "</span>" + "</div>"
+            " class=img-flag /> " + "<span class=ml-3 >" + state.text + "</span>" + "</div>"
         );
         return $state;
     }
@@ -21,18 +21,20 @@ $(document).ready(function () {
 
         var $state = $(
             "<div class=custom_img><img src=" + baseUrl + "/" + state.element.getAttribute('data-image') +
-            " class=img-flag /> " + "<span class=ml-5 >" + state.text + "</span>" + "</div>"
+            " class=img-flag /> " + "<span class=ml-3 >" + state.text + "</span>" + "</div>"
         );
         return $state;
     }
 
     $(".services").select2({
         templateResult: formatState,
-        maximumSelectionLength: 5
+        maximumSelectionLength: 5,
+        minimumResultsForSearch: -1
     });
 
     $(".staff").select2({
-        templateResult: formatStateUser
+        templateResult: formatStateUser,
+        minimumResultsForSearch: -1
     });
     $('.datepicker').datepicker();
 });
