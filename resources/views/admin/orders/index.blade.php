@@ -53,18 +53,20 @@
                                     </select>
                                 </div>
                                 @endif
-                                <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3 ">
-                                    <select name="order_status_id" id="order_status_id" class="form-control">
-                                        <option value="">Tất cả trạng thái</option>
-                                        @foreach($order_status as $item)
-                                            <option value="{{ $item->id }}"
-                                                    @if(old('order_status_id') == $item->id)
-                                                    selected
-                                                    @endif
-                                            >{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                @if(Auth::user()->role_id != config('contants.role_technician'))
+                                    <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3 ">
+                                        <select name="order_status_id" id="order_status_id" class="form-control">
+                                            <option value="">Tất cả trạng thái</option>
+                                            @foreach($order_status as $item)
+                                                <option value="{{ $item->id }}"
+                                                        @if(old('order_status_id') == $item->id)
+                                                        selected
+                                                        @endif
+                                                >{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
                                 <div class="padding-bottom-input col-xs-12 col-sm-6 col-md-3">
                                     <div class="input-group date input-date">
                                         <div class="input-group-addon">
@@ -126,6 +128,13 @@
                             </tr>
                             </thead>
                             <tbody>
+{{--                            @if(!$orders->first())--}}
+{{--                                <tr>--}}
+{{--                                    <td class="text-danger" colspan="8">--}}
+{{--                                        Không có bản ghi nào--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                            @endif--}}
                             @foreach($orders as $key => $order)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
@@ -137,7 +146,7 @@
                                         <i class="fa fa-tag {{ tagColorStatus($order->orderStatus->name) }}"></i>
                                         {{ $order->orderStatus->name }}
                                     </td>
-                                    <td>{!!  $order->branch->name. '<br>'.$order->branch->address !!} </td>
+                                    <td>{!!  $order->branch->name. ', '.$order->branch->address !!} </td>
                                     <td>
                                         <a href="#"
                                            class="btn btn-xs btn-primary"
@@ -157,6 +166,16 @@
                                                 <a href="{{ route('orders.show', Hashids::encode($order->id)) }}"
                                                    class="btn btn-xs btn-warning">
                                                     <i class="fa fa-pencil"></i>
+                                                </a>
+                                            @endif
+                                        @endcan
+                                        @can('remove-orders')
+                                            @if($order->order_status_id != config('contants.order_status_finish'))
+                                                <a href="{{ route('orders.destroy', Hashids::encode($order->id)) }}"
+                                                   class="btn btn-xs btn-danger"
+                                                   onclick="return confirmDelete()"
+                                                >
+                                                    <i class="fa fa-trash"></i>
                                                 </a>
                                             @endif
                                         @endcan
@@ -223,20 +242,10 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Người tạo:</th>
-                                                    <td>
-                                                        @if($order->created_by != "")
-                                                            {{$order->created_by }}
-                                                        @else
-                                                            Khách hàng
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                                <tr>
                                                     <th>Cập nhật lần cuối bởi:</th>
                                                     <td>
                                                         @if($order->updated_by != '')
-                                                            {{ $order->updated_by }}
+                                                            {{ $order->getNameUpdatedBy($order->updated_by) }}
                                                             <i>-
                                                                 ( {{ date('H:i d-m-Y', strtotime($order->updated_at)) }}
                                                                 ) </i>
@@ -300,6 +309,7 @@
             let url_get_users_with_branch = "{{ route('get-users-with-branch') }}";
             let branch_id = branch.val();
             let old_user_id = "{{ old('user_id') }}";
+            let select_user = select_user_id.val;
 
             //start: lay ky thuat vien theo chi nhanh
             function getUserWithBranch(url, branch_id, old_user_id) {
@@ -329,10 +339,12 @@
             });
             //end: lay khi co thay doi
 
+            console.log(branch);
             //start: lay khi load xong trang
-            // if (branch_id !== null) {
-            //     getUserWithBranch(url_get_users_with_branch, branch_id, old_user_id);
-            // }
+            if (branch.length > 0 && branch_id !== '') {
+                select_user_id.val('');
+                getUserWithBranch(url_get_users_with_branch, branch_id, old_user_id);
+            }
             //end: lay khi load xong trang
 
             // display form search
@@ -376,8 +388,5 @@
 
             });
         });
-    </script>
-    <script type="text/javascript">
-
     </script>
 @endsection

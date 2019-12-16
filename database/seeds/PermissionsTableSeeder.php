@@ -245,6 +245,10 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'Xóa thư viện ảnh',
                 'name'  => 'remove-photo-library'
             ],
+            [
+                'title' => 'Xóa lịch đặt',
+                'name'  => 'remove-orders'
+            ],
         ];
 
         DB::table('permissions')->insert($permission);

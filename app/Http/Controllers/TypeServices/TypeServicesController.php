@@ -78,6 +78,7 @@ class TypeServicesController extends Controller
             $type_of_service->image = $imageName;
         }
 
+        $type_of_service->slug = Str::slug($request->name);
         $type_of_service->fill($request->all())->save();
         return redirect()->route('type-services.index')->with('toast_success', 'Cập nhật thành công !');
     }

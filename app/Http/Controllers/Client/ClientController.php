@@ -175,13 +175,17 @@ class ClientController extends Controller
                     ]
                 );
             }
-
+            $time = $request->date .' '. $request->hours;
+            $check_exists_order = $this->order_services->checkExsitsOrder($request->user_id, $time);
+            if ($check_exists_order > 0){
+                return response()->json(['error' => 'Lich dat da ton tai !']);
+            }
             $order = new Order();
             $order->phone_number = $request->phone_number;
             $order->full_name = $request->full_name;
             $order->branch_id = $request->branch_id;
             $order->user_id = $request->user_id;
-            $order->time = $request->date .' '. $request->hours;
+            $order->time = $time;
             $order->note = $request->note;
             $order->order_status_id = config('contants.order_status_unconfirmed');
             $order->save();
@@ -295,8 +299,7 @@ class ClientController extends Controller
     {
         $times = [
             "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00",
-            "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00","19:30",
-            "20:00","20:30", "21:00","21:30"
+            "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"
         ];
         if ($request->ajax()) {
             $user_id = $request->user_id;

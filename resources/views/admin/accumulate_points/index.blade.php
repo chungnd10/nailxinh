@@ -21,6 +21,7 @@
                                 <th>Số điện thoại</th>
                                 <th>Họ và tên</th>
                                 <th>Tổng tiển</th>
+                                <th>Loại thành viên</th>
                                 @can('remove-accumulate-points')
                                     <th class="nosort" width="80">Hành động</th>
                                 @endcan
@@ -33,6 +34,7 @@
                                     <td>{{ '0'.$item->phone_number }}</td>
                                     <td>{{ $item->full_name }}</td>
                                     <td>{{ number_format($item->total_money,0,",",".") }}</td>
+                                    <td>{{ $item->membershipType($item->total_money) }}</td>
                                     @can('remove-accumulate-points')
                                         <td>
                                             <a href="{{ route('accumulate-points.destroy', Hashids::encode($item->id)) }}"

@@ -13,7 +13,7 @@ class BillController extends Controller
 {
     public function index()
     {
-        $bills = $this->bill_services->getAllBillJoinOrderJoinOrderServices('desc');
+        $bills = $this->bill_services->getAllBillJoinOrderJoinOrderServices('desc', 10);
         return view('admin.bills.index', compact('bills'));
     }
 
@@ -78,9 +78,23 @@ class BillController extends Controller
             $accumulate->save();
         }
 
-        // cập nhật hóa đơn
+        $bill->payment_by = \Auth::user()->id;
         $bill->fill($request->all())->save();
 
         return redirect()->route('bills.index')->with('toast_success', 'Cập nhật thành công');
+    }
+
+    /*
+     * Tim kiem nang cao
+     *
+     */
+    public function advancedSearch(Request $request){
+        $phone_number = $request->phone_number;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+
+        $bills = $this->bill_services->advancedSearch($phone_number, $start_date, $end_date, 10);
+        $request->flash();
+        return view('admin.bills.index', compact('bills'));
     }
 }

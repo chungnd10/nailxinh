@@ -28,15 +28,14 @@ class OrderController extends Controller
 
             $orders = $this->order_services->all(10);
             $order_status = $this->order_status_services->all('asc');
-            $member_technicians = $this->user_services->getTechnicianWithBranch($branch_id, 'desc');
 
 
-            if ($role_id = $admin){
+            if ($role_id == $admin) {
                 $branches = $this->branch_services->all('asc');
-                $technicians = $member_technicians;
-            }elseif ($role_id = $manager || $role_id == $cashier || $role_id == $receptionist){
-                $technicians = $member_technicians;
-            }else{
+                $technicians = $this->user_services->getTechnician('asc');
+            } elseif ($role_id == $manager || $role_id == $cashier || $role_id == $receptionist) {
+                $technicians = $this->user_services->getTechnicianWithBranch($branch_id, 'asc');
+            } else {
                 $branches = null;
                 $technicians = null;
             }
@@ -91,8 +90,14 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = $this->order_services->find($id);
-
-        $this->authorize('update', $order);
+        $bill = Bill::where('order_id', $order->id)->first();
+        if($bill){
+            $bill_status_id = $bill->bill_status_id;
+            $this->authorize('update', [ $order, $bill_status_id ]);
+        }else{
+            $chua_co_hoa_don = 0;
+            $this->authorize('show', [$order, $chua_co_hoa_don]);
+        }
 
         $admin = config('contants.role_admin');
         $manager = config('contants.role_manager');
@@ -153,19 +158,18 @@ class OrderController extends Controller
             // lấy tiền tích điểm của khách
             $accumulate = $this->accumulate_points_services->getPointsOfGuest($request->phone_number);
             //lấy danh sách loại thành viên
-            $membership_type = $this->membership_type->orderBy('asc');
+            $membership_type = $this->membership_type->all('asc');
 
+            $bill->discount = 0;
             // nếu có rồi thì lấy ra tích điểm của khách
             if ($accumulate != null) {
                 $accumulate_of_guest = $accumulate;
-            } else {
-                $accumulate_of_guest = 0;
-            }
-
-            // kiểm tra xem khách hàng thuộc lại thành viên nào và lấy % giảm giá
-            foreach ($membership_type as $membershipType) {
-                if ($accumulate_of_guest <= $membershipType->money_level) {
-                    $bill->discount = $membershipType->discount_level;
+                // kiểm tra xem khách hàng thuộc lại thành viên nào và lấy % giảm giá
+                $t = -1;
+                foreach ($membership_type as $item) {
+                    if ($item->money_level < $accumulate_of_guest && $item->money_level > $t) {
+                        $bill->discount = $item->discount_level;
+                    }
                 }
             }
 
@@ -177,9 +181,10 @@ class OrderController extends Controller
 
         $order = $this->order_services->find($order_id);
 
-        if (Auth::check() ? $order->updated_by = Auth::user()->full_name : '') {
+        if (Auth::check() ? $order->updated_by = Auth::user()->id : '') {
             $order->fill($request->all());
         }
+
         $order->save();
         $service_id = $request->input('service_id');
         $order->services()->sync($service_id);
@@ -235,8 +240,8 @@ class OrderController extends Controller
      */
     public function advancedSearch(Request $request)
     {
-        $role_id = Auth::user()->role_id;
-        $branch_id = Auth::user()->branch_id;
+        $current_role_id = Auth::user()->role_id;
+        $branch_id = $request->branch_id;
 
         $role_admin = config('contants.role_admin');
         $manager = config('contants.role_manager');
@@ -245,21 +250,21 @@ class OrderController extends Controller
         $receptionist = config('contants.role_receptionist');
 
         $order_status = $this->order_status_services->all('asc');
-        $member_technicians = $this->user_services->getTechnicianWithBranch($branch_id, 'desc');
 
-        if ($role_id = $role_admin){
+        if ($current_role_id == $role_admin) {
             $branches = $this->branch_services->all('asc');
-            $technicians = $member_technicians;
+            $technicians = $this->user_services->getTechnician('asc');
             $order_status_id = $request->order_status_id;
-        }elseif ($role_id = $manager || $role_id == $cashier || $role_id == $receptionist){
-            $technicians = $member_technicians;
-        }elseif($role_id == $role_technician){
-            $order_status_id = config('contants.order_status_confirmed');
-        }else{
+        } elseif ($current_role_id == $manager || $current_role_id == $cashier || $current_role_id == $receptionist) {
+             $branch_id = Auth::user()->branch_id;
+             $technicians = $this->user_services->getTechnicianWithBranch($branch_id, 'asc');
+             $order_status_id = $request->order_status_id;
+        } else {
             $branches = null;
             $technicians = null;
             $branch_id = null;
             $order_status_id = $request->order_status_id;
+
         }
 
         $user_order = $request->user_order;
@@ -278,13 +283,29 @@ class OrderController extends Controller
             $end_date,
             10
         );
+
         return view('admin.orders.index', compact(
-            'orders',
-            'branches',
-            'searched',
-            'order_status',
-            'technicians'
+                'orders',
+                'branches',
+                'searched',
+                'order_status',
+                'technicians'
             )
         );
+    }
+
+    /*
+     * Xoa lich dat
+     *
+     */
+    public function destroy($order_id){
+        $order = Order::findOrFail($order_id);
+        $order_status_finish = config('contants.order_status_finish');
+        if ($order->order_status_id == $order_status_finish){
+            return redirect()->route('orders.index')->with('toast_error', 'Không thể xóa lịch đặt đã hoàn thành !');
+        }
+        $order->delete();
+
+        return redirect()->route('orders.index')->with('toast_success', 'Xóa thành công !');
     }
 }

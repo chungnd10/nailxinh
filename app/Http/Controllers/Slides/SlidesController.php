@@ -13,14 +13,12 @@ class SlidesController extends Controller
     public function index()
     {
         $slides = $this->slide_services->all();
-
         return view('admin.slides.index', compact('slides'));
     }
 
     public function create()
     {
         $display_status = $this->display_status_services->all();
-
         return view('admin.slides.create', compact('display_status'));
     }
 
@@ -28,8 +26,7 @@ class SlidesController extends Controller
     {
         $slide = new Slides();
 
-        if ($request->hasFile('images'))
-        {
+        if ($request->hasFile('images')) {
             $file = $request->file('images');
             $name = time() . $file->getClientOriginalName();
             $file->storeAs('images/slides', $name);
@@ -37,7 +34,6 @@ class SlidesController extends Controller
         }
 
         $slide->fill($request->all())->save();
-
         return redirect()->route('slides.index')->with('toast_success', 'Thêm thành công !');
     }
 

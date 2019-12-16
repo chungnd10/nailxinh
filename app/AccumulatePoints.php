@@ -44,11 +44,14 @@ class AccumulatePoints extends Model
     public function membershipType($money)
     {
 
-        $membership_type = MembershipType::all();
+        $membership_type = MembershipType::orderby('money_level', 'asc')->get();
 
-        foreach ($membership_type as $membershipType) {
-            if ($money <= $membershipType->money_level) {
-                $title =  $membershipType->title;
+        // kiểm tra xem khách hàng thuộc lại thành viên nào và lấy % giảm giá
+        $title = 'Normal';
+        $t = -1;
+        foreach ($membership_type as $item) {
+            if ($item->money_level < $money && $item->money_level > $t) {
+                $title = $item->title;
             }
         }
 

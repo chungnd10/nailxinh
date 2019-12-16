@@ -34,7 +34,7 @@
                             <div class="col-md-12 mb-3">
                                 <span class="text-pink">Thông tin của bạn</span>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 custom-height">
                                 <span class="text-danger validation">*</span>
                                 <input type="text"
                                        class="form-control form-border form-require"
@@ -48,7 +48,7 @@
                                 <label id="phone_number-error3" class="mt-2" style="color:#dc3545"></label>
                                 <span class="general-message"></span>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 custom-height">
                                 <span class="text-danger validation">*</span>
                                 <input type="text"
                                        id="full_name"
@@ -123,7 +123,7 @@
                                             name="note"
                                             ></textarea>
                                         </div>
-                                        <div class="col-md-6 offset-md-3 mb-5">
+                                        <div class="col-lg-6 offset-lg-3 col-md-12 mb-5">
                                             <button class="btn btn-block btn-pink" type="submit" id="btn-booking">
                                                 <i class="far fa-calendar-alt"></i>
                                                 ĐẶT LỊCH NGAY
@@ -172,12 +172,7 @@
             "17:30", 
             "18:00", 
             "18:30", 
-            "19:00",
-            "19:30",
-            "20:00",
-            "20:30",
-            "21:00",
-            "21:30"
+            "19:00"
         ];
         /* init day in week */
         let weekday = new Array(7);
@@ -280,6 +275,7 @@
             $('.btn-select').removeClass('btn_primary').addClass('btn-inactive');
             $(this).addClass('btn_primary');
             let next_date = $(this).attr('data-date');
+            console.log('ad');
             checkPhoneLimitBooking(phone_number,next_date);
             $("#time_frame").empty();
             if(moment(next_date).isAfter(current_date)){
@@ -378,7 +374,7 @@
         };
         /*  ================================== run function ==================================*/
         renderBookingDate();
-        renderTimeSlot([],current_date);
+        renderTimeSlot([]);
 
         /* slick slider render */
         $('#select-day').slick({
@@ -460,11 +456,11 @@
         /* ====================================================  */
 
         /* check phone number limit booking in day */
-        $('#phone_number').bind('input change blur',function(event){
+         $('#phone_number').bind('input keypress keydown keyup blur change',function(event){
             let value = event.target.value;
             if(value.length >=10){
-                checkPhoneLimitBooking(value);
-                checkLimitList(value);
+               checkPhoneLimitBooking(value);
+               checkLimitList(value);
             }
         });
         function checkPhoneLimitBooking(numbers,date){
@@ -639,7 +635,54 @@
             }
             return is_valid;
         };
-    
+        
+        // jQuery.validator.addMethod('limitday', function (value, element) {
+        //     let response;
+        //     let url = "{{ route('ajax.check-limit-order') }}";
+        //     let data = {
+        //         phone_number : value,
+        //         date: current_date,
+        //         _token : $('meta[name="csrf-token"]').attr('content')
+        //     }
+        //     $.ajax({
+        //         type: "POST",
+        //         url: url,
+        //         data: data,
+        //         async:false,
+        //         success:function(data){
+        //             response = data;
+        //         }
+        //     });
+        //     if(response > 2){
+        //         return false;
+        //     } else{
+        //         return true;
+        //     }
+        // }, "*Số điện thoại đã quá lần đặt trong ngày");
+
+        // jQuery.validator.addMethod('limitList', function (value, element) {
+        //     let response;
+        //     let url = "{{ route('ajax.check-limited-list') }}";
+        //     let data = {
+        //         phone_number: value,
+        //         _token : $('meta[name="csrf-token"]').attr('content')
+        //     };
+        //     $.ajax({
+        //         type: "POST",
+        //         url: url,
+        //         data: data,
+        //         async:false,
+        //         success:function(data){
+        //             response = data;
+        //         }
+        //     });
+        //     if(response > 0){
+        //         return false;
+        //     } else{
+        //         return true;
+        //     }
+        // }, "*Số điện thoại nằm trong danh sách hạn chế");
+
         // Validation with Jquery validation
         $('#booking-form').validate({
             ignore: 'input[type="hidden"]',
@@ -647,6 +690,8 @@
                 phone_number: {
                     required: true,
                     phoneNumberVietNam: true,
+                    // limitday: true,
+                    // limitList:true
                 },
                 full_name:{
                     required:true,
@@ -683,7 +728,9 @@
                 }
             }
         });
-
+        $('select').on('change', function() {
+            $(this).valid();
+        });
         // submit form send ajax 
         $('#btn-booking').click(function(e){
             let form = $('#booking-form');
@@ -724,6 +771,12 @@
                             Swal.fire({
                                 type: 'error',
                                 title: 'Đặt lịch thất bại !.'
+                            });
+                        }
+                        if (data.error){
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Thời gian bạn chọn đã được người khác đặt.'
                             });
                         }
                     },
