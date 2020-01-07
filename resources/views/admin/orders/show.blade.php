@@ -150,29 +150,29 @@
             });
 
             //validate
-            // $("#update-orders").validate({
-            //     ignore: [],
-            //     rules: {
-            //         full_name: {
-            //             required: true,
-            //         },
-            //         phone_number: {
-            //             required: true,
-            //         },
-            //         time: {
-            //             required: true,
-            //         },
-            //         order_status_id: {
-            //             required: true,
-            //         },
-            //         branch_id: {
-            //             required: true,
-            //         },
-            //         select2: {
-            //             required: true,
-            //         }
-            //     }
-            // });
+            $("#update-orders").validate({
+                ignore: [],
+                rules: {
+                    full_name: {
+                        required: true,
+                    },
+                    phone_number: {
+                        required: true,
+                    },
+                    time: {
+                        required: true,
+                    },
+                    order_status_id: {
+                        required: true,
+                    },
+                    branch_id: {
+                        required: true,
+                    },
+                    select2: {
+                        required: true,
+                    }
+                }
+            });
 
             // start: lay KTV theo chi nhanh
             $('#branch_id').change(function () {

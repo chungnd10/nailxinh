@@ -54,15 +54,11 @@ class BillServices
      */
     public function getAllBillJoinOrderJoinOrderServices($order_by, $paginate)
     {
-        $current_user_id = \Auth::user()->id;
         $current_role_id = \Auth::user()->role_id;
         $current_branch_id = \Auth::user()->branch_id;
 
-        $admin = config('contants.role_admin');
         $manager = config('contants.role_manager');
-        $technician = config('contants.role_technician');
         $cashier = config('contants.role_cashier');
-        $receptionist = config('contants.role_receptionist');
 
         $query = Bill::join('orders', 'orders.id', '=', 'bills.order_id')
             ->join('order_services', 'order_services.order_id', '=', 'orders.id')
@@ -86,7 +82,7 @@ class BillServices
                 'bills.created_at',
                 'bills.updated_at',
                 DB::raw('group_concat(order_services.service_id) as service_id'));
-        if ($current_role_id == $manager || $cashier){
+        if ($current_role_id == $manager || $current_role_id == $cashier) {
             $query->where('branch_id', $current_branch_id);
         }
         $query->groupBy(
