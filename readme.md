@@ -21,12 +21,12 @@ APP_NAME=NailXinh
 APP_URL=http://localhost:8000
 APP_DEBUG=false
 
-MAIL_DRIVER=smtp
-MAIL_HOST=smtp.gmail.com
-MAIL_PORT=587
-MAIL_USERNAME=nailxinh1@gmail.com
-MAIL_PASSWORD=Matkhau1
-MAIL_ENCRYPTION=tls
+MAIL_DRIVER=smtp <br/>
+MAIL_HOST=smtp.gmail.com<br/>
+MAIL_PORT=587<br/>
+MAIL_USERNAME=nailxinh1@gmail.com<br/>
+MAIL_PASSWORD=Matkhau1<br/>
+MAIL_ENCRYPTION=tls<br/>
 
 SWEET_ALERT_MIDDLEWARE_TOAST_POSITION='top'
 SWEET_ALERT_MIDDLEWARE_TOAST_CLOSE_BUTTON=true
